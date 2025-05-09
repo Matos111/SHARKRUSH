@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de KG</title>
+  <link rel="stylesheet" href="Calculadora_kg.css" />
 </head>
 <body>
-    
+  <div class="container">
+    <h1>CALCULADORA <br><span>DE KG</span></h1>
+    <p>insira os dados para calcular o consumo diário de calorias</p>
+
+    <form id="formulario">
+      <div>
+        <label for="sexo">SEXO:</label>
+        <select id="sexo">
+          <option value="masculino">MASCULINO</option>
+          <option value="feminino">FEMININO</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="altura">ALTURA:</label>
+        <input type="number" id="altura" placeholder="175" step="1" required />
+        <span class="unidade">CM</span>
+      </div>
+
+      <div>
+        <label for="peso">PESO:</label>
+        <input type="number" id="peso" placeholder="70" required />
+        <span class="unidade">KG</span>
+      </div>
+
+      <div>
+        <label for="idade">IDADE:</label>
+        <input type="number" id="idade" placeholder="30" required />
+        <span class="unidade">ANOS</span>
+      </div>
+
+      <div>
+        <label for="atividade">ATIVIDADE:</label>
+        <select id="atividade" required>
+          <option value="" disabled selected>Selecione o nível de atividade</option>
+          <option value="1.2">Pouco ou nenhum exercício</option>
+          <option value="1.375">Levemente ativo</option>
+          <option value="1.55">Moderadamente ativo</option>
+          <option value="1.725">Muito ativo</option>
+          <option value="1.9">Extremamente ativo</option>
+        </select>
+      </div>
+
+      <button type="button" onclick="calcular()">MOSTRAR RESULTADO</button>
+    </form>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

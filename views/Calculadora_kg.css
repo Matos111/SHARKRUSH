@@ -1,0 +1,266 @@
+/* === ESTILOS GERAIS DO BODY === */
+body {
+  background-color: black; /* Fundo preto */
+  color: white;             /* Texto branco padrão */
+  font-family: Arial, sans-serif; /* Fonte simples e moderna */
+  margin: 0;
+  padding: 0;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.container {
+  max-width: 400px;  /* Largura máxima do conteúdo */
+  margin: 2rem auto; /* Espaço ao redor + centralização */
+  text-align: center;
+}
+/* === MENU LATERAL ESQUERDO === */
+.sidebar {
+  position: fixed;         /* Fixa no lado esquerdo da tela */
+  top: 0;
+  left: 0;
+  width: 60px;             /* Largura da barra */
+  height: 100vh;           /* Altura total da tela */
+  background-color: black; 
+  border-right: 2px solid red; /* Linha vermelha à direita */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin: 20px 0;         /* Espaçamento entre os ícones */
+  text-align: center;
+}
+
+.sidebar img {
+  width: 30px;            /* Tamanho dos ícones */
+  height: auto;
+  filter: brightness(1.2); /* Realça o laranja */
+}
+
+
+
+/* === TÍTULO PRINCIPAL === */
+h1 {
+  font-size: 2.5rem;  /* Tamanho grande */
+  color: red;         /* Cor vermelha forte */
+  margin-bottom: 0.2rem;
+  line-height: 1.2;   /* Espaçamento entre linhas */
+}
+
+/* === SPAN NO TÍTULO (DE KG) === */
+h1 span {
+  text-decoration: underline; /* Linha abaixo do texto */
+}
+
+/* === SUBTÍTULO (explicação abaixo do título) === */
+p {
+  color: #ccc;        /* Cinza claro */
+  margin-bottom: 2rem;
+}
+
+/* === FORMULÁRIO: ORGANIZAÇÃO DOS CAMPOS === */
+form {
+  display: flex;
+  flex-direction: column; /* Alinha os campos em coluna */
+  gap: 1.2rem;             /* Espaçamento entre eles */
+}
+
+/* === CADA CAMPO (sexo, altura, etc.) === */
+.campo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espaço entre label e input */
+  position: relative; /* Necessário para posicionar a unidade */
+}
+
+/* === LABELS DOS CAMPOS (SEXO, ALTURA, etc.) === */
+label {
+  color: red;             /* Cor vermelha destacada */
+  font-weight: bold;
+  width: 30%;             /* Ocupa 30% da linha */
+  text-align: left;
+}
+
+/* === INPUTS E SELECTS DO FORMULÁRIO === */
+input, select {
+  width: 60%;             /* Ocupa 60% da linha */
+  padding: 10px;
+  background: #000;       /* Fundo preto dentro do campo */
+  color: white;
+  border: 2px solid red;  /* Borda vermelha arredondada */
+  border-radius: 25px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* === UNIDADES (CM, KG, ANOS) AO LADO DOS INPUTS === */
+.unidade {
+  position: absolute;
+  right: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+/* === TÍTULO "ATIVIDADE" ACIMA DO SELECT === */
+h2 {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+}
+
+/* === SELECT ESPECÍFICO DO CAMPO ATIVIDADE === */
+select#atividade {
+  border: 2px solid white;   /* Borda branca pra destacar */
+  color: white;
+  background-color: black;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+/* === BOTÃO DE "MONSTRAR RESULTADO" === */
+button {
+  background-color: white;   /* Fundo branco */
+  color: black;              /* Texto preto */
+  font-weight: bold;
+  border: none;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* === RESULTADO CALCULADO QUE APARECE ABAIXO === */
+#resultado {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #0f0; /* Verde fluorescente */
+}
+/* === ESTILOS GERAIS DO BODY === */
+body {
+  background-color: black; /* Fundo preto */
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* === CONTAINER CENTRAL === */
+.container {
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+/* === TÍTULO PRINCIPAL === */
+h1 {
+  font-size: 2.5rem;
+  color: red;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+h1 span {
+  text-decoration: underline;
+}
+
+/* === SUBTÍTULO ABAIXO DO TÍTULO === */
+p {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* === FORMULÁRIO GERAL === */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* === GRUPO DE CAMPOS COM LABEL E INPUT === */
+.campo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* === LABELS ESQUERDA (SEXO, ALTURA, etc.) === */
+label {
+  color: red;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 30%;
+  text-align: left;
+}
+
+/* === INPUTS E SELECTS COM ESTILO DE BORDA VERMELHA === */
+input, select:not(#atividade) {
+  width: 60%;
+  padding: 10px;
+  background: black;
+  color: white;
+  border: 2px solid red;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* === UNIDADES (CM, KG, ANOS) NA DIREITA === */
+.unidade {
+  position: absolute;
+  right: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+/* === TÍTULO SECUNDÁRIO (ATIVIDADE) === */
+h2 {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+/* === SELECT DE ATIVIDADE COM ESTILO ESPECIAL === */
+#atividade {
+  padding: 10px;
+  border: 2px solid white;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* === SELECT DE ATIVIDADE CENTRALIZADO === */
+#atividade {
+  width: 100%;                /* Ocupar toda a largura do form */
+  padding: 12px;
+  border: 2px solid white;
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;         /* Centraliza o texto do select */
+  appearance: none;           /* Remove estilo padrão do navegador */
+}
+
+/* === RESULTADO APÓS CÁLCULO === */
+#resultado {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #0f0; /* Verde fluorescente */
+}
