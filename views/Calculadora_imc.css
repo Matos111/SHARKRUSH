@@ -6,9 +6,9 @@
     font-family: 'Arial', sans-serif;
 }
 
-/* Fundo com imagem escura */
+/* Imagem de Fundo */
 body {
-    background: url('fundo-academia.jpg') no-repeat center center/cover;
+    background: url('https://pratiquefitness.com.br/wp-content/uploads/2019/02/Treino-de-musculacao-que-emagrece_00000.jpg') no-repeat center center/cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -59,6 +59,36 @@ body {
     max-width: 400px;
     text-align: center;
     box-shadow: 0 0 10px rgba(255, 45, 45, 0.3);
+    .input-with-unit {
+    display: flex;
+    align-items: center;
+}
+
+.input-with-unit .input-value {
+    flex: 1;
+    text-align: right;
+    padding-right: 0.5rem;
+}
+
+.unit {
+    color: #ff2d2d;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}
+.input-with-unit .input-value {
+    flex: 1;
+    padding: 0.9rem;
+    border: 2px solid #ff2d2d;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    background-color: transparent;
+    color: #ff2d2d;
+    font-weight: bold;
+    text-align: center; /* alterado de right para center */
+    appearance: textfield;
+}
+
 }
 
 /* Títulos */
