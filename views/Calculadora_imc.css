@@ -1,0 +1,125 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Fundo com imagem escura */
+body {
+    background: url('fundo-academia.jpg') no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    color: #ffffff;
+}
+
+/* Logo */
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff2d2d;
+    text-transform: uppercase;
+}
+
+/* Login */
+.login-options {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 1rem;
+}
+
+.login-options a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.login-options .cadastro {
+    color: #ff2d2d;
+    font-weight: bold;
+}
+
+/* Container principal */
+.calculator-container {
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 12px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 45, 45, 0.3);
+}
+
+/* Títulos */
+.calculator-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.imc-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff2d2d;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.input-value {
+    width: 100%;
+    padding: 0.9rem;
+    border: 2px solid #ff2d2d;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    background-color: transparent;
+    color: #ff2d2d;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Botão */
+.calculate-btn {
+    background: linear-gradient(90deg, #ff2d2d, #ff5e3a);
+    color: #ffffff;
+    border: none;
+    padding: 1rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.3s;
+}
+
+.calculate-btn:hover {
+    opacity: 0.9;
+}
