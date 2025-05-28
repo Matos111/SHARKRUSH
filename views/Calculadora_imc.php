@@ -46,20 +46,55 @@
         </div>
 
         <button class="calculate-btn" onclick="calcularIMC()">CALCULAR</button>
+
+        <!-- Resultado aparece aqui -->
+        <div id="resultado-imc" style="margin-top: 2rem;"></div>
     </div>
 
     <script>
         function calcularIMC() {
             const peso = parseFloat(document.getElementById("peso").value);
             const altura = parseFloat(document.getElementById("altura").value);
+            const resultadoDiv = document.getElementById("resultado-imc");
 
             if (peso > 0 && altura > 0) {
                 const imc = peso / (altura * altura);
-                alert(`Seu IMC é: ${imc.toFixed(2)}`);
+                let classificacao = "";
+                let cor = "";
+
+                if (imc < 18.5) {
+                    classificacao = "Abaixo do peso";
+                    cor = "#ffc107";
+                } else if (imc < 24.9) {
+                    classificacao = "Peso normal";
+                    cor = "#00e676";
+                } else if (imc < 29.9) {
+                    classificacao = "Sobrepeso";
+                    cor = "#ff9800";
+                } else if (imc < 34.9) {
+                    classificacao = "Obesidade grau I";
+                    cor = "#ff5722";
+                } else if (imc < 39.9) {
+                    classificacao = "Obesidade grau II";
+                    cor = "#f44336";
+                } else {
+                    classificacao = "Obesidade grau III";
+                    cor = "#d32f2f";
+                }
+
+                resultadoDiv.innerHTML = `
+                    <div>
+                        <div class="input-value" style="font-size: 2.5rem; margin-bottom: 1rem;">${imc.toFixed(2)}</div>
+                        <p style="color: #ffffff; font-weight: bold; font-size: 1.2rem; text-transform: uppercase;">
+                            Classificação: <span style="color: ${cor};">${classificacao}</span>
+                        </p>
+                    </div>
+                `;
             } else {
-                alert("Preencha peso e altura corretamente.");
+                resultadoDiv.innerHTML = `<p style="color: #ff2d2d; margin-top: 1rem;">Preencha peso e altura corretamente.</p>`;
             }
         }
     </script>
+
 </body>
 </html>
