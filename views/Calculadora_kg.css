@@ -1,0 +1,146 @@
+/* Reset básico para evitar inconsistências entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Fonte padrão limpa */
+}
+/* Logo */
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff0101;
+    text-transform: uppercase;
+}
+
+/* Estilo do corpo da página */
+body {
+    background-color: #0b0b0b; /* Fundo escuro */
+    color: #f9f9f9; /* Texto branco */
+    display: flex; /* Centraliza o conteúdo */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Altura mínima igual à altura da tela */
+}
+
+/* Container principal da calculadora */
+.calculadora {
+    background: #f40909; /* Fundo um pouco mais claro que o body */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 10px; /* Cantos arredondados */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); /* Sombra vermelha */
+    width: 350px; /* Largura fixa */
+}
+
+/* Título principal */
+.calculadora h1 {
+    color: #ff0000; /* Vermelho vibrante */
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Subtítulo */
+.calculadora h2 {
+    color: #ff5555; /* Vermelho mais claro */
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Labels para os campos de entrada */
+label {
+    color: #baafaf; /* Vermelho claro */
+    display: block; /* Cada label em sua linha */
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Campos de entrada e seleção */
+input, select {
+    width: 100%; /* Preenche toda a largura */
+    padding: 10px;
+    margin-top: 5px;
+    border: none; /* Remove bordas padrão */
+    border-radius: 5px; /* Cantos arredondados */
+    background: #363636; /* Fundo escuro */
+    color: #fff; /* Texto branco */
+}
+
+/* Botão principal */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #ff0000; /* Vermelho padrão */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+    font-weight: bold;
+    transition: background 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+/* Efeito de hover no botão */
+button:hover {
+    background: #cc0000; /* Tom mais escuro de vermelho */
+}
+
+/* Estilo para ícones se forem adicionados */
+.icone {
+    color: orange; /* Cor laranja como no cronômetro da imagem */
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Área da logo */
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 80px; /* Tamanho da imagem da logo */
+}
+
+/* Botão ou link para atividades */
+.atividade-btn {
+    background: #1f1f1f; /* Mesmo padrão de input */
+    color: #ff5500; /* Laranja avermelhado */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+/* Efeito de hover no botão de atividade */
+.atividade-btn:hover {
+    background: #333; /* Um pouco mais claro */
+}
+
+/* Texto pequeno para observações */
+.small-text {
+    font-size: 12px;
+    color: #999; /* Cinza claro */
+    margin-top: 10px;
+    text-align: center;
+}
+#resultado {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#resultado.mostrar {
+  opacity: 1;
+  transform: translateY(0);
+}
+
