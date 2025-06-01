@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SharkRush - Calculadora de IMC</title>
+    <title>SharkRush - Calculadora de Calorias Diárias</title>
     <style>
         * {
             margin: 0;
@@ -320,7 +320,57 @@
         .logo img {
             width: 100px;
             height: auto;
-            
+        }
+        /* Adicione estilos para selects */
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 0, 0, 0.5);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(255,0,0,0.08);
+            cursor: pointer;
+            position: relative;
+        }
+        .form-group select:focus {
+            border-color: #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            transform: scale(1.02);
+        }
+        /* Ícone de seta customizada para select */
+        .input-container select {
+            background-image: url("data:image/svg+xml;utf8,<svg fill='red' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 18px 18px;
+        }
+        /* Destaque especial para sexo */
+        #sex {
+            background: linear-gradient(90deg, #ffb3b3 0%, #ff0000 100%);
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        #sex:focus {
+            background: linear-gradient(90deg, #ffcccc 0%, #ff3333 100%);
+        }
+        /* Destaque especial para atividade */
+        #activity {
+            background: linear-gradient(90deg, #ffe0b2 0%, #ff9800 100%);
+            color: #222;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        #activity:focus {
+            background: linear-gradient(90deg, #fff3e0 0%, #ffb74d 100%);
+        }
     </style>
 </head>
 <body>
@@ -333,93 +383,115 @@
     <div class="container">
         <div class="logo">
             <a><img src="../" alt=""></a>  
-            
-            <p class="logo">Calculadora de IMC</p>
+            <p class="logo">Calculadora de Calorias Diárias</p>
         </div>
 
         <div class="calculator-card">
-            
-            <form id="imcForm">
+            <form id="calorieForm">
+                <div class="form-group">
+                    <label for="sex">Sexo</label>
+                    <div class="input-container">
+                        <select id="sex" required>
+                            <option value="">Selecione</option>
+                            <option value="male">Masculino</option>
+                            <option value="female">Feminino</option>
+                        </select>
+                    </div>
+                    <div class="error-message" id="sexError">Por favor, selecione o sexo</div>
+                </div>
+                <div class="form-group">
+                    <label for="age">Idade (anos)</label>
+                    <div class="input-container">
+                        <input type="number" id="age" min="10" max="120" placeholder="Ex: 30" required>
+                        <span class="input-icon">🎂</span>
+                    </div>
+                    <div class="error-message" id="ageError">Por favor, insira uma idade válida</div>
+                </div>
                 <div class="form-group">
                     <label for="weight">Peso (kg)</label>
                     <div class="input-container">
-                        <input type="number" id="weight" step="0.1" min="1" max="500" placeholder="Ex: 70.5" required>
+                        <input type="number" id="weight" step="0.1" min="30" max="300" placeholder="Ex: 70.5" required>
                         <span class="input-icon">⚖️</span>
                     </div>
                     <div class="error-message" id="weightError">Por favor, insira um peso válido</div>
                 </div>
-
                 <div class="form-group">
                     <label for="height">Altura (cm)</label>
                     <div class="input-container">
-                        <input type="number" id="height" step="0.1" min="50" max="250" placeholder="Ex: 175" required>
+                        <input type="number" id="height" step="0.1" min="120" max="250" placeholder="Ex: 175" required>
                         <span class="input-icon">📏</span>
                     </div>
                     <div class="error-message" id="heightError">Por favor, insira uma altura válida</div>
                 </div>
-
+                <div class="form-group">
+                    <label for="activity">Nível de Atividade</label>
+                    <div class="input-container">
+                        <select id="activity" required>
+                            <option value="">Selecione</option>
+                            <option value="1.2">Sedentário (pouco ou nenhum exercício)</option>
+                            <option value="1.375">Levemente ativo (exercício leve 1-3 dias/semana)</option>
+                            <option value="1.55">Moderadamente ativo (exercício moderado 3-5 dias/semana)</option>
+                            <option value="1.725">Muito ativo (exercício intenso 6-7 dias/semana)</option>
+                            <option value="1.9">Extremamente ativo (exercício muito intenso, trabalho físico)</option>
+                        </select>
+                    </div>
+                    <div class="error-message" id="activityError">Por favor, selecione o nível de atividade</div>
+                </div>
                 <button type="submit" class="calculate-btn">
-                    Calcular IMC
+                    Calcular Calorias
                 </button>
             </form>
 
             <div class="result-container" id="resultContainer">
-                <div class="imc-value" id="imcValue"></div>
-                <div class="imc-category" id="imcCategory"></div>
-                <div class="imc-description" id="imcDescription"></div>
+                <div class="imc-value" id="calorieValue"></div>
+                <div class="imc-category" id="calorieCategory"></div>
+                <div class="imc-description" id="calorieDescription"></div>
             </div>
 
             <div class="imc-table">
-                <h3>Tabela de Referência IMC</h3>
+                <h3>O que significam as calorias diárias?</h3>
                 <div class="table-row">
-                    <span>Abaixo do peso</span>
-                    <span>&lt; 18.5</span>
+                    <span>Manutenção</span>
+                    <span>Consuma o valor calculado</span>
                 </div>
                 <div class="table-row">
-                    <span>Peso normal</span>
-                    <span>18.5 - 24.9</span>
+                    <span>Perda de peso</span>
+                    <span>Reduza ~500 kcal/dia</span>
                 </div>
                 <div class="table-row">
-                    <span>Sobrepeso</span>
-                    <span>25.0 - 29.9</span>
-                </div>
-                <div class="table-row">
-                    <span>Obesidade Grau I</span>
-                    <span>30.0 - 34.9</span>
-                </div>
-                <div class="table-row">
-                    <span>Obesidade Grau II</span>
-                    <span>35.0 - 39.9</span>
-                </div>
-                <div class="table-row">
-                    <span>Obesidade Grau III</span>
-                    <span>&gt; 40.0</span>
+                    <span>Ganho de peso</span>
+                    <span>Aumente ~500 kcal/dia</span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        class IMCCalculator {
+        class CalorieCalculator {
             constructor() {
-                this.form = document.getElementById('imcForm');
+                this.form = document.getElementById('calorieForm');
+                this.sexInput = document.getElementById('sex');
+                this.ageInput = document.getElementById('age');
                 this.weightInput = document.getElementById('weight');
                 this.heightInput = document.getElementById('height');
+                this.activityInput = document.getElementById('activity');
                 this.resultContainer = document.getElementById('resultContainer');
-                this.imcValue = document.getElementById('imcValue');
-                this.imcCategory = document.getElementById('imcCategory');
-                this.imcDescription = document.getElementById('imcDescription');
-                
+                this.calorieValue = document.getElementById('calorieValue');
+                this.calorieCategory = document.getElementById('calorieCategory');
+                this.calorieDescription = document.getElementById('calorieDescription');
                 this.init();
             }
 
             init() {
                 this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.sexInput.addEventListener('input', () => this.clearError('sex'));
+                this.ageInput.addEventListener('input', () => this.clearError('age'));
                 this.weightInput.addEventListener('input', () => this.clearError('weight'));
                 this.heightInput.addEventListener('input', () => this.clearError('height'));
+                this.activityInput.addEventListener('input', () => this.clearError('activity'));
                 
                 // Adiciona efeitos de hover nos inputs
-                [this.weightInput, this.heightInput].forEach(input => {
+                [this.sexInput, this.ageInput, this.weightInput, this.heightInput, this.activityInput].forEach(input => {
                     input.addEventListener('focus', () => this.addInputFocus(input));
                     input.addEventListener('blur', () => this.removeInputFocus(input));
                 });
@@ -449,120 +521,93 @@
 
             handleSubmit(e) {
                 e.preventDefault();
-                
+                const sex = this.sexInput.value;
+                const age = parseInt(this.ageInput.value);
                 const weight = parseFloat(this.weightInput.value);
                 const height = parseFloat(this.heightInput.value);
+                const activity = parseFloat(this.activityInput.value);
 
-                if (this.validateInputs(weight, height)) {
-                    const imc = this.calculateIMC(weight, height);
-                    this.displayResult(imc);
+                if (this.validateInputs(sex, age, weight, height, activity)) {
+                    const calories = this.calculateCalories(sex, age, weight, height, activity);
+                    this.displayResult(calories);
                     this.addCalculationAnimation();
                 }
             }
 
-            validateInputs(weight, height) {
+            validateInputs(sex, age, weight, height, activity) {
                 let isValid = true;
-
-                if (!weight || weight <= 0 || weight > 500) {
-                    this.showError('weight', 'Por favor, insira um peso válido (1-500 kg)');
+                if (!sex) {
+                    this.showError('sex', 'Por favor, selecione o sexo');
                     isValid = false;
                 }
-
-                if (!height || height <= 0 || height > 250) {
-                    this.showError('height', 'Por favor, insira uma altura válida (50-250 cm)');
+                if (!age || age < 10 || age > 120) {
+                    this.showError('age', 'Por favor, insira uma idade válida (10-120 anos)');
                     isValid = false;
                 }
-
+                if (!weight || weight < 30 || weight > 300) {
+                    this.showError('weight', 'Por favor, insira um peso válido (30-300 kg)');
+                    isValid = false;
+                }
+                if (!height || height < 120 || height > 250) {
+                    this.showError('height', 'Por favor, insira uma altura válida (120-250 cm)');
+                    isValid = false;
+                }
+                if (!activity) {
+                    this.showError('activity', 'Por favor, selecione o nível de atividade');
+                    isValid = false;
+                }
                 return isValid;
             }
 
             showError(field, message) {
                 const errorElement = document.getElementById(`${field}Error`);
                 const inputElement = document.getElementById(field);
-                
                 errorElement.textContent = message;
                 errorElement.style.display = 'block';
-                inputElement.style.borderColor = '#ff4444';
-                inputElement.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.3)';
+                if (inputElement) {
+                    inputElement.style.borderColor = '#ff4444';
+                    inputElement.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.3)';
+                }
             }
 
             clearError(field) {
                 const errorElement = document.getElementById(`${field}Error`);
                 const inputElement = document.getElementById(field);
-                
                 errorElement.style.display = 'none';
-                inputElement.style.borderColor = 'rgba(255, 0, 0, 0.3)';
-                inputElement.style.boxShadow = 'none';
-            }
-
-            calculateIMC(weight, height) {
-                const heightInMeters = height / 100;
-                return weight / (heightInMeters * heightInMeters);
-            }
-
-            getIMCCategory(imc) {
-                if (imc < 18.5) {
-                    return {
-                        category: 'Abaixo do Peso',
-                        description: 'Você está abaixo do peso ideal. Considere uma dieta balanceada para ganhar peso de forma saudável.',
-                        color: '#00bfff'
-                    };
-                } else if (imc < 25) {
-                    return {
-                        category: 'Peso Normal',
-                        description: 'Parabéns! Seu peso está dentro da faixa considerada saudável. Continue mantendo hábitos saudáveis.',
-                        color: '#00ff00'
-                    };
-                } else if (imc < 30) {
-                    return {
-                        category: 'Sobrepeso',
-                        description: 'Você está com sobrepeso. Considere uma dieta balanceada e exercícios regulares.',
-                        color: '#ffa500'
-                    };
-                } else if (imc < 35) {
-                    return {
-                        category: 'Obesidade Grau I',
-                        description: 'Obesidade grau I. É recomendável buscar orientação médica e nutricional.',
-                        color: '#ff6600'
-                    };
-                } else if (imc < 40) {
-                    return {
-                        category: 'Obesidade Grau II',
-                        description: 'Obesidade grau II. É importante buscar acompanhamento médico especializado.',
-                        color: '#ff3300'
-                    };
-                } else {
-                    return {
-                        category: 'Obesidade Grau III',
-                        description: 'Obesidade grau III. Procure acompanhamento médico urgente para cuidar da sua saúde.',
-                        color: '#ff0000'
-                    };
+                if (inputElement) {
+                    inputElement.style.borderColor = 'rgba(255, 0, 0, 0.3)';
+                    inputElement.style.boxShadow = 'none';
                 }
             }
 
-            displayResult(imc) {
-                const categoryInfo = this.getIMCCategory(imc);
-                
-                this.imcValue.textContent = imc.toFixed(1);
-                this.imcValue.style.color = categoryInfo.color;
-                this.imcCategory.textContent = categoryInfo.category;
-                this.imcCategory.style.color = categoryInfo.color;
-                this.imcDescription.textContent = categoryInfo.description;
-                
+            calculateCalories(sex, age, weight, height, activity) {
+                // Fórmula de Harris-Benedict revisada
+                let tmb;
+                if (sex === 'male') {
+                    tmb = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age);
+                } else {
+                    tmb = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age);
+                }
+                return tmb * activity;
+            }
+
+            displayResult(calories) {
+                this.calorieValue.textContent = `${Math.round(calories)} kcal/dia`;
+                this.calorieValue.style.color = "#ff0000";
+                this.calorieCategory.textContent = "Calorias para manutenção do peso";
+                this.calorieCategory.style.color = "#ff0000";
+                this.calorieDescription.textContent = "Para perder peso, consuma cerca de 500 kcal a menos por dia. Para ganhar peso, consuma cerca de 500 kcal a mais.";
                 this.resultContainer.classList.add('show');
             }
 
             addCalculationAnimation() {
                 const button = document.querySelector('.calculate-btn');
                 button.style.transform = 'scale(0.95)';
-                
                 setTimeout(() => {
                     button.style.transform = 'scale(1)';
                 }, 150);
-
-                // Efeito de pulsação no resultado
                 setTimeout(() => {
-                    this.imcValue.style.animation = 'pulse 0.6s ease-in-out';
+                    this.calorieValue.style.animation = 'pulse 0.6s ease-in-out';
                 }, 300);
             }
         }
@@ -579,7 +624,7 @@
 
         // Inicializa a calculadora quando a página carregar
         document.addEventListener('DOMContentLoaded', () => {
-            new IMCCalculator();
+            new CalorieCalculator();
         });
 
         // Adiciona partículas flutuantes
