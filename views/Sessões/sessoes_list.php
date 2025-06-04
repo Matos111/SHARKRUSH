@@ -170,6 +170,93 @@
         .scroll-header {
             background: rgba(10, 10, 10, 0.95);
         }
+            footer {
+      background-color: #000000;
+      color: #9E9E9E;
+      padding: 40px 20px 20px 120px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: start;
+      text-align: center;
+    }
+    .left, .right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .left-title, .right-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #FE4100;
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .center img {
+      height: 60px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .center img:hover {
+      transform: scale(1.1);
+    }
+    .link {
+      color: #FF0000;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+    .link:hover {
+      color: #FE4100;
+    }
+    .logo {
+      width: 35px;
+      height: 20px;
+    }
+    .logo_sharkrush {
+      height: 70px;
+      width: 70px;
+      justify-self: center;
+    }
+    .copy-notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #FE4100;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 1000;
+    }
+    .copy-notification.show {
+      opacity: 1;
+    }
+    .collaborators {
+      background-color: #000000;
+      color: #9E9E9E;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+    .collaborators-title {
+      color: #FE4100;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .collaborator-names {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
     </style>
 </head>
 <body>
@@ -219,6 +306,82 @@
 </table>
 
 <a href="/SHARKRUSH/public">Cadastrar novo treino</a>
+
+  <footer>
+    <div class="left">
+      <div class="left-title">Converse conosco!</div>
+      <span class="link" onclick="copyToClipboard('11999999999')">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_watzapp_SHARKRUSH.png" class="logo" alt="Logo Watzapp">Whatsapp
+      </span>
+      <span class="link" onclick="copyToClipboard('email@exemplo.com')">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_email_SHARKRUSH.png" class="logo" alt="Logo email">Email
+      </span>
+    </div>
+
+    <div class="center">
+      <a href="/pagina-inicial.html">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\logoshark.png" class="logo_sharkrush" alt="Logo">
+      </a>
+    </div>
+
+    <div class="right">
+      <div class="right-title">Siga-nos nas redes sociais!</div>
+      <a href="https://www.instagram.com/suaempresa" class="link" target="_blank">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_instagram_SHARKRUSH.png" class="logo" alt="Logo instagram">Instagram
+      </a>
+      <a href="https://www.facebook.com/suaempresa" class="link" target="_blank">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_facebook_SHARKRUSH.png" class="logo" alt="Logo facebook">Facebook
+      </a>
+    </div>
+  </footer>
+  <div class="collaborators">
+    <div class="collaborators-title">Colaboradores</div>
+    <div class="collaborator-names">
+      <span>Augusto Sena</span>
+      <span>Gabriella Teixeira</span>
+      <span>Guilherme Monte</span>
+      <span>Miguel Fortunato</span>
+    </div>
+  </div>
+  <div id="copyAlert" class="copy-notification">Copiado para a área de transferência</div>
+
+  <footer>
+    <div class="left">
+      <div class="left-title">Converse conosco!</div>
+      <span class="link" onclick="copyToClipboard('11999999999')">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_watzapp_SHARKRUSH.png" class="logo" alt="Logo Watzapp">Whatsapp
+      </span>
+      <span class="link" onclick="copyToClipboard('email@exemplo.com')">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_email_SHARKRUSH.png" class="logo" alt="Logo email">Email
+      </span>
+    </div>
+
+    <div class="center">
+      <a href="/pagina-inicial.html">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\logoshark.png" class="logo_sharkrush" alt="Logo">
+      </a>
+    </div>
+
+    <div class="right">
+      <div class="right-title">Siga-nos nas redes sociais!</div>
+      <a href="https://www.instagram.com/suaempresa" class="link" target="_blank">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_instagram_SHARKRUSH.png" class="logo" alt="Logo instagram">Instagram
+      </a>
+      <a href="https://www.facebook.com/suaempresa" class="link" target="_blank">
+        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_facebook_SHARKRUSH.png" class="logo" alt="Logo facebook">Facebook
+      </a>
+    </div>
+  </footer>
+  <div class="collaborators">
+    <div class="collaborators-title">Colaboradores</div>
+    <div class="collaborator-names">
+      <span>Augusto Sena</span>
+      <span>Gabriella Teixeira</span>
+      <span>Guilherme Monte</span>
+      <span>Miguel Fortunato</span>
+    </div>
+  </div>
+  <div id="copyAlert" class="copy-notification">Copiado para a área de transferência</div>
 
 <script>
         function toggleMenu() {
@@ -282,6 +445,15 @@
                 }
             });
         });
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const alertBox = document.getElementById("copyAlert");
+                alertBox.classList.add("show");
+                setTimeout(() => {
+                alertBox.classList.remove("show");
+                }, 2000);
+            });
+        }
     </script>
 
 </body>
