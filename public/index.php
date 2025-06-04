@@ -49,35 +49,20 @@ switch ($request) {
         break;
 
     
-    case '/SHARKRUSH/public/':
-        $controller = new TreinoController();
-        $controller->showForm();
+    case 'create':
+        $controller->create();
         break;
-    case '/SHARKRUSH/save-treino':
-        $controller = new TreinoController();
-        $controller->saveTreino();
+    case 'store':
+        $controller->store($_POST);
         break;
-    case '/SHARKRUSH/list-treinos':
-        $controller = new TreinoController();
-        $controller->listTreinos();
+    case 'edit':
+        $controller->edit($_GET['id']);
         break;
-        case '/SHARKRUSH/delete-treino':
-            require_once '../controllers/SessoesController.php';
-            $controller = new TreinoController();
-            $controller->deleteTreinoByDia();
-            break;
-    
-        case (preg_match('/\/SHARKRUSH\/update-treino\/(\d+)/', $request, $matches) ? true : false):
-            $id = $matches[1];
-            require_once '../controllers/SessoesController.php';
-            $controller = new TreinoController();
-            $controller->showUpdateForm($id);
-            break;
-    
-        case '/SHARKRUSH/update-treino':
-            require_once '../controllers/SessoesController.php';
-            $controller = new TreinoController();
-            $controller->updateTreino();
-            break;
+    case 'update':
+        $controller->update($_POST);
+        break;
+    case 'delete':
+        $controller->delete($_GET['id']);
+        break;
 }
     

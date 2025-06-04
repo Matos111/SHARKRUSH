@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinos Cadastrados</title>
+    <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
+            :root {
             --primary-red: #FF3B3F;
             --dark-bg: #0A0A0A;
             --light-text: #F5F5F5;
@@ -170,7 +169,7 @@
         .scroll-header {
             background: rgba(10, 10, 10, 0.95);
         }
-            footer {
+    footer {
       background-color: #000000;
       color: #9E9E9E;
       padding: 40px 20px 20px 120px;
@@ -280,34 +279,34 @@
             </button>
         </nav>
     </header>
+<h1 style="color: red; font-weight: bold;">MEUS TREINOS</h1>
+<hr style="border: 1px solid red;">
 
-<h1>Meus Treinos</h1>
-<table border="1">
-    <tr>
-        <th>Dia da semana</th>
-        <th>Grupo muscular</th>
-        <th>Data de criação</th>
-    </tr>
-    <?php foreach ($treinos as $treino): ?>
-    <tr>
-        <td><?php echo $treino['dia_semana']; ?></td>
-        <td><?php echo $treino['grupo_muscular']; ?></td>
-        <td><?php echo $treino['data_criacao']; ?></td>
-        <td>
-            <a href="/SHARKRUSH/update-treino/<?php echo $treino['id']; ?>">Atualizar</a>
+<div style="display: flex; gap: 20px; flex-wrap: wrap;">
+<?php
+$dias = ['Segunda' => [], 'Quarta' => [], 'Sexta' => []];
 
-            <form action="/SHARKRUSH/delete-treino" method="POST" style="display:inline;">
-                <input type="hidden" name="dia_semana" value="<?php echo $treino['dia_semana']; ?>">
-                <button type="submit">Excluir</button>
-            </form>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+foreach($sessoes as $sessao) {
+    $dias[$sessao['dia_semana']][] = $sessao['grupo_muscular'];
+}
 
-<a href="/SHARKRUSH/public">Cadastrar novo treino</a>
+foreach(['Segunda', 'Quarta', 'Sexta'] as $indice => $dia) {
+    $treino = chr(65 + $indice); // A, B, C
+    echo "<div style='border:2px solid gray; border-radius:10px; padding:20px; width:250px; background:black; color:white;'>";
+    echo "<h2>Treino <span style='color: red;'>$treino</span></h2>";
+    echo "<p>PRINCIPAIS MUSCULOS</p><ul>";
+    foreach(array_unique($dias[$dia]) as $musculo){
+        echo "<li>$musculo</li>";
+    }
+    echo "</ul>";
+    echo "<a href='?action=edit&id={$sessao['id']}' style='color:red; font-weight:bold; border:2px solid red; padding:10px; display:inline-block; text-decoration:none;'>COMEÇAR</a>";
+    echo "<p>ÚLTIMA SESSÃO INICIADA<br>" . date('d/m/Y') . "</p>";
+    echo "</div>";
+}
+?>
+</div>
 
-  <footer>
+    <footer>
     <div class="left">
       <div class="left-title">Converse conosco!</div>
       <span class="link" onclick="copyToClipboard('11999999999')">
@@ -344,47 +343,17 @@
     </div>
   </div>
   <div id="copyAlert" class="copy-notification">Copiado para a área de transferência</div>
-
-  <footer>
-    <div class="left">
-      <div class="left-title">Converse conosco!</div>
-      <span class="link" onclick="copyToClipboard('11999999999')">
-        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_watzapp_SHARKRUSH.png" class="logo" alt="Logo Watzapp">Whatsapp
-      </span>
-      <span class="link" onclick="copyToClipboard('email@exemplo.com')">
-        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_email_SHARKRUSH.png" class="logo" alt="Logo email">Email
-      </span>
-    </div>
-
-    <div class="center">
-      <a href="/pagina-inicial.html">
-        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\logoshark.png" class="logo_sharkrush" alt="Logo">
-      </a>
-    </div>
-
-    <div class="right">
-      <div class="right-title">Siga-nos nas redes sociais!</div>
-      <a href="https://www.instagram.com/suaempresa" class="link" target="_blank">
-        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_instagram_SHARKRUSH.png" class="logo" alt="Logo instagram">Instagram
-      </a>
-      <a href="https://www.facebook.com/suaempresa" class="link" target="_blank">
-        <img src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\Logo_facebook_SHARKRUSH.png" class="logo" alt="Logo facebook">Facebook
-      </a>
-    </div>
-  </footer>
-  <div class="collaborators">
-    <div class="collaborators-title">Colaboradores</div>
-    <div class="collaborator-names">
-      <span>Augusto Sena</span>
-      <span>Gabriella Teixeira</span>
-      <span>Guilherme Monte</span>
-      <span>Miguel Fortunato</span>
-    </div>
-  </div>
-  <div id="copyAlert" class="copy-notification">Copiado para a área de transferência</div>
-
-<script>
-        function toggleMenu() {
+    <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const alertBox = document.getElementById("copyAlert");
+        alertBox.classList.add("show");
+        setTimeout(() => {
+          alertBox.classList.remove("show");
+        }, 2000);
+      });
+    }
+            function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             const mobileMenu = document.querySelector('.mobile-menu');
             navLinks.classList.toggle('active');
@@ -445,17 +414,6 @@
                 }
             });
         });
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const alertBox = document.getElementById("copyAlert");
-                alertBox.classList.add("show");
-                setTimeout(() => {
-                alertBox.classList.remove("show");
-                }, 2000);
-            });
-        }
     </script>
-
 </body>
 </html>
-

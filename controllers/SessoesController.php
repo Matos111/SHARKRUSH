@@ -1,70 +1,40 @@
 <?php
+require_once 'models/sessoes.php';
 
-require_once '../models/sessoes.php';
+class SessoesController {
+    private $model;
 
-class TreinoController {
-    // Método para exibir o formulário de cadastro
-    public function showForm() {
-        include '../views/sessoes_form.php'; // Inclua o arquivo do formulário
+    public function __construct($pdo) {
+        $this->model = new Sessoes($pdo);
     }
 
-    // Método para salvar um livro
-    public function saveTreino() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $treino = new Treino();
-            $treino->data_criacao = $_POST['data_criacao'];
-            $treino->dia_semana = $_POST['dia_semana'];
-            $treino->grupo_muscular = $_POST['grupo_muscular'];
-
-            if ($treino->save()) {
-                header('Location: /SHARKRUSH/list-treino');
-            } else {
-                echo "Erro ao cadastrar o treino.";
-            }
-        }
+    public function index($id_cliente) {
+        $sessoes = $this->model->listarTreinos($id_cliente);
+        include 'views/Sessoes/sessoes_list.php';
     }
 
-    // Método para listar todos os livros
-    public function listTreinos() {
-        $treino = new Treino();
-        $treinos = $treino->getAll();
-        include '../views/sessoes_list.php'; // Inclua o arquivo para exibir a lista de livros
+    public function create() {
+        include 'views/Sessoes/sessoes_form.php';
     }
 
-    // Método para exibir o formulário de atualização
-    public function showUpdateForm($id) {
-        $treino = new Treino();
-        $treinoInfo = $treino->getById($id);
-        include '../views/update_sessoes_form.php'; // Inclua o arquivo do formulário de atualização
+    public function store($dados) {
+        $this->model->adicionarSessao($dados);
+        header('Location: index.php');
     }
 
-    // Método para atualizar um livro
-    public function updateTreino() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $treino = new Treino();
-            $treino->data_criacao = $_POST['data_criacao'];
-            $treino->dia_semana = $_POST['dia_semana'];
-            $treino->grupo_muscular = $_POST['grupo_muscular'];
-
-            if ($treino->update()) {
-                header('Location: /SHARKRUSH/list-treinos');
-            } else {
-                echo "Erro ao atualizar o treino.";
-            }
-        }
+    public function edit($id) {
+        $sessao = $this->model->buscarPorId($id);
+        include 'views/Sessoes/update_sessoes_form.php';
     }
 
-    // Método para excluir um treino pelo dia da semana
-    public function deleteTreinoByDia() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $treino = new Treino();
-            $treino->dia_semana = $_POST['dia_semana'];
+    public function update($dados) {
+        $this->model->atualizarSessao($dados);
+        header('Location: index.php');
+    }
 
-            if ($treino->deleteByDia()) {
-                header('Location: /SHARKRUSH/list-treinos');
-            } else {
-                echo "Erro ao excluir o treino.";
-            }
-        }
+    public function delete($id) {
+        $this->model->excluirSessao($id);
+        header('Location: index.php');
     }
 }
+?>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualizar Treino</title>
-        <style>
-        :root {
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+            :root {
             --primary-red: #FF3B3F;
             --dark-bg: #0A0A0A;
             --light-text: #F5F5F5;
@@ -169,7 +169,7 @@
         .scroll-header {
             background: rgba(10, 10, 10, 0.95);
         }
-            footer {
+    footer {
       background-color: #000000;
       color: #9E9E9E;
       padding: 40px 20px 20px 120px;
@@ -261,13 +261,13 @@
 <body>
     <header id="header">
         <nav class="nav-container">
-            <div class="logo" scr="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\logoshark.png"></div>
+            <div class="logo"></div>
             
             <div class="nav-links">
-                <a href="Calculadora_imc.php" class="nav-link.active">IMC</a>
-                <a href="Calculadora_calorias.php" class="nav-link">Calorias</a>
-                <a href="Academias_proximas.php" class="nav-link">Academias</a>
-                <a href="Sessões/sessoes_list.php" class="nav-link">Treinos</a>
+                <a href="#imc" class="nav-link active">IMC</a>
+                <a href="#calorias" class="nav-link">Calorias</a>
+                <a href="#academias" class="nav-link">Academias</a>
+                <a href="#treinos" class="nav-link">Treinos</a>
             </div>
 
             <button class="mobile-menu" onclick="toggleMenu()">
@@ -279,23 +279,26 @@
             </button>
         </nav>
     </header>
-
-<h1>Atualizar Treino</h1>
-<form action="/SHARKRUSH/update-treino" method="POST">
-    <input type="hidden" name="id" value="<?php echo $treinoInfo['id']; ?>">
-
-    <label for="dia_semana">Dia da semana:</label>
-    <input type="text" id="dia_semana" name="dia_semana" value="<?php echo $treinoInfo['dia_semana']; ?>" required><br><br>
-
-    <label for="grupo_muscular">Grupo Muscular:</label>
-    <input type="text" id="grupo_muscular" name="grupo_muscular" value="<?php echo $treinoInfo['grupo_muscular']; ?>" required><br><br>
-
-    <input type="submit" value="Atualizar Treino">
+<h2>Atualizar Sessão</h2>
+<form method="POST" action="index.php?action=update">
+    <input type="hidden" name="id" value="<?= $sessao['id'] ?>">
+    Exercício ID: <input type="text" name="id_exercicio" value="<?= $sessao['id_exercicio'] ?>"><br>
+    Séries: <input type="number" name="series" value="<?= $sessao['series'] ?>"><br>
+    Repetições: <input type="number" name="repeticoes" value="<?= $sessao['repeticoes'] ?>"><br>
+    Grupo Muscular: <input type="text" name="grupo_muscular" value="<?= $sessao['grupo_muscular'] ?>"><br>
+    Dia da Semana: 
+    <select name="dia_semana">
+        <option <?= $sessao['dia_semana']=='Segunda'?'selected':'' ?>>Segunda</option>
+        <option <?= $sessao['dia_semana']=='Terça'?'selected':'' ?>>Terça</option>
+        <option <?= $sessao['dia_semana']=='Quarta'?'selected':'' ?>>Quarta</option>
+        <option <?= $sessao['dia_semana']=='Quinta'?'selected':'' ?>>Quinta</option>
+        <option <?= $sessao['dia_semana']=='Sexta'?'selected':'' ?>>Sexta</option>
+        <option <?= $sessao['dia_semana']=='Sábado'?'selected':'' ?>>Sábado</option>
+        <option <?= $sessao['dia_semana']=='Domingo'?'selected':'' ?>>Domingo</option>
+    </select><br>
+    <button type="submit">Atualizar</button>
 </form>
-
-<a href="/SHARKRUSH/list-treinos">Voltar para a lista</a>
-
-  <footer>
+    <footer>
     <div class="left">
       <div class="left-title">Converse conosco!</div>
       <span class="link" onclick="copyToClipboard('11999999999')">
@@ -332,9 +335,17 @@
     </div>
   </div>
   <div id="copyAlert" class="copy-notification">Copiado para a área de transferência</div>
-
-<script>
-        function toggleMenu() {
+    <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const alertBox = document.getElementById("copyAlert");
+        alertBox.classList.add("show");
+        setTimeout(() => {
+          alertBox.classList.remove("show");
+        }, 2000);
+      });
+    }
+            function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             const mobileMenu = document.querySelector('.mobile-menu');
             navLinks.classList.toggle('active');
@@ -395,16 +406,6 @@
                 }
             });
         });
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const alertBox = document.getElementById("copyAlert");
-                alertBox.classList.add("show");
-                setTimeout(() => {
-                alertBox.classList.remove("show");
-                }, 2000);
-            });
-        }
     </script>
-
 </body>
 </html>
