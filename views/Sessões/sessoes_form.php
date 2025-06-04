@@ -282,12 +282,12 @@
 <h2>Adicionar Sessão</h2>
 <form method="POST" action="index.php?action=store">
     <input type="hidden" name="id_cliente" value="1">
-    Exercício ID: <input type="text" name="id_exercicio"><br>
-    Séries: <input type="number" name="series"><br>
-    Repetições: <input type="number" name="repeticoes"><br>
-    Grupo Muscular: <input type="text" name="grupo_muscular"><br>
+    Exercício ID: <input type="text" name="id_exercicio" required><br>
+    Séries: <input type="number" name="series" required><br>
+    Repetições: <input type="number" name="repeticoes" required><br>
+    Grupo Muscular: <input type="text" name="grupo_muscular" required><br>
     Dia da Semana: 
-    <select name="dia_semana">
+    <select name="dia_semana" required>
         <option>Segunda</option>
         <option>Terça</option>
         <option>Quarta</option>

@@ -1,5 +1,5 @@
 <?php
-require_once 'models/sessoes.php';
+require_once __DIR__ . '/../models/sessoes.php';
 
 class SessoesController {
     private $model;
@@ -14,12 +14,18 @@ class SessoesController {
     }
 
     public function create() {
-        include 'views/Sessoes/sessoes_form.php';
+        include 'views/Sessões/sessoes_form.php';
     }
 
     public function store($dados) {
-        $this->model->adicionarSessao($dados);
+
+        
+       if ($this->model->adicionarSessao($dados)){
         header('Location: index.php');
+       }
+       else{
+        echo("erro, sessão não cadastrada");
+       }
     }
 
     public function edit($id) {
