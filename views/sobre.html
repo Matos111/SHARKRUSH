@@ -331,66 +331,66 @@
       });
     }
         function toggleMenu() {
-          const navLinks = document.querySelector('.nav-links');
-          const mobileMenu = document.querySelector('.mobile-menu');
-          navLinks.classList.toggle('active');
-          mobileMenu.classList.toggle('active');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
         }
 
         // Fechar menu ao clicar fora
         document.addEventListener('click', (e) => {
-          const navLinks = document.querySelector('.nav-links');
-          const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenu = document.querySelector('.mobile-menu');
             
-          if (!e.target.closest('.nav-container')) {
-            navLinks.classList.remove('active');
-            mobileMenu.classList.remove('active');
-          }
+            if (!e.target.closest('.nav-container')) {
+                navLinks.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
         });
 
         // Efeito de scroll no header
         window.addEventListener('scroll', () => {
-          const header = document.getElementById('header');
-          header.classList.toggle('scroll-header', window.scrollY > 50);
+            const header = document.getElementById('header');
+            header.classList.toggle('scroll-header', window.scrollY > 50);
         });
 
         // Scroll suave
         document.querySelectorAll('.nav-link').forEach(link => {
-          link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const section = document.querySelector(link.getAttribute('href'));
-            section?.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = document.querySelector(link.getAttribute('href'));
+                section?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
                 
                 // Fechar menu mobile
-            if (window.innerWidth <= 1024) {
-              toggleMenu();
-            }
-          });
+                if (window.innerWidth <= 1024) {
+                    toggleMenu();
+                }
+            });
         });
 
         // Ativar link correspondente
         window.addEventListener('scroll', () => {
-          const sections = document.querySelectorAll('section');
-          const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
             
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - 100;
-          const sectionHeight = section.offsetHeight;
-          const sectionId = section.getAttribute('id');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
                 
-          if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === `#${sectionId}`) {
-                link.classList.add('active');
-              }
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
             });
-          }
         });
-      });
-  </script>
+    </script>
 </body>
 </html>
