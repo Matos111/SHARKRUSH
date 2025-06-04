@@ -9,4 +9,5 @@ try {
 } catch (PDOException $e) {
     die("Erro de conexão: " . $e->getMessage());
 }
+//método para conexão do banco
 ?>
