@@ -12,7 +12,7 @@
       color: #9E9E9E;
     }
     header {
-      background: var(--dark-bg);
+      background: #0A0A0A;
       padding: 1.2rem 6%;
       position: fixed;
       width: 100%;
@@ -33,7 +33,7 @@
     .logo {
       width: 180px;
       height: 40px;
-      background: ('C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\logoshark.png') no-repeat center;
+      background: no-repeat center;
       background-size: contain;
     }
 
@@ -44,7 +44,7 @@
     }
 
     .nav-link {
-      color: var(--light-text);
+      color: #F5F5F5;
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
@@ -61,7 +61,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--primary-red);
+      background: #FF3B3F;
       border-radius: 8px;
       z-index: -1;
       transform: scaleX(0);
@@ -70,7 +70,7 @@
     }
 
     .nav-link:hover {
-      color: var(--dark-bg);
+      color: #0A0A0A;
     }
 
     .nav-link:hover::before {
@@ -79,7 +79,7 @@
     }
 
     .nav-link.active {
-      color: var(--primary-red);
+      color: #FF3B3F;
       font-weight: 600;
     }
 
@@ -103,7 +103,7 @@
       position: absolute;
       height: 3px;
       width: 100%;
-      background: var(--light-text);
+      background: #F5F5F5;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
@@ -254,13 +254,13 @@
 <body>
     <header id="header">
         <nav class="nav-container">
-            <div class="logo"></div>
+            <div class="logo" scr="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\logoshark.png"></div>
             
             <div class="nav-links">
-                <a href="Calculadora_imc.php" class="nav-link active">IMC</a>
-                <a href="#calorias" class="nav-link">Calorias</a>
-                <a href="#academias" class="nav-link">Academias</a>
-                <a href="#treinos" class="nav-link">Treinos</a>
+                <a href="Calculadora_imc.php" class="nav-link.active">IMC</a>
+                <a href="Calculadora_calorias.php" class="nav-link">Calorias</a>
+                <a href="Academias_proximas.php" class="nav-link">Academias</a>
+                <a href="Sessões/sessoes_list.php" class="nav-link">Treinos</a>
             </div>
 
             <button class="mobile-menu" onclick="toggleMenu()">
@@ -330,67 +330,67 @@
         }, 2000);
       });
     }
-            function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            navLinks.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
+        function toggleMenu() {
+          const navLinks = document.querySelector('.nav-links');
+          const mobileMenu = document.querySelector('.mobile-menu');
+          navLinks.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
         }
 
         // Fechar menu ao clicar fora
         document.addEventListener('click', (e) => {
-            const navLinks = document.querySelector('.nav-links');
-            const mobileMenu = document.querySelector('.mobile-menu');
+          const navLinks = document.querySelector('.nav-links');
+          const mobileMenu = document.querySelector('.mobile-menu');
             
-            if (!e.target.closest('.nav-container')) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            }
+          if (!e.target.closest('.nav-container')) {
+            navLinks.classList.remove('active');
+            mobileMenu.classList.remove('active');
+          }
         });
 
         // Efeito de scroll no header
         window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            header.classList.toggle('scroll-header', window.scrollY > 50);
+          const header = document.getElementById('header');
+          header.classList.toggle('scroll-header', window.scrollY > 50);
         });
 
         // Scroll suave
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const section = document.querySelector(link.getAttribute('href'));
-                section?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = document.querySelector(link.getAttribute('href'));
+            section?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
                 
                 // Fechar menu mobile
-                if (window.innerWidth <= 1024) {
-                    toggleMenu();
-                }
-            });
+            if (window.innerWidth <= 1024) {
+              toggleMenu();
+            }
+          });
         });
 
         // Ativar link correspondente
         window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('section');
+          const navLinks = document.querySelectorAll('.nav-link');
             
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
                 
-                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
+          if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
             });
+          }
         });
+      });
   </script>
 </body>
 </html>
