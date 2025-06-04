@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../controllers/ClientesController.php'; 
-require_once '../controllers/SessaoController.php'; 
+require_once '../controllers/SessoesController.php'; 
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -47,4 +47,37 @@ switch ($request) {
         echo $request;
         echo "Página não encontrada.";
         break;
-    }
+
+    
+    case '/SHARKRUSH/public/':
+        $controller = new TreinoController();
+        $controller->showForm();
+        break;
+    case '/SHARKRUSH/save-treino':
+        $controller = new TreinoController();
+        $controller->saveTreino();
+        break;
+    case '/SHARKRUSH/list-treinos':
+        $controller = new TreinoController();
+        $controller->listTreinos();
+        break;
+        case '/SHARKRUSH/delete-treino':
+            require_once '../controllers/SessoesController.php';
+            $controller = new TreinoController();
+            $controller->deleteTreinoByDia();
+            break;
+    
+        case (preg_match('/\/SHARKRUSH\/update-treino\/(\d+)/', $request, $matches) ? true : false):
+            $id = $matches[1];
+            require_once '../controllers/SessoesController.php';
+            $controller = new TreinoController();
+            $controller->showUpdateForm($id);
+            break;
+    
+        case '/SHARKRUSH/update-treino':
+            require_once '../controllers/SessoesController.php';
+            $controller = new TreinoController();
+            $controller->updateTreino();
+            break;
+}
+    
