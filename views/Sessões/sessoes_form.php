@@ -280,14 +280,28 @@
         </nav>
     </header>
 <h2>Adicionar Sessão</h2>
-<form method="POST" action="index.php?action=store">
-    <input type="hidden" name="id_cliente" value="1">
-    Exercício ID: <input type="text" name="id_exercicio" required><br>
-    Séries: <input type="number" name="series" required><br>
-    Repetições: <input type="number" name="repeticoes" required><br>
-    Grupo Muscular: <input type="text" name="grupo_muscular" required><br>
-    Dia da Semana: 
-    <select name="dia_semana" required>
+<form action="/save-book" method="POST">
+        <label for="id_exercicio">Exercícios:</label>
+        <input type="text" id="id_exercicio" name="id_exercicio" required><br><br>
+
+        <label for="series">Séries:</label>
+        <input type="number" id="series" name="series" required><br><br>
+
+        <label for="repeticoes">Repetições:</label>
+        <input type="number" id="repeticoes" name="repeticoes" required><br><br>
+
+        <select name="grupo_muscular" value="Grupo Muscular" required>
+        <option>Peito</option>
+        <option>Costas</option>
+        <option>Pernas</option>
+        <option>Ombros</option>
+        <option>Bíceps</option>
+        <option>Tríceps</option>
+        <option>Abdômen</option>
+        <option>Cardio</option>
+        </select><br><br>
+
+        <select name="dia_semana" value="Dia da Semana" required>
         <option>Segunda</option>
         <option>Terça</option>
         <option>Quarta</option>
@@ -295,10 +309,10 @@
         <option>Sexta</option>
         <option>Sábado</option>
         <option>Domingo</option>
-    </select><br>
-    <button type="submit">Salvar</button>
-</form>
+        </select><br><br>
 
+        <input type="submit" value="Cadastrar Treino">
+    </form>
     <footer>
     <div class="left">
       <div class="left-title">Converse conosco!</div>
