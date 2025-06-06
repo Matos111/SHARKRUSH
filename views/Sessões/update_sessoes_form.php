@@ -6,13 +6,17 @@
     <title>Document</title>
 </head>
 <body>
+  <?php if (!isset($sessoesInfo)) {
+    echo "Erro: dados da sessão não encontrados.";
+    exit;
+} ?>
     <h1>Atualizar Treino</h1>
 <form action="/sharkrush/update-sessoes" method="POST">
 
     <input type="hidden" name="id" value="<?php echo $sessoesInfo['id']; ?>">
     
     <label for="id_exercicio">Exercícios:</label>
-    <input type="text" id="id_exercicio" name="id_exercicio" value="<?php echo $sessoesInfo['id_exercicio']; ?>" required><br><br>
+    <input type="text" name="id_exercicio" value="<?= htmlspecialchars($sessoesInfo['id_exercicio'] ?? '') ?>">
 
     <label for="series">Número de Séries:</label>
     <input type="number" id="series" name="series" value="<?php echo $sessoesInfo['series']; ?>" required><br><br>

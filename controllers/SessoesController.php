@@ -33,10 +33,24 @@ class SessoesController {
         include '../views/Sessões/sessoes_list.php'; 
     }
 
-    public function showUpdateForm($id) {
-        $sessoes = Sessoes::findById($id);
-        require '../views/Sessões/update_sessoes_form.php';
+public function showUpdateForm($id) {
+    $sessoes = Sessoes::findById($id); // Certifique-se que isso retorna um array ou objeto
+
+    if ($sessoes) {
+        $sessoesInfo = [
+            'id' => $sessoes->id,
+            'id_exercicio' => $sessoes->id_exercicio,
+            'series' => $sessoes->series,
+            'repeticoes' => $sessoes->repeticoes,
+            'grupo_muscular' => $sessoes->grupo_muscular,
+            'dia_semana' => $sessoes->dia_semana,
+        ];
+
+        require_once '../views/Sessões/update_sessoes_form.php';
+    } else {
+        echo "Sessão não encontrada.";
     }
+}
 
     public function updateSessoes() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,12 +72,12 @@ class SessoesController {
         }
     }
 
-    public function deleteSessaoByDia() {
+    public function deleteSessaoByID() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sessoes = new Sessoes();
-            $sessoes->dia_semana = $_POST['dia_semana'];
+            $sessoes->dia_semana = $_POST['id'];
 
-            if ($clientes->deleteByDia()) { 
+            if ($clientes->deleteByID()) { 
                 header('Location: /sharkrush/list-sessoes');
                 exit(); 
             } else {

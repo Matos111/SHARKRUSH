@@ -6,6 +6,7 @@ class Sessoes {
     private $conn;
     private $table_name = "treinos_usuarios"; 
 
+    public $id;
     public $id_cliente;
     public $id_exercicio;
     public $data_criacao;
@@ -63,12 +64,32 @@ class Sessoes {
         return $stmt->execute();
     }
 
-    public function deleteByDia() {
-        $query = "DELETE FROM " . $this->table_name . " WHERE dia_semana = :dia_semana";
+    public function deleteByID() {
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':dia_semana', $this->dia_semana);
+        $stmt->bindParam(':id', $this->id);
 
         return $stmt->execute();
     }
-    
+    public static function findById($id) {
+        $pdo = new PDO('mysql:host=localhost;dbname=sharkrush', 'root', '');
+
+        $stmt = $pdo->prepare("SELECT * FROM treinos_usuarios WHERE id = ?");
+        $stmt->execute([$id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($data) {
+            $sessao = new Sessoes();
+            $sessao->id = $data['id'];
+            $sessao->id_exercicio = $data['id_exercicio'];
+            $sessao->data_criacao = $data['data_criacao'];
+            $sessao->series = $data['series'];
+            $sessao->repeticoes = $data['repeticoes'];
+            $sessao->grupo_muscular = $data['grupo_muscular'];
+            $sessao->dia_semana = $data['dia_semana'];
+            return $sessao;
+        }
+
+        return null;
+    }
 }
