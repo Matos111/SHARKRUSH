@@ -57,7 +57,7 @@ switch ($request) {
     
     case '/sharkrush/delete-sessoes':
         $controller = new SessoesController();
-        $controller->deleteSessoesByID();
+        $controller->deleteSessaoByID();
         break;
     
     case (preg_match('/\/sharkrush\/update-sessoes\/(\d+)/', $request, $matches) ? true : false):

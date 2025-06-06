@@ -75,9 +75,9 @@ public function showUpdateForm($id) {
     public function deleteSessaoByID() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sessoes = new Sessoes();
-            $sessoes->dia_semana = $_POST['id'];
+            $sessoes->id = $_POST['id'];
 
-            if ($clientes->deleteByID()) { 
+            if ($sessoes->deleteByID()) { 
                 header('Location: /sharkrush/list-sessoes');
                 exit(); 
             } else {
