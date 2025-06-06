@@ -1,62 +1,74 @@
 <?php
-class Sessoes {
-    private $pdo;
 
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+require_once '../config/database.php';
+
+class Sessoes {
+    private $conn;
+    private $table_name = "treinos_usuarios"; 
+
+    public $id_cliente;
+    public $id_exercicio;
+    public $data_criacao;
+    public $series;
+    public $repeticoes;
+    public $grupo_muscular;
+    public $dia_semana;
+
+    public function __construct() {
+        $database = new Database();
+        $this->conn = $database->getConnection();
     }
 
-    public function listarTreinos($id_cliente) {
-        $sql = "SELECT tu.*, e.grupo_muscular, e.nome_exercicio 
-                FROM treinos_usuarios tu
-                JOIN exercicios e ON tu.id_exercicio = e.id
-                WHERE tu.id_cliente = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$id_cliente]);
+    public function save() {
+        $query = "INSERT INTO " . $this->table_name . "(id_exercicio, data_criacao, series, repeticoes, grupo_muscular, dia_semana, id_cliente) VALUES (:id_exercicio, :data_criacao, :series, :repeticoes, :grupo_muscular, :dia_semana, :id_cliente)";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id_cliente', $this->id_cliente);
+        $stmt->bindParam(':id_exercicio', $this->id_exercicio);
+        $stmt->bindParam(':data_criacao', $this->data_criacao);
+        $stmt->bindParam(':series', $this->series);
+        $stmt->bindParam(':repeticoes', $this->repeticoes);
+        $stmt->bindParam(':grupo_muscular', $this->grupo_muscular);
+        $stmt->bindParam(':dia_semana', $this->dia_semana);
+
+        return $stmt->execute();
+    }
+
+    public function getAll() {
+        $query = "SELECT id, grupo_muscular, dia_semana, series, repeticoes, data_criacao FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function adicionarSessao($dados) {
-        $sql = "INSERT INTO treinos_usuarios 
-                (id_cliente, id_exercicio, series, repeticoes, grupo_muscular, dia_semana) 
-                VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            $dados['id_cliente'],
-            $dados['id_exercicio'],
-            $dados['series'],
-            $dados['repeticoes'],
-            $dados['grupo_muscular'],
-            $dados['dia_semana']
-        ]);
-    }
-
-    public function buscarPorId($id) {
-        $sql = "SELECT * FROM treinos_usuarios WHERE id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$id]);
+    public function getById($id) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function atualizarSessao($dados) {
-        $sql = "UPDATE treinos_usuarios 
-                SET id_exercicio = ?, series = ?, repeticoes = ?, grupo_muscular = ?, dia_semana = ? 
-                WHERE id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            $dados['id_exercicio'],
-            $dados['series'],
-            $dados['repeticoes'],
-            $dados['grupo_muscular'],
-            $dados['dia_semana'],
-            $dados['id']
-        ]);
+    public function update() {
+        $query = "UPDATE " . $this->table_name . " SET id_exercicio = :id_exercicio, data_criacao = :data_criacao, series = :series, repeticoes = :repeticoes, grupo_muscular = :grupo_muscular, dia_semana = :dia_semana WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id_exercicio', $this->id_exercicio);
+        $stmt->bindParam(':data_criacao', $this->data_criacao);
+        $stmt->bindParam(':series', $this->series);
+        $stmt->bindParam(':repeticoes', $this->repeticoes);
+        $stmt->bindParam(':grupo_muscular', $this->grupo_muscular);
+        $stmt->bindParam(':dia_semana', $this->dia_semana);
+
+        return $stmt->execute();
     }
 
-    public function excluirSessao($id) {
-        $sql = "DELETE FROM treinos_usuarios WHERE id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([$id]);
+    public function deleteByDia() {
+        $query = "DELETE FROM " . $this->table_name . " WHERE dia_semana = :dia_semana";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':dia_semana', $this->dia_semana);
+
+        return $stmt->execute();
     }
+    
 }
-?>
