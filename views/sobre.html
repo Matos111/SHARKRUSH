@@ -1,174 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-            :root {
-            --primary-red: #FF3B3F;
-            --dark-bg: #0A0A0A;
-            --light-text: #F5F5F5;
-            --hover-red: #FF5256;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre-nós-SHARKRUSH</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #9E9E9E;
+    }
+    header {
+      background: #0A0A0A;
+      padding: 1.2rem 6%;
+      position: fixed;
+      width: 100%;
+      top: 0; 
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-        body {
-            background: #FAFAFA;
-        }
+    .logo {
+      width: 180px;
+      height: 40px;
+      background: no-repeat center;
+      background-size: contain;
+    }
 
-        header {
-            background: var(--dark-bg);
-            padding: 1.2rem 6%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-        }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    .nav-link {
+      color: #F5F5F5;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .logo {
-            width: 180px;
-            height: 40px;
-            background: url('sua-logo-aqui.svg') no-repeat center;
-            background-size: contain;
-        }
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #FF3B3F;
+      border-radius: 8px;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+    .nav-link:hover {
+      color: #0A0A0A;
+    }
 
-        .nav-link {
-            color: var(--light-text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    .nav-link:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-red);
-            border-radius: 8px;
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
+    .nav-link.active {
+      color: #FF3B3F;
+      font-weight: 600;
+    }
 
-        .nav-link:hover {
-            color: var(--dark-bg);
-        }
+    .mobile-menu {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
 
-        .nav-link:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
+    .hamburger {
+      width: 32px;
+      height: 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
 
-        .nav-link.active {
-            color: var(--primary-red);
-            font-weight: 600;
-        }
+    .hamburger span {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #F5F5F5;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
 
-        .mobile-menu {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            z-index: 1001;
-        }
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 10px; }
+    .hamburger span:nth-child(3) { top: 20px; }
 
-        .hamburger {
-            width: 32px;
-            height: 24px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
+    .mobile-menu.active .hamburger span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
 
-        .hamburger span {
-            position: absolute;
-            height: 3px;
-            width: 100%;
-            background: var(--light-text);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
+    .mobile-menu.active .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
 
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 10px; }
-        .hamburger span:nth-child(3) { top: 20px; }
-
-        .mobile-menu.active .hamburger span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .mobile-menu.active .hamburger span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu.active .hamburger span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        @media (max-width: 1024px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                flex-direction: column;
-                background: var(--dark-bg);
-                width: 280px;
-                height: 100vh;
-                padding: 120px 2rem 2rem;
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: -4px 0 20px rgba(0,0,0,0.2);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-link {
-                width: 100%;
-                text-align: center;
-                padding: 12px 24px;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-        }
-
-        .scroll-header {
-            background: rgba(10, 10, 10, 0.95);
-        }
+    .mobile-menu.active .hamburger span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .logo-text {
+      font-weight: bold;
+      font-size: 24px;
+    }
+    .logo-text span {
+      color: #FE4100;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .profile-icon {
+      width: 30px;
+      height: 30px;
+    }
+    .sobre-nos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 40px 40px 40px 120px;
+      gap: 40px;
+      background-color: #121212;
+      align-items: center;
+    }
+    .titulo {
+      font-weight: 900;
+      color: #FE4100;
+      font-size: xx-large;
+    }
+    .imagem {
+      width: 100%;
+      border: 5px solid #FE4100;
+    }
     footer {
       background-color: #000000;
       color: #9E9E9E;
@@ -256,18 +249,18 @@
       gap: 30px;
       flex-wrap: wrap;
     }
-    </style>
+  </style>
 </head>
 <body>
     <header id="header">
         <nav class="nav-container">
-            <div class="logo"></div>
+            <div class="logo" scr="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\Logos\logoshark.png"></div>
             
             <div class="nav-links">
-                <a href="#imc" class="nav-link active">IMC</a>
-                <a href="#calorias" class="nav-link">Calorias</a>
-                <a href="#academias" class="nav-link">Academias</a>
-                <a href="#treinos" class="nav-link">Treinos</a>
+                <a href="Calculadora_imc.php" class="nav-link.active">IMC</a>
+                <a href="Calculadora_calorias.php" class="nav-link">Calorias</a>
+                <a href="Academias_proximas.php" class="nav-link">Academias</a>
+                <a href="Sessões/sessoes_list.php" class="nav-link">Treinos</a>
             </div>
 
             <button class="mobile-menu" onclick="toggleMenu()">
@@ -279,26 +272,18 @@
             </button>
         </nav>
     </header>
-<h2>Atualizar Sessão</h2>
-<form method="POST" action="index.php?action=update">
-    <input type="hidden" name="id" value="<?= $sessao['id'] ?>">
-    Exercício ID: <input type="text" name="id_exercicio" value="<?= $sessao['id_exercicio'] ?>"><br>
-    Séries: <input type="number" name="series" value="<?= $sessao['series'] ?>"><br>
-    Repetições: <input type="number" name="repeticoes" value="<?= $sessao['repeticoes'] ?>"><br>
-    Grupo Muscular: <input type="text" name="grupo_muscular" value="<?= $sessao['grupo_muscular'] ?>"><br>
-    Dia da Semana: 
-    <select name="dia_semana">
-        <option <?= $sessao['dia_semana']=='Segunda'?'selected':'' ?>>Segunda</option>
-        <option <?= $sessao['dia_semana']=='Terça'?'selected':'' ?>>Terça</option>
-        <option <?= $sessao['dia_semana']=='Quarta'?'selected':'' ?>>Quarta</option>
-        <option <?= $sessao['dia_semana']=='Quinta'?'selected':'' ?>>Quinta</option>
-        <option <?= $sessao['dia_semana']=='Sexta'?'selected':'' ?>>Sexta</option>
-        <option <?= $sessao['dia_semana']=='Sábado'?'selected':'' ?>>Sábado</option>
-        <option <?= $sessao['dia_semana']=='Domingo'?'selected':'' ?>>Domingo</option>
-    </select><br>
-    <button type="submit">Atualizar</button>
-</form>
-    <footer>
+  <section class="sobre-nos">
+    <div class="esquerda">
+      <h2 class="titulo">SOBRE NÓS</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ipsum vitae lacus lobortis lacinia. Donec tristique arcu massa, at pharetra tortor feugiat non.</p>
+      <img class="imagem" src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\images\IMAGEM-SOBRE-2-SHARKRUSH.png" alt="Imagem pessoa treinando">
+    </div>
+    <div class="direita">
+      <img class="imagem" src="C:\Users\3anoA\Documents\Guilherme M\PROJETO\SHARKRUSH\midia\images\IMAGEM-SOBRE-1-SHARKRUSH.png" alt="Imagem pessoa treinando">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ipsum vitae lacus lobortis lacinia. Donec tristique arcu massa, at pharetra tortor feugiat non.</p>
+    </div>
+  </section>
+  <footer>
     <div class="left">
       <div class="left-title">Converse conosco!</div>
       <span class="link" onclick="copyToClipboard('11999999999')">
@@ -335,7 +320,7 @@
     </div>
   </div>
   <div id="copyAlert" class="copy-notification">Copiado para a área de transferência</div>
-    <script>
+  <script>
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
         const alertBox = document.getElementById("copyAlert");
@@ -345,7 +330,7 @@
         }, 2000);
       });
     }
-            function toggleMenu() {
+        function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             const mobileMenu = document.querySelector('.mobile-menu');
             navLinks.classList.toggle('active');
