@@ -29,7 +29,7 @@
                 <a href="/sharkrush/update-sessoes/<?= $sessao['id'] ?>">Atualizar</a>
                 
                 <form action="/sharkrush/delete-sessoes" method="POST" style="display:inline;">
-                    <input type="hidden" name="dia_semana" value="<?php echo htmlspecialchars($sessao['dia_semana']); ?>">
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($sessao['id']); ?>">
                     <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</button>
                 </form>
             </td>
