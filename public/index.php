@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 
 require_once '../controllers/ClientesController.php'; 
 require_once '../controllers/SessoesController.php'; 
+require_once '../controllers/ExerciciosController.php';
 require_once '../models/sessoes.php';
 
 $pdo = new PDO('mysql:host=localhost;dbname=sharkrush', 'root', '');
@@ -23,7 +24,7 @@ switch ($request) {
         $controller = new ClientesController();
         $controller->saveClientes();
         break;
-        
+
     case '/sharkrush/list-clientes':
         $controller = new ClientesController();
         $controller->listClientes();
@@ -44,6 +45,7 @@ switch ($request) {
         $controller = new ClientesController();
         $controller->updateClientes();
         break;
+
 
     //EXERCÍCIOS
     case '/sharkrush/public-exercicio': 

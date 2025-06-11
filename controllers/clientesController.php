@@ -22,7 +22,7 @@ class ClientesController {
             if ($clientes->save()) {
 
                 header('Location: /sharkrush/list-clientes');
-                exit(); // Adicionado para garantir que o script pare após o redirecionamento
+                exit(); 
             } else {
                 echo "Erro ao cadastrar o Cliente.";  
             }

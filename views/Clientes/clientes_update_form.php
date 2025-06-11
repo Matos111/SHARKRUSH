@@ -2,9 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/sharkrush/views/css/styles.css">
     <title>Atualizar Cadastro</title>
+    <style>
+*   {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f9ff;
+        color: #333;
+        padding: 20px;
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color:rgb(0, 0, 0);
+    }
+
+    form {
+        max-width: 500px;
+        background: #ffffff;
+        margin: 0 auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+    }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+        border-color: rgb(170, 25, 0);
+        outline: none;
+    }
+
+        input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        input[type="submit"]:hover {
+        background-color:rgb(170, 25, 0);
+        transform: scale(1.02);
+    }
+
+    a.ver-clientes-btn {
+         display: block;
+        max-width: 500px;
+        margin: 20px auto 0 auto;
+        text-align: center;
+        padding: 12px;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    a.ver-clientes-btn:hover {
+        background-color:rgb(170, 25, 0);
+        transform: scale(1.02);
+    }
+
+    .btn-voltar {
+        display: inline-block;
+        min-width: 100px;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        margin: 4px 4px 4px 0;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .btn-voltar:hover {
+        background:rgb(170, 25, 0);
+        transform: scale(1.05);
+    }
+</style>
 </head>
 <body>
 
@@ -35,7 +147,7 @@
     <input type="submit" value="Atualizar cliente">
 
 
-<a href="/sharkrush/list-clientes">Voltar para a lista</a>
+<a href="/sharkrush/list-clientes" class="btn-voltar">Voltar para a lista</a>
 
 </body>
 </html>
