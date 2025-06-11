@@ -44,29 +44,37 @@ switch ($request) {
         $controller->updateClientes();
         break;
 
-    case '/sharkrush/create-sessoes':
-        $controller = new SessoesController($pdo);
-        $controller->create();
-        break;
 
+    case '/sharkrush/save-sessoes':
+        $controller = new SessoesController();
+        $controller->saveSessoes();
+        break;
+            
     case '/sharkrush/list-sessoes':
-        $controller = new SessoesController($pdo);
-        $controller->store($_POST);
+        $controller = new SessoesController();
+        $controller->listSessoes();
+        break;
+    
+    case '/sharkrush/delete-sessoes':
+        $controller = new SessoesController();
+        $controller->deleteSessaoByID();
+        break;
+    
+    case (preg_match('/\/sharkrush\/update-sessoes\/(\d+)/', $request, $matches) ? true : false):
+        $id = $matches[1];
+        $controller = new SessoesController();
+        $controller->showUpdateForm($id);
         break;
 
-    case '/sharkrush/editar-sessoes':
-        $controller = new SessoesController($pdo);
-        $controller->edit($_GET['id']);
+    
+    case '/sharkrush/update-sessoes':
+        $controller = new SessoesController();
+        $controller->updateSessoes();
         break;
 
-    case '/sharkrush/atualizar-sessoes':
-        $controller = new SessoesController($pdo);
-        $controller->update($_POST);
-        break;
-
-    case '/sharkrush/deletar-sessoes':
-        $controller = new SessoesController($pdo);
-        $controller->delete($_GET['id']);
+    case '/sharkrush/sessoes':
+        $controller = new SessoesController();
+        $controller->showForm();
         break;
 
     default:
