@@ -13,6 +13,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=sharkrush', 'root', '');
 $request = $_SERVER['REQUEST_URI'];
 
 switch ($request) {
+    //CLIENTES
     case '/sharkrush/public/':
         $controller = new ClientesController();
         $controller->showForm();
@@ -44,7 +45,39 @@ switch ($request) {
         $controller->updateClientes();
         break;
 
+    //EXERCÍCIOS
+    case '/sharkrush/public-exercicio': 
+        $controller = new ExerciciosController();
+        $controller->showForm();
+        break;
 
+    case '/sharkrush/save-exercicio': 
+        $controller = new ExerciciosController();
+        $controller->saveExercicio();
+        break;
+
+    case '/sharkrush/list-exercicio': 
+        $controller = new ExerciciosController();
+        $controller->listExercicios();
+        break;
+
+    case '/sharkrush/delete-exercicio':
+        $controller = new ExerciciosController();
+        $controller->deleteExercicio(); 
+        break;
+
+    case (preg_match('/\/sharkrush\/update-exercicio\/([A-Za-z0-9]+)/', $request, $matches) ? true : false): 
+        $id = $matches[1];
+        $controller = new ExerciciosController();
+        $controller->showUpdateForm($id);
+        break;
+
+    case '/sharkrush/update-exercicio': 
+        $controller = new ExerciciosController();
+        $controller->updateExercicio();
+        break;
+
+    //SESSÕES
     case '/sharkrush/save-sessoes':
         $controller = new SessoesController();
         $controller->saveSessoes();
