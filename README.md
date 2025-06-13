@@ -25,7 +25,7 @@ Este projeto foi desenvolvido por:
 
 ## 🛠️ Tecnologias Utilizadas
 
-- HTML, CSS e JavaScript  
+- PHP, HTML, CSS e JavaScript  
 - (Adicione aqui frameworks ou bibliotecas utilizadas, como React, Node.js etc)  
 - (APIs utilizadas, como geolocalização ou nutrição, se houver)  
 - (Banco de dados, se aplicável)
