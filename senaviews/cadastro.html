@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SharkRush - Cadastro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #FF1F1F;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --input-bg: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --border-color: #333333;
+            --success-color: #00ff88;
+            --error-color: #ff4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 31, 31, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 31, 31, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, var(--dark-bg) 0%, #111111 100%);
+            z-index: -2;
+        }
+
+        /* Animated Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🦈';
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Left Side - Info */
+        .info-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 31, 31, 0.1) 0%, rgba(255, 31, 31, 0.05) 100%);
+        }
+
+        .info-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .info-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+
+        .features {
+            list-style: none;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
+        }
+
+        .features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .features li:hover {
+            transform: translateX(10px);
+            color: var(--text-primary);
+        }
+
+        .features li::before {
+            content: '⚡';
+            margin-right: 1rem;
+            color: var(--primary-red);
+            font-size: 1.2rem;
+        }
+
+        /* Right Side - Form */
+        .form-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(135deg, var(--primary-red), transparent, var(--primary-red));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-container:hover::before {
+            opacity: 0.3;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-title h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-title p {
+            color: var(--text-secondary);
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-container input,
+        .input-container select {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: var(--input-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-container input:focus,
+        .input-container select:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 20px rgba(255, 31, 31, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+
+        .input-container input:focus + .input-icon {
+            color: var(--primary-red);
+        }
+
+        /* Validation States */
+        .input-container.valid input {
+            border-color: var(--success-color);
+        }
+
+        .input-container.invalid input {
+            border-color: var(--error-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Password Strength */
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--error-color);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .password-strength-bar.weak { width: 25%; background: var(--error-color); }
+        .password-strength-bar.fair { width: 50%; background: #ffaa00; }
+        .password-strength-bar.good { width: 75%; background: #00aaff; }
+        .password-strength-bar.strong { width: 100%; background: var(--success-color); }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-red) 0%, #ff4444 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 31, 31, 0.4);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .login-link a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #ff4444;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .info-section {
+                padding: 2rem 1rem;
+            }
+            
+            .info-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .info-content h1 {
+                font-size: 2rem;
+            }
+            
+            .info-content p {
+                font-size: 1rem;
+            }
+            
+            .form-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-section {
+                padding: 1rem;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .form-title h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">SharkRush</a>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-content">
+                <h1>Desperte o Tubarão em Você</h1>
+                <p>Junte-se à revolução fitness com treinos personalizados, acompanhamento em tempo real e uma comunidade que não desiste nunca.</p>
+                <ul class="features">
+                    <li>Treinos personalizados por IA</li>
+                    <li>Acompanhamento de progresso</li>
+                    <li>Comunidade motivadora</li>
+                    <li>Planos nutricionais</li>
+                    <li>Suporte 24/7</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <div class="form-container">
+                <div class="form-title">
+                    <h2>Criar Conta</h2>
+                    <p>Comece sua jornada de transformação</p>
+                </div>
+
+                <form id="signupForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="text" id="firstName" name="firstName" placeholder="Nome" required>
+                                <span class="input-icon">👤</span>
+                            </div>
+                            <div class="error-message" id="firstNameError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="text" id="lastName" name="lastName" placeholder="Sobrenome" required>
+                                <span class="input-icon">👤</span>
+                            </div>
+                            <div class="error-message" id="lastNameError"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <span class="input-icon">📧</span>
+                        </div>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="password" id="password" name="password" placeholder="Senha" required>
+                            <span class="input-icon">🔒</span>
+                        </div>
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                        </div>
+                        <div class="error-message" id="passwordError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Senha" required>
+                            <span class="input-icon">🔒</span>
+                        </div>
+                        <div class="error-message" id="confirmPasswordError"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="date" id="birthDate" name="birthDate" required>
+                                <span class="input-icon">📅</span>
+                            </div>
+                            <div class="error-message" id="birthDateError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-container">
+                                <select id="gender" name="gender" required>
+                                    <option value="">Gênero</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                                <span class="input-icon">⚧</span>
+                            </div>
+                            <div class="error-message" id="genderError"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span id="btnText">Criar Conta</span>
+                    </button>
+                </form>
+
+                <div class="login-link">
+                    Já tem uma conta? <a href="#" id="loginLink">Fazer Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Particle System
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Form Validation
+        class FormValidator {
+            constructor() {
+                this.form = document.getElementById('signupForm');
+                this.fields = {
+                    firstName: document.getElementById('firstName'),
+                    lastName: document.getElementById('lastName'),
+                    email: document.getElementById('email'),
+                    password: document.getElementById('password'),
+                    confirmPassword: document.getElementById('confirmPassword'),
+                    birthDate: document.getElementById('birthDate'),
+                    gender: document.getElementById('gender')
+                };
+                this.init();
+            }
+
+            init() {
+                // Add event listeners
+                Object.keys(this.fields).forEach(key => {
+                    this.fields[key].addEventListener('input', () => this.validateField(key));
+                    this.fields[key].addEventListener('blur', () => this.validateField(key));
+                });
+
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Password strength indicator
+                this.fields.password.addEventListener('input', () => this.updatePasswordStrength());
+            }
+
+            validateField(fieldName) {
+                const field = this.fields[fieldName];
+                const value = field.value.trim();
+                const container = field.closest('.input-container');
+                const errorElement = document.getElementById(fieldName + 'Error');
+
+                let isValid = true;
+                let errorMessage = '';
+
+                switch (fieldName) {
+                    case 'firstName':
+                    case 'lastName':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Este campo é obrigatório';
+                        } else if (value.length < 2) {
+                            isValid = false;
+                            errorMessage = 'Deve ter pelo menos 2 caracteres';
+                        }
+                        break;
+
+                    case 'email':
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Email é obrigatório';
+                        } else if (!emailRegex.test(value)) {
+                            isValid = false;
+                            errorMessage = 'Email inválido';
+                        }
+                        break;
+
+                    case 'password':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Senha é obrigatória';
+                        } else if (value.length < 8) {
+                            isValid = false;
+                            errorMessage = 'Senha deve ter pelo menos 8 caracteres';
+                        } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
+                            isValid = false;
+                            errorMessage = 'Senha deve conter maiúscula, minúscula e número';
+                        }
+                        break;
+
+                    case 'confirmPassword':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Confirmação de senha é obrigatória';
+                        } else if (value !== this.fields.password.value) {
+                            isValid = false;
+                            errorMessage = 'Senhas não coincidem';
+                        }
+                        break;
+
+                    case 'birthDate':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Data de nascimento é obrigatória';
+                        } else {
+                            const birthDate = new Date(value);
+                            const today = new Date();
+                            const age = today.getFullYear() - birthDate.getFullYear();
+                            if (age < 16) {
+                                isValid = false;
+                                errorMessage = 'Deve ter pelo menos 16 anos';
+                            }
+                        }
+                        break;
+
+                    case 'gender':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Gênero é obrigatório';
+                        }
+                        break;
+                }
+
+                // Update UI
+                container.classList.toggle('valid', isValid && value);
+                container.classList.toggle('invalid', !isValid && value);
+                
+                errorElement.textContent = errorMessage;
+                errorElement.classList.toggle('show', !isValid && value);
+
+                return isValid;
+            }
+
+            updatePasswordStrength() {
+                const password = this.fields.password.value;
+                const strengthBar = document.getElementById('passwordStrengthBar');
+                
+                let strength = 0;
+                let strengthClass = '';
+
+                if (password.length >= 8) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/\d/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+                switch (strength) {
+                    case 0:
+                    case 1:
+                        strengthClass = 'weak';
+                        break;
+                    case 2:
+                        strengthClass = 'fair';
+                        break;
+                    case 3:
+                        strengthClass = 'good';
+                        break;
+                    case 4:
+                    case 5:
+                        strengthClass = 'strong';
+                        break;
+                }
+
+                strengthBar.className = `password-strength-bar ${strengthClass}`;
+            }
+
+            validateForm() {
+                let isFormValid = true;
+                Object.keys(this.fields).forEach(key => {
+                    if (!this.validateField(key)) {
+                        isFormValid = false;
+                    }
+                });
+                return isFormValid;
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                if (!this.validateForm()) {
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = document.getElementById('btnText');
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                btnText.innerHTML = '<div class="loading"></div> Criando conta...';
+
+                // Simulate API call
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Success animation
+                    btnText.textContent = '✓ Conta criada com sucesso!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #00ff88 0%, #00cc66 100%)';
+                    
+                    setTimeout(() => {
+                        alert('Conta criada com sucesso! Redirecionando...');
+                        // Here you would redirect to login or dashboard
+                    }, 1000);
+                    
+                } catch (error) {
+                    btnText.textContent = 'Erro ao criar conta';
+                    submitBtn.style.background = 'linear-gradient(135deg, #ff4444 0%, #cc3333 100%)';
+                    
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        btnText.textContent = 'Criar Conta';
+                        submitBtn.style.background = '';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Interactive Elements
+        class InteractiveElements {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupInputFocus();
+                this.setupLoginLink();
+                this.setupFormAnimations();
+            }
+
+            setupInputFocus() {
+                const inputs = document.querySelectorAll('input, select');
+                inputs.forEach(input => {
+                    input.addEventListener('focus', (e) => {
+                        e.target.closest('.input-container').style.transform = 'translateY(-2px)';
+                    });
+
+                    input.addEventListener('blur', (e) => {
+                        e.target.closest('.input-container').style.transform = '';
+                    });
+                });
+            }
+
+            setupLoginLink() {
+                document.getElementById('loginLink').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('Redirecionando para página de login...');
+                });
+            }
+
+            setupFormAnimations() {
+                const formGroups = document.querySelectorAll('.form-group');
+                formGroups.forEach((group, index) => {
+                    group.style.animationDelay = `${index * 0.1}s`;
+                    group.style.animation = 'slideInRight 0.6s ease-out both';
+                });
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            new FormValidator();
+            new InteractiveElements();
+        });
+
+        // Add some extra visual effects
+        document.addEventListener('mousemove', (e) => {
+            const cursor = { x: e.clientX, y: e.clientY };
+            const formContainer = document.querySelector('.form-container');
+            const rect = formContainer.getBoundingClientRect();
+            
+            if (cursor.x >= rect.left && cursor.x <= rect.right && 
+                cursor.y >= rect.top && cursor.y <= rect.bottom) {
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const rotateX = (cursor.y - centerY) / 20;
+                const rotateY = (centerX - cursor.x) / 20;
+                
+                formContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            } else {
+                formContainer.style.transform = '';
+            }
+        });
+    </script>
+</body>
+</html>
