@@ -99,7 +99,7 @@
     </style>
 </head>
 <body>
-<h1>Eexercícios Cadastrados</h1>
+<h1>Exercícios Cadastrados</h1>
 <table border="1">
     <tr>
         <th>Grupo Muscular</th>
