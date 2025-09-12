@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SharkRush - Meus Treinos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* === RESET E BASE === */
         * {
             margin: 0;
             padding: 0;
@@ -19,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* Background Pattern */
+        /* === BACKGROUND PATTERN === */
         body::before {
             content: '';
             position: fixed;
@@ -33,6 +35,7 @@
             z-index: -1;
         }
 
+        /* === HEADER SECTION === */
         .header {
             display: flex;
             justify-content: space-between;
@@ -41,67 +44,15 @@
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            height: 80px;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .logo span {
-            color: #ff0000;
-        }
-
-        .shark-logo {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #ff0000, #cc0000);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .profile-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .profile-text {
-            color: #cccccc;
-            font-style: italic;
-        }
-
-        .profile-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(45deg, #ff0000, #cc0000);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .profile-icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-
-        .container {
-            display: flex;
-            min-height: calc(100vh - 90px);
-        }
-
+        /* === SIDEBAR NAVIGATION (MANTENDO SUA ESTRUTURA) === */
          .main-menu {
             background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
             position: fixed;
@@ -219,41 +170,45 @@
             max-height: 120px;
         }
 
-        .main-content {
-            flex: 1;
+        .workout-content-area {
+            margin-left: 70px;
+            margin-top: 80px;
             padding: 40px;
+            min-height: calc(100vh - 80px);
+            transition: margin-left 0.3s ease;
         }
 
-        .page-title {
+        .workouts-page-title {
             font-size: 48px;
             font-weight: bold;
             color: #ff0000;
             text-transform: uppercase;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            animation: glow 2s ease-in-out infinite alternate;
+            animation: titleGlowEffect 2s ease-in-out infinite alternate;
         }
 
-        @keyframes glow {
+        @keyframes titleGlowEffect {
             from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 0, 0, 0.3); }
             to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.3); }
         }
 
-        .divider {
+        .red-title-divider {
             width: 200px;
             height: 3px;
             background: linear-gradient(90deg, #ff0000, transparent);
             margin-bottom: 40px;
         }
 
-        .workouts-grid {
+        /* === WORKOUTS GRID === */
+        .workouts-display-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
 
-        .workout-card {
+        .individual-workout-card {
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 0, 0, 0.2);
@@ -265,7 +220,7 @@
             overflow: hidden;
         }
 
-        .workout-card::before {
+        .individual-workout-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -276,24 +231,24 @@
             transition: left 0.5s ease;
         }
 
-        .workout-card:hover::before {
+        .individual-workout-card:hover::before {
             left: 100%;
         }
 
-        .workout-card:hover {
+        .individual-workout-card:hover {
             transform: translateY(-10px);
             border-color: rgba(255, 0, 0, 0.6);
             box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
         }
 
-        .workout-letter {
+        .workout-type-letter {
             font-size: 24px;
             font-weight: bold;
             color: #ff0000;
             margin-bottom: 5px;
         }
 
-        .workout-title {
+        .workout-main-title {
             font-size: 32px;
             font-weight: bold;
             color: #ffffff;
@@ -301,7 +256,7 @@
             text-transform: uppercase;
         }
 
-        .muscle-group-title {
+        .muscle-groups-section-title {
             font-size: 14px;
             color: #888888;
             text-transform: uppercase;
@@ -309,12 +264,12 @@
             margin-bottom: 15px;
         }
 
-        .muscle-list {
+        .target-muscles-list {
             list-style: none;
             margin-bottom: 30px;
         }
 
-        .muscle-list li {
+        .target-muscles-list li {
             color: #cccccc;
             margin-bottom: 8px;
             text-transform: uppercase;
@@ -323,7 +278,7 @@
             padding-left: 15px;
         }
 
-        .muscle-list li::before {
+        .target-muscles-list li::before {
             content: '▶';
             position: absolute;
             left: 0;
@@ -331,7 +286,7 @@
             font-size: 10px;
         }
 
-        .start-button {
+        .workout-start-button {
             background: linear-gradient(45deg, #ff0000, #cc0000);
             color: white;
             border: none;
@@ -346,13 +301,13 @@
             margin-bottom: 20px;
         }
 
-        .start-button:hover {
+        .workout-start-button:hover {
             background: linear-gradient(45deg, #cc0000, #990000);
             transform: scale(1.05);
             box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
         }
 
-        .last-session {
+        .last-workout-session {
             text-align: center;
             color: #888888;
             font-size: 12px;
@@ -360,12 +315,12 @@
             letter-spacing: 1px;
         }
 
-        .last-session-date {
+        .session-date-display {
             color: #cccccc;
             font-weight: bold;
         }
 
-        .progress-bar {
+        .workout-progress-bar {
             width: 100%;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
@@ -374,60 +329,61 @@
             overflow: hidden;
         }
 
-        .progress-fill {
+        .progress-bar-fill {
             height: 100%;
             background: linear-gradient(90deg, #ff0000, #cc0000);
             border-radius: 2px;
-            animation: progress-animate 2s ease-in-out;
+            animation: progressAnimation 2s ease-in-out;
         }
 
-        @keyframes progress-animate {
+        @keyframes progressAnimation {
             from { width: 0; }
         }
 
-        .workout-a .progress-fill { width: 75%; }
-        .workout-b .progress-fill { width: 60%; }
-        .workout-c .progress-fill { width: 45%; }
+        .workout-a-card .progress-bar-fill { width: 75%; }
+        .workout-b-card .progress-bar-fill { width: 60%; }
+        .workout-c-card .progress-bar-fill { width: 45%; }
 
+        /* === RESPONSIVE DESIGN === */
         @media (max-width: 768px) {
             .header {
                 padding: 15px 20px;
             }
             
-            .logo {
+            .sharkrush-logo {
                 font-size: 20px;
             }
             
-            .main-content {
+            .workout-content-area {
+                margin-left: 0;
                 padding: 20px;
             }
             
-            .page-title {
+            .workouts-page-title {
                 font-size: 32px;
             }
             
-            .workouts-grid {
+            .workouts-display-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
             
-            .sidebar {
+            .main-menu {
                 width: 60px;
             }
+        }
+
+        .individual-workout-card:hover .workout-main-title {
+            color: #ff0000;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .individual-workout-card:hover .target-muscles-list li {
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <span>SHARK</span>RUSH
-        </div>
-        <div class="shark-logo"></div>
-        <div class="profile-section">
-            <span class="profile-text">MEU PERFIL</span>
-            <div class="profile-icon"></div>
-        </div>
-    </header>
 
      <nav class="main-menu">
         <div class="logo-container">
@@ -445,7 +401,8 @@
                     <i class="fa fa-info-circle nav-icon"></i>
                     <span class="nav-text">Sobre</span>
                 </a>
-            </li>            <li>
+            </li>            
+            <li>
                 <a href="#gerador" class="active">
                     <i class="fa fa-cogs nav-icon"></i>
                     <span class="nav-text">Gerador</span>
@@ -483,139 +440,221 @@
             </li>
         </ul>
     </nav>
-        <main class="main-content">
-            <h1 class="page-title">MEUS TREINOS</h1>
-            <div class="divider"></div>
 
-            <div class="workouts-grid">
-                <div class="workout-card workout-a" onclick="startWorkout('A')">
-                    <div class="workout-letter">TREINO</div>
-                    <div class="workout-title">A</div>
-                    <div class="muscle-group-title">PRINCIPAIS MÚSCULOS</div>
-                    <ul class="muscle-list">
-                        <li>PEITO</li>
-                        <li>TRÍCEPS</li>
-                        <li>BÍCEPS</li>
-                        <li>ABDOMINAL</li>
-                    </ul>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    <button class="start-button">COMEÇAR</button>
-                    <div class="last-session">
-                        ÚLTIMA SESSÃO INICIADA<br>
-                        <span class="last-session-date">10/02/2025</span>
-                    </div>
+    <main class="workout-content-area">
+        <h1 class="workouts-page-title">MEUS TREINOS</h1>
+        <div class="red-title-divider"></div>
+
+        <div class="workouts-display-grid">
+            <div class="individual-workout-card workout-a-card" onclick="initializeWorkout('A')">
+                <div class="workout-type-letter">TREINO</div>
+                <div class="workout-main-title">A</div>
+                <div class="muscle-groups-section-title">PRINCIPAIS MÚSCULOS</div>
+                <ul class="target-muscles-list">
+                    <li>PEITO</li>
+                    <li>TRÍCEPS</li>
+                    <li>BÍCEPS</li>
+                    <li>ABDOMINAL</li>
+                </ul>
+                <div class="workout-progress-bar">
+                    <div class="progress-bar-fill"></div>
                 </div>
-
-                <div class="workout-card workout-b" onclick="startWorkout('B')">
-                    <div class="workout-letter">TREINO</div>
-                    <div class="workout-title">B</div>
-                    <div class="muscle-group-title">PRINCIPAIS MÚSCULOS</div>
-                    <ul class="muscle-list">
-                        <li>COSTA</li>
-                        <li>TRAPÉZIO</li>
-                        <li>ANTEBRAÇO</li>
-                        <li>OMBRO</li>
-                    </ul>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    <button class="start-button">COMEÇAR</button>
-                    <div class="last-session">
-                        ÚLTIMA SESSÃO INICIADA<br>
-                        <span class="last-session-date">11/02/2025</span>
-                    </div>
-                </div>
-
-                <div class="workout-card workout-c" onclick="startWorkout('C')">
-                    <div class="workout-letter">TREINO</div>
-                    <div class="workout-title">C</div>
-                    <div class="muscle-group-title">PRINCIPAIS MÚSCULOS</div>
-                    <ul class="muscle-list">
-                        <li>PANTURRILHA</li>
-                        <li>QUADRÍCEPS</li>
-                        <li>POSTERIORES</li>
-                        <li>GLÚTEOS</li>
-                    </ul>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    <button class="start-button">COMEÇAR</button>
-                    <div class="last-session">
-                        ÚLTIMA SESSÃO INICIADA<br>
-                        <span class="last-session-date">12/02/2025</span>
-                    </div>
+                <button class="workout-start-button">COMEÇAR</button>
+                <div class="last-workout-session">
+                    ÚLTIMA SESSÃO INICIADA<br>
+                    <span class="session-date-display">10/02/2025</span>
                 </div>
             </div>
-        </main>
-    </div>
+
+            <div class="individual-workout-card workout-b-card" onclick="initializeWorkout('B')">
+                <div class="workout-type-letter">TREINO</div>
+                <div class="workout-main-title">B</div>
+                <div class="muscle-groups-section-title">PRINCIPAIS MÚSCULOS</div>
+                <ul class="target-muscles-list">
+                    <li>COSTA</li>
+                    <li>TRAPÉZIO</li>
+                    <li>ANTEBRAÇO</li>
+                    <li>OMBRO</li>
+                </ul>
+                <div class="workout-progress-bar">
+                    <div class="progress-bar-fill"></div>
+                </div>
+                <button class="workout-start-button">COMEÇAR</button>
+                <div class="last-workout-session">
+                    ÚLTIMA SESSÃO INICIADA<br>
+                    <span class="session-date-display">11/02/2025</span>
+                </div>
+            </div>
+
+            <div class="individual-workout-card workout-c-card" onclick="initializeWorkout('C')">
+                <div class="workout-type-letter">TREINO</div>
+                <div class="workout-main-title">C</div>
+                <div class="muscle-groups-section-title">PRINCIPAIS MÚSCULOS</div>
+                <ul class="target-muscles-list">
+                    <li>PANTURRILHA</li>
+                    <li>QUADRÍCEPS</li>
+                    <li>POSTERIORES</li>
+                    <li>GLÚTEOS</li>
+                </ul>
+                <div class="workout-progress-bar">
+                    <div class="progress-bar-fill"></div>
+                </div>
+                <button class="workout-start-button">COMEÇAR</button>
+                <div class="last-workout-session">
+                    ÚLTIMA SESSÃO INICIADA<br>
+                    <span class="session-date-display">12/02/2025</span>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
-        function startWorkout(workoutType) {
-            // Adiciona efeito visual ao clicar
-            event.target.style.transform = 'scale(0.95)';
+        // === WORKOUT INITIALIZATION FUNCTION ===
+        function initializeWorkout(workoutType) {
+            const clickedCard = event.target.closest('.individual-workout-card');
+            
+            // Visual feedback on click
+            clickedCard.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                event.target.style.transform = '';
+                clickedCard.style.transform = '';
             }, 150);
 
-            // Simula o início do treino
-            alert(`Iniciando Treino ${workoutType}!\n\nBoa sorte no seu treino!`);
+            // Workout start notification
+            showWorkoutNotification(workoutType);
         }
 
-        // Adiciona efeito de hover nos ícones da sidebar
-        document.querySelectorAll('.sidebar-icon').forEach(icon => {
-            icon.addEventListener('click', function() {
-                document.querySelectorAll('.sidebar-icon').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
+        // === NOTIFICATION SYSTEM ===
+        function showWorkoutNotification(workoutType) {
+            const notificationMessage = `
+                🦈 SHARKRUSH WORKOUT INICIADO! 🦈
+                
+                Treino ${workoutType} selecionado!
+                
+                💪 Dê o seu melhor!
+                🔥 Força e foco!
+                ⚡ Você consegue!
+            `;
+            
+            alert(notificationMessage);
+        }
 
-        // Animação das barras de progresso ao carregar a página
-        window.addEventListener('load', () => {
-            const progressBars = document.querySelectorAll('.progress-fill');
-            progressBars.forEach(bar => {
-                bar.style.animation = 'progress-animate 2s ease-in-out';
+        // === SIDEBAR NAVIGATION EFFECTS ===
+        function initializeSidebarEffects() {
+            const navigationIcons = document.querySelectorAll('.main-menu .nav-icon');
+            
+            navigationIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    // Remove active class from all icons
+                    navigationIcons.forEach(navIcon => {
+                        navIcon.parentElement.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked icon
+                    this.parentElement.classList.add('active');
+                });
             });
-        });
+        }
 
-        // Efeito de partículas no background (opcional)
-        function createParticle() {
+        // === PROGRESS BAR ANIMATIONS ===
+        function animateProgressBars() {
+            const allProgressBars = document.querySelectorAll('.progress-bar-fill');
+            
+            allProgressBars.forEach(progressBar => {
+                progressBar.style.animation = 'progressAnimation 2s ease-in-out';
+            });
+        }
+
+        // === PARTICLE EFFECTS SYSTEM ===
+        function createFloatingParticle() {
             const particle = document.createElement('div');
+            const randomXPosition = Math.random() * 100;
+            const particleSize = Math.random() * 3 + 1;
+            
             particle.style.cssText = `
                 position: fixed;
-                width: 2px;
-                height: 2px;
-                background: rgba(255, 0, 0, 0.5);
+                width: ${particleSize}px;
+                height: ${particleSize}px;
+                background: rgba(255, 0, 0, 0.7);
                 pointer-events: none;
                 z-index: 1;
                 border-radius: 50%;
-                left: ${Math.random() * 100}vw;
+                left: ${randomXPosition}vw;
                 top: 100vh;
-                animation: float-up 3s linear forwards;
+                animation: floatUpAnimation 4s linear forwards;
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
             `;
             
             document.body.appendChild(particle);
             
+            // Remove particle after animation
             setTimeout(() => {
-                particle.remove();
-            }, 3000);
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 4000);
         }
 
-        // Adiciona estilo da animação das partículas
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float-up {
-                to {
-                    transform: translateY(-100vh) rotate(360deg);
-                    opacity: 0;
+        // === DYNAMIC PARTICLE ANIMATION STYLES ===
+        function initializeParticleStyles() {
+            const dynamicStyles = document.createElement('style');
+            dynamicStyles.textContent = `
+                @keyframes floatUpAnimation {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(-100vh) rotate(720deg);
+                        opacity: 0;
+                    }
                 }
-            }
-        `;
-        document.head.appendChild(style);
+            `;
+            document.head.appendChild(dynamicStyles);
+        }
 
-        // Cria partículas ocasionalmente
-        setInterval(createParticle, 2000);
+        // === CARD HOVER SOUND EFFECTS (Visual feedback) ===
+        function addCardInteractionEffects() {
+            const workoutCards = document.querySelectorAll('.individual-workout-card');
+            
+            workoutCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transition = 'all 0.3s ease';
+                });
+            });
+        }
+
+        // === INITIALIZATION ON PAGE LOAD ===
+        window.addEventListener('load', () => {
+            initializeSidebarEffects();
+            animateProgressBars();
+            initializeParticleStyles();
+            addCardInteractionEffects();
+        });
+
+        // === PARTICLE GENERATION INTERVAL ===
+        setInterval(createFloatingParticle, 3000);
+
+        // === RESPONSIVE SIDEBAR BEHAVIOR ===
+        function handleResponsiveSidebar() {
+            const sidebar = document.querySelector('.main-menu');
+            const contentArea = document.querySelector('.workout-content-area');
+            
+            if (window.innerWidth <= 768) {
+                contentArea.style.marginLeft = '0';
+            } else {
+                contentArea.style.marginLeft = '70px';
+            }
+        }
+
+        // === WINDOW RESIZE HANDLER ===
+        window.addEventListener('resize', handleResponsiveSidebar);
+        
+        // Initialize responsive behavior
+        handleResponsiveSidebar();
     </script>
 </body>
 </html>
