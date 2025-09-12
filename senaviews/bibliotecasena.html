@@ -82,7 +82,7 @@
         .header h1 {
             font-size: 3rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ffffff, #a9a9a9, #ffffff);
+            background: linear-gradient(45deg, #ffffff, #e1e1e1, #ffffff);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -137,13 +137,13 @@
 
         .muscle-title {
             font-size: 2rem;
-            color: #ff0000;
+            color: #fff; /* Alterado de #ff0000 para branco */
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
             padding-left: 10px;
-            border-left: 4px solid #ff0000;
+            border-left: 4px solid #868686;
         }
 
         .muscle-title i {
@@ -697,6 +697,70 @@
             background: #1e7e34 !important;
             color: #fff !important;
         }
+        .sidebar-workout-actions {
+            margin: 32px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .sidebar-workout-counter {
+            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
+            color: #fff;
+            border-radius: 18px;
+            padding: 18px 32px 18px 28px;
+            font-size: 1.18rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
+            letter-spacing: 0.5px;
+            margin-bottom: 0;
+            border: none;
+            min-width: 230px;
+            justify-content: center;
+        }
+        .sidebar-workout-counter .counter-icon {
+            font-size: 1.6rem;
+            margin-right: 2px;
+        }
+        .sidebar-workout-counter .count-number {
+            background: #e53935;
+            color: #fff;
+            border-radius: 9px;
+            padding: 2px 13px 2px 13px;
+            font-size: 1.08em;
+            font-weight: 700;
+            margin: 0 7px;
+            display: inline-block;
+            min-width: 22px;
+            text-align: center;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .sidebar-save-btn {
+            width: 100%;
+            padding: 17px 0 17px 0;
+            background: #232323;
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px #0004;
+            transition: background 0.18s, color 0.18s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+        .sidebar-save-btn:hover {
+            background: #444;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -1247,7 +1311,7 @@
 
     <!-- Botão para abrir menu lateral de exercícios selecionados -->
     <button id="open-selected-sidebar-btn" style="position:fixed;top:30px;right:30px;z-index:1200;background:#232323;color:#fff;border:none;border-radius:50%;width:54px;height:54px;box-shadow:0 2px 12px #0007;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;transition:background 0.2s;">
-        <i class="fas fa-list"></i>
+        <i class="fas fa-dumbbell"></i>
     </button>
 
     <!-- Menu lateral de exercícios selecionados -->
@@ -1263,9 +1327,13 @@
         <div id="sidebar-selected-list" style="flex:1;overflow-y:auto;padding:18px 22px 0 22px;">
             <!-- Lista de exercícios será preenchida via JS -->
         </div>
-        <div style="padding:18px 22px 22px 22px;border-top:1px solid #222;">
-            <button id="save-sidebar-workout-btn" style="width:100%;padding:13px 0;background:linear-gradient(45deg,#ff0000,#cc0000);color:#fff;font-size:1.08rem;font-weight:600;border:none;border-radius:8px;cursor:pointer;letter-spacing:1px;box-shadow:0 2px 12px #0004;transition:background 0.2s;">
-                <i class="fas fa-save"></i> Salvar Treino
+        <div class="sidebar-workout-actions">
+            <div class="sidebar-workout-counter">
+                <i class="fas fa-dumbbell counter-icon"></i>
+                Treino: <span class="count-number" id="sidebar-workout-count">0</span> exercícios
+            </div>
+            <button id="save-sidebar-workout-btn" class="sidebar-save-btn">
+                <i class="fas fa-save"></i> SALVAR TREINO
             </button>
         </div>
     </aside>
@@ -1667,6 +1735,8 @@
         // Renderiza a lista de exercícios selecionados no menu lateral
         function renderSidebarSelectedList() {
             const listDiv = document.getElementById('sidebar-selected-list');
+            const countSpan = document.getElementById('sidebar-workout-count');
+            if (countSpan) countSpan.textContent = selectedExercises.length;
             listDiv.innerHTML = '';
             if (selectedExercises.length === 0) {
                 listDiv.innerHTML = `<div style="color:#aaa;text-align:center;margin-top:30px;">Nenhum exercício selecionado.</div>`;
