@@ -33,7 +33,7 @@
 
         .fitness-icon {
             position: absolute;
-            color: #ff0000;
+            color: #aeaeae;
             animation: float 6s ease-in-out infinite;
             font-size: 24px;
         }
@@ -83,13 +83,13 @@
         .header h1 {
             font-size: 3rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ffffff, #ff0000, #ffffff);
+            background: linear-gradient(45deg, #ffffff, #a9a9a9, #ffffff);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: gradientShift 3s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            text-shadow: 0 0 20px rgba(138, 138, 138, 0.3);
             margin-bottom: 10px;
         }
 
@@ -172,7 +172,7 @@
             min-width: 280px;
             height: 380px;
             background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #ff0000;
+            border: 2px solid #2a2a2a;
             border-radius: 15px;
             overflow: hidden;
             position: relative;
@@ -660,6 +660,44 @@
             max-width: 100%;
             max-height: 120px;
         }
+
+        .add-to-workout-btn {
+            margin-top: 10px;
+            width: 90%;
+            padding: 7px 0;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 34px;
+        }
+        .add-to-workout-btn:hover:not(:disabled) {
+            background: #ff3333;
+            color: #fff;
+            transform: scale(1.03);
+            box-shadow: 0 4px 16px rgba(255,0,0,0.18);
+        }
+        .add-to-workout-btn:disabled,
+        .add-to-workout-btn.added {
+            background: #1e7e34 !important;
+            color: #fff !important;
+            cursor: default;
+        }
+        .add-to-workout-btn.added {
+            background: #1e7e34 !important;
+            color: #fff !important;
+        }
     </style>
 </head>
 <body>
@@ -669,7 +707,7 @@
         </div>
         <ul>
             <li>
-                <a href="#home">
+                <a href="../senaviews/homesena.html">
                     <i class="fa fa-home nav-icon"></i>
                     <span class="nav-text">Home</span>
                 </a>
@@ -681,13 +719,13 @@
                 </a>
             </li>
             <li>
-                <a href="#gerador" class="active">
+                <a href="../senaviews/gerador.html">
                     <i class="fa fa-cogs nav-icon"></i>
                     <span class="nav-text">Gerador</span>
                 </a>
             </li>
             <li>
-                <a href="#biblioteca">
+                <a href="../senaviews/bibliotecasena.html" class="active">
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
@@ -705,7 +743,7 @@
                 </a>
             </li>
             <li>
-                <a href="#calculadora-kalorias">
+                <a href="../senaviews/calculocalorias.html">
                     <i class="fa fa-fire nav-icon"></i>
                     <span class="nav-text">Calculadora Kalorias</span>
                 </a>
@@ -737,7 +775,7 @@
         <!-- Peito e Ombros -->
         <section class="muscle-group">
             <h2 class="muscle-title">
-                <i class="fas fa-hand-fist"></i>
+                <i class="fas fa-dumbbell"></i>
                 Peito e Ombros
             </h2>
             <div class="exercises-carousel">
@@ -748,7 +786,7 @@
                     <div class="exercise-card" onclick="openExerciseModal('Supino Reto', 'Exercício fundamental para desenvolvimento do peitoral maior', 'beginner', '3-4 séries', 'https://example.com/supino-reto.gif')">
                         <div class="exercise-image">
                             <i class="fas fa-hand-fist exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
+                            <button class="play-button" type="button" onclick="event.stopPropagation(); openExerciseModal('Supino Reto', 'Exercício fundamental para desenvolvimento do peitoral maior', 'beginner', '3-4 séries', 'https://example.com/supino-reto.gif')"><i class="fas fa-play"></i></button>
                         </div>
                         <div class="exercise-info">
                             <h3 class="exercise-name">Supino Reto</h3>
@@ -757,6 +795,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">3-4 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="addToWorkout(this, event)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -766,12 +808,16 @@
                             <button class="play-button"><i class="fas fa-play"></i></button>
                         </div>
                         <div class="exercise-info">
-                            <h3 class="exercise-name">Desenvolvimento Ombros</h3>
+                            <h3 class="exercise-name">Desenvolvimento </h3>
                             <p class="exercise-details">Deltoides fortes e definidos</p>
                             <div class="exercise-meta">
                                 <span class="difficulty intermediate">Intermediário</span>
                                 <span class="exercise-duration">3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -787,6 +833,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">2-3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -802,6 +852,10 @@
                                 <span class="difficulty intermediate">Intermediário</span>
                                 <span class="exercise-duration">3-4 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -817,6 +871,10 @@
                                 <span class="difficulty advanced">Avançado</span>
                                 <span class="exercise-duration">3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -829,7 +887,7 @@
         <!-- Braços -->
         <section class="muscle-group">
             <h2 class="muscle-title">
-                <i class="fas fa-dumbbell"></i>
+                <i class="fas fa-hand-fist"></i>
                 Braços
             </h2>
             <div class="exercises-carousel">
@@ -849,6 +907,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -864,6 +926,10 @@
                                 <span class="difficulty intermediate">Intermediário</span>
                                 <span class="exercise-duration">3-4 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -879,6 +945,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -894,6 +964,10 @@
                                 <span class="difficulty advanced">Avançado</span>
                                 <span class="exercise-duration">3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -906,7 +980,7 @@
         <!-- Abdômen -->
         <section class="muscle-group">
             <h2 class="muscle-title">
-                <i class="fas fa-stop"></i>
+                <i class="fas fa-fire"></i>
                 Abdômen
             </h2>
             <div class="exercises-carousel">
@@ -926,6 +1000,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">3x30-60s</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -941,6 +1019,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">3x15-20</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -956,6 +1038,10 @@
                                 <span class="difficulty intermediate">Intermediário</span>
                                 <span class="exercise-duration">3x12-15</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -971,6 +1057,10 @@
                                 <span class="difficulty intermediate">Intermediário</span>
                                 <span class="exercise-duration">3x20</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -986,6 +1076,10 @@
                                 <span class="difficulty advanced">Avançado</span>
                                 <span class="exercise-duration">3x30s</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1018,6 +1112,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">3-4 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -1033,6 +1131,10 @@
                                 <span class="difficulty intermediate">Intermediário</span>
                                 <span class="exercise-duration">3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -1048,6 +1150,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">3x12 cada</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -1063,6 +1169,10 @@
                                 <span class="difficulty intermediate">Intermediário</span>
                                 <span class="exercise-duration">3 séries</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -1078,6 +1188,10 @@
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">4x15-20</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
 
@@ -1093,6 +1207,10 @@
                                 <span class="difficulty advanced">Avançado</span>
                                 <span class="exercise-duration">3x5 cada</span>
                             </div>
+                            <button class="add-to-workout-btn" type="button"
+                                onclick="event.stopPropagation(); addToWorkout(this)">
+                                <i class="fas fa-plus"></i> Adicionar ao Treino
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1230,7 +1348,7 @@
                     'Fique em pé com a barra na pegada supinada',
                     'Mantenha os cotovelos fixos ao lado do corpo',
                     'Flexione os braços levando a barra ao peito',
-                    'Desça controladamente estendendo completamente os braços'
+                    'Desça controladamente estendendo completamente'
                 ],
                 'Tríceps Testa': [
                     'Deite no banco segurando a barra ou halteres',
@@ -1412,6 +1530,54 @@
                 ticking = true;
             }
         });
+
+        function getExerciseData(card) {
+            const name = card.querySelector('.exercise-name')?.textContent || '';
+            const details = card.querySelector('.exercise-details')?.textContent || '';
+            const meta = card.querySelector('.exercise-meta');
+            const difficulty = meta?.querySelector('.difficulty')?.classList[1] || '';
+            const difficultyText = meta?.querySelector('.difficulty')?.textContent || '';
+            const duration = meta?.querySelector('.exercise-duration')?.textContent || '';
+            const iconClass = card.querySelector('.exercise-placeholder')?.classList[1] || '';
+            let gifUrl = '';
+            let description = '';
+            const onclickAttr = card.getAttribute('onclick');
+            if (onclickAttr) {
+                const match = onclickAttr.match(/['"]([^'"]+)['"],\s*['"]([^'"]+)['"],\s*['"]([^'"]+)['"],\s*['"]([^'"]+)['"],\s*['"]([^'"]+)['"]/);
+                if (match) {
+                    description = match[2];
+                    gifUrl = match[5];
+                }
+            }
+            return { name, details, difficulty, difficultyText, duration, iconClass, gifUrl, description };
+        }
+        function addToWorkout(btn, event) {
+            if (event) event.stopPropagation();
+            const card = btn.closest('.exercise-card');
+            const data = getExerciseData(card);
+            let saved = JSON.parse(localStorage.getItem('savedExercises') || '[]');
+            if (saved.some(e => e.name === data.name)) {
+                btn.innerHTML = '<i class="fas fa-check"></i> Já adicionado';
+                btn.classList.add('added');
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-plus"></i> Adicionar ao Treino';
+                    btn.classList.remove('added');
+                    btn.disabled = false;
+                }, 1200);
+                return;
+            }
+            saved.push(data);
+            localStorage.setItem('savedExercises', JSON.stringify(saved));
+            btn.innerHTML = '<i class="fas fa-check"></i> Adicionado!';
+            btn.classList.add('added');
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-plus"></i> Adicionar ao Treino';
+                btn.classList.remove('added');
+                btn.disabled = false;
+            }, 1200);
+        }
     </script>
 </body>
 </html>
