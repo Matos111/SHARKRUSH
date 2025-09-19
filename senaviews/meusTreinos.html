@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SharkRush - Meus Treinos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="">
     <style>
-        /* === RESET E BASE === */
+
         * {
             margin: 0;
             padding: 0;
@@ -20,8 +20,6 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
-        /* === BACKGROUND PATTERN === */
         body::before {
             content: '';
             position: fixed;
@@ -35,7 +33,6 @@
             z-index: -1;
         }
 
-        /* === HEADER SECTION === */
         .header {
             display: flex;
             justify-content: space-between;
@@ -52,7 +49,6 @@
             height: 80px;
         }
 
-        /* === SIDEBAR NAVIGATION (MANTENDO SUA ESTRUTURA) === */
          .main-menu {
             background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
             position: fixed;
@@ -526,13 +522,11 @@
         // === NOTIFICATION SYSTEM ===
         function showWorkoutNotification(workoutType) {
             const notificationMessage = `
-                🦈 SHARKRUSH WORKOUT INICIADO! 🦈
+                TREINO INICIADO! 🦈
                 
-                Treino ${workoutType} selecionado!
+                Treino ${workoutType} selecionado! 💪
                 
-                💪 Dê o seu melhor!
-                🔥 Força e foco!
-                ⚡ Você consegue!
+                FAÇA O SEU MELHOR E SUPERE SEUS LIMITES!
             `;
             
             alert(notificationMessage);

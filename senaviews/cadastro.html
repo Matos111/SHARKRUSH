@@ -501,79 +501,72 @@
                     <p>Comece sua jornada de transformação</p>
                 </div>
 
-                <form id="signupForm" novalidate>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <div class="input-container">
-                                <input type="text" id="firstName" name="firstName" placeholder="Nome" required>
-                                <span class="input-icon">👤</span>
-                            </div>
-                            <div class="error-message" id="firstNameError"></div>
-                        </div>
+                <form id="signupForm" action="/sharkrush/save-clientes" method="POST" novalidate> <!-- envia para o controller -->
 
-                        <div class="form-group">
-                            <div class="input-container">
-                                <input type="text" id="lastName" name="lastName" placeholder="Sobrenome" required>
-                                <span class="input-icon">👤</span>
-                            </div>
-                            <div class="error-message" id="lastNameError"></div>
-                        </div>
-                    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <div class="input-container">
+                <input type="text" id="firstName" name="nome_completo" placeholder="Nome completo" required> 
+                <span class="input-icon">👤</span>
+            </div>
+            <div class="error-message" id="firstNameError"></div>
+        </div>
+    </div>
 
-                    <div class="form-group">
-                        <div class="input-container">
-                            <input type="email" id="email" name="email" placeholder="Email" required>
-                            <span class="input-icon">📧</span>
-                        </div>
-                        <div class="error-message" id="emailError"></div>
-                    </div>
+    <div class="form-group">
+        <div class="input-container">
+            <input type="email" id="email" name="email" placeholder="Email" required> 
+            <span class="input-icon">📧</span>
+        </div>
+        <div class="error-message" id="emailError"></div>
+    </div>
 
-                    <div class="form-group">
-                        <div class="input-container">
-                            <input type="password" id="password" name="password" placeholder="Senha" required>
-                            <span class="input-icon">🔒</span>
-                        </div>
-                        <div class="password-strength">
-                            <div class="password-strength-bar" id="passwordStrengthBar"></div>
-                        </div>
-                        <div class="error-message" id="passwordError"></div>
-                    </div>
+    <div class="form-group">
+        <div class="input-container">
+            <input type="password" id="password" name="senha" placeholder="Senha" required> 
+            <span class="input-icon">🔒</span>
+        </div>
+        <div class="password-strength">
+            <div class="password-strength-bar" id="passwordStrengthBar"></div>
+        </div>
+        <div class="error-message" id="passwordError"></div>
+    </div>
 
-                    <div class="form-group">
-                        <div class="input-container">
-                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Senha" required>
-                            <span class="input-icon">🔒</span>
-                        </div>
-                        <div class="error-message" id="confirmPasswordError"></div>
-                    </div>
+    <div class="form-group">
+        <div class="input-container">
+            <input type="password" id="confirmPassword" name="confirmar_senha" placeholder="Confirmar Senha" required> 
+            <span class="input-icon">🔒</span>
+        </div>
+        <div class="error-message" id="confirmPasswordError"></div>
+    </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <div class="input-container">
-                                <input type="date" id="birthDate" name="birthDate" required>
-                                <span class="input-icon">📅</span>
-                            </div>
-                            <div class="error-message" id="birthDateError"></div>
-                        </div>
+    <div class="form-row">
+        <div class="form-group">
+            <div class="input-container">
+                <input type="date" id="birthDate" name="data_nascimento" required> 
+                <span class="input-icon">📅</span>
+            </div>
+            <div class="error-message" id="birthDateError"></div>
+        </div>
 
-                        <div class="form-group">
-                            <div class="input-container">
-                                <select id="gender" name="gender" required>
-                                    <option value="">Gênero</option>
-                                    <option value="masculino">Masculino</option>
-                                    <option value="feminino">Feminino</option>
-                                    <option value="outro">Outro</option>
-                                </select>
-                                <span class="input-icon">⚧</span>
-                            </div>
-                            <div class="error-message" id="genderError"></div>
-                        </div>
-                    </div>
+        <div class="form-group">
+            <div class="input-container">
+                <select id="gender" name="genero" required> 
+                    <option value="">Gênero</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="outro">Outro</option>
+                </select>
+                <span class="input-icon">⚧</span>
+            </div>
+            <div class="error-message" id="genderError"></div>
+        </div>
+    </div>
 
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <span id="btnText">Criar Conta</span>
-                    </button>
-                </form>
+    <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="btnText">Criar Conta</span>
+    </button>
+</form>
 
                 <div class="login-link">
                     Já tem uma conta? <a href="#" id="loginLink">Fazer Login</a>
