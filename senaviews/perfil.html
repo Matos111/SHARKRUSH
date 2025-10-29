@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SharkRush - Perfil do Usuário</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* ...estilos baseados em recuperarsenha.html... */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(ellipse at center, #1a0000 0%, #000000 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .animated-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden; }
+        .particle { position: absolute; background: #FF1F1F; border-radius: 50%; opacity: 0.4; animation: float 8s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+        .wave { position: absolute; left: 0; width: 100vw; height: 120px; background: linear-gradient(90deg, transparent, rgba(255, 31, 31, 0.07), transparent); opacity: 0.7; animation: wave 12s linear infinite; }
+        .wave:nth-child(1) { top: 20%; animation-delay: 0s; }
+        .wave:nth-child(2) { top: 40%; animation-delay: -4s; }
+        .wave:nth-child(3) { top: 60%; animation-delay: -8s; }
+        @keyframes wave { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .perfil-container {
+            background: rgba(30, 30, 30, 0.25);
+            backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+            -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 0 0 2px rgba(255,31,31,0.12);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .perfil-header { text-align: center; margin-bottom: 2rem; }
+        .perfil-avatar {
+            width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #FF1F1F, #cc0000);
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; box-shadow: 0 0 20px rgba(255, 31, 31, 0.3);
+        }
+        .perfil-avatar i { font-size: 2.8rem; color: #fff; }
+        .perfil-nome { font-size: 1.5rem; font-weight: bold; color: #fff; margin-bottom: 0.3rem; }
+        .perfil-email { color: #ccc; font-size: 1rem; margin-bottom: 0.5rem; }
+        .perfil-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+        .form-group { position: relative; }
+        .form-label { color: #ccc; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
+        .form-input { width: 100%; padding: 1rem 1rem 1rem 3rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 31, 31, 0.3); border-radius: 12px; color: white; font-size: 1rem; transition: all 0.3s ease; outline: none; }
+        .form-input:focus { border-color: #FF1F1F; box-shadow: 0 0 20px rgba(255, 31, 31, 0.3); background: rgba(255, 255, 255, 0.1); }
+        .form-input::placeholder { color: #888; }
+        .input-icon { position: absolute; left: 1rem; bottom: 1rem; color: #FF1F1F; font-size: 1.2rem; transition: all 0.3s ease; }
+        .form-input:focus ~ .input-icon { color: #fff; transform: scale(1.1); }
+        .btn-group { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .btn { flex: 1; padding: 1rem; border: none; border-radius: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .btn-primary { background: linear-gradient(135deg, #FF1F1F, #cc0000); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 31, 31, 0.4); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 31, 31, 0.3); color: #ccc; }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: #FF1F1F; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .success-message { text-align: center; padding: 2rem; color: #44ff44; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <div class="perfil-container">
+        <div class="perfil-header">
+            <div class="perfil-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="perfil-nome" id="perfilNome">Usuário Exemplo</div>
+            <div class="perfil-email" id="perfilEmail">exemplo@email.com</div>
+        </div>
+        <form class="perfil-form" id="perfilForm">
+            <div class="form-group">
+                <label class="form-label" for="nomeInput">Nome</label>
+                <input type="text" class="form-input" id="nomeInput" placeholder="Seu nome" value="Usuário Exemplo">
+                <i class="fas fa-user input-icon"></i>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="emailInput">E-mail</label>
+                <input type="email" class="form-input" id="emailInput" placeholder="Seu e-mail" value="exemplo@email.com">
+                <i class="fas fa-envelope input-icon"></i>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="senhaInput">Nova Senha</label>
+                <input type="password" class="form-input" id="senhaInput" placeholder="Nova senha">
+                <i class="fas fa-lock input-icon"></i>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" id="salvarBtn">Salvar Alterações</button>
+                <button type="button" class="btn btn-secondary" id="cancelarBtn">Cancelar</button>
+            </div>
+        </form>
+        <div class="success-message" id="successMsg" style="display:none;">Informações atualizadas com sucesso!</div>
+    </div>
+    <script>
+        // Partículas animadas
+        function createParticles() {
+            const animatedBg = document.querySelector('.animated-bg');
+            const particleCount = 40;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                let left = Math.random() * 100;
+                let top = Math.random() * 100;
+                if (left > 35 && left < 65 && top > 35 && top < 65) {
+                    left = left < 50 ? 30 : 70;
+                    top = top < 50 ? 30 : 70;
+                }
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                particle.style.animationDelay = `${Math.random() * 8}s`;
+                particle.style.animationDuration = `${8 + Math.random() * 4}s`;
+                animatedBg.appendChild(particle);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            createParticles();
+            // Preencher dados do usuário (exemplo)
+            const nomeInput = document.getElementById('nomeInput');
+            const emailInput = document.getElementById('emailInput');
+            const perfilNome = document.getElementById('perfilNome');
+            const perfilEmail = document.getElementById('perfilEmail');
+            nomeInput.addEventListener('input', function () {
+                perfilNome.textContent = nomeInput.value;
+            });
+            emailInput.addEventListener('input', function () {
+                perfilEmail.textContent = emailInput.value;
+            });
+            document.getElementById('salvarBtn').addEventListener('click', function () {
+                // Simular salvamento
+                document.getElementById('successMsg').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('successMsg').style.display = 'none';
+                }, 2000);
+            });
+            document.getElementById('cancelarBtn').addEventListener('click', function () {
+                // Resetar para valores iniciais
+                nomeInput.value = 'Usuário Exemplo';
+                emailInput.value = 'exemplo@email.com';
+                perfilNome.textContent = nomeInput.value;
+                perfilEmail.textContent = emailInput.value;
+                document.getElementById('senhaInput').value = '';
+            });
+        });
+    </script>
+</body>
+</html>
