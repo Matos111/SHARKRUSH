@@ -172,7 +172,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, #ff0000, #ff6666, #ff0000);
+            
             border-radius: 25px;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -943,6 +943,11 @@
             }
         }
 
+        // Cronômetro global
+        let cronometroInterval = null;
+        let cronometroSegundos = 0;
+        let cronometroAtivoId = null;
+
         function startWorkout(workoutId) {
             const workout = workouts.find(w => w.id === workoutId);
             if (workout) {
@@ -951,11 +956,28 @@
                     workout.status = 'pending';
                     workout.progress = 0;
                 }
-                
+
                 currentWorkoutId = workoutId;
+                cronometroAtivoId = workoutId;
+                cronometroSegundos = 0;
+                if (cronometroInterval) clearInterval(cronometroInterval);
+                cronometroInterval = setInterval(() => {
+                    cronometroSegundos++;
+                    atualizarCronometroModal();
+                }, 1000);
                 viewWorkout(workoutId);
                 showNotification(`🔥 Treino iniciado! Vamos lá! 💪`);
                 renderWorkouts();
+            }
+        }
+
+        function atualizarCronometroModal() {
+            const el = document.getElementById('cronometro-modal');
+            if (el) {
+                const h = String(Math.floor(cronometroSegundos / 3600)).padStart(2, '0');
+                const m = String(Math.floor((cronometroSegundos % 3600) / 60)).padStart(2, '0');
+                const s = String(cronometroSegundos % 60).padStart(2, '0');
+                el.textContent = `${h}:${m}:${s}`;
             }
         }
 
@@ -964,10 +986,19 @@
             if (!workout) return;
 
             const content = document.getElementById('workoutDetailsContent');
+            let cronometroHtml = '';
+            if (cronometroAtivoId === workoutId) {
+                cronometroHtml = `
+                    <div style="margin: 20px 0; text-align: center;">
+                        <span style="font-size:2rem; color:#ff0000; font-weight:bold;">Tempo do treino:</span><br>
+                        <span id="cronometro-modal" style="font-size:2.2rem; margin-top:10px; display:inline-block;">00:00:00</span>
+                    </div>
+                `;
+            }
             content.innerHTML = `
                 <h2>${workout.name}</h2>
                 <div style="color: #aaa; margin-bottom: 30px;">${workout.description || 'Sem descrição'}</div>
-                
+                ${cronometroHtml}
                 <div class="progress-section">
                     <div class="progress-label">
                         <span>Progresso Geral</span>
@@ -1034,6 +1065,7 @@
             `;
 
             document.getElementById('viewWorkoutModal').classList.add('active');
+            atualizarCronometroModal();
         }
 
         function showExerciseGif(exerciseName, workoutId) {
@@ -1052,6 +1084,11 @@
 
         function closeViewWorkoutModal() {
             document.getElementById('viewWorkoutModal').classList.remove('active');
+            if (cronometroInterval) {
+                clearInterval(cronometroInterval);
+                cronometroInterval = null;
+                cronometroAtivoId = null;
+            }
         }
 
         function deleteWorkout(workoutId) {
