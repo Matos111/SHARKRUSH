@@ -940,4 +940,6 @@
         // Inicialização
         window.onload = function() {
             createParticles();
+            // Garante que overlay de autenticação está visível ao carregar
+            document.getElementById('authOverlay').classList.remove('hidden');
         };
