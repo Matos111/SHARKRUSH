@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SharkRush - Recuperar Senha</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -977,179 +977,365 @@
     </div>
 
     <script>
-       
-
         let currentStep = 1;
-        function changeStep(step) {
-            currentStep = step;
-            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-            document.getElementById(['emailStep', 'codeStep', 'passwordStep', 'successStep'][step - 1]).classList.add('active');
-            // Atualiza indicador de etapas
-            for (let i = 1; i <= 3; i++) {
-                document.getElementById('step' + i).classList.remove('active', 'completed');
-                document.getElementById('line' + i)?.classList.remove('active');
+        let resendTimer = 0;
+        let timerInterval;
+        let userEmail = '';
+
+        // Criar partículas
+        function createParticles() {
+            const animatedBg = document.querySelector('.animated-bg');
+            const particleCount = 40;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                let left = Math.random() * 100;
+                let top = Math.random() * 100;
+                if (left > 35 && left < 65 && top > 35 && top < 65) {
+                    left = left < 50 ? 30 : 70;
+                    top = top < 50 ? 30 : 70;
+                }
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                particle.style.animationDelay = `${Math.random() * 8}s`;
+                particle.style.animationDuration = `${8 + Math.random() * 4}s`;
+                animatedBg.appendChild(particle);
             }
-            for (let i = 1; i < step; i++) {
-                document.getElementById('step' + i).classList.add('completed');
-                document.getElementById('line' + i)?.classList.add('active');
-            }
-            if (step <= 3) document.getElementById('step' + step).classList.add('active');
         }
 
-        function showError(id, msg) {
-            const el = document.getElementById(id);
-            el.textContent = msg;
-            el.classList.add('show');
-        }
-
-        function clearError(id) {
-            const el = document.getElementById(id);
-            el.textContent = '';
-            el.classList.remove('show');
-        }
-
+        // Validação de email
         function validateEmail(email) {
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
 
-        // Timer para reenviar código
+        // Mostrar erro
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
+
+        // Limpar erro
+        function clearError(elementId) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.classList.remove('show');
+        }
+
+        // Mudar etapa
+        function changeStep(step) {
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.getElementById(['emailStep', 'codeStep', 'passwordStep', 'successStep'][step - 1]).classList.add('active');
+
+            // Atualizar indicadores
+            document.querySelectorAll('.step').forEach((s, i) => {
+                s.classList.remove('active', 'completed');
+                if (i + 1 < step) s.classList.add('completed');
+                if (i + 1 === step) s.classList.add('active');
+            });
+
+            document.querySelectorAll('.step-line').forEach((line, i) => {
+                line.classList.remove('active');
+                if (i + 1 < step) line.classList.add('active');
+            });
+
+            currentStep = step;
+
+            // Atualizar subtítulo
+            const subtitles = [
+                'Não se preocupe! Vamos te ajudar a recuperar o acesso à sua conta.',
+                'Verifique seu e-mail e insira o código que enviamos.',
+                'Escolha uma senha forte para proteger sua conta.',
+                'Tudo pronto! Sua senha foi alterada com sucesso.'
+            ];
+            document.getElementById('headerSubtitle').textContent = subtitles[step - 1];
+        }
+
+        // Etapa 1: Enviar código
+        document.getElementById('sendCodeBtn').addEventListener('click', function() {
+            const email = document.getElementById('emailInput').value.trim();
+            clearError('emailError');
+
+            if (!email) {
+                showError('emailError', 'Por favor, digite seu e-mail');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showError('emailError', 'Por favor, digite um e-mail válido');
+                return;
+            }
+
+            // Simular envio
+            this.classList.add('loading');
+            this.textContent = '';
+
+            setTimeout(() => {
+                this.classList.remove('loading');
+                this.textContent = 'Enviar Código';
+                
+                userEmail = email;
+                document.getElementById('emailDisplay').textContent = email;
+                changeStep(2);
+                startResendTimer();
+                document.getElementById('code1').focus();
+            }, 2000);
+        });
+
+        // Sistema de código
+        const codeInputs = document.querySelectorAll('.code-input');
+        
+        codeInputs.forEach((input, index) => {
+            input.addEventListener('input', function(e) {
+                if (this.value.length === 1 && index < codeInputs.length - 1) {
+                    codeInputs[index + 1].focus();
+                }
+                
+                // Auto-verificar quando todos os campos estiverem preenchidos
+                const allFilled = Array.from(codeInputs).every(inp => inp.value.length === 1);
+                if (allFilled) {
+                    document.getElementById('verifyCodeBtn').focus();
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                    codeInputs[index - 1].focus();
+                }
+            });
+
+            input.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').slice(0, 6);
+                pasteData.split('').forEach((char, i) => {
+                    if (codeInputs[index + i]) {
+                        codeInputs[index + i].value = char;
+                    }
+                });
+                if (index + pasteData.length < codeInputs.length) {
+                    codeInputs[index + pasteData.length].focus();
+                }
+            });
+        });
+
+        // Timer de reenvio
         function startResendTimer() {
-            resendTimer = 30;
-            document.getElementById('resendBtn').disabled = true;
-            document.getElementById('timer').textContent = ` (aguarde ${resendTimer}s)`;
+            resendTimer = 60;
+            const resendBtn = document.getElementById('resendBtn');
+            const timerSpan = document.getElementById('timer');
+            
+            resendBtn.disabled = true;
+            
             timerInterval = setInterval(() => {
                 resendTimer--;
-                document.getElementById('timer').textContent = ` (aguarde ${resendTimer}s)`;
+                timerSpan.textContent = `(${resendTimer}s)`;
+                
                 if (resendTimer <= 0) {
                     clearInterval(timerInterval);
-                    document.getElementById('resendBtn').disabled = false;
-                    document.getElementById('timer').textContent = '';
+                    resendBtn.disabled = false;
+                    timerSpan.textContent = '';
                 }
             }, 1000);
         }
 
-        // Navegação entre inputs do código
-        function setupCodeInputs() {
-            for (let i = 1; i <= 6; i++) {
-                const input = document.getElementById('code' + i);
-                input.addEventListener('input', function () {
-                    if (this.value.length === 1 && i < 6) {
-                        document.getElementById('code' + (i + 1)).focus();
-                    }
-                });
-                input.addEventListener('keydown', function (e) {
-                    if (e.key === 'Backspace' && !this.value && i > 1) {
-                        document.getElementById('code' + (i - 1)).focus();
-                    }
-                });
+        // Reenviar código
+        document.getElementById('resendBtn').addEventListener('click', function() {
+            this.classList.add('loading');
+            
+            setTimeout(() => {
+                this.classList.remove('loading');
+                alert('Código reenviado para ' + userEmail);
+                startResendTimer();
+            }, 1500);
+        });
+
+        // Verificar código
+        document.getElementById('verifyCodeBtn').addEventListener('click', function() {
+            const code = Array.from(codeInputs).map(input => input.value).join('');
+            clearError('codeError');
+
+            if (code.length !== 6) {
+                showError('codeError', 'Por favor, digite o código completo');
+                return;
             }
+
+            // Simular verificação (código correto: 123456)
+            this.classList.add('loading');
+            this.textContent = '';
+
+            setTimeout(() => {
+                this.classList.remove('loading');
+                this.textContent = 'Verificar Código';
+                
+                if (code === '123456') {
+                    clearInterval(timerInterval);
+                    changeStep(3);
+                    document.getElementById('newPassword').focus();
+                } else {
+                    showError('codeError', 'Código inválido. Tente novamente.');
+                    codeInputs.forEach(input => input.value = '');
+                    codeInputs[0].focus();
+                }
+            }, 1500);
+        });
+
+        // Verificar força da senha
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+
+            if (password.length >= 8) strength++;
+            if (password.length >= 12) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+            const width = (strength / 5) * 100;
+            strengthBar.style.width = width + '%';
+
+            const colors = ['#ff4444', '#ff8844', '#ffaa44', '#88ff44', '#44ff44'];
+            const texts = ['Muito fraca', 'Fraca', 'Média', 'Forte', 'Muito forte'];
+
+            strengthBar.style.background = colors[strength - 1] || '#ff4444';
+            strengthText.textContent = texts[strength - 1] || '';
+            strengthText.style.color = colors[strength - 1] || '#ff4444';
+
+            return strength;
         }
 
-        // Força da senha
-        function updatePasswordStrength(password) {
-            const bar = document.getElementById('strengthBar');
-            const text = document.getElementById('strengthText');
-            let score = 0;
-            if (password.length >= 8) score++;
-            if (/[A-Z]/.test(password)) score++;
-            if (/[a-z]/.test(password)) score++;
-            if (/[0-9]/.test(password)) score++;
-            if (/[^A-Za-z0-9]/.test(password)) score++;
-            let percent = (score / 5) * 100;
-            bar.style.width = percent + '%';
-            if (score <= 2) {
-                bar.style.background = '#ff4444';
-                text.textContent = 'Senha fraca';
-            } else if (score === 3 || score === 4) {
-                bar.style.background = '#FF1F1F';
-                text.textContent = 'Senha média';
-            } else {
-                bar.style.background = '#44ff44';
-                text.textContent = 'Senha forte';
-            }
-        }
+        // Validação de senha em tempo real
+        document.getElementById('newPassword').addEventListener('input', function() {
+            const password = this.value;
+            clearError('passwordError');
 
-        let userEmail = '';
-        document.addEventListener('DOMContentLoaded', function () {
-            createParticles();
-            setupCodeInputs();
-
-            document.getElementById('sendCodeBtn').addEventListener('click', function () {
-                const email = document.getElementById('emailInput').value.trim();
-                if (!validateEmail(email)) {
-                    showError('emailError', 'Digite um e-mail válido.');
-                    return;
-                }
-                clearError('emailError');
-                userEmail = email;
-                document.getElementById('emailDisplay').textContent = userEmail;
-                changeStep(2);
-                startResendTimer();
-            });
-
-            document.getElementById('verifyCodeBtn').addEventListener('click', function () {
-                let code = '';
-                for (let i = 1; i <= 6; i++) {
-                    code += document.getElementById('code' + i).value;
-                }
-                if (code.length !== 6 || !/^[0-9]{6}$/.test(code)) {
-                    showError('codeError', 'Digite o código de 6 dígitos.');
-                    return;
-                }
-                clearError('codeError');
-                changeStep(3);
-            });
-
-            document.getElementById('resendBtn').addEventListener('click', function () {
-                startResendTimer();
-                // Aqui você pode adicionar lógica para reenviar o código
-            });
-
-            document.getElementById('newPassword').addEventListener('input', function () {
-                updatePasswordStrength(this.value);
-            });
-
-            document.getElementById('resetPasswordBtn').addEventListener('click', function () {
-                const password = document.getElementById('newPassword').value;
-                const confirm = document.getElementById('confirmPassword').value;
-                let valid = true;
+            if (password.length > 0) {
+                const strength = checkPasswordStrength(password);
+                
                 if (password.length < 8) {
-                    showError('passwordError', 'A senha deve ter pelo menos 8 caracteres.');
-                    valid = false;
-                } else {
-                    clearError('passwordError');
+                    showError('passwordError', 'A senha deve ter no mínimo 8 caracteres');
+                } else if (strength < 3) {
+                    showError('passwordError', 'Tente uma senha mais forte');
                 }
-                if (password !== confirm) {
-                    showError('confirmPasswordError', 'As senhas não coincidem.');
-                    valid = false;
-                } else {
-                    clearError('confirmPasswordError');
-                }
-                if (!valid) return;
+            } else {
+                document.getElementById('strengthBar').style.width = '0%';
+                document.getElementById('strengthText').textContent = '';
+            }
+        });
+
+        // Validação de confirmação de senha
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('newPassword').value;
+            const confirm = this.value;
+            clearError('confirmPasswordError');
+
+            if (confirm.length > 0 && password !== confirm) {
+                showError('confirmPasswordError', 'As senhas não coincidem');
+            }
+        });
+
+        // Redefinir senha
+        document.getElementById('resetPasswordBtn').addEventListener('click', function() {
+            const password = document.getElementById('newPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            
+            clearError('passwordError');
+            clearError('confirmPasswordError');
+
+            let isValid = true;
+
+            if (password.length < 8) {
+                showError('passwordError', 'A senha deve ter no mínimo 8 caracteres');
+                isValid = false;
+            }
+
+            if (password !== confirm) {
+                showError('confirmPasswordError', 'As senhas não coincidem');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Simular redefinição
+            this.classList.add('loading');
+            this.textContent = '';
+
+            setTimeout(() => {
+                this.classList.remove('loading');
+                this.textContent = 'Redefinir Senha';
                 changeStep(4);
-            });
+            }, 2000);
+        });
 
-            document.getElementById('goToLoginBtn').addEventListener('click', function () {
-                window.location.href = '../senaviews/login.html';
-            });
+        // Ir para login
+        document.getElementById('goToLoginBtn').addEventListener('click', function() {
+            window.location.href = 'login.html'; // Ajuste o caminho conforme necessário
+        });
 
-            document.getElementById('backBtn').addEventListener('click', function (e) {
-                e.preventDefault();
-                if (currentStep > 1) {
-                    changeStep(currentStep - 1);
-                } else {
-                    window.location.href = '../senaviews/login.html';
+        // Botão voltar
+        document.getElementById('backBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentStep > 1 && currentStep < 4) {
+                changeStep(currentStep - 1);
+            } else {
+                window.location.href = 'login.html'; // Ajuste o caminho conforme necessário
+            }
+        });
+
+        // Efeito de hover no container
+        document.querySelector('.recovery-container').addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const deltaX = (x - centerX) / centerX;
+            const deltaY = (y - centerY) / centerY;
+            
+            this.style.transform = `perspective(1000px) rotateY(${deltaX * 5}deg) rotateX(${-deltaY * 5}deg)`;
+        });
+
+        document.querySelector('.recovery-container').addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+
+        // Atalhos de teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                if (currentStep === 1) {
+                    document.getElementById('sendCodeBtn').click();
+                } else if (currentStep === 2) {
+                    document.getElementById('verifyCodeBtn').click();
+                } else if (currentStep === 3) {
+                    document.getElementById('resetPasswordBtn').click();
+                } else if (currentStep === 4) {
+                    document.getElementById('goToLoginBtn').click();
                 }
-            });
+            }
+        });
 
-            // ===== NAVBAR JS INÍCIO =====
+        // Navbar interativa
+        document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.main-menu li a').forEach(link => {
                 link.addEventListener('click', function () {
                     document.querySelectorAll('.main-menu li a').forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
                 });
             });
-            // ===== NAVBAR JS FIM =====
         });
+
+        
+
+        
     </script>
 </body>
+</html>
