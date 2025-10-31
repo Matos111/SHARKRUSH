@@ -576,6 +576,26 @@
             margin-bottom: 10px;
         }
 
+        .exercise-inputs select.exercise-name {
+            background: #111111;
+            color: #fff;
+            border: 2px solid #ff0000;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            appearance: none;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .exercise-inputs select.exercise-name:focus {
+            border-color: #fff;
+        }
+        .exercise-inputs select.exercise-name option {
+            background: #232323;
+            color: #fff;
+        }
+
         .add-exercise-btn {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -1081,13 +1101,31 @@
             const container = document.getElementById('exercisesContainer');
             const exerciseDiv = document.createElement('div');
             exerciseDiv.className = 'exercise-form';
-            exerciseDiv.innerHTML = `
-                <div class="exercise-inputs">
-                    <input type="text" placeholder="Nome do exercício" class="exercise-name" required>
-                    <input type="text" placeholder="Séries" class="exercise-sets" required>
-                    <input type="text" placeholder="Reps" class="exercise-reps" required>
-                </div>
-            `;
+                exerciseDiv.innerHTML = `
+                    <div class="exercise-inputs">
+                        <select class="exercise-name" required>
+                            <option value="">Selecione o exercício</option>
+                            <option value="Supino Reto">Supino Reto</option>
+                            <option value="Supino Inclinado">Supino Inclinado</option>
+                            <option value="Crucifixo">Crucifixo</option>
+                            <option value="Tríceps Testa">Tríceps Testa</option>
+                            <option value="Tríceps Corda">Tríceps Corda</option>
+                            <option value="Puxada Frontal">Puxada Frontal</option>
+                            <option value="Remada Curvada">Remada Curvada</option>
+                            <option value="Remada Unilateral">Remada Unilateral</option>
+                            <option value="Rosca Direta">Rosca Direta</option>
+                            <option value="Agachamento Livre">Agachamento Livre</option>
+                            <option value="Leg Press">Leg Press</option>
+                            <option value="Cadeira Extensora">Cadeira Extensora</option>
+                            <option value="Cadeira Flexora">Cadeira Flexora</option>
+                            <option value="Panturrilha">Panturrilha</option>
+                            <option value="Flexão">Flexão</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                        <input type="number" placeholder="Séries" class="exercise-sets" required min="1" step="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input type="number" placeholder="Reps" class="exercise-reps" required min="1" step="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                `;
             container.appendChild(exerciseDiv);
         }
 
@@ -1101,10 +1139,10 @@
             const exercises = [];
             
             exerciseForms.forEach(form => {
-                const exerciseName = form.querySelector('.exercise-name').value;
+                const exerciseNameElem = form.querySelector('.exercise-name');
+                const exerciseName = exerciseNameElem.tagName === 'SELECT' ? exerciseNameElem.options[exerciseNameElem.selectedIndex].value : exerciseNameElem.value;
                 const sets = form.querySelector('.exercise-sets').value;
                 const reps = form.querySelector('.exercise-reps').value;
-                
                 if (exerciseName && sets && reps) {
                     exercises.push({
                         name: exerciseName,
