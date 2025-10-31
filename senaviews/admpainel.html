@@ -941,7 +941,9 @@
         // Inicialização
         window.onload = function() {
             createParticles();
-            // Garante que overlay de autenticação está visível ao carregar e oculta conteúdo principal
+            // Garante que overlay de autenticação está visível ao carregar
             document.getElementById('authOverlay').classList.remove('hidden');
-            document.getElementById('mainContent').style.display = 'none';
+            // NÃO oculta mainContent aqui, pois isso sobrescreve display após login
         };
+        </script>
+</body>
