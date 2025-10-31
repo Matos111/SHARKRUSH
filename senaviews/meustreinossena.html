@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SharkRush - Gerenciador de Treinos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -300,6 +301,13 @@
             cursor: pointer;
             accent-color: #ff0000;
             transform: scale(1.2);
+            background: #000;
+            border: 2px solid #ff0000;
+            border-radius: 6px;
+            }
+
+        .exercise-checkbox:not(:checked) {
+                background: #000;
         }
 
         .progress-section {
@@ -628,6 +636,233 @@
             font-size: 16px;
         }
 
+        /* NAVBAR CSS */
+        .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+
+        
+        /* ===== NAVBAR CSS INÍCIO ===== */
+        .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+        .main-menu li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0000;
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .main-menu li:hover a::before {
+            transform: scaleY(1);
+        }
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+        .main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0303;
+            transform: scaleY(1);
+        }
+        .main-menu li a.active .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        /* ===== NAVBAR CSS FIM ===== */
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 36px;
@@ -696,9 +931,66 @@
     </style>
 </head>
 <body>
+     <!-- ===== NAVBAR HTML INÍCIO ===== -->
+    <nav class="main-menu">
+        <div class="logo-container">
+            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+        </div>
+        <ul>
+            <li>
+                <a href="../senaviews/homesena.html">
+                    <i class="fa fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="../senaviews/sobresena.html">
+                    <i class="fa fa-info-circle nav-icon"></i>
+                    <span class="nav-text">Sobre</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/gerador.html">
+                    <i class="fa fa-cogs nav-icon"></i>
+                    <span class="nav-text">Gerador</span>
+                </a>
+            </li>
+            <li>
+                <a href="../senaviews/biblioteca.html">
+                    <i class="fa fa-book nav-icon"></i>
+                    <span class="nav-text">Biblioteca</span>
+                </a>
+            </li>
+            <li>
+                <a href="#meus-treinos">
+                    <i class="fa fa-dumbbell nav-icon"></i>
+                    <span class="nav-text">Meus Treinos</span>
+                </a>
+            </li>
+            <li>
+                <a href="#calculadora-imc" class="active">
+                    <i class="fa fa-calculator nav-icon"></i>
+                    <span class="nav-text">Calculadora IMC</span>
+                </a>
+            </li>
+            <li>
+                <a href="../senaviews/calculocalorias.html">
+                    <i class="fa fa-fire nav-icon"></i>
+                    <span class="nav-text">Calculadora Kalorias</span>
+                </a>
+            </li>
+            <li>
+                <a href="#academias-proximas">
+                    <i class="fa fa-map-marker-alt nav-icon"></i>
+                    <span class="nav-text">Academias Próximas</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- ===== NAVBAR HTML FIM ===== -->
     <div class="container">
         <div class="header">
-            <h1>🦈 MEUS TREINOS 🦈</h1>
+            <h1>MEUS TREINOS </h1>
             <p>Gerencie e acompanhe seus treinos</p>
         </div>
 
@@ -1234,6 +1526,16 @@
                 const rect = e.target.getBoundingClientRect();
                 createParticleEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
             }
+        });
+
+         // Navbar interativa
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.main-menu li a').forEach(link => {
+                link.addEventListener('click', function () {
+                    document.querySelectorAll('.main-menu li a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
         });
     </script>
 </body>
