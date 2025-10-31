@@ -721,7 +721,7 @@
     </nav>
 
     <!-- Conteúdo principal -->
-    <div class="main-content">
+    <div class="main-content" id="mainContent" style="display:none;">
         <div class="admin-header">
             <h1 class="admin-title">
                 <i class="fas fa-users-cog"></i>
@@ -841,6 +841,7 @@
             if (password === ADMIN_PASSWORD) {
                 isAuthenticated = true;
                 document.getElementById('authOverlay').classList.add('hidden');
+                document.getElementById('mainContent').style.display = 'block';
                 loadClientsData();
             } else {
                 errorElement.textContent = 'Senha incorreta. Tente novamente.';
@@ -940,6 +941,7 @@
         // Inicialização
         window.onload = function() {
             createParticles();
-            // Garante que overlay de autenticação está visível ao carregar
+            // Garante que overlay de autenticação está visível ao carregar e oculta conteúdo principal
             document.getElementById('authOverlay').classList.remove('hidden');
+            document.getElementById('mainContent').style.display = 'none';
         };
