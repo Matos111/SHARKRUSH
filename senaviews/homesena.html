@@ -741,6 +741,19 @@
             opacity: 1;
             transform: translateX(0);
         }
+
+        /* Estilo específico para o link de Login/Cadastro (cinza escuro) */
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
         .main-menu li:hover > a {
             color: #ffffff;
             background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
@@ -1444,7 +1457,7 @@
             </a>
             </li>
             <li>
-            <a href="../senaviews/biblioteca.html">
+            <a href="../senaviews/bibliotecasena.html">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
@@ -1468,9 +1481,9 @@
             </a>
             </li>
             <li>
-            <a href="../senaviews/academias.html">
-                <i class="fa fa-map-marker-alt nav-icon"></i>
-                <span class="nav-text">Academias Próximas</span>
+            <a href="../senaviews/login.html" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Entrar</span>
             </a>
             </li>
         </ul>
