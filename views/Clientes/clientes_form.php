@@ -761,53 +761,53 @@
 
     <nav class="main-menu">
         <div class="logo-container">
-            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+            <img src="/sharkrush/views/midia/Logos/logoshark.png" alt="Logo" />
         </div>
         <ul>
             <li>
-                <a href="../views/homesena.html">
+                <a href="/sharkrush/views/homesena.html">
                     <i class="fa fa-home nav-icon"></i>
                     <span class="nav-text">Home</span>
                 </a>
             </li>
             <li>
-                <a href="../views/sobresena.html">
+                <a href="/sharkrush/views/sobresena.html">
                     <i class="fa fa-info-circle nav-icon"></i>
                     <span class="nav-text">Sobre</span>
                 </a>
             </li>
             <li>
-                <a href="../views/gerador.html">
+                <a href="/sharkrush/views/gerador.html">
                     <i class="fa fa-cogs nav-icon"></i>
                     <span class="nav-text">Gerador</span>
                 </a>
             </li>
             <li>
-                <a href="../views/bibliotecasena.html">
+                <a href="/sharkrush/views/bibliotecasena.html">
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
             </li>
             <li>
-                <a href="../views/meustreinossena.html">
+                <a href="/sharkrush/views/meustreinossena.html">
                     <i class="fa fa-dumbbell nav-icon"></i>
                     <span class="nav-text">Meus Treinos</span>
                 </a>
             </li>
             <li>
-                <a href="../views/calculoimc.html">
+                <a href="/sharkrush/views/calculoimc.html">
                     <i class="fa fa-calculator nav-icon"></i>
                     <span class="nav-text">Calculadora IMC</span>
                 </a>
             </li>
             <li>
-                <a href="../views/calculocalorias.html">
+                <a href="/sharkrush/views/calculocalorias.html">
                     <i class="fa fa-fire nav-icon"></i>
                     <span class="nav-text">Calculadora Kalorias</span>
                 </a>
             </li>
             <li>
-                <a href="../views/login.html" class="active">
+                <a href="/sharkrush/views/login.html" class="active">
                     <i class="fa fa-user nav-icon"></i>
                     <span class="nav-text">Entrar</span>
                 </a>
@@ -1006,7 +1006,7 @@
         </div>
 
         <div class="login-link">
-            Já tem uma conta? <a href="../views/login.html">Faça login aqui</a>
+            Já tem uma conta? <a href="/sharkrush/views/login.html">Faça login aqui</a>
         </div>
     </div>
 
