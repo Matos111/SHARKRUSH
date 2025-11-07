@@ -372,7 +372,7 @@
                          to keep buttons on one line */
         }
 
-        .action-buttons .btn-delete {
+        .action-buttons .btn-start {
             flex: 1 1 100%; /* occupy full row so other buttons stay in the row above */
             margin-top: 6px;
         }
@@ -410,14 +410,15 @@
         }
 
         .btn-start {
-            background: linear-gradient(45deg, #ff0000, #cc0000);
-            color: white;
-            grid-column: span 2;
+            /* match .btn-delete styling to make Start look like Excluir */
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff6666;
+            border: 1px solid rgba(255, 0, 0, 0.3);
         }
 
         .btn-start:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
         }
 
         .btn-view {
@@ -432,14 +433,15 @@
         }
 
         .btn-delete {
-            background: rgba(255, 0, 0, 0.1);
-            color: #ff6666;
-            border: 1px solid rgba(255, 0, 0, 0.3);
+            /* match .btn-view styling so Excluir looks like Ver/Reiniciar */
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .btn-delete:hover {
-            background: rgba(255, 0, 0, 0.2);
-            border-color: #ff0000;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .modal {
@@ -1230,6 +1232,8 @@
                             <button class="btn btn-view" onclick="viewWorkout(${workout.id})">
                                 <i class="fas fa-eye"></i> Ver
                             </button>
+                            
+                
                             <button class="btn btn-delete" onclick="deleteWorkout(${workout.id})">
                                 <i class="fas fa-trash"></i> Excluir
                             </button>
