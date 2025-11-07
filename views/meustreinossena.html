@@ -330,8 +330,10 @@
         }
 
         .exercise-checkbox:checked::after {
-            border-right-color: #ff0000; /* red check */
-            border-bottom-color: #ff0000;
+            border-right-color: #ff1a1a; /* stronger red check */
+            border-bottom-color: #ff1a1a;
+            /* add subtle glow to make the check more visible */
+            box-shadow: 0 0 6px rgba(255, 26, 26, 0.9);
             transform: translate(-50%, -60%) rotate(35deg) scale(1);
         }
 
