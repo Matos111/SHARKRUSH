@@ -257,7 +257,7 @@
         }
 
         .exercise-item {
-            background: rgba(255, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border-radius: 12px;
             margin-bottom: 12px;
@@ -275,9 +275,9 @@
         }
 
         .exercise-item.completed {
-            opacity: 0.6;
+            opacity: 1;
             text-decoration: line-through;
-            background: rgba(30, 30, 30, 0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-left-color: #ff0000;
         }
 
@@ -296,19 +296,48 @@
             color: #888;
         }
 
+        /* custom-styled checkbox: force black background and gray border, replace native appearance */
         .exercise-checkbox {
             width: 24px;
             height: 24px;
             cursor: pointer;
-            accent-color: #ff0000;
             transform: scale(1.2);
-            background: #000;
-            border: 2px solid #ff0000;
+            background: #000;               /* black background */
+            border: 2px solid #888;         /* gray border */
             border-radius: 6px;
-            }
+            -webkit-appearance: none;
+            appearance: none;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            box-sizing: border-box;
+        }
 
-        .exercise-checkbox:not(:checked) {
-                background: #000;
+        /* checkmark drawn with a rotated border in a pseudo-element (moved up + thicker) */
+        .exercise-checkbox::after {
+            content: '';
+            position: absolute;
+            /* move the check slightly upward for better visual alignment */
+            left: 60%;
+            top: 24%;
+            width: 14px;
+            height: 26px;
+            border-right: 4px solid transparent; /* thicker stroke */
+            border-bottom: 4px solid transparent;
+            transform: translate(-50%, -60%) rotate(40deg) scale(0);
+            transition: transform 120ms ease, border-color 120ms ease;
+            pointer-events: none;
+        }
+
+        .exercise-checkbox:checked::after {
+            border-right-color: #ff0000; /* red check */
+            border-bottom-color: #ff0000;
+            transform: translate(-50%, -60%) rotate(40deg) scale(1);
+        }
+
+        .exercise-checkbox:focus {
+            outline: 2px solid rgba(255,255,255,0.08);
+            outline-offset: 2px;
         }
 
         .progress-section {
@@ -363,6 +392,11 @@
             align-items: center;
             margin-top: 20px;
             flex-wrap: wrap; /* allow wrapping on small screens */
+        }
+
+        /* spacing specifically for the top row of buttons above the exercises */
+        .action-buttons.top-row {
+            margin-bottom: 32px; /* increased gap between buttons and exercises */
         }
 
         /* make buttons share the row; keep delete full-width below */
@@ -466,6 +500,51 @@
 
         .modal.active {
             display: flex;
+        }
+
+        /* Confirmation modal specific styles */
+        .confirm-modal .modal-content {
+            max-width: 420px;
+            text-align: center;
+            padding: 28px 24px;
+            border-radius: 16px;
+        }
+
+        .confirm-modal h2 {
+            color: #ff4d4d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .confirm-modal p {
+            color: #ccc;
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 900;
+        }
+
+        .cancel-btn {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 10px 16px;
+            border-radius: 10px;
         }
 
         .modal-content {
@@ -974,13 +1053,13 @@
         </div>
         <ul>
             <li>
-                <a href="../views/homesena.html">
+                <a href="../senaviews/homesena.html">
                     <i class="fa fa-home nav-icon"></i>
                     <span class="nav-text">Home</span>
                 </a>
             </li>
             <li>
-                <a href="../views/sobresena.html">
+                <a href="../senaviews/sobresena.html">
                     <i class="fa fa-info-circle nav-icon"></i>
                     <span class="nav-text">Sobre</span>
                 </a>
@@ -992,25 +1071,25 @@
                 </a>
             </li>
             <li>
-                <a href="../views/biblioteca.html">
+                <a href="../senaviews/biblioteca.html">
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
             </li>
             <li>
-                <a href="../views/meustreinossena.html" class="active">
+                <a href="../senaviews/meustreinossena.html" class="active">
                     <i class="fa fa-dumbbell nav-icon"></i>
                     <span class="nav-text">Meus Treinos</span>
                 </a>
             </li>
             <li>
-                <a href="../views/calculoimc.html">
+                <a href="../senaviews/calculoimc.html">
                     <i class="fa fa-calculator nav-icon"></i>
                     <span class="nav-text">Calculadora IMC</span>
                 </a>
             </li>
             <li>
-                <a href="../views/calculocalorias.html">
+                <a href="../senaviews/calculocalorias.html">
                     <i class="fa fa-fire nav-icon"></i>
                     <span class="nav-text">Calculadora Kalorias</span>
                 </a>
@@ -1070,6 +1149,19 @@
         <div class="modal-content">
             <button class="close-btn" onclick="closeViewWorkoutModal()">×</button>
             <div id="workoutDetailsContent"></div>
+        </div>
+    </div>
+
+    <!-- Delete confirmation modal -->
+    <div class="modal confirm-modal" id="deleteConfirmModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="hideDeleteConfirm()">×</button>
+            <h2>Excluir Treino</h2>
+            <p id="deleteConfirmMessage">Tem certeza que deseja excluir este treino? Esta ação não pode ser desfeita.</p>
+            <div class="confirm-buttons">
+                <button class="btn cancel-btn" onclick="hideDeleteConfirm()">Cancelar</button>
+                <button class="btn confirm-btn" onclick="confirmDelete()">Excluir</button>
+            </div>
         </div>
     </div>
 
@@ -1222,7 +1314,7 @@
                         </div>
                         <div class="workout-description">${workout.description || 'Sem descrição'}</div>
 
-                        <div class="action-buttons">
+                        <div class="action-buttons top-row">
                             <button class="btn btn-start" onclick="startWorkout(${workout.id})">
                                 <i class="fas fa-play"></i> ${workout.status === 'completed' ? 'Refazer' : 'Iniciar'}
                             </button>
@@ -1263,18 +1355,6 @@
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: ${progress}%"></div>
                             </div>
-                        </div>
-
-                        <div class="action-buttons">
-                            <button class="btn btn-start" onclick="startWorkout(${workout.id})">
-                                <i class="fas fa-play"></i> ${workout.status === 'completed' ? 'Refazer' : 'Iniciar'}
-                            </button>
-                            <button class="btn btn-view" onclick="viewWorkout(${workout.id})">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="btn btn-delete" onclick="deleteWorkout(${workout.id})">
-                                <i class="fas fa-trash"></i> Excluir
-                            </button>
                         </div>
                     </div>
                 `;
@@ -1501,14 +1581,14 @@
                     name: 'TREINO A - PEITO',
                     description: 'Foco em peito, tríceps e ombros',
                     exercises: [
-                        { name: 'Supino Reto', sets: '4', reps: '12', completed: true },
-                        { name: 'Supino Inclinado', sets: '4', reps: '10', completed: true },
+                        { name: 'Supino Reto', sets: '4', reps: '12', completed: false },
+                        { name: 'Supino Inclinado', sets: '4', reps: '10', completed: false },
                         { name: 'Crucifixo', sets: '3', reps: '12', completed: false },
                         { name: 'Tríceps Testa', sets: '3', reps: '15', completed: false },
                         { name: 'Tríceps Corda', sets: '3', reps: '15', completed: false }
                     ],
-                    status: 'in-progress',
-                    progress: 40,
+                    status: 'pending',
+                    progress: 0,
                     createdAt: '01/11/2025'
                 },
                 {
@@ -1530,14 +1610,14 @@
                     name: 'TREINO C - PERNAS',
                     description: 'Treino completo de membros inferiores',
                     exercises: [
-                        { name: 'Agachamento Livre', sets: '4', reps: '12', completed: true },
-                        { name: 'Leg Press', sets: '4', reps: '15', completed: true },
-                        { name: 'Cadeira Extensora', sets: '3', reps: '15', completed: true },
-                        { name: 'Cadeira Flexora', sets: '3', reps: '15', completed: true },
-                        { name: 'Panturrilha', sets: '4', reps: '20', completed: true }
+                        { name: 'Agachamento Livre', sets: '4', reps: '12', completed: false  },
+                        { name: 'Leg Press', sets: '4', reps: '15', completed: false  },
+                        { name: 'Cadeira Extensora', sets: '3', reps: '15', completed: false  },
+                        { name: 'Cadeira Flexora', sets: '3', reps: '15', completed: false  },
+                        { name: 'Panturrilha', sets: '4', reps: '20', completed: false }
                     ],
-                    status: 'completed',
-                    progress: 100,
+                    status: 'pending',
+                    progress: 0,
                     createdAt: '30/10/2025'
                 }
             ];
