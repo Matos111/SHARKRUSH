@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SharkRush - Painel Administrativo</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -275,6 +275,12 @@
             z-index: 1002;
         }
 
+        /* make sidebar a column so we can pin logout to bottom */
+        .main-menu {
+            display: flex;
+            flex-direction: column;
+        }
+
         .main-menu:hover {
             width: 280px;
             box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
@@ -284,6 +290,13 @@
             margin: 7px 0;
             padding: 0;
             list-style: none;
+        }
+
+        /* make nav list grow so items can be spaced and a bottom item can stick */
+        .main-menu ul {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
         }
 
         .main-menu li {
@@ -376,6 +389,32 @@
         .main-menu li a.active .nav-icon {
             transform: scale(1.15);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* style for login/logout special link (dark) */
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
+
+        /* pin nav-bottom items to footer area */
+        .main-menu li.nav-bottom {
+            margin-top: auto;
+            padding-bottom: 12px;
+        }
+
+        .main-menu li.nav-bottom a {
+            border-top: 1px solid rgba(255,255,255,0.04);
+            background: linear-gradient(180deg, rgba(47,47,47,0.95), rgba(39,39,39,0.95));
+            padding-top: 12px;
+            padding-bottom: 12px;
         }
 
         .logo-container {
@@ -688,87 +727,30 @@
         </div>
         <ul>
             <li>
-                <a href="homesena.html">
+                <a href="../senaviews/adminhome.html">
                     <i class="fa fa-home nav-icon"></i>
                     <span class="nav-text">Home</span>
                 </a>
             </li>
+            
+
+            
             <li>
-                <a href="meusTreinos.html">
-                    <i class="fa fa-dumbbell nav-icon"></i>
-                    <span class="nav-text">Meus Treinos</span>
+                <a href="../senaviews/admpainel.html" class="active">
+                    <i class="fa fa-users-cog nav-icon"></i>
+                    <span class="nav-text">Painel Admin</span>
                 </a>
             </li>
             <li>
-                <a href="meustreinossena.html">
-                    <i class="fa fa-running nav-icon"></i>
-                    <span class="nav-text">MeusTreinos (Sena)</span>
-                </a>
-            </li>
-            <li>
-                <a href="gerador.html">
-                    <i class="fa fa-cogs nav-icon"></i>
-                    <span class="nav-text">Gerador</span>
-                </a>
-            </li>
-            <li>
-                <a href="calculoimc.html">
-                    <i class="fa fa-heartbeat nav-icon"></i>
-                    <span class="nav-text">Calculadora IMC</span>
-                </a>
-            </li>
-            <li>
-                <a href="calculocalorias.html">
-                    <i class="fa fa-fire nav-icon"></i>
-                    <span class="nav-text">Calculadora Calorias</span>
-                </a>
-            </li>
-            <li>
-                <a href="cadastro.html">
-                    <i class="fa fa-user-plus nav-icon"></i>
-                    <span class="nav-text">Cadastro</span>
-                </a>
-            </li>
-            <li>
-                <a href="login.html">
-                    <i class="fa fa-sign-in-alt nav-icon"></i>
-                    <span class="nav-text">Login</span>
-                </a>
-            </li>
-            <li>
-                <a href="perfil.html">
-                    <i class="fa fa-user nav-icon"></i>
-                    <span class="nav-text">Perfil</span>
-                </a>
-            </li>
-            <li>
-                <a href="recuperarsenha.html">
-                    <i class="fa fa-key nav-icon"></i>
-                    <span class="nav-text">Recuperar Senha</span>
-                </a>
-            </li>
-            <li>
-                <a href="bibliotecasena.html">
+                <a href="../senaviews/admbiblioteca.html">
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
             </li>
-            <li>
-                <a href="api.html">
-                    <i class="fa fa-server nav-icon"></i>
-                    <span class="nav-text">API</span>
-                </a>
-            </li>
-            <li>
-                <a href="sobresena.html">
-                    <i class="fa fa-info-circle nav-icon"></i>
-                    <span class="nav-text">Sobre</span>
-                </a>
-            </li>
-            <li>
-                <a href="admpainel.html" class="active">
-                    <i class="fa fa-users-cog nav-icon"></i>
-                    <span class="nav-text">Painel Admin</span>
+            <li class="nav-bottom">
+                <a href="../senaviews/login.html" class="nav-login" id="logoutBtn" onclick="logout(event)">
+                    <i class="fa fa-sign-out-alt nav-icon"></i>
+                    <span class="nav-text">Sair</span>
                 </a>
             </li>
         </ul>
@@ -999,5 +981,17 @@
             document.getElementById('authOverlay').classList.remove('hidden');
             // NÃO oculta mainContent aqui, pois isso sobrescreve display após login
         };
+        
+        // Logout helper: clears storage and redirects to login
+        function logout(e) {
+            if (e && typeof e.preventDefault === 'function') e.preventDefault();
+            try {
+                localStorage.clear();
+                sessionStorage.clear();
+            } catch (err) {
+                console.warn('Logout: could not clear storage', err);
+            }
+            window.location.href = '../senaviews/login.html';
+        }
         </script>
 </body>
