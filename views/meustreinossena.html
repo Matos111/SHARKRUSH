@@ -257,7 +257,7 @@
         }
 
         .exercise-item {
-            background: rgba(255, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border-radius: 12px;
             margin-bottom: 12px;
@@ -275,9 +275,9 @@
         }
 
         .exercise-item.completed {
-            opacity: 0.6;
+            opacity: 1;
             text-decoration: line-through;
-            background: rgba(30, 30, 30, 0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-left-color: #ff0000;
         }
 
@@ -319,22 +319,20 @@
             position: absolute;
             /* move the check slightly upward for better visual alignment */
             left: 60%;
-            top: 44%;
+            top: 24%;
             width: 14px;
             height: 26px;
             border-right: 4px solid transparent; /* thicker stroke */
             border-bottom: 4px solid transparent;
-            transform: translate(-50%, -60%) rotate(30deg) scale(0);
+            transform: translate(-50%, -60%) rotate(40deg) scale(0);
             transition: transform 120ms ease, border-color 120ms ease;
             pointer-events: none;
         }
 
         .exercise-checkbox:checked::after {
-            border-right-color: #ff1a1a; /* stronger red check */
-            border-bottom-color: #ff1a1a;
-            /* add subtle glow to make the check more visible */
-            box-shadow: 0 0 6px rgba(255, 26, 26, 0.9);
-            transform: translate(-50%, -60%) rotate(35deg) scale(1);
+            border-right-color: #ff0000; /* red check */
+            border-bottom-color: #ff0000;
+            transform: translate(-50%, -60%) rotate(40deg) scale(1);
         }
 
         .exercise-checkbox:focus {
@@ -1055,13 +1053,13 @@
         </div>
         <ul>
             <li>
-                <a href="../views/homesena.html">
+                <a href="../senaviews/homesena.html">
                     <i class="fa fa-home nav-icon"></i>
                     <span class="nav-text">Home</span>
                 </a>
             </li>
             <li>
-                <a href="../views/sobresena.html">
+                <a href="../senaviews/sobresena.html">
                     <i class="fa fa-info-circle nav-icon"></i>
                     <span class="nav-text">Sobre</span>
                 </a>
@@ -1073,25 +1071,25 @@
                 </a>
             </li>
             <li>
-                <a href="../views/biblioteca.html">
+                <a href="../senaviews/biblioteca.html">
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
             </li>
             <li>
-                <a href="../views/meustreinossena.html" class="active">
+                <a href="../senaviews/meustreinossena.html" class="active">
                     <i class="fa fa-dumbbell nav-icon"></i>
                     <span class="nav-text">Meus Treinos</span>
                 </a>
             </li>
             <li>
-                <a href="../views/calculoimc.html">
+                <a href="../senaviews/calculoimc.html">
                     <i class="fa fa-calculator nav-icon"></i>
                     <span class="nav-text">Calculadora IMC</span>
                 </a>
             </li>
             <li>
-                <a href="../views/calculocalorias.html">
+                <a href="../senaviews/calculocalorias.html">
                     <i class="fa fa-fire nav-icon"></i>
                     <span class="nav-text">Calculadora Kalorias</span>
                 </a>
@@ -1358,18 +1356,6 @@
                                 <div class="progress-fill" style="width: ${progress}%"></div>
                             </div>
                         </div>
-
-                        <div class="action-buttons">
-                            <button class="btn btn-start" onclick="startWorkout(${workout.id})">
-                                <i class="fas fa-play"></i> ${workout.status === 'completed' ? 'Refazer' : 'Iniciar'}
-                            </button>
-                            <button class="btn btn-view" onclick="viewWorkout(${workout.id})">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="btn btn-delete" onclick="deleteWorkout(${workout.id})">
-                                <i class="fas fa-trash"></i> Excluir
-                            </button>
-                        </div>
                     </div>
                 `;
             }).join('');
@@ -1595,14 +1581,14 @@
                     name: 'TREINO A - PEITO',
                     description: 'Foco em peito, tríceps e ombros',
                     exercises: [
-                        { name: 'Supino Reto', sets: '4', reps: '12', completed: true },
-                        { name: 'Supino Inclinado', sets: '4', reps: '10', completed: true },
+                        { name: 'Supino Reto', sets: '4', reps: '12', completed: false },
+                        { name: 'Supino Inclinado', sets: '4', reps: '10', completed: false },
                         { name: 'Crucifixo', sets: '3', reps: '12', completed: false },
                         { name: 'Tríceps Testa', sets: '3', reps: '15', completed: false },
                         { name: 'Tríceps Corda', sets: '3', reps: '15', completed: false }
                     ],
-                    status: 'in-progress',
-                    progress: 40,
+                    status: 'pending',
+                    progress: 0,
                     createdAt: '01/11/2025'
                 },
                 {
@@ -1624,14 +1610,14 @@
                     name: 'TREINO C - PERNAS',
                     description: 'Treino completo de membros inferiores',
                     exercises: [
-                        { name: 'Agachamento Livre', sets: '4', reps: '12', completed: true },
-                        { name: 'Leg Press', sets: '4', reps: '15', completed: true },
-                        { name: 'Cadeira Extensora', sets: '3', reps: '15', completed: true },
-                        { name: 'Cadeira Flexora', sets: '3', reps: '15', completed: true },
-                        { name: 'Panturrilha', sets: '4', reps: '20', completed: true }
+                        { name: 'Agachamento Livre', sets: '4', reps: '12', completed: false  },
+                        { name: 'Leg Press', sets: '4', reps: '15', completed: false  },
+                        { name: 'Cadeira Extensora', sets: '3', reps: '15', completed: false  },
+                        { name: 'Cadeira Flexora', sets: '3', reps: '15', completed: false  },
+                        { name: 'Panturrilha', sets: '4', reps: '20', completed: false }
                     ],
-                    status: 'completed',
-                    progress: 100,
+                    status: 'pending',
+                    progress: 0,
                     createdAt: '30/10/2025'
                 }
             ];
