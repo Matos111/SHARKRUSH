@@ -296,19 +296,48 @@
             color: #888;
         }
 
+        /* custom-styled checkbox: force black background and gray border, replace native appearance */
         .exercise-checkbox {
             width: 24px;
             height: 24px;
             cursor: pointer;
-            accent-color: #ff0000;
             transform: scale(1.2);
-            background: #000;
-            border: 2px solid #ff0000;
+            background: #000;               /* black background */
+            border: 2px solid #888;         /* gray border */
             border-radius: 6px;
-            }
+            -webkit-appearance: none;
+            appearance: none;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            box-sizing: border-box;
+        }
 
-        .exercise-checkbox:not(:checked) {
-                background: #000;
+        /* checkmark drawn with a rotated border in a pseudo-element (moved up + thicker) */
+        .exercise-checkbox::after {
+            content: '';
+            position: absolute;
+            /* move the check slightly upward for better visual alignment */
+            left: 60%;
+            top: 44%;
+            width: 14px;
+            height: 26px;
+            border-right: 4px solid transparent; /* thicker stroke */
+            border-bottom: 4px solid transparent;
+            transform: translate(-50%, -60%) rotate(30deg) scale(0);
+            transition: transform 120ms ease, border-color 120ms ease;
+            pointer-events: none;
+        }
+
+        .exercise-checkbox:checked::after {
+            border-right-color: #ff0000; /* red check */
+            border-bottom-color: #ff0000;
+            transform: translate(-50%, -60%) rotate(35deg) scale(1);
+        }
+
+        .exercise-checkbox:focus {
+            outline: 2px solid rgba(255,255,255,0.08);
+            outline-offset: 2px;
         }
 
         .progress-section {
@@ -363,6 +392,11 @@
             align-items: center;
             margin-top: 20px;
             flex-wrap: wrap; /* allow wrapping on small screens */
+        }
+
+        /* spacing specifically for the top row of buttons above the exercises */
+        .action-buttons.top-row {
+            margin-bottom: 32px; /* increased gap between buttons and exercises */
         }
 
         /* make buttons share the row; keep delete full-width below */
@@ -466,6 +500,51 @@
 
         .modal.active {
             display: flex;
+        }
+
+        /* Confirmation modal specific styles */
+        .confirm-modal .modal-content {
+            max-width: 420px;
+            text-align: center;
+            padding: 28px 24px;
+            border-radius: 16px;
+        }
+
+        .confirm-modal h2 {
+            color: #ff4d4d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .confirm-modal p {
+            color: #ccc;
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 900;
+        }
+
+        .cancel-btn {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 10px 16px;
+            border-radius: 10px;
         }
 
         .modal-content {
@@ -1073,6 +1152,19 @@
         </div>
     </div>
 
+    <!-- Delete confirmation modal -->
+    <div class="modal confirm-modal" id="deleteConfirmModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="hideDeleteConfirm()">×</button>
+            <h2>Excluir Treino</h2>
+            <p id="deleteConfirmMessage">Tem certeza que deseja excluir este treino? Esta ação não pode ser desfeita.</p>
+            <div class="confirm-buttons">
+                <button class="btn cancel-btn" onclick="hideDeleteConfirm()">Cancelar</button>
+                <button class="btn confirm-btn" onclick="confirmDelete()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
     <div class="notification" id="notification"></div>
 
     <script>
@@ -1222,7 +1314,7 @@
                         </div>
                         <div class="workout-description">${workout.description || 'Sem descrição'}</div>
 
-                        <div class="action-buttons">
+                        <div class="action-buttons top-row">
                             <button class="btn btn-start" onclick="startWorkout(${workout.id})">
                                 <i class="fas fa-play"></i> ${workout.status === 'completed' ? 'Refazer' : 'Iniciar'}
                             </button>
