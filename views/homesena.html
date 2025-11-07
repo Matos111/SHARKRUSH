@@ -741,6 +741,19 @@
             opacity: 1;
             transform: translateX(0);
         }
+
+        /* Estilo específico para o link de Login/Cadastro (cinza escuro) */
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
         .main-menu li:hover > a {
             color: #ffffff;
             background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
@@ -1428,52 +1441,52 @@
         </div>
         <ul>
             <li>
-                <a href="../senaviews/homesena.html" class="active">
-                    <i class="fa fa-home nav-icon"></i>
-                    <span class="nav-text">Home</span>
-                </a>
+            <a href="../senaviews/homesena.html" class="active">
+                <i class="fa fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
             </li>
             <li>
-                <a href="../senaviews/sobresena.html">
-                    <i class="fa fa-info-circle nav-icon"></i>
-                    <span class="nav-text">Sobre</span>
-                </a>
+            <a href="../senaviews/sobresena.html">
+                <i class="fa fa-info-circle nav-icon"></i>
+                <span class="nav-text">Sobre</span>
+            </a>
             </li>
             <li>
-                <a href="../senaviews/gerador.html">
-                    <i class="fa fa-cogs nav-icon"></i>
-                    <span class="nav-text">Gerador</span>
-                </a>
+            <a href="../senaviews/gerador.html">
+                <i class="fa fa-cogs nav-icon"></i>
+                <span class="nav-text">Gerador</span>
+            </a>
             </li>
             <li>
-                <a href="../senaviews/biblioteca.html">
-                    <i class="fa fa-book nav-icon"></i>
-                    <span class="nav-text">Biblioteca</span>
-                </a>
+            <a href="../senaviews/bibliotecasena.html">
+                <i class="fa fa-book nav-icon"></i>
+                <span class="nav-text">Biblioteca</span>
+            </a>
             </li>
             <li>
-                <a href="#meus-treinos">
-                    <i class="fa fa-dumbbell nav-icon"></i>
-                    <span class="nav-text">Meus Treinos</span>
-                </a>
+            <a href="../senaviews/meustreinos.html">
+                <i class="fa fa-dumbbell nav-icon"></i>
+                <span class="nav-text">Meus Treinos</span>
+            </a>
             </li>
             <li>
-                <a href="../senaviews/calculoimc.html">
-                    <i class="fa fa-calculator nav-icon"></i>
-                    <span class="nav-text">Calculadora IMC</span>
-                </a>
+            <a href="../senaviews/calculoimc.html">
+                <i class="fa fa-calculator nav-icon"></i>
+                <span class="nav-text">Calculadora IMC</span>
+            </a>
             </li>
             <li>
-                <a href="../senaviews/calculocalorias.html">
-                    <i class="fa fa-fire nav-icon"></i>
-                    <span class="nav-text">Calculadora Kalorias</span>
-                </a>
+            <a href="../senaviews/calculocalorias.html">
+                <i class="fa fa-fire nav-icon"></i>
+                <span class="nav-text">Calculadora Calorias</span>
+            </a>
             </li>
             <li>
-                <a href="#academias-proximas">
-                    <i class="fa fa-map-marker-alt nav-icon"></i>
-                    <span class="nav-text">Academias Próximas</span>
-                </a>
+            <a href="../senaviews/login.html" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Entrar</span>
+            </a>
             </li>
         </ul>
     </nav>
@@ -1543,11 +1556,7 @@
 
    
 </main>
-   <div class="stats-title" style="margin-bottom: 5px;">
-                                <h2>Funcionalidades em Destaque</h2>
-    <p>Descubra os principais recursos do SharkRush para potencializar seus treinos, monitorar sua saúde e otimizar sua alimentação!</p>
-                        </div>
-
+   
     <!-- Carrossel de Imagens -->
     <section class="carousel-section scroll-reveal">
         <div class="container">

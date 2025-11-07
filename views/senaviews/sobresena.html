@@ -511,6 +511,18 @@
             transform: scale(1.15);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
+        /* Estilo especial para o link de login (cinza escuro) */
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
         /* NAVBAR CSS FIM */
 
         @media (max-width: 768px) {
@@ -583,45 +595,45 @@
                 </a>
             </li>
             <li>
-                <a href="#sobre" class="active">
+                <a href="../senaviews/sobresena.html" class="active">
                     <i class="fa fa-info-circle nav-icon"></i>
                     <span class="nav-text">Sobre</span>
                 </a>
             </li>
             <li>
-                <a href="../views/gerador.html">
+                <a href="../senaviews/gerador.html">
                     <i class="fa fa-cogs nav-icon"></i>
                     <span class="nav-text">Gerador</span>
                 </a>
             </li>
             <li>
-                <a href="#biblioteca">
+                <a href="../senaviews/bibliotecasena.html">
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
             </li>
             <li>
-                <a href="#meus-treinos">
+                <a href="../senaviews/meustreinossena.html">
                     <i class="fa fa-dumbbell nav-icon"></i>
                     <span class="nav-text">Meus Treinos</span>
                 </a>
             </li>
             <li>
-                <a href="../senaviews/calculadoraimc.html">
+                <a href="../senaviews/calculoimc.html">
                     <i class="fa fa-calculator nav-icon"></i>
                     <span class="nav-text">Calculadora IMC</span>
                 </a>
             </li>
             <li>
-                <a href="#calculadora-kalorias">
+                <a href="../senaviews/calculocalorias.html">
                     <i class="fa fa-fire nav-icon"></i>
                     <span class="nav-text">Calculadora Kalorias</span>
                 </a>
             </li>
             <li>
-                <a href="#academias-proximas">
-                    <i class="fa fa-map-marker-alt nav-icon"></i>
-                    <span class="nav-text">Academias Próximas</span>
+                <a href="../senaviews/login.html" class="nav-login">
+                    <i class="fa fa-user nav-icon"></i>
+                    <span class="nav-text">Entrar</span>
                 </a>
             </li>
         </ul>
