@@ -116,61 +116,61 @@
             }
         }
 
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Seção de grupo muscular */
-        .muscle-group {
-            margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease-out both;
-        }
-
-        .muscle-group:nth-child(1) { animation-delay: 0.1s; }
-        .muscle-group:nth-child(2) { animation-delay: 0.2s; }
-        .muscle-group:nth-child(3) { animation-delay: 0.3s; }
-        .muscle-group:nth-child(4) { animation-delay: 0.4s; }
-        .muscle-group:nth-child(5) { animation-delay: 0.5s; }
-
-        .muscle-title {
-            font-size: 2rem;
-            color: #fff; /* Alterado de #ff0000 para branco */
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding-left: 10px;
-            border-left: 4px solid #868686;
-        }
-
-        .muscle-title i {
-            font-size: 2.2rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* Carrossel de exercícios */
-        .exercises-carousel {
-            position: relative;
-            overflow: visible;
-            margin-bottom: 30px;
-            padding: 0 30px;
-        }
-
-        .exercises-container {
-            display: flex;
-            gap: 20px;
-            transition: transform 0.3s ease;
-            padding: 10px 0;
-        }
-
-        /* Cards de exercícios */
-        .exercise-card {
-            min-width: 280px;
-            height: 380px;
-            background: rgba(0, 0, 0, 0.8);
+        <nav class="main-menu">
+            <div class="logo-container">
+                <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+            </div>
+            <ul>
+                <li>
+                    <a href="homesena.html">
+                        <i class="fa fa-home nav-icon"></i>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="sobresena.html">
+                        <i class="fa fa-info-circle nav-icon"></i>
+                        <span class="nav-text">Sobre</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="gerador.html">
+                        <i class="fa fa-cogs nav-icon"></i>
+                        <span class="nav-text">Gerador</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="bibliotecasena.html" class="active">
+                        <i class="fa fa-book nav-icon"></i>
+                        <span class="nav-text">Biblioteca</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="meustreinossena.html">
+                        <i class="fa fa-dumbbell nav-icon"></i>
+                        <span class="nav-text">Meus Treinos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="calculoimc.html">
+                        <i class="fa fa-calculator nav-icon"></i>
+                        <span class="nav-text">Calculadora IMC</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="calculocalorias.html">
+                        <i class="fa fa-fire nav-icon"></i>
+                        <span class="nav-text">Calculadora Kalorias</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="api.html">
+                        <i class="fa fa-map-marker-alt nav-icon"></i>
+                        <span class="nav-text">Academias Próximas</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
             border: 2px solid #2a2a2a;
             border-radius: 15px;
             overflow: hidden;
@@ -597,6 +597,7 @@
             text-align: center;
             vertical-align: middle;
             font-size: 26px;
+            color: #000 !important;
             padding: 12px 0;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
