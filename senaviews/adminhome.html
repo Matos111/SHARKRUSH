@@ -999,6 +999,17 @@
   pointer-events: none;
 }
 
+.main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li a.active::before {
+            transform: scaleY(1);
+        }
+
+
 
 /* Glow effects */
 .glow-layer-1 {
@@ -1439,8 +1450,8 @@
         </div>
         <ul>
             <li>
-                <a href="../senaviews/adminhome.html">
-                    <i class="fa fa-home nav-icon"></i>
+                <a href="../senaviews/adminhome.html" class="active">
+                    <i class="fa fa-home nav-icon" class="active" ></i>
                     <span class="nav-text">Home</span>
                 </a>
             </li>
@@ -1451,7 +1462,7 @@
                 </a>
             </li>
             <li>
-                <a href="../senaviews/admbiblioteca.html" class="active">
+                <a href="../senaviews/admbiblioteca.html" >
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
