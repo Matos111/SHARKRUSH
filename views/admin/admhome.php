@@ -1471,29 +1471,29 @@
     <!-- Sidebar navigation -->
     <nav class="main-menu">
         <div class="logo-container">
-            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+            <img src="../midia/Logos/logoshark.png" alt="Logo" />
         </div>
         <ul>
             <li>
-                <a href="../views/adminhome.html" class="active">
+                <a href="../admin/admhome.php" class="active">
                     <i class="fa fa-home nav-icon" class="active" ></i>
                     <span class="nav-text">Home</span>
                 </a>
             </li>
             <li>
-                <a href="../views/admpainel.html">
+                <a href="../admin/admpainel.php">
                     <i class="fa fa-users-cog nav-icon"></i>
                     <span class="nav-text">Painel Admin</span>
                 </a>
             </li>
             <li>
-                <a href="../views/admbiblioteca.html" >
+                <a href="../admin/admbiblioteca.php" >
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
             </li>
             <li class="nav-bottom">
-                <a href="../views/login.html" class="nav-login" id="logoutBtn" onclick="logout(event)">
+                <a href="../semcadastro/semlogin.php" class="nav-login" id="logoutBtn" onclick="logout(event)">
                     <i class="fa fa-sign-out-alt nav-icon"></i>
                     <span class="nav-text">Sair</span>
                 </a>
@@ -1682,7 +1682,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../views/midia/images/supinoinclinado.png" alt="Supino Inclinado">
+                            <img class="card-bg-image" src="../midia/images/supinoinclinado.png" alt="Supino Inclinado">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PEITO</div>
@@ -1707,7 +1707,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../views/midia/images/agachamentolivre.png" alt="Agachamento Livre">
+                            <img class="card-bg-image" src="../midia/images/agachamentolivre.png" alt="Agachamento Livre">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PERNA</div>
@@ -1732,7 +1732,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../views/midia/images/puxadafrontal.png" alt="Puxada Frontal">
+                            <img class="card-bg-image" src="../midia/images/puxadafrontal.png" alt="Puxada Frontal">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">COSTAS</div>
@@ -2121,7 +2121,7 @@
                 console.warn('Logout: could not clear storage', err);
             }
             // Redirect to login page
-            window.location.href = '../senaviews/login.html';
+            window.location.href = '../semcadastro/semlogin.php';
         }
     </script>
 </body>

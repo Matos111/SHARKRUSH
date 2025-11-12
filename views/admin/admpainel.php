@@ -723,11 +723,11 @@
     <!-- NAVBAR -->
     <nav class="main-menu">
         <div class="logo-container">
-            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+            <img src="../midia/Logos/logoshark.png" alt="Logo" />
         </div>
         <ul>
             <li>
-                <a href="../views/adminhome.html">
+                <a href="../admin/admhome.php">
                     <i class="fa fa-home nav-icon"></i>
                     <span class="nav-text">Home</span>
                 </a>
@@ -736,13 +736,13 @@
 
             
             <li>
-                <a href="../views/admpainel.html" class="active">
+                <a href="../admin/admpainel.php" class="active">
                     <i class="fa fa-users-cog nav-icon"></i>
                     <span class="nav-text">Painel Admin</span>
                 </a>
             </li>
             <li>
-                <a href="../views/admbiblioteca.html">
+                <a href="../admin/admbiblioteca.php">
                     <i class="fa fa-book nav-icon"></i>
                     <span class="nav-text">Biblioteca</span>
                 </a>
@@ -991,7 +991,7 @@
             } catch (err) {
                 console.warn('Logout: could not clear storage', err);
             }
-            window.location.href = '../senaviews/login.html';
+            window.location.href = '../semcadastro/semlogin.php';
         }
         </script>
 </body>
