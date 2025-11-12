@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Treino - Corpo Interativo</title>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+
+        .main-menu li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0000;
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu li:hover a::before {
+            transform: scaleY(1);
+        }
+
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            transition: margin-right 0.3s ease;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffffff, #ffffff, #ffffff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            font-weight: 300;
+        }
+
+        .human-body {
+            width: 207px;
+            position: relative;
+            padding-top: 240px;
+            height: 260px;
+            display: block;
+            margin: 40px auto;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .human-body:hover {
+            transform: scale(1.02);
+        }
+
+        .human-body svg {
+            position: absolute;
+            left: 50%;
+            fill: #606060;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .human-body svg:hover {
+            fill: #ff0000aa;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.716));
+            transform: scale(1.05);
+        }
+
+        .human-body svg.active {
+            fill: #ff0000f6;
+            animation: pulse 2s infinite;
+        }
+
+        .human-body svg.inactive {
+            fill: #3f3f3f;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgb(255, 0, 0)); }
+        }
+
+        /* Posicionamento dos SVGs (mantendo o original) */
+        .human-body svg.head { margin-left: -28.5px; top: -6px; }
+        .human-body svg.shoulder { margin-left: -53.5px; top: 69px; }
+        .human-body svg.arm { margin-left: -78px; top: 112px; }
+        .human-body svg.cheast { margin-left: -43.5px; top: 88px; }
+        .human-body svg.stomach { margin-left: -37.5px; top: 130px; }
+        .human-body svg.legs { margin-left: -46.5px; top: 205px; z-index: 9999; }
+        .human-body svg.hands { margin-left: -102.5px; top: 224px; }
+
+        #area {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: 'Segoe UI', sans-serif;
+            color: #a5a5a5;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #area #data {
+            color: #ff0000;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .exercise-sidebar {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-left: 2px solid #444444;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 2rem;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .exercise-sidebar.active {
+            right: 0;
+        }
+
+        .exercise-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .exercise-sidebar::-webkit-scrollbar-track {
+            background: #0f0f0f;
+        }
+
+        .exercise-sidebar::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 4px;
+        }
+
+        .close-sidebar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 28px;
+            color: #ff0000;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .close-sidebar:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .muscle-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #777777;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #4c4c4c;
+            padding-bottom: 0.5rem;
+        }
+
+        .exercise-list {
+            margin-top: 2rem;
+            margin-bottom: 80px;
+        }
+
+        .exercise-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .exercise-item:hover {
+            transform: translateY(-3px);
+            border-color: #ff0000;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .exercise-item:hover::before {
+            left: 100%;
+        }
+
+        .exercise-title {
+            color: #ffffff;
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .exercise-description {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .exercise-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .exercise-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }        .exercise-button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .exercise-button i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            z-index: 1;
+        }
+
+        .exercise-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }        .watch-button {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .watch-button:hover {
+            background: linear-gradient(45deg, #cc0000, #990000);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .watch-button:hover i {
+            transform: scale(1.2);
+        }
+
+        .watch-button:active {
+            transform: translateY(1px);
+        }        .add-button {
+            background: linear-gradient(45deg, #333333, #1a1a1a);
+            color: white;
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-button:hover {
+            background: linear-gradient(45deg, #555555, #333333);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .add-button:hover i {
+            transform: scale(1.2) rotate(180deg);
+        }
+
+        .add-button:active {
+            transform: translateY(1px);
+        }
+
+        .add-button.adding {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+
+        .add-button.adding i {
+            animation: spin 1s linear infinite;
+        }        .add-button.added {
+            background: linear-gradient(45deg, #414141, #2a2a2a);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .add-button.added:hover {
+            background: linear-gradient(45deg, #232323, #27ae60);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 204, 112, 0.226);
+        }
+
+        .add-button.added i {
+            transform: rotate(360deg);
+        }
+
+        .exercise-item {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }.workout-actions {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .workout-counter {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .workout-counter .counter-icon {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .workout-counter .count-number {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 10px;
+            margin: 0 5px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .workout-counter:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+            z-index: 1001;
+            transition: all 0.4s ease;
+            opacity: 0;
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .muscle-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+           
+        }
+
+        .muscle-chip {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e0e0e0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .muscle-chip:hover, .muscle-chip.active {
+            background: #ff0000;
+            border-color: #ff0000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .exercise-sidebar {
+                width: 100vw;
+                right: -100vw;
+            }
+           
+            .header h1 {
+                font-size: 2rem;
+            }
+           
+            .main-content {
+                padding: 1rem;
+            }
+        }
+
+        .logo img {
+            max-height: 120px;
+            max-width: 100%;
+            height: auto;
+           
+        }        .save-workout-button {
+            background: linear-gradient(45deg, #2d2d2d, #2f2f2d);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(30, 30, 30, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .save-workout-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .save-workout-button:hover::before {
+            left: 100%;
+        }
+
+        .save-workout-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(33, 33, 33, 0.4);
+        }
+
+        .save-workout-button:active {
+            transform: translateY(1px);
+        }
+
+        .save-workout-button .button-icon {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .save-workout-button:hover .button-icon {
+            transform: scale(1.2);
+        }
+
+        .save-workout-button.saving {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            pointer-events: none;
+        }
+
+        .save-workout-button.saving .button-icon {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .save-workout-button.active {
+            display: block;
+        }        .save-workout-button.error {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .workout-counter, .save-workout-button {
+            transform-origin: center;
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .selected-exercises-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 1px solid #444;
+            border-radius: 15px;
+            padding: 2rem;
+            min-width: 400px;
+            max-width: 90%;
+            max-height: 80vh;
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .selected-exercises-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1099;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #ff0000;
+        }
+
+        .popup-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .popup-close {
+            background: none;
+            border: none;
+            color: #ff0000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .popup-close:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .selected-exercise-list {
+            max-height: calc(80vh - 100px);
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .selected-exercise-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .selected-exercise-list::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 4px;
+        }
+
+        .selected-exercise-list::-webkit-scrollbar-thumb {
+            background: #ff0000;
+            border-radius: 4px;
+        }
+
+        .selected-exercise-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .selected-exercise-item:hover {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: #ff0000;
+            transform: translateX(5px);
+        }
+
+        .selected-exercise-info {
+            flex-grow: 1;
+        }
+
+        .selected-exercise-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .selected-exercise-muscle {
+            color: #ff0000;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .selected-exercise-meta {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .remove-exercise {
+            background: none;
+            border: none;
+            color: #ff0000;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .remove-exercise:hover {
+            background: rgba(255, 0, 0, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0303;
+            transform: scaleY(1);
+        }
+
+        .main-menu li a.active .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+       
+    </style>
+</head>
+<body>    <nav class="main-menu">
+        <div class="logo-container">
+            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+        </div>
+        <ul>
+            <li>
+            <a href="../views/homesena.html">
+                <i class="fa fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            </li>
+            <li>
+            <a href="../views/sobresena.html">
+                <i class="fa fa-info-circle nav-icon"></i>
+                <span class="nav-text">Sobre</span>
+            </a>
+            </li>            
+            <li>
+            <a href="../views/gerador.html" class="active">
+                <i class="fa fa-cogs nav-icon"></i>
+                <span class="nav-text">Gerador</span>
+            </a>
+            </li>
+            <li>
+            <a href="../views/bibliotecasena.html">
+                <i class="fa fa-book nav-icon"></i>
+                <span class="nav-text">Biblioteca</span>
+            </a>
+            </li>
+            <li>
+            <a href="../views/meustreinossena.html">
+                <i class="fa fa-dumbbell nav-icon"></i>
+                <span class="nav-text">Meus Treinos</span>
+            </a>
+            </li>
+            <li>
+            <a href="../views/calculoimc.html">
+                <i class="fa fa-calculator nav-icon"></i>
+                <span class="nav-text">Calculadora IMC</span>
+            </a>
+            </li>
+            <li>
+            <a href="../views/calculokalorias.html">
+                <i class="fa fa-fire nav-icon"></i>
+                <span class="nav-text">Calculadora Kalorias</span>
+            </a>
+            </li>
+            <li>
+            <a href="../views/login.html">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Logar</span>
+            </a>
+            </li>
+        </ul>
+        </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="header">
+                <h1>Gerador de Treinos</h1>
+                <p>Selecione os músculos e veja os exercícios recomendados.</p>
+            </div>
+
+            <div class="muscle-selector">
+                <div class="muscle-chip" data-muscle="shoulder">Ombros</div>
+                <div class="muscle-chip" data-muscle="arm">Braços</div>
+                <div class="muscle-chip" data-muscle="cheast">Peito</div>
+                <div class="muscle-chip" data-muscle="stomach">Abdômen</div>
+                <div class="muscle-chip" data-muscle="legs">Pernas</div>
+            </div>
+
+            <div class="human-body">
+                <svg data-position="head" class="head inactive" xmlns="http://www.w3.org/2000/svg" width="56.594" height="95.031" viewBox="0 0 56.594 95.031"><path d="M15.92 68.5l8.8 12.546 3.97 13.984-9.254-7.38-4.622-15.848zm27.1 0l-8.8 12.546-3.976 13.988 9.254-7.38 4.622-15.848zm6.11-27.775l.108-11.775-21.16-14.742L8.123 26.133 8.09 40.19l-3.24.215 1.462 9.732 5.208 1.81 2.36 11.63 9.72 11.018 10.856-.324 9.56-10.37 1.918-11.952 5.207-1.81 1.342-9.517zm-43.085-1.84l-.257-13.82L28.226 11.9l23.618 15.755-.216 10.37 4.976-17.085L42.556 2.376 25.49 0 10.803 3.673.002 24.415z"/></svg>
+                <svg data-position="shoulder" class="shoulder" xmlns="http://www.w3.org/2000/svg" width="109.532" height="46.594" viewBox="0 0 109.532 46.594">
+                <path d="M38.244-.004l1.98 9.232-11.653 2.857-7.474-2.637zm33.032 0l-1.98 9.232 11.653 2.857 7.474-2.637zm21.238 10.54l4.044-2.187 12.656 14 .07 5.33S92.76 10.66 92.515 10.535zm-1.285.58c-.008.28 17.762 18.922 17.762 18.922l.537 16.557-6.157-10.55L91.5 30.988 83.148 15.6zm-74.224-.58L12.962 8.35l-12.656 14-.062 5.325s16.52-17.015 16.764-17.14zm1.285.58C18.3 11.396.528 30.038.528 30.038L-.01 46.595l6.157-10.55 11.87-5.056L26.374 15.6z"/></svg>
+                <svg data-position="arm" class="arm" xmlns="http://www.w3.org/2000/svg" width="156.344" height="119.25" viewBox="0 0 156.344 119.25"><path d="M21.12 56.5a1.678 1.678 0 0 1-.427.33l.935 8.224 12.977-13.89 1.2-8.958A168.2 168.2 0 0 0 21.12 56.5zm1.387 12.522l-18.07 48.91 5.757 1.333 19.125-39.44 3.518-22.047zm-5.278-18.96l2.638 18.74-17.2 46.023L.01 113.05l6.644-35.518zm118.015 6.44a1.678 1.678 0 0 0 .426.33l-.934 8.222-12.977-13.89-1.2-8.958A168.2 168.2 0 0 1 135.24 56.5zm-1.39 12.52l18.073 48.91-5.758 1.333-19.132-39.44-3.52-22.05zm5.28-18.96l-2.64 18.74 17.2 46.023 2.658-1.775-6.643-35.518zm-103.1-12.323a1.78 1.78 0 0 1 .407-.24l3.666-27.345L33.07.015l-7.258 10.58-6.16 37.04.566 4.973a151.447 151.447 0 0 1 15.808-14.87zm84.3 0a1.824 1.824 0 0 0-.407-.24l-3.666-27.345L123.3.015l7.258 10.58 6.16 37.04-.566 4.973a151.447 151.447 0 0 0-15.822-14.87zM22.288 8.832l-3.3 35.276-2.2-26.238zm111.79 0l3.3 35.276 2.2-26.238z"/></svg>
+                <svg data-position="cheast" class="cheast" xmlns="http://www.w3.org/2000/svg" width="86.594" height="45.063" viewBox="0 0 86.594 45.063"><path d="M19.32 0l-9.225 16.488-10.1 5.056 6.15 4.836 4.832 14.07 11.2 4.616 17.85-8.828-4.452-34.7zm47.934 0l9.225 16.488 10.1 5.056-6.15 4.836-4.833 14.07-11.2 4.616-17.844-8.828 4.45-34.7z"/></svg>
+                <svg data-position="stomach" class="stomach" xmlns="http://www.w3.org/2000/svg" width="75.25" height="107.594" viewBox="0 0 75.25 107.594"><path d="M19.25 7.49l16.6-7.5-.5 12.16-14.943 7.662zm-10.322 8.9l6.9 3.848-.8-9.116zm5.617-8.732L1.32 2.15 6.3 15.6zm-8.17 9.267l9.015 5.514 1.54 11.028-8.795-5.735zm15.53 5.89l.332 8.662 12.286-2.665.664-11.826zm14.61 84.783L33.28 76.062l-.08-20.53-11.654-5.736-1.32 37.5zM22.735 35.64L22.57 46.3l11.787 3.166.166-16.657zm-14.16-5.255L16.49 35.9l1.1 11.25-8.8-7.06zm8.79 22.74l-9.673-7.28-.84 9.78L-.006 68.29l10.564 14.594 5.5.883 1.98-20.735zM56 7.488l-16.6-7.5.5 12.16 14.942 7.66zm10.32 8.9l-6.9 3.847.8-9.116zm-5.617-8.733L73.93 2.148l-4.98 13.447zm8.17 9.267l-9.015 5.514-1.54 11.03 8.8-5.736zm-15.53 5.89l-.332 8.662-12.285-2.665-.664-11.827zm-14.61 84.783l3.234-31.536.082-20.532 11.65-5.735 1.32 37.5zm13.78-71.957l.166 10.66-11.786 3.168-.166-16.657zm14.16-5.256l-7.915 5.514-1.1 11.25 8.794-7.06zm-8.79 22.743l9.673-7.28.84 9.78 6.862 12.66-10.564 14.597-5.5.883-1.975-20.74z"/></svg>
+                <svg data-position="legs" class="legs" xmlns="http://www.w3.org/2000/svg" width="93.626" height="286.625" viewBox="0 0 93.626 286.625"><path d="M17.143 138.643l-.664 5.99 4.647 5.77 1.55 9.1 3.1 1.33 2.655-13.755 1.77-4.88-1.55-3.107zm20.582.444l-3.32 9.318-7.082 13.755 1.77 12.647 5.09-14.2 4.205-7.982zm-26.557-12.645l5.09 27.29-3.32-1.777-2.656 8.875zm22.795 42.374l-1.55 4.88-3.32 20.634-.442 27.51 4.65 26.847-.223-34.39 4.87-13.754.663-15.087zM23.34 181.24l1.106 41.267 8.853 33.28-9.628-4.55-16.045-57.8 5.533-36.384zm15.934 80.536l-.664 18.415-1.55 6.435h-4.647l-1.327-4.437-1.55-.222.332 4.437-5.864-1.778-1.55-.887-6.64-1.442-.22-5.214 6.418-10.87 4.426-5.548 10.844-4.437zM13.63 3.076v22.476l15.71 31.073 9.923 30.85L38.23 66.1zm25.49 30.248l.118-.148-.793-2.024L21.9 12.992l-1.242-.44L31.642 40.93zM32.865 44.09l6.812 17.6 2.274-21.596-1.344-3.43zM6.395 61.91l.827 25.34 12.816 35.257-3.928 10.136L3.5 88.133zM30.96 74.69l.345.826 6.47 15.48-4.177 38.342-6.594-3.526 5.715-35.7zm45.5 63.953l.663 5.99-4.647 5.77-1.55 9.1-3.1 1.33-2.655-13.755-1.77-4.88 1.55-3.107zm-20.582.444l3.32 9.318 7.08 13.755-1.77 12.647-5.09-14.2-4.2-7.987zm3.762 29.73l1.55 4.88 3.32 20.633.442 27.51-4.648 26.847.22-34.39-4.867-13.754-.67-15.087zm10.623 12.424l-1.107 41.267-8.852 33.28 9.627-4.55 16.046-57.8-5.533-36.384zM54.33 261.777l.663 18.415 1.546 6.435h4.648l1.328-4.437 1.55-.222-.333 4.437 5.863-1.778 1.55-.887 6.638-1.442.222-5.214-6.418-10.868-4.426-5.547-10.844-4.437zm25.643-258.7v22.476L64.26 56.625l-9.923 30.85L55.37 66.1zM54.48 33.326l-.118-.15.793-2.023L71.7 12.993l1.24-.44L61.96 40.93zm6.255 10.764l-6.812 17.6-2.274-21.595 1.344-3.43zm26.47 17.82l-.827 25.342-12.816 35.256 3.927 10.136 12.61-44.51zM62.64 74.693l-.346.825-6.47 15.48 4.178 38.342 6.594-3.527-5.715-35.7zm19.792 51.75l-5.09 27.29 3.32-1.776 2.655 8.875zM9.495-.007l.827 21.373-7.028 42.308-3.306-34.155zm2.068 27.323L26.24 59.707l3.307 26-6.2 36.58L9.91 85.046l-.827-38.342zM84.103-.01l-.826 21.375 7.03 42.308 3.306-34.155zm-2.066 27.325L67.36 59.707l-3.308 26 6.2 36.58 13.436-37.24.827-38.34z"/></svg>
+                <!-- hands: left path + mirrored copy for right hand so both match -->
+                <svg data-position="hands" class="hands inactive" xmlns="http://www.w3.org/2000/svg" width="205" height="38.938" viewBox="0 0 205 38.938">
+                    <!-- left hand path (original left side) -->
+                    <path d="M21.255-.002l2.88 6.9 8.412 1.335.664 12.458-4.427 17.8-2.878-.22 2.8-11.847-2.99-.084-4.676 12.6-3.544-.446 4.4-12.736-3.072-.584-5.978 13.543-4.428-.445 6.088-14.1-2.1-1.25-7.528 12.012-3.764-.445L12.4 12.9l-1.107-1.78L.665 15.57 0 13.124l8.635-7.786z"/>
+                    <!-- mirrored copy of the left hand positioned to the right -->
+                    <path d="M21.255-.002l2.88 6.9 8.412 1.335.664 12.458-4.427 17.8-2.878-.22 2.8-11.847-2.99-.084-4.676 12.6-3.544-.446 4.4-12.736-3.072-.584-5.978 13.543-4.428-.445 6.088-14.1-2.1-1.25-7.528 12.012-3.764-.445L12.4 12.9l-1.107-1.78L.665 15.57 0 13.124l8.635-7.786z" transform="translate(205,0) scale(-1,1)"/>
+                </svg>
+            </div>
+
+            <div id="area">
+                Área Selecionada: <span id="data">Nenhuma</span>
+            </div>
+        </div>        <div class="workout-actions">            <div class="workout-counter">
+                <i class="fas fa-dumbbell counter-icon"></i>
+                <span>Treino: <span id="workoutCount" class="count-number">0</span> exercícios</span>
+            </div>
+            <button class="save-workout-button" id="saveWorkoutButton" onclick="saveWorkout()">
+                <i class="fas fa-save button-icon"></i>
+                <span>SALVAR TREINO</span>
+            </button>
+        </div>
+
+        <div class="notification" id="notification"></div><div class="exercise-sidebar" id="exerciseSidebar">
+            <span class="close-sidebar" onclick="closeSidebar()">&times;</span>
+            <h2 class="muscle-title" id="muscleTitle"></h2>
+            <div class="exercise-list" id="exerciseList"></div>
+            <button class="save-workout-button active" id="saveWorkoutButton" onclick="saveWorkout()">SALVAR TREINO</button>
+        </div>
+
+        <div class="popup-overlay" id="popupOverlay"></div>
+        <div class="selected-exercises-popup" id="selectedExercisesPopup">
+            <div class="popup-header">
+                <h3 class="popup-title">Exercícios Selecionados</h3>
+                <button class="popup-close" onclick="closeExercisePopup()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="selected-exercise-list" id="selectedExerciseList">
+                <!-- Lista de exercícios será preenchida dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base de dados expandida de exercícios
+        const exerciseData = {
+            shoulder: [
+                {
+                    name: "Elevação Lateral",
+                    description: "Trabalha o deltoide lateral, aumentando a largura dos ombros.",
+                    sets: "4x10",
+                    difficulty: "Médio",
+                    video: "https://youtube.com/shorts/xJLldOWxkxA?si=yzhZNjM8KRfll5Kq"
+                },
+                {
+                    name: "Desenvolvimento com Halteres",
+                    description: "Exercício composto para força e volume dos ombros.",
+                    sets: "4x8",
+                    difficulty: "Médio",
+                    video: "https://youtube.com/shorts/TLvK2UExsD8?si=z11DFbCG7FWyuzbm"
+                }
+            ],
+            arm: [
+                {
+                    name: "Rosca Direta",
+                    description: "Foco em bíceps, excelente para força e hipertrofia.",
+                    sets: "4x12",
+                    difficulty: "Fácil",
+                    video: "https://youtube.com/shorts/vDWPtEMrzeU?si=K2uXlY2d_RjtsT28"
+                },
+                {
+                    name: "Tríceps Testa",
+                    description: "Isolamento de tríceps, ideal para definição.",
+                    sets: "3x10",
+                    difficulty: "Médio",
+                    video: "https://youtube.com/shorts/NNx0w_PDumY?si=fRoxdlwgNfebbvM0"
+                }
+            ],
+            cheast: [
+                {
+                    name: "Supino Reto",
+                    description: "Exercício clássico para peitoral maior.",
+                    sets: "4x10",
+                    difficulty: "Médio",
+                    video: "https://youtube.com/shorts/50RSzhMG5Hc?si=sD0hx_MVL2vfgX_8"
+                },
+                {
+                    name: "Crucifixo",
+                    description: "Isolamento do peitoral, ótimo para alongamento muscular.",
+                    sets: "3x12",
+                    difficulty: "Fácil",
+                    video: "https://youtube.com/shorts/K8NXj_t_qSk?si=Au5LiL8CnA9wpTrI"
+                }
+            ],
+            stomach: [
+                {
+                    name: "Abdominal Supra",
+                    description: "Trabalha a parte superior do abdômen.",
+                    sets: "4x15",
+                    difficulty: "Fácil",
+                    video: "https://youtube.com/shorts/MKq4WH-eBAQ?si=M6gXM4w_RGaGssRw"
+                },
+                {
+                    name: "Prancha",
+                    description: "Exercício isométrico para core e estabilidade.",
+                    sets: "3x40s",
+                    difficulty: "Médio",
+                    video: "https://youtube.com/shorts/ohxyKQzZ2xM?si=MLA6dR9BZhVnMrsr"
+                }
+            ],
+            legs: [
+                {
+                    name: "Agachamento Livre",
+                    description: "Exercício completo para quadríceps, glúteos e core.",
+                    sets: "4x10",
+                    difficulty: "Médio",
+                    video: "https://youtube.com/shorts/F4IzWV8cg8g?si=WAam4OPq5yg1u6Kp"
+                },
+                {
+                    name: "Cadeira Extensora",
+                    description: "Isolamento de quadríceps, ideal para finalização.",
+                    sets: "3x15",
+                    difficulty: "Fácil",
+                    video: "https://youtube.com/shorts/u68RNdfZymA?si=pgKHW6x_HVXKKkAp"
+                }
+            ]
+        };
+
+        // Array para armazenar exercícios selecionados
+        let selectedExercises = [];
+       
+        // Função para adicionar exercício ao treino
+        function addToWorkout(muscle, exerciseName, button) {
+            const exercise = exerciseData[muscle].find(ex => ex.name === exerciseName);
+            const existingIndex = selectedExercises.findIndex(e => e.name === exerciseName);
+           
+            if (existingIndex !== -1) {
+                // Remove o exercício se já estiver selecionado
+                selectedExercises.splice(existingIndex, 1);
+                updateWorkoutCounter();
+                showNotification(`${exerciseName} removido do treino!`);
+                // Atualiza todos os botões com o mesmo exercício
+                document.querySelectorAll('.add-button').forEach(btn => {
+                    if (btn.parentElement.parentElement.querySelector('.exercise-title').textContent === exerciseName) {
+                        btn.classList.remove('added');
+                        btn.textContent = 'Adicionar ao Treino';
+                    }
+                });
+            } else if (exercise) {
+                // Adiciona o exercício se não estiver selecionado
+                selectedExercises.push({...exercise, muscle});
+                updateWorkoutCounter();
+                showNotification(`${exerciseName} adicionado ao treino!`);
+                // Atualiza todos os botões com o mesmo exercício
+                document.querySelectorAll('.add-button').forEach(btn => {
+                    if (btn.parentElement.parentElement.querySelector('.exercise-title').textContent === exerciseName) {
+                        btn.classList.add('added');
+                        btn.textContent = 'Adicionado';
+                    }
+                });
+            }
+        }
+
+        // Função para atualizar o contador de exercícios
+        function updateWorkoutCounter() {
+            const counter = document.getElementById('workoutCount');
+            counter.textContent = selectedExercises.length;
+        }
+
+        // Função para mostrar notificação
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Função para mostrar o popup com os exercícios selecionados
+        function showSelectedExercisesPopup() {
+            const popup = document.getElementById('selectedExercisesPopup');
+            const overlay = document.getElementById('popupOverlay');
+            const list = document.getElementById('selectedExerciseList');
+           
+            // Limpa a lista atual
+            list.innerHTML = '';
+           
+            if (selectedExercises.length === 0) {
+                list.innerHTML = `
+                    <div class="selected-exercise-item" style="justify-content: center; color: #666;">
+                        <p>Nenhum exercício selecionado</p>
+                    </div>
+                `;
+            } else {
+                // Preenche a lista com os exercícios selecionados
+                selectedExercises.forEach((exercise, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'selected-exercise-item';
+                    item.innerHTML = `
+                        <div class="selected-exercise-info">
+                            <div class="selected-exercise-name">${exercise.name}</div>
+                            <div class="selected-exercise-muscle">${muscleName(exercise.muscle)}</div>
+                            <div class="selected-exercise-meta">
+                                <i class="fas fa-layer-group"></i> ${exercise.sets} |
+                                <i class="fas fa-signal"></i> ${exercise.difficulty}
+                            </div>
+                        </div>
+                        <button class="remove-exercise" onclick="removeExercise(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+           
+            popup.classList.add('active');
+            overlay.classList.add('active');
+        }
+       
+        // Função para fechar o popup
+        function closeExercisePopup() {
+            const popup = document.getElementById('selectedExercisesPopup');
+            const overlay = document.getElementById('popupOverlay');
+           
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+       
+        // Função para remover um exercício da lista (usada no popup)
+        function removeExercise(index) {
+            const exercise = selectedExercises[index];
+            selectedExercises.splice(index, 1);
+            updateWorkoutCounter();
+
+            // Atualiza os botões de adicionar
+            document.querySelectorAll('.add-button').forEach(btn => {
+                const exerciseTitle = btn.parentElement.parentElement.querySelector('.exercise-title');
+                if (exerciseTitle && exerciseTitle.textContent === exercise.name) {
+                    btn.classList.remove('added');
+                    btn.innerHTML = `
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Adicionar ao Treino</span>
+                    `;
+                }
+            });
+
+            showNotification(`${exercise.name} removido do treino! ❌`);
+            showSelectedExercisesPopup(); // Atualiza o popup
+        }
+
+        // Função para abrir a sidebar com os exercícios do grupo selecionado
+        function openSidebar(muscle) {
+            console.log('Abrindo sidebar para:', muscle); // Debug
+            const sidebar = document.getElementById('exerciseSidebar');
+            const title = document.getElementById('muscleTitle');
+            const list = document.getElementById('exerciseList');
+           
+            if (!sidebar || !title || !list) {
+                console.error('Elementos da sidebar não encontrados');
+                return;
+            }
+           
+            title.textContent = muscleName(muscle);
+            list.innerHTML = '';
+           
+            if (exerciseData[muscle]) {
+                exerciseData[muscle].forEach(ex => {
+                    const item = document.createElement('div');
+                    item.className = 'exercise-item';const isSelected = selectedExercises.some(e => e.name === ex.name);
+                    item.innerHTML = `
+                        <div class="exercise-title">${ex.name}</div>
+                        <div class="exercise-description">${ex.description}</div>
+                        <div class="exercise-meta">
+                            <span class="meta-item"><b>Séries:</b> ${ex.sets}</span>
+                            <span class="meta-item"><b>Dificuldade:</b> ${ex.difficulty}</span>
+                        </div>
+                        <div class="exercise-buttons">                            <button class="exercise-button watch-button" onclick="window.open('${ex.video}','_blank')">
+                                <i class="fas fa-play-circle"></i>
+                                <span>Ver Vídeo</span>
+                            </button>
+                            <button class="exercise-button add-button ${isSelected ? 'added' : ''}" onclick="addToWorkout('${muscle}', '${ex.name}', this)">
+                                <i class="fas ${isSelected ? 'fa-check-circle' : 'fa-plus-circle'}"></i>
+                                <span>${isSelected ? 'Adicionado' : 'Adicionar ao Treino'}</span>
+                            </button>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+            } else {
+                list.innerHTML = '<div style="color:#fff;">Nenhum exercício cadastrado para este grupo.</div>';
+            }
+            sidebar.classList.add('active');
+        }        // Função para fechar a sidebar
+        function closeSidebar() {
+            document.getElementById('exerciseSidebar').classList.remove('active');
+            // Deseleciona o músculo no SVG
+            document.querySelectorAll('.human-body svg').forEach(s => s.classList.remove('active'));
+            // Deseleciona o chip
+            document.querySelectorAll('.muscle-chip').forEach(c => c.classList.remove('active'));
+            // Reseta o texto da área selecionada
+            document.getElementById('data').textContent = 'Nenhuma';
+        }
+
+        // Função para retornar nome amigável
+        function muscleName(muscle) {
+            const names = {
+                head: 'Pescoço',
+                shoulder: 'Ombros',
+                arm: 'Braços',
+                cheast: 'Peito',
+                stomach: 'Abdômen',
+                legs: 'Pernas',
+                hands: 'Mãos'
+            };
+            return names[muscle] || muscle;
+        }        // Adiciona eventos de clique aos SVGs e chips
+        document.querySelectorAll('.human-body svg').forEach(svg => {
+            if (!svg.classList.contains('inactive')) {
+                svg.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const muscle = this.getAttribute('data-position');
+                    openSidebar(muscle);
+                    // Novo: ativa o SVG e o chip correspondente
+                    document.querySelectorAll('.human-body svg').forEach(s => s.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.muscle-chip').forEach(c => c.classList.remove('active'));
+                    const chip = document.querySelector(`.muscle-chip[data-muscle="${muscle}"]`);
+                    if (chip) chip.classList.add('active');
+                    document.getElementById('data').textContent = muscleName(muscle);
+                });
+            }
+        });
+        document.querySelectorAll('.muscle-chip').forEach(chip => {
+            chip.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+               
+                const muscle = this.getAttribute('data-muscle');
+                const sidebar = document.getElementById('exerciseSidebar');
+               
+                // If clicking on already selected muscle and sidebar is open, close it
+                if (this.classList.contains('active') && sidebar.classList.contains('active')) {
+                    closeSidebar();
+                    return;
+                }
+               
+                // Remove active class from all chips and SVGs
+                document.querySelectorAll('.muscle-chip').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.human-body svg').forEach(s => s.classList.remove('active'));
+               
+                // Add active class to clicked chip and corresponding SVG
+                this.classList.add('active');
+                const svg = document.querySelector(`.human-body svg[data-position="${muscle}"]`);
+                if (svg) {
+                    svg.classList.add('active');
+                }
+               
+                document.getElementById('data').textContent = muscleName(muscle);
+               
+                // Close and reopen sidebar to ensure clean state
+                sidebar.classList.remove('active');
+                setTimeout(() => {
+                    openSidebar(muscle);
+                }, 50);
+            });
+        });
+        // Fecha sidebar ao clicar fora (opcional)        // Fecha sidebar ao clicar fora
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('exerciseSidebar');
+            const humanBody = e.target.closest('.human-body');
+            const muscleChip = e.target.closest('.muscle-chip');
+            const exerciseSidebar = e.target.closest('.exercise-sidebar');
+           
+            // Só fecha se:
+            // 1. A sidebar estiver ativa
+            // 2. O clique não foi dentro da sidebar
+            // 3. O clique não foi no corpo humano
+            // 4. O clique não foi em um chip de músculo
+            if (sidebar.classList.contains('active') &&
+                !exerciseSidebar &&
+                !humanBody &&
+                !muscleChip) {
+                closeSidebar();
+            }
+        });        // Função para salvar o treino
+        function saveWorkout() {
+            const saveButton = document.getElementById('saveWorkoutButton');
+           
+            if (selectedExercises.length === 0) {
+                saveButton.classList.add('error');
+                setTimeout(() => saveButton.classList.remove('error'), 500);
+                showNotification('Selecione pelo menos um exercício para salvar! ⚠️');
+                return;
+            }
+           
+            const workoutName = prompt('Digite um nome para o treino:', 'Meu Treino');
+            if (!workoutName) return;
+           
+            // Adiciona efeito de loading
+            saveButton.classList.add('saving');
+            saveButton.innerHTML = '<i class="fas fa-spinner button-icon"></i><span>Salvando...</span>';
+           
+            const workoutData = {
+                name: workoutName,
+                date: new Date().toLocaleDateString(),
+                exercises: selectedExercises.map(ex => ({
+                    name: ex.name,
+                    muscle: ex.muscle,
+                    sets: ex.sets,
+                    difficulty: ex.difficulty
+                }))
+            };
+           
+            // Salva no localStorage
+            let savedWorkouts = JSON.parse(localStorage.getItem('workouts') || '[]');
+            savedWorkouts.push(workoutData);
+            localStorage.setItem('workouts', JSON.stringify(savedWorkouts));
+              // Simula um pequeno delay para mostrar o loading
+            setTimeout(() => {
+                // Remove efeito de loading
+                saveButton.classList.remove('saving');
+                saveButton.innerHTML = '<i class="fas fa-check button-icon"></i><span>Treino Salvo!</span>';
+               
+                showNotification(`Treino "${workoutName}" salvo com sucesso! 🎉`);
+               
+                // Limpa os exercícios selecionados
+                selectedExercises = [];
+                updateWorkoutCounter();
+               
+                // Atualiza os botões
+                document.querySelectorAll('.add-button').forEach(btn => {
+                    btn.classList.remove('added');
+                    btn.textContent = 'Adicionar ao Treino';
+                });
+               
+                // Restaura o texto original do botão após 2 segundos
+                setTimeout(() => {
+                    saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
+                }, 2000);
+            }, 1000);
+        }
+
+        // Função para salvar o treino
+        function saveWorkout() {
+            if (selectedExercises.length === 0) {
+                alert('Nenhum exercício selecionado para salvar.');
+                return;
+            }
+           
+            const workoutName = prompt('Digite um nome para o treino:', 'Meu Treino');
+            if (!workoutName) return;
+           
+            const workoutData = {
+                name: workoutName,
+                exercises: selectedExercises
+            };
+           
+            // Aqui você pode implementar o salvamento em servidor ou localStorage
+            console.log('Treino salvo:', workoutData);
+            alert('Treino salvo com sucesso!');
+        }        // Adiciona eventos aos elementos interativos
+        document.addEventListener('DOMContentLoaded', () => {
+            // Evento para o botão de salvar
+            document.getElementById('saveWorkoutButton').addEventListener('click', saveWorkout);
+           
+            // Evento para mostrar o popup ao clicar no contador
+            document.querySelector('.workout-counter').addEventListener('click', showSelectedExercisesPopup);
+           
+            // Evento para fechar o popup ao clicar no overlay
+            document.getElementById('popupOverlay').addEventListener('click', closeExercisePopup);
+        });
+
+        // Função para fechar o popup de exercícios selecionados
+        function closeExercisePopup() {
+            const popup = document.getElementById('selectedExercisesPopup');
+            const overlay = document.getElementById('popupOverlay');
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Função para abrir o popup de exercícios selecionados
+        function openExercisePopup() {
+            const popup = document.getElementById('selectedExercisesPopup');
+            const overlay = document.getElementById('popupOverlay');
+            const list = document.getElementById('selectedExerciseList');
+           
+            list.innerHTML = ''; // Limpa a lista
+           
+            if (selectedExercises.length === 0) {
+                list.innerHTML = `
+                    <div class="selected-exercise-item" style="justify-content: center; color: #666;">
+                        <p>Nenhum exercício selecionado</p>
+                    </div>
+                `;
+            } else {
+                selectedExercises.forEach((ex, idx) => {
+                    const item = document.createElement('div');
+                    item.className = 'selected-exercise-item';
+                    item.innerHTML = `
+                        <div class="selected-exercise-info">
+                            <div class="selected-exercise-name">${ex.name}</div>
+                            <div class="selected-exercise-muscle">${muscleName(ex.muscle)}</div>
+                            <div class="selected-exercise-meta">
+                                <span class="meta-item"><b>Séries:</b> ${ex.sets}</span>
+                                <span class="meta-item"><b>Dificuldade:</b> ${ex.difficulty}</span>
+                            </div>
+                        </div>
+                        <button class="remove-exercise" onclick="removeExercise(${idx})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+           
+            popup.classList.add('active');
+            overlay.classList.add('active');
+        }
+    </script>
+</body>
+</html>

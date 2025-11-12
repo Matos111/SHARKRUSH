@@ -641,16 +641,16 @@
                 </a>
             </li>
             <li>
-                <a href="../views/meustreinos.html"></a>
+                <a href="../views/meustreinos.html">
                     <i class="fa fa-dumbbell nav-icon"></i>
                     <span class="nav-text">Meus Treinos</span>
                 </a>
             </li>
             <li>
-                <a href="../views/perfil.html" class="active"></a>
-                    <i class="fa fa-user nav-icon"></i>
-                    <span class="nav-text">Meu Perfil</span>
-                </a>
+            <a href="../views/calculoimc.html">
+                <i class="fa fa-calculator nav-icon"></i>
+                <span class="nav-text">Calculadora IMC</span>
+            </a>
             </li>
             <li>
                 <a href="../views/calculocalorias.html">
@@ -659,11 +659,12 @@
                 </a>
             </li>
             <li>
-                <a href="../views/academiasproxi.html"></a>
-                    <i class="fa fa-map-marker-alt nav-icon"></i>
-                    <span class="nav-text">Academias Próximas</span>
+                <a href="../views/perfil.html" class="active">
+                    <i class="fa fa-user nav-icon"></i>
+                    <span class="nav-text">Perfil</span>
                 </a>
             </li>
+            
         </ul>
     </nav>
 
@@ -678,6 +679,11 @@
     <div class="profile-container">
         <!-- Header do perfil -->
         <div class="profile-header">
+            <!-- Botão Sair (Logout) -->
+            <button class="btn btn-secondary" style="position: absolute; top: 2rem; right: 2rem; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 12px;" onclick="window.location.href='../views/login.html'">
+                <i class="fas fa-sign-out-alt" style="margin-right: 0.7rem; font-size: 1.5rem;"></i> Sair
+            </button>
+
             <div class="profile-top">
                 <div class="profile-avatar">
                     <div class="avatar-container" id="avatarContainer">
@@ -861,12 +867,7 @@
                     <span class="info-label">Última Alteração</span>
                     <span class="info-value">15/03/2024</span>
                 </div>
-                <div class="info-item">
-                    <span class="info-label">Autenticação em Dois Fatores</span>
-                    <span class="info-value">
-                        <i class="fas fa-times-circle" style="color: #ff4444;"></i> Desativada
-                    </span>
-                </div>
+                <!-- Autenticação em Dois Fatores removida conforme solicitado -->
                 
                 <div class="action-buttons" style="margin-top: 1.5rem;">
                     <button type="button" class="btn btn-primary" onclick="changePassword()">
