@@ -477,18 +477,6 @@
             transform: scaleY(1);
         }
 
-        .main-menu li a.nav-login {
-            background: #2f2f2f;
-            color: #d6d6d6;
-        }
-        .main-menu li a.nav-login .nav-icon {
-            color: #d6d6d6;
-        }
-        .main-menu li a.nav-login:hover {
-            background: #3b3b3b;
-            color: #ffffff;
-        }
-
         .main-menu li a.active {
             background: linear-gradient(45deg, #373737 0%, #292929 100%);
             color: #ffffff;
@@ -544,57 +532,57 @@
     <!-- Sidebar navigation -->
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+            <a href="../semcadastro/Clientes/clientes_form.php" title="Cadastro">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="../comcadastro/comhomesena.php">
+            <a href="../semcadastro/semhomesena.php" >
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comsobresena.php">
+            <a href="../semcadastro/semsobresena.php">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comgerador.php">
+            <a href="../semcadastro/semgerador.php">
                 <i class="fa fa-cogs nav-icon"></i>
                 <span class="nav-text">Gerador</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/combibliotecasena.php" >
+            <a href="../semcadastro/sembibliotecasena.php">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/commeustreinossena.php" >
+            <a href="../semcadastro/semmeustreinossena.php">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php">
+            <a href="../semcadastro/semcalculoimc.php">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php" class="active">
+            <a href="../semcadastro/semcalculocalorias.php" class="active">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="nav-login">
+            <a href="../semcadastro/semlogin.php" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
+                <span class="nav-text">Entrar</span>
             </a>
             </li>
         </ul>

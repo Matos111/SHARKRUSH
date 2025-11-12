@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SharkRush - Calculadora de Calorias Diárias</title>
+    <title>SharkRush - Calculadora de IMC</title>
+    <!-- Adiciona Font Awesome para ícones da navbar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
@@ -18,7 +19,9 @@
             min-height: 100vh;
             color: white;
             overflow-x: hidden;
-            margin-left: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .background-animation {
@@ -49,35 +52,37 @@
 
         .container {
             max-width: 500px;
-            margin: 0 auto;
+            width: 100%;
             padding: 20px;
-            min-height: 100vh;
+            min-height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            margin-left: 70px; /* largura da navbar */
         }
 
         .logo {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             animation: fadeInDown 1s ease-out;
         }
 
         .logo h1 {
+            margin-top: 10px;
             font-size: 3rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff0000, #ffffff, #ff0000);
+            background: linear-gradient(45deg, #ffffff, #ffffff, #ffffff);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: gradientShift 3s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .logo p {
-            color: #cccccc;
+            color: #adadad;
             font-size: 1.1rem;
             margin-top: 10px;
         }
@@ -104,6 +109,8 @@
             border-radius: 20px;
             padding: 40px;
             width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
             box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             animation: fadeInUp 1s ease-out 0.3s both;
@@ -151,6 +158,7 @@
             color: #ffffff;
             font-weight: bold;
             font-size: 1.1rem;
+            user-select: none;
         }
 
         .input-container {
@@ -187,6 +195,7 @@
             transform: translateY(-50%);
             color: #ff0000;
             font-size: 1.2rem;
+            user-select: none;
         }
 
         .calculate-btn {
@@ -281,109 +290,35 @@
         }
 
         .imc-table {
-            margin-top: 30px;
+            margin-top: 10px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 8px 10px;
             border: 1px solid rgba(255, 0, 0, 0.2);
+            max-width: 320px;
+            font-size: 0.92rem;
         }
 
         .imc-table h3 {
             color: #ff0000;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             text-align: center;
+            font-size: 1.1rem;
         }
 
         .table-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95em;
         }
 
         .table-row:last-child {
             border-bottom: none;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .calculator-card {
-                padding: 25px;
-            }
-            
-            .logo h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        .logo img {
-            width: 100px;
-            height: auto;
-        }
-        /* Adicione estilos para selects */
-        .form-group select {
-            width: 100%;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.1); /* igual input */
-            border: 2px solid rgba(255, 0, 0, 0.3); /* igual input */
-            border-radius: 10px;
-            color: #fff; /* seletor branco */
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            appearance: none;
-            -webkit-appearance: none;
-            outline: none;
-            box-shadow: none;
-            cursor: pointer;
-            position: relative;
-        }
-        .form-group select:focus {
-            border-color: #ff0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-            transform: scale(1.02);
-            color: #fff; /* mantém branco no foco */
-        }
-        /* Opções em preto */
-        .form-group select option {
-            color: #000 !important; /* opções em preto */
-            background: #fff !important; /* fundo branco para contraste */
-        }
-        .input-container select {
-            background-image: url("data:image/svg+xml;utf8,<svg fill='red' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-            background-repeat: no-repeat;
-            background-position: right 18px center;
-            background-size: 18px 18px;
-            /* padding-right: 40px; já incluso no input */
-        }
-        .input-container {
-            position: relative;
-        }
-        .input-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ff0000;
-            font-size: 1.2rem;
-            pointer-events: none;
-        }
-        /* Remove destaque especial antigo dos selects */
-        #sex, #activity {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff; /* cor preta para o texto */
-            font-weight: normal;
-            letter-spacing: normal;
-        }
-        #sex:focus, #activity:focus {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff; /* cor preta para o texto */
-        }
-
-        /* Sidebar styles */
+        /* ===== NAVBAR CSS INÍCIO ===== */
         .main-menu {
             background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
             position: fixed;
@@ -452,6 +387,18 @@
             opacity: 1;
             transform: translateX(0);
         }
+
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
         .main-menu li:hover > a {
             color: #ffffff;
             background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
@@ -476,19 +423,17 @@
         .main-menu li:hover a::before {
             transform: scaleY(1);
         }
-
-        .main-menu li a.nav-login {
-            background: #2f2f2f;
-            color: #d6d6d6;
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
         }
-        .main-menu li a.nav-login .nav-icon {
-            color: #d6d6d6;
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
         }
-        .main-menu li a.nav-login:hover {
-            background: #3b3b3b;
-            color: #ffffff;
-        }
-
         .main-menu li a.active {
             background: linear-gradient(45deg, #373737 0%, #292929 100%);
             color: #ffffff;
@@ -509,96 +454,97 @@
             transform: scale(1.15);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
-        .logo-container {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-        .logo-container img {
-            max-width: 100%;
-            max-height: 120px;
-        }
-        /* Ajuste para não sobrepor conteúdo principal */
-        body {
-            /* ...existing code... */
-            margin-left: 70px;
-        }
-        @media (max-width: 900px) {
+        /* ===== NAVBAR CSS FIM ===== */
+
+        @media (max-width: 600px) {
             body {
-                margin-left: 0;
+                flex-direction: column;
+                align-items: stretch;
             }
-            .main-menu {
-                position: absolute;
-                height: auto;
-                width: 100vw;
-                left: 0;
-                top: 0;
-                z-index: 1002;
+            .container {
+                margin-left: 0 !important;
+                padding: 15px;
             }
+            .calculator-card {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+            .logo h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+        
+        .form-group label, .input-icon {
+            user-select: none;
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar navigation -->
+    <!-- ===== NAVBAR HTML INÍCIO ===== -->
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+            <a href="../semcadastro/Clientes/clientes_form.php" title="Cadastro">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="../comcadastro/comhomesena.php">
+            <a href="../semcadastro/semhomesena.php">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comsobresena.php">
+            <a href="../semcadastro/semsobresena.php">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comgerador.php">
+            <a href="../semcadastro/semgerador.php">
                 <i class="fa fa-cogs nav-icon"></i>
                 <span class="nav-text">Gerador</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/combibliotecasena.php" >
+            <a href="../semcadastro/sembibliotecasena.php">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/commeustreinossena.php" >
+            <a href="../semcadastro/semmeustreinossena.php">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php">
+            <a href="../semcadastro/semcalculoimc.php" class="active">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php" class="active">
+            <a href="../semcadastro/semcalculocalorias.php">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="nav-login">
+            <a href="../semcadastro/semlogin.php" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
+                <span class="nav-text">Entrar</span>
             </a>
             </li>
         </ul>
     </nav>
+    <!-- ===== NAVBAR HTML FIM ===== -->
 
     <div class="background-animation">
         <div class="shark-fin" style="top: 20%; animation-delay: 0s;"></div>
@@ -607,116 +553,91 @@
     </div>
 
     <div class="container">
-       
+        
 
         <div class="calculator-card">
-            <form id="calorieForm">
-                <div class="form-group">
-                    <label for="sex">Sexo</label>
-                    <div class="input-container">
-                        <select id="sex" required>
-                            <option value="">Selecione</option>
-                            <option value="male">Masculino</option>
-                            <option value="female">Feminino</option>
-                        </select>
-                        <span class="input-icon">♂️</span>
-                    </div>
-                    <div class="error-message" id="sexError">Por favor, selecione o sexo</div>
-                </div>
-                <div class="form-group">
-                    <label for="age">Idade (anos)</label>
-                    <div class="input-container">
-                        <input type="number" id="age" min="10" max="120" placeholder="Ex: 30" required>
-                        <span class="input-icon">🎂</span>
-                    </div>
-                    <div class="error-message" id="ageError">Por favor, insira uma idade válida</div>
-                </div>
+            
+            <form id="imcForm">
                 <div class="form-group">
                     <label for="weight">Peso (kg)</label>
                     <div class="input-container">
-                        <input type="number" id="weight" step="0.1" min="30" max="300" placeholder="Ex: 70.5" required>
+                        <input type="number" id="weight" step="0.1" min="1" max="500" placeholder="Ex: 70.5" required>
                         <span class="input-icon">⚖️</span>
                     </div>
                     <div class="error-message" id="weightError">Por favor, insira um peso válido</div>
                 </div>
+
                 <div class="form-group">
                     <label for="height">Altura (cm)</label>
                     <div class="input-container">
-                        <input type="number" id="height" step="0.1" min="120" max="250" placeholder="Ex: 175" required>
+                        <input type="number" id="height" step="0.1" min="50" max="250" placeholder="Ex: 175" required>
                         <span class="input-icon">📏</span>
                     </div>
                     <div class="error-message" id="heightError">Por favor, insira uma altura válida</div>
                 </div>
-                <div class="form-group">
-                    <label for="activity">Nível de Atividade</label>
-                    <div class="input-container">
-                        <select id="activity" required>
-                            <option value="">Selecione</option>
-                            <option value="1.2">Sedentário (pouco ou nenhum exercício)</option>
-                            <option value="1.375">Levemente ativo (exercício leve 1-3 dias/semana)</option>
-                            <option value="1.55">Moderadamente ativo (exercício moderado 3-5 dias/semana)</option>
-                            <option value="1.725">Muito ativo (exercício intenso 6-7 dias/semana)</option>
-                            <option value="1.9">Extremamente ativo (exercício muito intenso, trabalho físico)</option>
-                        </select>
-                        <span class="input-icon">🏃</span>
-                    </div>
-                    <div class="error-message" id="activityError">Por favor, selecione o nível de atividade</div>
-                </div>
+
                 <button type="submit" class="calculate-btn">
-                    Calcular Calorias
+                    Calcular IMC
                 </button>
             </form>
 
             <div class="result-container" id="resultContainer">
-                <div class="imc-value" id="calorieValue"></div>
-                <div class="imc-category" id="calorieCategory"></div>
-                <div class="imc-description" id="calorieDescription"></div>
+                <div class="imc-value" id="imcValue"></div>
+                <div class="imc-category" id="imcCategory"></div>
+                <div class="imc-description" id="imcDescription"></div>
             </div>
 
             <div class="imc-table">
-                <h3>O que significam as calorias diárias?</h3>
+                <h3>Tabela de Referência IMC</h3>
                 <div class="table-row">
-                    <span>Manutenção</span>
-                    <span>Consuma o valor calculado</span>
+                    <span>Abaixo do peso</span>
+                    <span>&lt; 18.5</span>
                 </div>
                 <div class="table-row">
-                    <span>Perda de peso</span>
-                    <span>Reduza ~500 kcal/dia</span>
+                    <span>Peso normal</span>
+                    <span>18.5 - 24.9</span>
                 </div>
                 <div class="table-row">
-                    <span>Ganho de peso</span>
-                    <span>Aumente ~500 kcal/dia</span>
+                    <span>Sobrepeso</span>
+                    <span>25.0 - 29.9</span>
+                </div>
+                <div class="table-row">
+                    <span>Obesidade Grau I</span>
+                    <span>30.0 - 34.9</span>
+                </div>
+                <div class="table-row">
+                    <span>Obesidade Grau II</span>
+                    <span>35.0 - 39.9</span>
+                </div>
+                <div class="table-row">
+                    <span>Obesidade Grau III</span>
+                    <span>&gt; 40.0</span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        class CalorieCalculator {
+        class IMCCalculator {
             constructor() {
-                this.form = document.getElementById('calorieForm');
-                this.sexInput = document.getElementById('sex');
-                this.ageInput = document.getElementById('age');
+                this.form = document.getElementById('imcForm');
                 this.weightInput = document.getElementById('weight');
                 this.heightInput = document.getElementById('height');
-                this.activityInput = document.getElementById('activity');
                 this.resultContainer = document.getElementById('resultContainer');
-                this.calorieValue = document.getElementById('calorieValue');
-                this.calorieCategory = document.getElementById('calorieCategory');
-                this.calorieDescription = document.getElementById('calorieDescription');
+                this.imcValue = document.getElementById('imcValue');
+                this.imcCategory = document.getElementById('imcCategory');
+                this.imcDescription = document.getElementById('imcDescription');
+                
                 this.init();
             }
 
             init() {
                 this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-                this.sexInput.addEventListener('input', () => this.clearError('sex'));
-                this.ageInput.addEventListener('input', () => this.clearError('age'));
                 this.weightInput.addEventListener('input', () => this.clearError('weight'));
                 this.heightInput.addEventListener('input', () => this.clearError('height'));
-                this.activityInput.addEventListener('input', () => this.clearError('activity'));
                 
                 // Adiciona efeitos de hover nos inputs
-                [this.sexInput, this.ageInput, this.weightInput, this.heightInput, this.activityInput].forEach(input => {
+                [this.weightInput, this.heightInput].forEach(input => {
                     input.addEventListener('focus', () => this.addInputFocus(input));
                     input.addEventListener('blur', () => this.removeInputFocus(input));
                 });
@@ -746,93 +667,120 @@
 
             handleSubmit(e) {
                 e.preventDefault();
-                const sex = this.sexInput.value;
-                const age = parseInt(this.ageInput.value);
+                
                 const weight = parseFloat(this.weightInput.value);
                 const height = parseFloat(this.heightInput.value);
-                const activity = parseFloat(this.activityInput.value);
 
-                if (this.validateInputs(sex, age, weight, height, activity)) {
-                    const calories = this.calculateCalories(sex, age, weight, height, activity);
-                    this.displayResult(calories);
+                if (this.validateInputs(weight, height)) {
+                    const imc = this.calculateIMC(weight, height);
+                    this.displayResult(imc);
                     this.addCalculationAnimation();
                 }
             }
 
-            validateInputs(sex, age, weight, height, activity) {
+            validateInputs(weight, height) {
                 let isValid = true;
-                if (!sex) {
-                    this.showError('sex', 'Por favor, selecione o sexo');
+
+                if (!weight || weight <= 0 || weight > 500) {
+                    this.showError('weight', 'Por favor, insira um peso válido (1-500 kg)');
                     isValid = false;
                 }
-                if (!age || age < 10 || age > 120) {
-                    this.showError('age', 'Por favor, insira uma idade válida (10-120 anos)');
+
+                if (!height || height <= 0 || height > 250) {
+                    this.showError('height', 'Por favor, insira uma altura válida (50-250 cm)');
                     isValid = false;
                 }
-                if (!weight || weight < 30 || weight > 300) {
-                    this.showError('weight', 'Por favor, insira um peso válido (30-300 kg)');
-                    isValid = false;
-                }
-                if (!height || height < 120 || height > 250) {
-                    this.showError('height', 'Por favor, insira uma altura válida (120-250 cm)');
-                    isValid = false;
-                }
-                if (!activity) {
-                    this.showError('activity', 'Por favor, selecione o nível de atividade');
-                    isValid = false;
-                }
+
                 return isValid;
             }
 
             showError(field, message) {
                 const errorElement = document.getElementById(`${field}Error`);
                 const inputElement = document.getElementById(field);
+                
                 errorElement.textContent = message;
                 errorElement.style.display = 'block';
-                if (inputElement) {
-                    inputElement.style.borderColor = '#ff4444';
-                    inputElement.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.3)';
-                }
+                inputElement.style.borderColor = '#ff4444';
+                inputElement.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.3)';
             }
 
             clearError(field) {
                 const errorElement = document.getElementById(`${field}Error`);
                 const inputElement = document.getElementById(field);
+                
                 errorElement.style.display = 'none';
-                if (inputElement) {
-                    inputElement.style.borderColor = 'rgba(255, 0, 0, 0.3)';
-                    inputElement.style.boxShadow = 'none';
-                }
+                inputElement.style.borderColor = 'rgba(255, 0, 0, 0.3)';
+                inputElement.style.boxShadow = 'none';
             }
 
-            calculateCalories(sex, age, weight, height, activity) {
-                // Fórmula de Harris-Benedict revisada
-                let tmb;
-                if (sex === 'male') {
-                    tmb = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age);
+            calculateIMC(weight, height) {
+                const heightInMeters = height / 100;
+                return weight / (heightInMeters * heightInMeters);
+            }
+
+            getIMCCategory(imc) {
+                if (imc < 18.5) {
+                    return {
+                        category: 'Abaixo do Peso',
+                        description: 'Você está abaixo do peso ideal. Considere uma dieta balanceada para ganhar peso de forma saudável.',
+                        color: '#00bfff'
+                    };
+                } else if (imc < 25) {
+                    return {
+                        category: 'Peso Normal',
+                        description: 'Parabéns! Seu peso está dentro da faixa considerada saudável. Continue mantendo hábitos saudáveis.',
+                        color: '#00ff00'
+                    };
+                } else if (imc < 30) {
+                    return {
+                        category: 'Sobrepeso',
+                        description: 'Você está com sobrepeso. Considere uma dieta balanceada e exercícios regulares.',
+                        color: '#ffa500'
+                    };
+                } else if (imc < 35) {
+                    return {
+                        category: 'Obesidade Grau I',
+                        description: 'Obesidade grau I. É recomendável buscar orientação médica e nutricional.',
+                        color: '#ff6600'
+                    };
+                } else if (imc < 40) {
+                    return {
+                        category: 'Obesidade Grau II',
+                        description: 'Obesidade grau II. É importante buscar acompanhamento médico especializado.',
+                        color: '#ff3300'
+                    };
                 } else {
-                    tmb = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age);
+                    return {
+                        category: 'Obesidade Grau III',
+                        description: 'Obesidade grau III. Procure acompanhamento médico urgente para cuidar da sua saúde.',
+                        color: '#ff0000'
+                    };
                 }
-                return tmb * activity;
             }
 
-            displayResult(calories) {
-                this.calorieValue.textContent = `${Math.round(calories)} kcal/dia`;
-                this.calorieValue.style.color = "#ff0000";
-                this.calorieCategory.textContent = "Calorias para manutenção do peso";
-                this.calorieCategory.style.color = "#ff0000";
-                this.calorieDescription.textContent = "Para perder peso, consuma cerca de 500 kcal a menos por dia. Para ganhar peso, consuma cerca de 500 kcal a mais.";
+            displayResult(imc) {
+                const categoryInfo = this.getIMCCategory(imc);
+                
+                this.imcValue.textContent = imc.toFixed(1);
+                this.imcValue.style.color = categoryInfo.color;
+                this.imcCategory.textContent = categoryInfo.category;
+                this.imcCategory.style.color = categoryInfo.color;
+                this.imcDescription.textContent = categoryInfo.description;
+                
                 this.resultContainer.classList.add('show');
             }
 
             addCalculationAnimation() {
                 const button = document.querySelector('.calculate-btn');
                 button.style.transform = 'scale(0.95)';
+                
                 setTimeout(() => {
                     button.style.transform = 'scale(1)';
                 }, 150);
+
+                // Efeito de pulsação no resultado
                 setTimeout(() => {
-                    this.calorieValue.style.animation = 'pulse 0.6s ease-in-out';
+                    this.imcValue.style.animation = 'pulse 0.6s ease-in-out';
                 }, 300);
             }
         }
@@ -849,7 +797,7 @@
 
         // Inicializa a calculadora quando a página carregar
         document.addEventListener('DOMContentLoaded', () => {
-            new CalorieCalculator();
+            new IMCCalculator();
         });
 
         // Adiciona partículas flutuantes
@@ -891,6 +839,17 @@
         // Inicia as partículas
         setInterval(createFloatingParticles, 12000);
         createFloatingParticles();
+
+        // ===== NAVBAR JS INÍCIO =====
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.main-menu li a').forEach(link => {
+                link.addEventListener('click', function () {
+                    document.querySelectorAll('.main-menu li a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+        // ===== NAVBAR JS FIM =====
     </script>
 </body>
 </html>
