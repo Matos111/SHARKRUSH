@@ -908,61 +908,65 @@
        
     </style>
 </head>
-<body>    <nav class="main-menu">
+<body>    
+    
+    <nav class="main-menu">
         <div class="logo-container">
-            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+                <img src="../midia/Logos/logoshark.png"alt="Logo"/>
+            </a>
         </div>
         <ul>
             <li>
-            <a href="../views/homesena.html">
+            <a href="../comcadastro/comhomesena.php">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="../views/sobresena.html">
+            <a href="../comcadastro/comsobresena.php">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
-            </li>            
+            </li>
             <li>
-            <a href="../views/gerador.html" class="active">
+            <a href="../comcadastro/comgerador.php" class="active">
                 <i class="fa fa-cogs nav-icon"></i>
                 <span class="nav-text">Gerador</span>
             </a>
             </li>
             <li>
-            <a href="../views/bibliotecasena.html">
+            <a href="../comcadastro/combibliotecasena.php">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../views/meustreinossena.html">
+            <a href="../comcadastro/commeustreinossena.php">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../views/calculoimc.html">
+            <a href="../comcadastro/comcalculoimc.php">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../views/calculokalorias.html">
+            <a href="../comcadastro/comcalculocalorias.php">
                 <i class="fa fa-fire nav-icon"></i>
-                <span class="nav-text">Calculadora Kalorias</span>
+                <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../views/login.html">
+            <a href="../comcadastro/comperfil.php" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Logar</span>
+                <span class="nav-text">Perfil</span>
             </a>
             </li>
         </ul>
-        </nav>
+    </nav>
 
     <div class="container">
         <div class="main-content">
