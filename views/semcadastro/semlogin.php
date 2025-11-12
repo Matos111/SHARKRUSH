@@ -612,7 +612,7 @@
                     <input type="checkbox" id="rememberMe">
                     Lembrar de mim
                 </label>
-                <a href="../senaviews/recuperarsenha.html" class="forgot-password">Esqueceu a senha?</a>
+                <a href="../semcadastro/semrecuperarsenha.php" class="forgot-password">Esqueceu a senha?</a>
             </div>
 
             <button type="submit" class="login-btn" id="loginBtn">
@@ -625,7 +625,7 @@
         </div>
 
         <div class="register-link">
-            Não tem uma conta? <a href="../senaviews/cadastro.html">Cadastre-se aqui</a>
+            Não tem uma conta? <a href="../semcadastro/semcadastro.php">Cadastre-se aqui</a>
         </div>
     </div>
 
