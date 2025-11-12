@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Nossa História</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a0000 50%, #000000 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .shark-fin {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 40px solid #ff0000;
+            animation: swim 8s linear infinite;
+        }
+
+        @keyframes swim {
+            0% { transform: translateX(-100px) rotate(0deg); }
+            50% { transform: translateX(calc(100vw + 100px)) rotate(15deg); }
+            100% { transform: translateX(-100px) rotate(0deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            margin-left: 90px; /* Espaço para a navbar */
+            /* Remova flex para não quebrar grids internos */
+            /* display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #ffffff, #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            color: #adadad;
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0000, transparent, #ff0000);
+            border-radius: 20px;
+            z-index: -1;
+            animation: borderGlow 2s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            color: #ff0000;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            color: #cccccc;
+            text-align: justify;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
+            border-color: #ff0000;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff0000;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+            color: #adadad;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #ff0000, rgba(255, 0, 0, 0.3));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 80px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #ff0000;
+            border-radius: 50%;
+            border: 4px solid #000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+
+        .timeline-year {
+            color: #ff0000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .team-member:hover::before {
+            left: 100%;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .team-role {
+            font-size: 1rem;
+            color: #ff0000;
+            margin-bottom: 15px;
+        }
+
+        .team-description {
+            font-size: 0.95rem;
+            color: #adadad;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+        }
+
+        /* NAVBAR CSS INÍCIO */
+        .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+        .main-menu li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0000;
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .main-menu li:hover a::before {
+            transform: scaleY(1);
+        }
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+        .main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0303;
+            transform: scaleY(1);
+        }
+        .main-menu li a.active .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        /* Estilo especial para o link de login (cinza escuro) */
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
+        /* NAVBAR CSS FIM */
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 25px;
+                margin-bottom: 30px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .timeline-item {
+                padding-left: 60px;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-marker {
+                left: 10px;
+            }
+            
+            .container {
+                margin-left: 0 !important;
+                padding: 10px;
+            }
+        }
+
+        /* Animação de entrada escalonada */
+        .content-section:nth-child(2) { animation-delay: 0.1s; }
+        .content-section:nth-child(3) { animation-delay: 0.2s; }
+        .content-section:nth-child(4) { animation-delay: 0.3s; }
+        .content-section:nth-child(5) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Animação de fundo -->
+    <div class="background-animation">
+        <div class="shark-fin" style="top: 10%; animation-delay: 0s;"></div>
+        <div class="shark-fin" style="top: 30%; animation-delay: 2s;"></div>
+        <div class="shark-fin" style="top: 50%; animation-delay: 4s;"></div>
+        <div class="shark-fin" style="top: 70%; animation-delay: 6s;"></div>
+    </div>
+
+    <!-- ===== NAVBAR HTML INÍCIO ===== -->
+    <nav class="main-menu">
+        <div class="logo-container">
+            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+        </div>
+        <ul>
+            <li>
+                <a href="../views/homesena.html">
+                    <i class="fa fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/sobresena.html" class="active">
+                    <i class="fa fa-info-circle nav-icon"></i>
+                    <span class="nav-text">Sobre</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/gerador.html">
+                    <i class="fa fa-cogs nav-icon"></i>
+                    <span class="nav-text">Gerador</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/bibliotecasena.html">
+                    <i class="fa fa-book nav-icon"></i>
+                    <span class="nav-text">Biblioteca</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/meustreinossena.html">
+                    <i class="fa fa-dumbbell nav-icon"></i>
+                    <span class="nav-text">Meus Treinos</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/calculoimc.html">
+                    <i class="fa fa-calculator nav-icon"></i>
+                    <span class="nav-text">Calculadora IMC</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/calculocalorias.html">
+                    <i class="fa fa-fire nav-icon"></i>
+                    <span class="nav-text">Calculadora Kalorias</span>
+                </a>
+            </li>
+            <li>
+                <a href="../views/login.html" class="nav-login">
+                    <i class="fa fa-user nav-icon"></i>
+                    <span class="nav-text">Entrar</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- ===== NAVBAR HTML FIM ===== -->
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Sobre Nós</h1>
+            <p>Conheça nossa história, missão e a equipe que trabalha para oferecer as melhores soluções digitais.</p>
+        </div>
+
+        <!-- Nossa História -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-history"></i>
+                Nossa História
+            </h2>
+            <div class="section-content">
+                <p>Fundada em 2024, nossa equipe nasceu da paixão por tecnologia e da vontade de aprender e criar soluções digitais inovadoras. Iniciamos nossa trajetória no curso de Análise e Desenvolvimento de Sistemas do SESI SENAI Salto, onde demos nossos primeiros passos no desenvolvimento web.</p>
+                
+                <p>Durante esse período, nos dedicamos ao aprendizado de HTML, CSS e JavaScript, construindo projetos práticos e colaborativos que fortaleceram nosso conhecimento e trabalho em equipe.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-content">
+                            <strong>Início da Jornada</strong><br>
+                            Ingresso no curso de ADS do SESI SENAI Salto e primeiros contatos com HTML, CSS e JavaScript.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-content">
+                            <strong>Desenvolvimento e Conclusão</strong><br>
+                            Consolidação do conhecimento em desenvolvimento web, finalização de projetos e conclusão do curso.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Missão e Visão -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-bullseye"></i>
+                Missão & Visão
+            </h2>
+            <div class="section-content">
+                <p><strong>Nossa Missão:</strong> Transformar ideias em realidade digital através de soluções inovadoras, acessíveis e de alta qualidade, proporcionando experiências excepcionais para usuários e resultados extraordinários para nossos clientes.</p>
+                
+                <p><strong>Nossa Visão:</strong> Ser reconhecida como a empresa líder em desenvolvimento de soluções digitais, estabelecendo novos padrões de excelência em design, funcionalidade e experiência do usuário.</p>
+                
+                <p><strong>Nossos Valores:</strong> Inovação constante, qualidade sem compromissos, transparência nos relacionamentos, compromisso com prazos e resultados, e foco absoluto na satisfação do cliente.</p>
+            </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-line"></i>
+                Nossos Números
+            </h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Projetos Entregues</div>
+                    <div class="stat-description">Soluções desenvolvidas com excelência e qualidade</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">120+</div>
+                    <div class="stat-label">Clientes Satisfeitos</div>
+                    <div class="stat-description">Empresas que confiam em nosso trabalho</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Taxa de Satisfação</div>
+                    <div class="stat-description">Aprovação dos clientes em nossos projetos</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Anos de Experiência</div>
+                    <div class="stat-description">Crescimento constante no mercado digital</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nossa Equipe -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                Nossa Equipe
+            </h2>
+            <div class="section-content">
+                <p>Nossa força está em nossa equipe talentosa e dedicada. Cada membro contribui com sua expertise única para criar soluções extraordinárias.</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-name">Augusto Sena</div>
+                        <div class="team-role">Dev Front End</div>
+                        <div class="team-description">Especialista em interfaces modernas, experiência do usuário e desenvolvimento web responsivo.</div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-name">Gabrielle Teixeira</div>
+                        <div class="team-role">Dev Full Stack</div>
+                        <div class="team-description">Atua em todas as camadas do desenvolvimento, garantindo qualidade e integração entre front e back end.</div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-name">Miguel Fortunato</div>
+                        <div class="team-role">Dev Full Stack</div>
+                        <div class="team-description">Responsável por soluções robustas, escaláveis e integração de sistemas.</div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-name">Guilherme Matos</div>
+                        <div class="team-role">Dev Full Stack</div>
+                        <div class="team-description">Focado em performance, segurança e inovação em aplicações web.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        
+    </div>
+
+    <script>
+        // Animação de entrada dos elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar seções para animação
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Efeito de contagem nos números das estatísticas
+        function animateNumber(element, target, duration = 2000, isPercent = false, isPlus = false) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (isPlus) {
+                    element.textContent = Math.floor(current).toLocaleString() + '+';
+                } else if (isPercent) {
+                    element.textContent = Math.floor(current) + '%';
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Animar números quando entrarem na tela
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.stat-number');
+                    const text = numberElement.textContent;
+                    // Detecta se é porcentagem ou "+"
+                    const isPercent = text.trim().endsWith('%');
+                    const isPlus = text.trim().endsWith('+');
+                    const number = parseInt(text.replace(/\D/g, ''));
+                    
+                    numberElement.textContent = '0';
+                    animateNumber(numberElement, number, 2000, isPercent, isPlus);
+                    
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            statsObserver.observe(card);
+        });
+
+        // Efeito de hover suave nos cards
+        document.querySelectorAll('.stat-card, .team-member').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Scroll suave para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ===== NAVBAR JS INÍCIO =====
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.main-menu li a').forEach(link => {
+                link.addEventListener('click', function () {
+                    document.querySelectorAll('.main-menu li a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+        // ===== NAVBAR JS FIM =====
+    </script>
+</body>
+</html>
