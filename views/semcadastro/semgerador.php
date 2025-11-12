@@ -89,12 +89,12 @@
 
         document.getElementById('btnLogin').addEventListener('click', function(){
             // navigate to the login page
-            window.location.href = '../views/login.html';
+            window.location.href = '../semcadastro/semlogin.php';
         });
 
         document.getElementById('btnBack').addEventListener('click', function(){
-            // go back to home
-            window.location.href = '../views/homesena.html';
+            // go back to home (semhomesena.php in semcadastro)
+            window.location.href = 'semhomesena.php';
         });
 
         // On load, if user not logged in show modal and block access
