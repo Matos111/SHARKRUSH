@@ -1,6 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gerador — Acesso Restrito</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --red: #ff0000; --bg: #0b0b0b; --muted: #777; --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+        html,body{height:100%;margin:0;font-family:var(--font);background:linear-gradient(135deg,#070707 0%,#121212 100%);color:#fff}
+        .page {max-width:1100px;margin:60px auto;padding:28px}
+        h1{font-size:32px;color:var(--red);margin-bottom:12px;font-weight:700;letter-spacing:0.6px}
+        p.lead{color:var(--muted);margin-bottom:24px;font-weight:400}
+
+        /* overlay modal that blocks access */
+        .access-overlay{
+            position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;
+            background:rgba(0, 0, 0, 0.48);backdrop-filter:blur(6px);
+        }
+
+        .access-modal{width:min(560px,92%);background:linear-gradient(180deg,#1a1a1a 0%, #141414 100%);border-radius:16px;padding:28px;border:1px solid rgba(255,0,0,0.12);box-shadow:0 30px 80px rgba(0,0,0,0.7);text-align:center}
+        .access-modal h2{margin:0 0 8px;color:var(--red);text-transform:uppercase;letter-spacing:1.5px;font-weight:800;font-size:18px}
+        .access-modal p{color:#d6d6d6;margin-bottom:22px;font-size:15px}
+
+        .access-actions{display:flex;gap:14px;justify-content:center;align-items:center}
+        .btn{padding:12px 20px;border-radius:12px;border:none;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:10px;transition:all 180ms ease;font-family:var(--font);letter-spacing:0.2px}
+        .btn i{font-size:16px}
+
+        .btn-login{background:linear-gradient(180deg,var(--red),#cc0000);color:#fff;box-shadow:0 10px 30px rgba(255,0,0,0.2), inset 0 -3px 8px rgba(0,0,0,0.18)}
+        .btn-login:hover{transform:translateY(-3px);box-shadow:0 18px 46px rgba(255,0,0,0.28)}
+        .btn-login:active{transform:translateY(-1px);filter:brightness(0.98)}
+        .btn-login:focus{outline:3px solid rgba(255,0,0,0.12);outline-offset:3px}
+
+        .btn-back{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));color:#fff;border:1px solid rgba(255,255,255,0.06);box-shadow:0 8px 20px rgba(0,0,0,0.45)}
+        .btn-back:hover{transform:translateY(-2px);background:rgba(255,255,255,0.06)}
+        .btn-back:focus{outline:3px solid rgba(255,255,255,0.06);outline-offset:3px}
+
+        /* make sure underlying content is not interactable visually */
+        .dimmed{filter:brightness(0.45) saturate(0.8) blur(1px);pointer-events:none;user-select:none}
+
+        /* small responsive tweaks */
+        @media (max-width:560px){ .access-modal{padding:18px} .btn{flex:1} .access-actions{flex-direction:column;gap:10px} }
+    </style>
+</head>
+<body>
+    <div class="page" id="pageContent">
+        <h1>Gerador de Treinos</h1>
+        <p class="lead">Aqui você pode montar sequências e gerar treinos automáticos. Esta área é exclusiva para usuários cadastrados.</p>
+
+        <section>
+            <p style="color:#999">Conteúdo do gerador (visualização pública):</p>
+            <div style="margin-top:18px;padding:18px;background:rgba(255,255,255,0.02);border-radius:12px;border:1px solid rgba(255,255,255,0.03);">
+                <p style="color:#bbb">Exemplo de áreas e controles do gerador. Esses elementos ficarão inacessíveis até que o usuário faça login.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Access modal (shown to guests) -->
+    <div id="accessOverlay" class="access-overlay" style="display:none">
+        <div class="access-modal">
+            <h2>Logue para ter acesso!</h2>
+            <p>Somente usuários cadastrados podem acessar o Gerador. <br> Faça login para continuar ou volte para a página inicial.</p>
+            <div class="access-actions">
+                <button class="btn btn-login" id="btnLogin"><i class="fas fa-sign-in-alt"></i>Entrar</button>
+                <button class="btn btn-back" id="btnBack"><i class="fas fa-arrow-left"></i>Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple gating using the same 'shark_logged_in' key used elsewhere in the app.
+        function isLoggedIn(){ return localStorage.getItem('shark_logged_in') === '1'; }
+
+        function showAccessModal(){
+            const overlay = document.getElementById('accessOverlay');
+            overlay.style.display = 'flex';
+            // visually dim the page content and prevent interaction
+            document.getElementById('pageContent').classList.add('dimmed');
+            document.documentElement.style.overflow = 'hidden';
+        }
+
+        function hideAccessModal(){
+            const overlay = document.getElementById('accessOverlay');
+            overlay.style.display = 'none';
+            document.getElementById('pageContent').classList.remove('dimmed');
+            document.documentElement.style.overflow = '';
+        }
+
+        document.getElementById('btnLogin').addEventListener('click', function(){
+            // navigate to the login page
+            window.location.href = '../views/login.html';
+        });
+
+        document.getElementById('btnBack').addEventListener('click', function(){
+            // go back to home
+            window.location.href = '../views/homesena.html';
+        });
+
+        // On load, if user not logged in show modal and block access
+        document.addEventListener('DOMContentLoaded', function(){
+            if (!isLoggedIn()){
+                showAccessModal();
+            } else {
+                hideAccessModal();
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Treino - Corpo Interativo</title>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -131,7 +241,7 @@
         body {
             background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
             color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font, 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -908,61 +1018,66 @@
        
     </style>
 </head>
-<body>    <nav class="main-menu">
+<body>    
+    <!-- Sidebar navigation -->
+    <nav class="main-menu">
         <div class="logo-container">
-            <img src="../views/midia/Logos/logoshark.png" alt="Logo" />
+            <a href="../semcadastro/Clientes/clientes_form.php" title="Cadastro">
+                <img src="../midia/Logos/logoshark.png"alt="Logo"/>
+            </a>
         </div>
         <ul>
             <li>
-            <a href="../views/homesena.html">
+            <a href="../semcadastro/semhomesena.php" >
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="../views/sobresena.html">
+            <a href="../semcadastro/semsobresena.php">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
-            </li>            
+            </li>
             <li>
-            <a href="../views/gerador.html" class="active">
+            <a href="../semcadastro/semgerador.php" class="active">
                 <i class="fa fa-cogs nav-icon"></i>
                 <span class="nav-text">Gerador</span>
             </a>
             </li>
             <li>
-            <a href="../views/bibliotecasena.html">
+            <a href="../semcadastro/sembibliotecasena.php">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../views/meustreinossena.html">
+            <a href="../semcadastro/semmeustreinossena.php">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../views/calculoimc.html">
+            <a href="../semcadastro/semcalculoimc.php">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../views/calculokalorias.html">
+            <a href="../semcadastro/semcalculocalorias.php">
                 <i class="fa fa-fire nav-icon"></i>
-                <span class="nav-text">Calculadora Kalorias</span>
+                <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../views/login.html">
+            <a href="../semcadastro/login.php" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Logar</span>
+                <span class="nav-text">Entrar</span>
             </a>
             </li>
         </ul>
-        </nav>
+    </nav>
+
 
     <div class="container">
         <div class="main-content">

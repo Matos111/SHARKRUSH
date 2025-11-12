@@ -1435,55 +1435,55 @@
     <!-- Sidebar navigation -->
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="../views/Clientes/clientes_form.php" title="Cadastro">
-                <img src="../views/midia/Logos/logoshark.png"alt="Logo"/>
+            <a href="../semcadastro/Clientes/clientes_form.php" title="Cadastro">
+                <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="../views/homesena.html" class="active">
+            <a href="../semcadastro/semhomesena.php" class="active">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="../views/sobresena.html">
+            <a href="../semcadastro/semsobresena.php">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
             </li>
             <li>
-            <a href="../views/gerador.html">
+            <a href="../semcadastro/semgerador.php">
                 <i class="fa fa-cogs nav-icon"></i>
                 <span class="nav-text">Gerador</span>
             </a>
             </li>
             <li>
-            <a href="../views/bibliotecasena.html">
+            <a href="../semcadastro/sembibliotecasena.php">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../views/meustreinossena.html">
+            <a href="../semcadastro/semmeustreinossena.php">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../views/calculoimc.html">
+            <a href="../semcadastro/semcalculoimc.php">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../views/calculocalorias.html">
+            <a href="../semcadastro/semcalculocalorias.php">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../views/login.html" class="nav-login">
+            <a href="../semcadastro/login.php" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
                 <span class="nav-text">Entrar</span>
             </a>
@@ -1672,7 +1672,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../views/midia/images/supinoinclinado.png" alt="Supino Inclinado">
+                            <img class="card-bg-image" src="../midia/images/supinoinclinado.png" alt="Supino Inclinado">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PEITO</div>
@@ -1697,7 +1697,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../views/midia/images/agachamentolivre.png" alt="Agachamento Livre">
+                            <img class="card-bg-image" src="../midia/images/agachamentolivre.png" alt="Agachamento Livre">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PERNA</div>
@@ -1722,7 +1722,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../views/midia/images/puxadafrontal.png" alt="Puxada Frontal">
+                            <img class="card-bg-image" src="../midia/images/puxadafrontal.png" alt="Puxada Frontal">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">COSTAS</div>
