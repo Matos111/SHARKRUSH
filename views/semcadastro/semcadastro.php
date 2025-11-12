@@ -1007,7 +1007,7 @@
         </div>
 
         <div class="login-link">
-            Já tem uma conta? <a href="../senaviews/login.html">Faça login aqui</a>
+            Já tem uma conta? <a href="../semcadastro/semlogin.php">Faça login aqui</a>
         </div>
     </div>
 

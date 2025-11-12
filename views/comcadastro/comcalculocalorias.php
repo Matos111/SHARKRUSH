@@ -477,6 +477,18 @@
             transform: scaleY(1);
         }
 
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
+
         .main-menu li a.active {
             background: linear-gradient(45deg, #373737 0%, #292929 100%);
             color: #ffffff;
