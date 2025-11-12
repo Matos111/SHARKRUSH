@@ -502,7 +502,7 @@
                 </a>
             </li>
             <li>
-                <a href="../views/login.html" class="nav-login">
+                <a href="../views/semlogin.html" class="nav-login">
                     <i class="fa fa-user nav-icon"></i>
                     <span class="nav-text">Entrar</span>
                 </a>

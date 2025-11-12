@@ -1483,7 +1483,7 @@
             </a>
             </li>
             <li>
-            <a href="../semcadastro/login.php" class="nav-login">
+            <a href="../semcadastro/semlogin.php" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
                 <span class="nav-text">Entrar</span>
             </a>
