@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-   
+
     <link rel="stylesheet" href="/sharkrush/views/css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Usuário</title>
@@ -77,33 +77,14 @@
         transform: scale(1.02);
     }
 
-    a.ver-clientes-btn {
-        display: block;
-        max-width: 500px;
-        margin: 20px auto 0 auto;
-        text-align: center;
-        padding: 12px;
-        background-color: rgb(0, 0, 0);
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 5px;
-        transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    a.ver-clientes-btn:hover {
-        background-color:rgb(170, 25, 0);
-        transform: scale(1.02);
-    }
-
 </style>
 </head>
 <body>
     <h1>CADASTRO DO USUÁRIO</h1>
 
     <h2>Preencha os dados abaixo:</h2>
-    <form action="/sharkrush/save-clientes" method="POST">
-   
+    <form action="/save-clientes" method="POST">
+
         <label for="nome_completo">Digite o nome completo:</label>
         <input type="text" id="nome_completo" name="nome_completo" required><br><br>
 
@@ -121,11 +102,9 @@
 
         <label for="senha">Digite a senha:</label>
         <input type="password" id="senha" name="senha" required><br><br>
-        
+
         <input type="submit" value="Cadastrar Cliente">
     </form>
-
-    <a href="/sharkrush/list-clientes" class="ver-clientes-btn">Ver todos os Clientes</a>
 
 </body>
 </html>

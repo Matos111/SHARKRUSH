@@ -1,10 +1,10 @@
 <?php
-require_once '../models/exercicio.php';
+require_once __DIR__ . '/../models/exercicio.php';
 
 class ExerciciosController {
 
     public function showForm() {
-        include '../views/Exercicios/exercicio_form.php';
+        include __DIR__ . '/../views/Exercicios/exercicio_form.php';
     }
 
     public function saveExercicio() {
@@ -26,13 +26,13 @@ class ExerciciosController {
     public function listExercicios() {
         $exercicio = new Exercicio();
         $exerciciosList = $exercicio->getAll();
-        include '../views/Exercicios/exercicio_list.php';
+        include __DIR__ . '/../views/Exercicios/exercicio_list.php';
     }
 
     public function showUpdateForm($id) {
         $exercicio = new Exercicio();
         $exercicioInfo = $exercicio->getById($id);
-        include '../views/Exercicios/exercicio_update_form.php';
+        include __DIR__ . '/../views/Exercicios/exercicio_update_form.php';
     }
 
     public function updateExercicio() {

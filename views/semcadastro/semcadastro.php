@@ -343,7 +343,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-           
+
         }
 
         .register-btn::before {
@@ -384,7 +384,7 @@
 
         .back-btn {
             flex: 1;
-            
+
             height: 56px;
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 31, 31, 0.3);
@@ -836,7 +836,15 @@
             <div class="step-dot" data-step="3"></div>
         </div>
 
-        <form class="register-form" id="registerForm">
+        <form class="register-form" id="registerForm" method="POST" action="/save-clientes">
+            <!-- Campos hidden para o backend -->
+            <input type="hidden" name="nome_completo" id="nome_completo_hidden">
+            <input type="hidden" name="cpf" id="cpf_hidden" value="000.000.000-00">
+            <input type="hidden" name="endereco" id="endereco_hidden" value="Não informado">
+            <input type="hidden" name="email" id="email_hidden">
+            <input type="hidden" name="telefone" id="telefone_hidden">
+            <input type="hidden" name="senha" id="senha_hidden">
+
             <!-- Step 1: Seleção de perfil -->
             <div class="form-step active" id="step1">
                 <div class="profile-selector">
@@ -986,7 +994,7 @@
                 <div class="terms-checkbox">
                     <input type="checkbox" id="termsAccept">
                     <label for="termsAccept">
-                        Eu aceito os <a href="#" target="_blank">Termos de Uso</a> e a 
+                        Eu aceito os <a href="#" target="_blank">Termos de Uso</a> e a
                         <a href="#" target="_blank">Política de Privacidade</a>
                     </label>
                 </div>
@@ -1053,7 +1061,7 @@
         // Avançar do step 1
         document.getElementById('nextStep1').addEventListener('click', function() {
             document.getElementById('step1').classList.remove('active');
-            
+
             if (selectedProfile === 'trainer') {
                 goToStep(2);
                 document.getElementById('step2Trainer').classList.add('active');
@@ -1069,7 +1077,7 @@
             document.getElementById('step2Trainer').classList.remove('active');
             document.getElementById('step1').classList.add('active');
             goToStep(1);
-            
+
             // Limpar validações do CREF
             clearValidation('cref');
             document.getElementById('crefNumber').value = '';
@@ -1082,7 +1090,7 @@
         // Botão voltar dos dados pessoais
         document.getElementById('backFromInfo').addEventListener('click', function() {
             document.getElementById('step3').classList.remove('active');
-            
+
             if (selectedProfile === 'trainer') {
                 document.getElementById('step2Trainer').classList.add('active');
                 goToStep(2);
@@ -1113,20 +1121,20 @@
         document.getElementById('validateCref').addEventListener('click', function() {
             const crefNumber = document.getElementById('crefNumber').value;
             const crefState = document.getElementById('crefState').value;
-            
+
             // Simular validação
             this.disabled = true;
             this.textContent = 'VALIDANDO...';
-            
+
             setTimeout(() => {
                 const isValid = crefNumber.length >= 10 && crefState;
-                
+
                 if (isValid) {
                     showSuccess('cref', 'CREF validado com sucesso!');
                     document.getElementById('crefNumber').classList.add('success');
                     document.getElementById('crefState').classList.add('success');
                     crefValidated = true;
-                    
+
                     setTimeout(() => {
                         document.getElementById('step2Trainer').classList.remove('active');
                         document.getElementById('step3').classList.add('active');
@@ -1174,10 +1182,10 @@
             if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
             if (password.match(/[0-9]/)) strength++;
             if (password.match(/[^a-zA-Z0-9]/)) strength++;
-            
+
             const bar = document.getElementById('strengthBar');
             bar.className = 'password-strength-bar';
-            
+
             if (strength <= 1) {
                 bar.classList.add('weak');
             } else if (strength <= 3) {
@@ -1190,7 +1198,7 @@
         function showError(inputId, message) {
             const input = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
-            
+
             if (input && errorElement) {
                 input.classList.add('error');
                 input.classList.remove('success');
@@ -1203,7 +1211,7 @@
             const input = document.getElementById(inputId);
             const successElement = document.getElementById(inputId + 'Success');
             const errorElement = document.getElementById(inputId + 'Error');
-            
+
             if (input) {
                 input.classList.add('success');
                 input.classList.remove('error');
@@ -1219,7 +1227,7 @@
             const input = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
             const successElement = document.getElementById(inputId + 'Success');
-            
+
             if (input) {
                 input.classList.remove('error', 'success');
                 if (errorElement) errorElement.classList.remove('show');
@@ -1303,7 +1311,7 @@
             const birthDate = new Date(this.value);
             const today = new Date();
             const age = today.getFullYear() - birthDate.getFullYear();
-            
+
             if (this.value === '') {
                 clearValidation('birthDate');
             } else if (age < 16) {
@@ -1322,7 +1330,7 @@
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
             checkPasswordStrength(password);
-            
+
             if (password === '') {
                 clearValidation('password');
             } else if (validatePassword(password)) {
@@ -1332,7 +1340,7 @@
             } else {
                 showError('password', 'Senha deve ter no mínimo 8 caracteres');
             }
-            
+
             // Validar confirmação se já foi preenchida
             const confirmPassword = document.getElementById('confirmPassword').value;
             if (confirmPassword) {
@@ -1351,7 +1359,7 @@
         document.getElementById('confirmPassword').addEventListener('input', function() {
             const password = document.getElementById('password').value;
             const confirmPassword = this.value;
-            
+
             if (confirmPassword === '') {
                 clearValidation('confirmPassword');
             } else if (password === confirmPassword) {
@@ -1396,7 +1404,7 @@
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             const termsAccept = document.getElementById('termsAccept').checked;
-            
+
             const isValid = firstName.length >= 2 &&
                           lastName.length >= 2 &&
                           validateEmail(email) &&
@@ -1405,42 +1413,45 @@
                           validatePassword(password) &&
                           password === confirmPassword &&
                           termsAccept;
-            
+
             document.getElementById('submitRegister').disabled = !isValid;
         }
 
         // Submissão do formulário
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const submitBtn = document.getElementById('submitRegister');
             submitBtn.disabled = true;
             submitBtn.textContent = 'CRIANDO CONTA...';
-            
-            // Simular criação de conta
-            setTimeout(() => {
-                const formData = {
-                    profile: selectedProfile,
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    birthDate: document.getElementById('birthDate').value,
-                    password: document.getElementById('password').value
-                };
-                
+
+            // Preencher campos hidden para o backend
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+
+            document.getElementById('nome_completo_hidden').value = firstName + ' ' + lastName;
+            document.getElementById('email_hidden').value = email;
+            document.getElementById('telefone_hidden').value = phone;
+            document.getElementById('senha_hidden').value = password;
+
+            // Submeter o formulário
+            this.submit();
+
                 if (selectedProfile === 'trainer') {
                     formData.cref = document.getElementById('crefNumber').value;
                     formData.crefState = document.getElementById('crefState').value;
                 }
-                
+
                 console.log('Dados do cadastro:', formData);
-                
-                alert('✅ Cadastro realizado com sucesso!\n\nPerfil: ' + 
+
+                alert('✅ Cadastro realizado com sucesso!\n\nPerfil: ' +
                       (selectedProfile === 'atleta' ? 'Atleta' : 'Trainer') +
                       '\nNome: ' + formData.firstName + ' ' + formData.lastName +
                       '\nE-mail: ' + formData.email);
-                
+
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'CRIAR CONTA';
             }, 2000);
@@ -1451,13 +1462,13 @@
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             const deltaX = (x - centerX) / centerX;
             const deltaY = (y - centerY) / centerY;
-            
+
             this.style.transform = `perspective(1000px) rotateY(${deltaX * 3}deg) rotateX(${-deltaY * 3}deg)`;
         });
 
@@ -1479,7 +1490,7 @@
                 });
             });
         });
-        // ===== 
+        // =====
     </script>
 </body>
 </html>
