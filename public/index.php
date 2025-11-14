@@ -12,6 +12,7 @@ require_once "../controllers/ClientesController.php";
 require_once "../controllers/ExerciciosController.php";
 require_once "../controllers/TreinosController.php";
 require_once "../controllers/PerfilController.php";
+require_once "../controllers/MeusTreinosController.php";
 
 // Pega a URL atual
 $request = $_SERVER["REQUEST_URI"];
@@ -195,6 +196,55 @@ switch ($request) {
   case "/meus-treinos":
     AuthController::checkAuth();
     include __DIR__ . "/../views/comcadastro/commeustreinossena.php";
+    break;
+
+  // API ENDPOINTS - MEUS TREINOS
+  case "/api/meus-treinos/listar":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->listarTreinos();
+    break;
+
+  case "/api/meus-treinos/detalhes":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->detalhesTreino();
+    break;
+
+  case "/api/meus-treinos/criar":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->criarTreino();
+    break;
+
+  case "/api/meus-treinos/toggle-exercicio":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->toggleExercicio();
+    break;
+
+  case "/api/meus-treinos/atualizar-status":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->atualizarStatus();
+    break;
+
+  case "/api/meus-treinos/resetar":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->resetarTreino();
+    break;
+
+  case "/api/meus-treinos/deletar":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->deletarTreino();
+    break;
+
+  case "/api/meus-treinos/atualizar":
+    AuthController::checkAuth();
+    $controller = new MeusTreinosController();
+    $controller->atualizarTreino();
     break;
 
   default:

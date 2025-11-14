@@ -632,7 +632,8 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 15px;
             background: rgba(255, 255, 255, 0.05);
@@ -643,8 +644,14 @@
             transition: all 0.3s ease;
         }
 
+        .form-group select option {
+            background: #1a1a1a;
+            color: white;
+        }
+
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #ff0000;
             background: rgba(255, 255, 255, 0.08);
@@ -1135,17 +1142,30 @@
             <form id="workoutForm">
                 <div class="form-group">
                     <label>Nome do Treino</label>
-                    <input type="text" id="workoutName" placeholder="Ex: Treino A - Peito e Tríceps" required>
+                    <input type="text" id="workoutName" placeholder="Ex: Treino A - Peito e Triceps" required>
                 </div>
                 <div class="form-group">
-                    <label>Descrição</label>
+                    <label>Descricao</label>
                     <textarea id="workoutDescription" placeholder="Descreva o foco deste treino..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Exercícios</label>
+                    <label>Dia da Semana</label>
+                    <select id="workoutDiaSemana" required style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 16px;">
+                        <option value="">Selecione o dia</option>
+                        <option value="Segunda">Segunda-feira</option>
+                        <option value="Terça">Terca-feira</option>
+                        <option value="Quarta">Quarta-feira</option>
+                        <option value="Quinta">Quinta-feira</option>
+                        <option value="Sexta">Sexta-feira</option>
+                        <option value="Sábado">Sabado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Exercicios</label>
                     <div id="exercisesContainer"></div>
                     <button type="button" class="add-exercise-btn" onclick="addExerciseField()">
-                        <i class="fas fa-plus"></i> Adicionar Exercício
+                        <i class="fas fa-plus"></i> Adicionar Exercicio
                     </button>
                 </div>
                 <button type="submit" class="btn btn-start">Criar Treino</button>
@@ -1157,6 +1177,46 @@
         <div class="modal-content">
             <button class="close-btn" onclick="closeViewWorkoutModal()">×</button>
             <div id="workoutDetailsContent"></div>
+        </div>
+    </div>
+
+    <!-- Edit workout modal -->
+    <div class="modal" id="editWorkoutModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeEditWorkoutModal()">×</button>
+            <h2>Editar Treino</h2>
+            <form id="editWorkoutForm">
+                <input type="hidden" id="editWorkoutId">
+                <div class="form-group">
+                    <label>Nome do Treino</label>
+                    <input type="text" id="editWorkoutName" placeholder="Ex: Treino A - Peito e Triceps" required>
+                </div>
+                <div class="form-group">
+                    <label>Descricao</label>
+                    <textarea id="editWorkoutDescription" placeholder="Descreva o foco deste treino..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Dia da Semana</label>
+                    <select id="editWorkoutDiaSemana" required style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 16px;">
+                        <option value="">Selecione o dia</option>
+                        <option value="Segunda">Segunda-feira</option>
+                        <option value="Terça">Terca-feira</option>
+                        <option value="Quarta">Quarta-feira</option>
+                        <option value="Quinta">Quinta-feira</option>
+                        <option value="Sexta">Sexta-feira</option>
+                        <option value="Sábado">Sabado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Exercicios</label>
+                    <div id="editExercisesContainer"></div>
+                    <button type="button" class="add-exercise-btn" onclick="addEditExerciseField()">
+                        <i class="fas fa-plus"></i> Adicionar Exercicio
+                    </button>
+                </div>
+                <button type="submit" class="btn btn-start">Salvar Alteracoes</button>
+            </form>
         </div>
     </div>
 
@@ -1178,8 +1238,26 @@
     <script>
         let workouts = [];
         let currentWorkoutId = null;
+        const API_BASE = '/sharkrush/api/meus-treinos';
 
         // Exercícios com GIFs de exemplo
+        // Carrega treinos da API
+        async function loadWorkouts() {
+            try {
+                const response = await fetch(`${API_BASE}/listar`);
+                const result = await response.json();
+
+                if (result.success) {
+                    workouts = result.treinos;
+                    renderWorkouts();
+                } else {
+                    console.error('Erro ao carregar treinos:', result.message);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar treinos:', error);
+            }
+        }
+
         const exerciseGifs = {
             'supino': 'https://i.pinimg.com/originals/16/70/c8/1670c89b555af7d1e75161a19bb622c1.gif',
             'flexao': 'https://i.pinimg.com/originals/49/7d/f9/497df922c8f51417c0e00f2a1b29ab5b.gif',
@@ -1208,6 +1286,149 @@
             document.getElementById('addWorkoutModal').classList.remove('active');
             document.getElementById('workoutForm').reset();
             document.getElementById('exercisesContainer').innerHTML = '';
+        }
+
+        async function editWorkout(workoutId) {
+            const workout = workouts.find(w => w.id === workoutId);
+            if (!workout) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/detalhes?id=${workoutId}`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    showNotification('Erro ao carregar detalhes do treino');
+                    return;
+                }
+
+                const exercises = result.exercises || [];
+
+                document.getElementById('editWorkoutId').value = workout.id;
+                document.getElementById('editWorkoutName').value = workout.name;
+                document.getElementById('editWorkoutDescription').value = workout.description || '';
+                document.getElementById('editWorkoutDiaSemana').value = workout.dia_semana || '';
+
+                const container = document.getElementById('editExercisesContainer');
+                container.innerHTML = '';
+
+                exercises.forEach(exercise => {
+                    addEditExerciseField(exercise);
+                });
+
+                document.getElementById('editWorkoutModal').classList.add('active');
+            } catch (error) {
+                console.error('Erro:', error);
+                showNotification('Erro ao carregar treino para edicao');
+            }
+        }
+
+        function closeEditWorkoutModal() {
+            document.getElementById('editWorkoutModal').classList.remove('active');
+            document.getElementById('editWorkoutForm').reset();
+        }
+
+        document.getElementById('editWorkoutForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const grupoTreino = document.getElementById('editWorkoutId').value;
+            const nome = document.getElementById('editWorkoutName').value;
+            const descricao = document.getElementById('editWorkoutDescription').value;
+            const diaSemana = document.getElementById('editWorkoutDiaSemana').value;
+
+            if (!diaSemana) {
+                showNotification('Selecione o dia da semana!');
+                return;
+            }
+
+            const exerciseForms = document.querySelectorAll('#editExercisesContainer .exercise-form');
+            const exercises = [];
+
+            exerciseForms.forEach(form => {
+                const id = form.querySelector('.exercise-id')?.value;
+                const exerciseNameElem = form.querySelector('.exercise-name');
+                const exerciseName = exerciseNameElem.options[exerciseNameElem.selectedIndex].value;
+                const sets = form.querySelector('.exercise-sets').value;
+                const reps = form.querySelector('.exercise-reps').value;
+
+                if (exerciseName && sets && reps) {
+                    exercises.push({
+                        id: id || null,
+                        name: exerciseName,
+                        sets: parseInt(sets),
+                        reps: parseInt(reps)
+                    });
+                }
+            });
+
+            if (exercises.length === 0) {
+                showNotification('Adicione pelo menos um exercicio ao treino!');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/atualizar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        grupo_treino: grupoTreino,
+                        nome_treino: nome,
+                        descricao_treino: descricao,
+                        dia_semana: diaSemana,
+                        exercises: exercises
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    await loadWorkouts();
+                    closeEditWorkoutModal();
+                    showNotification('Treino atualizado com sucesso!');
+                } else {
+                    showNotification('Erro ao atualizar treino: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showNotification('Erro ao atualizar treino. Tente novamente.');
+            }
+        });
+
+        function addEditExerciseField(exercise = null) {
+            const container = document.getElementById('editExercisesContainer');
+            const exerciseDiv = document.createElement('div');
+            exerciseDiv.className = 'exercise-form';
+                exerciseDiv.innerHTML = `
+                    <div class="exercise-inputs">
+                        ${exercise ? `<input type="hidden" class="exercise-id" value="${exercise.id}">` : ''}
+                        <select class="exercise-name" required>
+                            <option value="">Selecione o exercicio</option>
+                            <option value="Supino Reto" ${exercise && exercise.name === 'Supino Reto' ? 'selected' : ''}>Supino Reto</option>
+                            <option value="Supino Inclinado" ${exercise && exercise.name === 'Supino Inclinado' ? 'selected' : ''}>Supino Inclinado</option>
+                            <option value="Crucifixo" ${exercise && exercise.name === 'Crucifixo' ? 'selected' : ''}>Crucifixo</option>
+                            <option value="Tríceps Testa" ${exercise && exercise.name === 'Tríceps Testa' ? 'selected' : ''}>Tríceps Testa</option>
+                            <option value="Tríceps Corda" ${exercise && exercise.name === 'Tríceps Corda' ? 'selected' : ''}>Tríceps Corda</option>
+                            <option value="Puxada Frontal" ${exercise && exercise.name === 'Puxada Frontal' ? 'selected' : ''}>Puxada Frontal</option>
+                            <option value="Remada Curvada" ${exercise && exercise.name === 'Remada Curvada' ? 'selected' : ''}>Remada Curvada</option>
+                            <option value="Remada Unilateral" ${exercise && exercise.name === 'Remada Unilateral' ? 'selected' : ''}>Remada Unilateral</option>
+                            <option value="Rosca Direta" ${exercise && exercise.name === 'Rosca Direta' ? 'selected' : ''}>Rosca Direta</option>
+                            <option value="Agachamento Livre" ${exercise && exercise.name === 'Agachamento Livre' ? 'selected' : ''}>Agachamento Livre</option>
+                            <option value="Leg Press" ${exercise && exercise.name === 'Leg Press' ? 'selected' : ''}>Leg Press</option>
+                            <option value="Cadeira Extensora" ${exercise && exercise.name === 'Cadeira Extensora' ? 'selected' : ''}>Cadeira Extensora</option>
+                            <option value="Cadeira Flexora" ${exercise && exercise.name === 'Cadeira Flexora' ? 'selected' : ''}>Cadeira Flexora</option>
+                            <option value="Panturrilha" ${exercise && exercise.name === 'Panturrilha' ? 'selected' : ''}>Panturrilha</option>
+                            <option value="Flexão" ${exercise && exercise.name === 'Flexão' ? 'selected' : ''}>Flexão</option>
+                            <option value="Outro" ${exercise && exercise.name === 'Outro' ? 'selected' : ''}>Outro</option>
+                        </select>
+                        <input type="number" placeholder="Series" class="exercise-sets" required min="1" step="1" value="${exercise ? exercise.sets : ''}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input type="number" placeholder="Reps" class="exercise-reps" required min="1" step="1" value="${exercise ? exercise.reps : ''}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <button type="button" class="btn btn-delete" style="padding: 10px; margin-left: 5px;" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            container.appendChild(exerciseDiv);
         }
 
         function addExerciseField() {
@@ -1242,11 +1463,17 @@
             container.appendChild(exerciseDiv);
         }
 
-        document.getElementById('workoutForm').addEventListener('submit', function(e) {
+        document.getElementById('workoutForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const name = document.getElementById('workoutName').value;
             const description = document.getElementById('workoutDescription').value;
+            const diaSemana = document.getElementById('workoutDiaSemana').value;
+
+            if (!diaSemana) {
+                showNotification('Selecione o dia da semana!');
+                return;
+            }
 
             const exerciseForms = document.querySelectorAll('.exercise-form');
             const exercises = [];
@@ -1259,27 +1486,44 @@
                 if (exerciseName && sets && reps) {
                     exercises.push({
                         name: exerciseName,
-                        sets: sets,
-                        reps: reps,
-                        completed: false
+                        sets: parseInt(sets),
+                        reps: parseInt(reps)
                     });
                 }
             });
 
-            const workout = {
-                id: Date.now(),
-                name: name,
-                description: description,
-                exercises: exercises,
-                status: 'pending',
-                progress: 0,
-                createdAt: new Date().toLocaleDateString('pt-BR')
-            };
+            if (exercises.length === 0) {
+                showNotification('Adicione pelo menos um exercicio ao treino!');
+                return;
+            }
 
-            workouts.push(workout);
-            renderWorkouts();
-            closeAddWorkoutModal();
-            showNotification('Treino criado com sucesso! 💪');
+            try {
+                const response = await fetch(`${API_BASE}/criar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        description: description,
+                        dia_semana: diaSemana,
+                        exercises: exercises
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    await loadWorkouts();
+                    closeAddWorkoutModal();
+                    showNotification('Treino criado com sucesso!');
+                } else {
+                    showNotification('Erro ao criar treino: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showNotification('Erro ao criar treino. Tente novamente.');
+            }
         });
 
         function renderWorkouts() {
@@ -1293,66 +1537,45 @@
             }
 
             emptyState.style.display = 'none';
-            grid.innerHTML = workouts.map(workout => {
-                const completedExercises = workout.exercises.filter(ex => ex.completed).length;
-                const progress = workout.exercises.length > 0
-                    ? Math.round((completedExercises / workout.exercises.length) * 100)
-                    : 0;
-
-                workout.progress = progress;
+            grid.innerHTML = workouts.map((workout, index) => {
+                const progress = workout.progress || 0;
 
                 let statusClass = 'status-pending';
                 let statusText = 'Pendente';
 
-                if (progress === 100) {
+                if (workout.status === 'completed' || progress === 100) {
                     statusClass = 'status-completed';
-                    statusText = 'Concluído';
-                    workout.status = 'completed';
-                } else if (progress > 0) {
+                    statusText = 'Concluido';
+                } else if (workout.status === 'in-progress' || progress > 0) {
                     statusClass = 'status-in-progress';
                     statusText = 'Em Progresso';
-                    workout.status = 'in-progress';
                 }
 
                 return `
-                    <div class="workout-card" style="animation-delay: ${workouts.indexOf(workout) * 0.1}s">
+                    <div class="workout-card" style="animation-delay: ${index * 0.1}s">
                         <div class="workout-header">
                             <div class="workout-name">${workout.name}</div>
                             <div class="workout-status ${statusClass}">${statusText}</div>
                         </div>
-                        <div class="workout-description">${workout.description || 'Sem descrição'}</div>
+                        <div class="workout-description">${workout.description || 'Sem descricao'}</div>
 
                         <div class="action-buttons top-row">
-                            <button class="btn btn-start" onclick="startWorkout(${workout.id})">
-                                <i class="fas fa-play"></i> ${workout.status === 'completed' ? 'Refazer' : 'Iniciar'}
+                            <button class="btn btn-start" onclick="startWorkout('${workout.id}')">
+                                <i class="fas fa-play"></i> ${statusText === 'Concluido' ? 'Refazer' : 'Iniciar'}
                             </button>
-                            <button class="btn btn-view" onclick="resetWorkout(${workout.id})">
+                            <button class="btn btn-view" onclick="editWorkout('${workout.id}')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn btn-view" onclick="resetWorkout('${workout.id}')">
                                 <i class="fas fa-undo"></i>
                             </button>
-                            <button class="btn btn-view" onclick="viewWorkout(${workout.id})">
+                            <button class="btn btn-view" onclick="viewWorkout('${workout.id}')">
                                 <i class="fas fa-eye"></i> Ver
                             </button>
 
-
-                            <button class="btn btn-delete" onclick="deleteWorkout(${workout.id})">
+                            <button class="btn btn-delete" onclick="deleteWorkout('${workout.id}')">
                                 <i class="fas fa-trash"></i> Excluir
                             </button>
-                        </div>
-
-                        <div class="exercises-list">
-                            ${workout.exercises.slice(0, 3).map(exercise => `
-                                <div class="exercise-item ${exercise.completed ? 'completed' : ''}">
-                                    <div class="exercise-info">
-                                        <div class="exercise-name">${exercise.name}</div>
-                                        <div class="exercise-details">${exercise.sets} séries × ${exercise.reps} reps</div>
-                                    </div>
-                                    <input type="checkbox"
-                                           class="exercise-checkbox"
-                                           ${exercise.completed ? 'checked' : ''}
-                                           onchange="toggleExercise(${workout.id}, '${exercise.name}')">
-                                </div>
-                            `).join('')}
-                            ${workout.exercises.length > 3 ? `<div style="color: #666; text-align: center; margin-top: 10px;">+${workout.exercises.length - 3} exercícios</div>` : ''}
                         </div>
 
                         <div class="progress-section">
@@ -1364,30 +1587,39 @@
                                 <div class="progress-fill" style="width: ${progress}%"></div>
                             </div>
                         </div>
+
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; text-align: center; color: #aaa; font-size: 14px;">
+                            <i class="fas fa-calendar-alt" style="color: #ff0000; margin-right: 8px;"></i>
+                            Dia da semana: <strong style="color: #fff;">${workout.dia_semana || 'Nao definido'}</strong>
+                        </div>
                     </div>
                 `;
             }).join('');
         }
 
-        function toggleExercise(workoutId, exerciseName) {
-            const workout = workouts.find(w => w.id === workoutId);
-            if (workout) {
-                const exercise = workout.exercises.find(e => e.name === exerciseName);
-                if (exercise) {
-                    exercise.completed = !exercise.completed;
-                    renderWorkouts();
+        async function toggleExercise(workoutId, exerciseId) {
+            try {
+                const response = await fetch(`${API_BASE}/toggle-exercicio`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id_exercicio: exerciseId
+                    })
+                });
 
-                    if (exercise.completed) {
-                        showNotification(`✓ ${exerciseName} concluído!`);
-                    }
+                const result = await response.json();
 
-                    const allCompleted = workout.exercises.every(e => e.completed);
-                    if (allCompleted && workout.status !== 'completed') {
-                        setTimeout(() => {
-                            showNotification('🎉 Treino 100% concluído! Parabéns! 🦈');
-                        }, 500);
-                    }
+                if (result.success) {
+                    await loadWorkouts();
+                    showNotification('Status atualizado!');
+                } else {
+                    showNotification('Erro ao atualizar exercicio');
                 }
+            } catch (error) {
+                console.error('Erro:', error);
+                showNotification('Erro ao atualizar exercicio');
             }
         }
 
@@ -1396,27 +1628,23 @@
         let cronometroSegundos = 0;
         let cronometroAtivoId = null;
 
-        function startWorkout(workoutId) {
+        async function startWorkout(workoutId) {
             const workout = workouts.find(w => w.id === workoutId);
-            if (workout) {
-                if (workout.status === 'completed') {
-                    workout.exercises.forEach(ex => ex.completed = false);
-                    workout.status = 'pending';
-                    workout.progress = 0;
-                }
+            if (!workout) return;
 
-                currentWorkoutId = workoutId;
-                cronometroAtivoId = workoutId;
-                cronometroSegundos = 0;
-                if (cronometroInterval) clearInterval(cronometroInterval);
-                cronometroInterval = setInterval(() => {
-                    cronometroSegundos++;
-                    atualizarCronometroModal();
-                }, 1000);
-                viewWorkout(workoutId);
-                showNotification(`🔥 Treino iniciado! Vamos lá! 💪`);
-                renderWorkouts();
-            }
+            currentWorkoutId = workoutId;
+            cronometroAtivoId = workoutId;
+            cronometroSegundos = 0;
+
+            if (cronometroInterval) clearInterval(cronometroInterval);
+
+            cronometroInterval = setInterval(() => {
+                cronometroSegundos++;
+                atualizarCronometroModal();
+            }, 1000);
+
+            await viewWorkout(workoutId);
+            showNotification('Treino iniciado! Vamos la!');
         }
 
         function atualizarCronometroModal() {
@@ -1429,91 +1657,107 @@
             }
         }
 
-        function viewWorkout(workoutId) {
+        async function viewWorkout(workoutId) {
             const workout = workouts.find(w => w.id === workoutId);
             if (!workout) return;
 
-            const content = document.getElementById('workoutDetailsContent');
-            let cronometroHtml = '';
-            if (cronometroAtivoId === workoutId) {
-                cronometroHtml = `
-                    <div style="margin: 20px 0; text-align: center;">
-                        <span style="font-size:2rem; color:#ff0000; font-weight:bold;">Tempo do treino:</span><br>
-                        <span id="cronometro-modal" style="font-size:2.2rem; margin-top:10px; display:inline-block;">00:00:00</span>
-                    </div>
-                `;
-            }
-            content.innerHTML = `
-                <h2>${workout.name}</h2>
-                <div style="color: #aaa; margin-bottom: 30px;">${workout.description || 'Sem descrição'}</div>
-                ${cronometroHtml}
-                <div class="progress-section">
-                    <div class="progress-label">
-                        <span>Progresso Geral</span>
-                        <span>${workout.progress}%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${workout.progress}%"></div>
-                    </div>
-                </div>
+            try {
+                const response = await fetch(`${API_BASE}/detalhes?id=${workoutId}`);
+                const result = await response.json();
 
-                <h3 style="color: #ff0000; margin: 30px 0 20px 0; text-transform: uppercase;">Exercícios</h3>
-                <div class="exercises-list">
-                    ${workout.exercises.map((exercise, index) => `
-                        <div class="exercise-item ${exercise.completed ? 'completed' : ''}" style="flex-direction: column; align-items: stretch;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <div class="exercise-info">
-                                    <div class="exercise-name" style="font-size: 18px;">${index + 1}. ${exercise.name}</div>
-                                    <div class="exercise-details" style="font-size: 14px; margin-top: 5px;">
-                                        <i class="fas fa-dumbbell" style="color: #ff0000;"></i> ${exercise.sets} séries × ${exercise.reps} repetições
+                if (!result.success) {
+                    showNotification('Erro ao carregar detalhes do treino');
+                    return;
+                }
+
+                const exercises = result.exercises || [];
+                const content = document.getElementById('workoutDetailsContent');
+                let cronometroHtml = '';
+
+                if (cronometroAtivoId === workoutId) {
+                    cronometroHtml = `
+                        <div style="margin: 20px 0; text-align: center;">
+                            <span style="font-size:2rem; color:#ff0000; font-weight:bold;">Tempo do treino:</span><br>
+                            <span id="cronometro-modal" style="font-size:2.2rem; margin-top:10px; display:inline-block;">00:00:00</span>
+                        </div>
+                    `;
+                }
+
+                content.innerHTML = `
+                    <h2>${workout.name}</h2>
+                    <div style="color: #aaa; margin-bottom: 30px;">${workout.description || 'Sem descricao'}</div>
+                    ${cronometroHtml}
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>Progresso Geral</span>
+                            <span>${workout.progress}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${workout.progress}%"></div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #ff0000; margin: 30px 0 20px 0; text-transform: uppercase;">Exercicios</h3>
+                    <div class="exercises-list">
+                        ${exercises.map((exercise, index) => `
+                            <div class="exercise-item ${exercise.completed ? 'completed' : ''}" style="flex-direction: column; align-items: stretch;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                    <div class="exercise-info">
+                                        <div class="exercise-name" style="font-size: 18px;">${index + 1}. ${exercise.name}</div>
+                                        <div class="exercise-details" style="font-size: 14px; margin-top: 5px;">
+                                            <i class="fas fa-dumbbell" style="color: #ff0000;"></i> ${exercise.sets} series × ${exercise.reps} repeticoes
+                                        </div>
+                                    </div>
+                                    <input type="checkbox"
+                                           class="exercise-checkbox"
+                                           ${exercise.completed ? 'checked' : ''}
+                                           onchange="toggleExercise('${workoutId}', ${exercise.id}); setTimeout(() => viewWorkout('${workoutId}'), 500)">
+                                </div>
+
+                                <div class="gif-viewer">
+                                    <button class="btn btn-view" style="width: 100%;" onclick="showExerciseGif('${exercise.name}', '${workoutId}')">
+                                        <i class="fas fa-play-circle"></i> Ver Demonstracao
+                                    </button>
+                                    <div id="gif-${exercise.name.replace(/\s/g, '-')}" class="gif-container" style="display: none;">
+                                        <img src="${getExerciseGif(exercise.name)}" alt="${exercise.name}">
+                                        <p style="color: #aaa; margin-top: 10px; font-size: 12px;">Demonstracao: ${exercise.name}</p>
                                     </div>
                                 </div>
-                                <input type="checkbox"
-                                       class="exercise-checkbox"
-                                       ${exercise.completed ? 'checked' : ''}
-                                       onchange="toggleExercise(${workout.id}, '${exercise.name}'); viewWorkout(${workout.id})">
                             </div>
-
-                            <div class="gif-viewer">
-                                <button class="btn btn-view" style="width: 100%;" onclick="showExerciseGif('${exercise.name}', ${workout.id})">
-                                    <i class="fas fa-play-circle"></i> Ver Demonstração
-                                </button>
-                                <div id="gif-${exercise.name.replace(/\s/g, '-')}" class="gif-container" style="display: none;">
-                                    <img src="${getExerciseGif(exercise.name)}" alt="${exercise.name}">
-                                    <p style="color: #aaa; margin-top: 10px; font-size: 12px;">Demonstração: ${exercise.name}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div style="margin-top: 30px; padding: 20px; background: rgba(255, 0, 0, 0.05); border-radius: 15px; border: 1px solid rgba(255, 0, 0, 0.2);">
-                    <h4 style="color: #ff0000; margin-bottom: 15px; text-transform: uppercase;">
-                        <i class="fas fa-info-circle"></i> Dicas para o Treino
-                    </h4>
-                    <ul style="color: #aaa; line-height: 2; list-style: none; padding: 0;">
-                        <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Mantenha boa postura durante os exercícios</li>
-                        <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Controle a respiração: expire na força</li>
-                        <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Descanse 60-90 segundos entre as séries</li>
-                        <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Hidrate-se durante o treino</li>
-                    </ul>
-                </div>
-
-                ${workout.status === 'completed' ? `
-                    <div style="margin-top: 30px; text-align: center; padding: 30px; background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 200, 0, 0.1)); border-radius: 15px; border: 2px solid #00ff00;">
-                        <i class="fas fa-trophy" style="font-size: 48px; color: #00ff00; margin-bottom: 15px;"></i>
-                        <h3 style="color: #00ff00; margin-bottom: 10px;">TREINO CONCLUÍDO!</h3>
-                        <p style="color: #aaa;">Excelente trabalho! Continue assim! 🦈</p>
+                        `).join('')}
                     </div>
-                ` : ''}
 
-                <button class="btn btn-start" style="width: 100%; margin-top: 20px;" onclick="closeViewWorkoutModal()">
-                    <i class="fas fa-check"></i> Fechar
-                </button>
-            `;
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(255, 0, 0, 0.05); border-radius: 15px; border: 1px solid rgba(255, 0, 0, 0.2);">
+                        <h4 style="color: #ff0000; margin-bottom: 15px; text-transform: uppercase;">
+                            <i class="fas fa-info-circle"></i> Dicas para o Treino
+                        </h4>
+                        <ul style="color: #aaa; line-height: 2; list-style: none; padding: 0;">
+                            <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Mantenha boa postura durante os exercicios</li>
+                            <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Controle a respiracao: expire na forca</li>
+                            <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Descanse 60-90 segundos entre as series</li>
+                            <li><i class="fas fa-check" style="color: #ff0000; margin-right: 10px;"></i> Hidrate-se durante o treino</li>
+                        </ul>
+                    </div>
 
-            document.getElementById('viewWorkoutModal').classList.add('active');
-            atualizarCronometroModal();
+                    ${workout.status === 'completed' || workout.progress === 100 ? `
+                        <div style="margin-top: 30px; text-align: center; padding: 30px; background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 200, 0, 0.1)); border-radius: 15px; border: 2px solid #00ff00;">
+                            <i class="fas fa-trophy" style="font-size: 48px; color: #00ff00; margin-bottom: 15px;"></i>
+                            <h3 style="color: #00ff00; margin-bottom: 10px;">TREINO CONCLUIDO!</h3>
+                            <p style="color: #aaa;">Excelente trabalho! Continue assim!</p>
+                        </div>
+                    ` : ''}
+
+                    <button class="btn btn-start" style="width: 100%; margin-top: 20px;" onclick="closeViewWorkoutModal()">
+                        <i class="fas fa-check"></i> Fechar
+                    </button>
+                `;
+
+                document.getElementById('viewWorkoutModal').classList.add('active');
+                atualizarCronometroModal();
+            } catch (error) {
+                console.error('Erro:', error);
+                showNotification('Erro ao carregar detalhes do treino');
+            }
         }
 
         function showExerciseGif(exerciseName, workoutId) {
@@ -1539,36 +1783,82 @@
             }
         }
 
-        function deleteWorkout(workoutId) {
-            if (confirm('Tem certeza que deseja excluir este treino?')) {
-                workouts = workouts.filter(w => w.id !== workoutId);
-                renderWorkouts();
-                showNotification('Treino excluído com sucesso!');
+        async function deleteWorkout(workoutId) {
+            currentWorkoutId = workoutId;
+            document.getElementById('deleteConfirmModal').classList.add('active');
+        }
+
+        function hideDeleteConfirm() {
+            document.getElementById('deleteConfirmModal').classList.remove('active');
+            currentWorkoutId = null;
+        }
+
+        async function confirmDelete() {
+            if (!currentWorkoutId) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/deletar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        grupo_treino: currentWorkoutId
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    await loadWorkouts();
+                    hideDeleteConfirm();
+                    showNotification('Treino excluido com sucesso!');
+                } else {
+                    showNotification('Erro ao excluir treino');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showNotification('Erro ao excluir treino');
             }
         }
 
-        // Reiniciar um treino: resetar exercícios, progresso e status
-        function resetWorkout(workoutId) {
-            const workout = workouts.find(w => w.id === workoutId);
-            if (!workout) return;
-            if (!confirm('Deseja reiniciar este treino? Isso marcará todos os exercícios como não concluídos.')) return;
-
-            workout.exercises.forEach(ex => ex.completed = false);
-            workout.progress = 0;
-            workout.status = 'pending';
-
-            // If this workout was running, stop the timer
-            if (cronometroAtivoId === workoutId) {
-                if (cronometroInterval) {
-                    clearInterval(cronometroInterval);
-                    cronometroInterval = null;
-                }
-                cronometroAtivoId = null;
-                cronometroSegundos = 0;
+        async function resetWorkout(workoutId) {
+            if (!confirm('Deseja reiniciar este treino? Todos os exercicios serao marcados como nao concluidos.')) {
+                return;
             }
 
-            renderWorkouts();
-            showNotification('Treino reiniciado com sucesso.');
+            try {
+                const response = await fetch(`${API_BASE}/resetar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        grupo_treino: workoutId
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    if (cronometroAtivoId === workoutId) {
+                        if (cronometroInterval) {
+                            clearInterval(cronometroInterval);
+                            cronometroInterval = null;
+                        }
+                        cronometroAtivoId = null;
+                        cronometroSegundos = 0;
+                    }
+
+                    await loadWorkouts();
+                    showNotification('Treino reiniciado com sucesso!');
+                } else {
+                    showNotification('Erro ao reiniciar treino');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showNotification('Erro ao reiniciar treino');
+            }
         }
 
         function showNotification(message) {
@@ -1581,67 +1871,25 @@
             }, 3000);
         }
 
-        // Criar alguns treinos de exemplo ao carregar
+        // Carregar treinos ao inicializar a pagina
         window.addEventListener('load', () => {
-            workouts = [
-                {
-                    id: 1,
-                    name: 'TREINO A - PEITO',
-                    description: 'Foco em peito, tríceps e ombros',
-                    exercises: [
-                        { name: 'Supino Reto', sets: '4', reps: '12', completed: false },
-                        { name: 'Supino Inclinado', sets: '4', reps: '10', completed: false },
-                        { name: 'Crucifixo', sets: '3', reps: '12', completed: false },
-                        { name: 'Tríceps Testa', sets: '3', reps: '15', completed: false },
-                        { name: 'Tríceps Corda', sets: '3', reps: '15', completed: false }
-                    ],
-                    status: 'pending',
-                    progress: 0,
-                    createdAt: '01/11/2025'
-                },
-                {
-                    id: 2,
-                    name: 'TREINO B - COSTAS',
-                    description: 'Desenvolvimento de costas e bíceps',
-                    exercises: [
-                        { name: 'Puxada Frontal', sets: '4', reps: '12', completed: false },
-                        { name: 'Remada Curvada', sets: '4', reps: '10', completed: false },
-                        { name: 'Remada Unilateral', sets: '3', reps: '12', completed: false },
-                        { name: 'Rosca Direta', sets: '3', reps: '12', completed: false }
-                    ],
-                    status: 'pending',
-                    progress: 0,
-                    createdAt: '01/11/2025'
-                },
-                {
-                    id: 3,
-                    name: 'TREINO C - PERNAS',
-                    description: 'Treino completo de membros inferiores',
-                    exercises: [
-                        { name: 'Agachamento Livre', sets: '4', reps: '12', completed: false  },
-                        { name: 'Leg Press', sets: '4', reps: '15', completed: false  },
-                        { name: 'Cadeira Extensora', sets: '3', reps: '15', completed: false  },
-                        { name: 'Cadeira Flexora', sets: '3', reps: '15', completed: false  },
-                        { name: 'Panturrilha', sets: '4', reps: '20', completed: false }
-                    ],
-                    status: 'pending',
-                    progress: 0,
-                    createdAt: '30/10/2025'
-                }
-            ];
-            renderWorkouts();
+            loadWorkouts();
         });
 
         // Fechar modais ao clicar fora
         window.addEventListener('click', (e) => {
             const addModal = document.getElementById('addWorkoutModal');
             const viewModal = document.getElementById('viewWorkoutModal');
+            const editModal = document.getElementById('editWorkoutModal');
 
             if (e.target === addModal) {
                 closeAddWorkoutModal();
             }
             if (e.target === viewModal) {
                 closeViewWorkoutModal();
+            }
+            if (e.target === editModal) {
+                closeEditWorkoutModal();
             }
         });
 
@@ -1650,6 +1898,7 @@
             if (e.key === 'Escape') {
                 closeAddWorkoutModal();
                 closeViewWorkoutModal();
+                closeEditWorkoutModal();
             }
         });
 
