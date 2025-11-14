@@ -435,6 +435,8 @@
         if (isset($_GET["success"])) {
           if ($_GET["success"] == "cadastro") {
             $sucesso = "Cadastro realizado com sucesso! Faça login para continuar.";
+          } elseif ($_GET["success"] == "senha_alterada") {
+            $sucesso = "Senha alterada com sucesso! Faça login com sua nova senha.";
           }
         }
         ?>
