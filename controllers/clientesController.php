@@ -43,7 +43,13 @@ class ClientesController
   public function listClientes()
   {
     $clientes = new Clientes();
-    $clientesList = $clientes->getAll();
+    $allClientes = $clientes->getAll();
+
+    // Filtrar para excluir administradores da lista
+    $clientesList = array_filter($allClientes, function ($cliente) {
+      return !isset($cliente["is_admin"]) || $cliente["is_admin"] == 0;
+    });
+
     include __DIR__ . "/../views/Clientes/clientes_list.php";
   }
 
@@ -64,11 +70,19 @@ class ClientesController
       $clientes->endereco = $_POST["endereco"];
       $clientes->email = $_POST["email"];
       $clientes->telefone = $_POST["telefone"];
-      $clientes->senha = password_hash($_POST["senha"], PASSWORD_DEFAULT); // Alterado para usar hashing da senha
+
+      // So atualizar a senha se uma nova senha foi fornecida
+      if (!empty($_POST["senha"])) {
+        $clientes->senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
+      } else {
+        // Manter a senha atual
+        $clienteAtual = $clientes->getById($_POST["id"]);
+        $clientes->senha = $clienteAtual["senha"];
+      }
 
       if ($clientes->update()) {
-        header("Location: /sharkrush/list-clientes");
-        exit(); // Adicionado para garantir que o script pare após o redirecionamento
+        header("Location: /list-clientes");
+        exit();
       } else {
         echo "Erro ao atualizar o Cliente.";
       }

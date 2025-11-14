@@ -202,12 +202,14 @@
         .profile-email {
             color: #ccc;
             font-size: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .profile-stats {
             display: flex;
             gap: 2rem;
+            justify-content: center;
+            margin-top: 0.5rem;
         }
 
         .stat-item {
@@ -215,14 +217,16 @@
         }
 
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #FF1F1F;
+            line-height: 1.2;
         }
 
         .stat-label {
             color: #999;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
         }
 
         /* Seções do perfil */
@@ -716,27 +720,21 @@
                 </div>
                 <div class="profile-info">
                     <h1 class="profile-name" id="displayName"><?php echo htmlspecialchars(
-                      $userData["nome_completo"],
+                      $userData["nome_completo"] ?? "",
                       ENT_QUOTES,
                       "UTF-8",
                     ); ?></h1>
                     <p class="profile-email" id="displayEmail"><?php echo htmlspecialchars(
-                      $userData["email"],
+                      $userData["email"] ?? "",
                       ENT_QUOTES,
                       "UTF-8",
                     ); ?></p>
                     <div class="profile-stats">
                         <div class="stat-item">
-                            <div class="stat-value">28</div>
+                            <div class="stat-value"><?php echo htmlspecialchars(
+                              $userData["total_treinos"] ?? 0,
+                            ); ?></div>
                             <div class="stat-label">Treinos</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Sequências</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">45</div>
-                            <div class="stat-label">Dias Ativos</div>
                         </div>
                     </div>
                 </div>
@@ -766,7 +764,7 @@
                     <div class="form-group">
                         <label class="form-label">Nome Completo</label>
                         <input type="text" class="form-input" id="fullName" value="<?php echo htmlspecialchars(
-                          $userData["nome_completo"],
+                          $userData["nome_completo"] ?? "",
                           ENT_QUOTES,
                           "UTF-8",
                         ); ?>" disabled>
@@ -774,7 +772,7 @@
                     <div class="form-group">
                         <label class="form-label">CPF</label>
                         <input type="text" class="form-input" id="cpf" value="<?php echo htmlspecialchars(
-                          $userData["cpf"],
+                          $userData["cpf"] ?? "",
                           ENT_QUOTES,
                           "UTF-8",
                         ); ?>" disabled>
@@ -782,7 +780,7 @@
                     <div class="form-group">
                         <label class="form-label">Endereco</label>
                         <input type="text" class="form-input" id="endereco" value="<?php echo htmlspecialchars(
-                          $userData["endereco"],
+                          $userData["endereco"] ?? "",
                           ENT_QUOTES,
                           "UTF-8",
                         ); ?>" disabled>
@@ -790,7 +788,7 @@
                     <div class="form-group">
                         <label class="form-label">Telefone</label>
                         <input type="tel" class="form-input" id="phone" value="<?php echo htmlspecialchars(
-                          $userData["telefone"],
+                          $userData["telefone"] ?? "",
                           ENT_QUOTES,
                           "UTF-8",
                         ); ?>" disabled>
@@ -823,7 +821,7 @@
                     <div class="form-group">
                         <label class="form-label">E-mail</label>
                         <input type="email" class="form-input" id="email" value="<?php echo htmlspecialchars(
-                          $userData["email"],
+                          $userData["email"] ?? "",
                           ENT_QUOTES,
                           "UTF-8",
                         ); ?>" disabled>

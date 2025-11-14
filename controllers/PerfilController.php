@@ -25,6 +25,19 @@ class PerfilController
       exit();
     }
 
+    // Buscar contagem de treinos do usuario
+    require_once __DIR__ . "/../config/database.php";
+    $database = new Database();
+    $conn = $database->getConnection();
+
+    $queryTreinos =
+      "SELECT COUNT(DISTINCT id) as total_treinos FROM treinos_usuarios WHERE id_cliente = :id_cliente";
+    $stmtTreinos = $conn->prepare($queryTreinos);
+    $stmtTreinos->bindParam(":id_cliente", $_SESSION["user_id"]);
+    $stmtTreinos->execute();
+    $resultTreinos = $stmtTreinos->fetch(PDO::FETCH_ASSOC);
+    $totalTreinos = $resultTreinos["total_treinos"] ?? 0;
+
     // Disponibilizar dados para a view
     $userData = [
       "id" => $usuario["id"],
@@ -33,6 +46,7 @@ class PerfilController
       "telefone" => $usuario["telefone"] ?? "",
       "cpf" => $usuario["cpf"] ?? "",
       "endereco" => $usuario["endereco"] ?? "",
+      "total_treinos" => $totalTreinos,
     ];
 
     // Incluir a view de perfil
