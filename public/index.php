@@ -66,6 +66,16 @@ switch ($request) {
     $controller->updatePassword();
     break;
 
+  case "/calculadora-imc":
+    AuthController::checkAuth();
+    include __DIR__ . "/../views/comcadastro/comcalculoimc.php";
+    break;
+
+  case "/calculadora-calorias":
+    AuthController::checkAuth();
+    include __DIR__ . "/../views/comcadastro/comcalculocalorias.php";
+    break;
+
   // CLIENTES
   case "/cadastro":
     $controller = new ClientesController();

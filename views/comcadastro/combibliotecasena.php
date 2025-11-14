@@ -823,13 +823,13 @@
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php">
+            <a href="/calculadora-imc">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php">
+            <a href="/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
@@ -902,7 +902,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -940,7 +940,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -959,7 +959,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -995,7 +995,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1014,7 +1014,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1107,7 +1107,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1126,7 +1126,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1200,7 +1200,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1219,7 +1219,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1257,7 +1257,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1276,7 +1276,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1295,7 +1295,7 @@
                             </div>
                             <button class="add-to-workout-btn" type="button"
                                 onclick="event.stopPropagation(); addToWorkout(this)">
-                                <i class="fas fa-plus"></i> Adicionar 
+                                <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
@@ -1374,16 +1374,16 @@
             const container = document.getElementById(group + '-container');
             const cardWidth = 300; // largura do card + gap
             const maxScroll = (container.children.length - 1) * cardWidth;
-            
+
             carouselPositions[group] += direction * cardWidth;
-            
+
             // Limites do carrossel
             if (carouselPositions[group] < 0) {
                 carouselPositions[group] = 0;
             } else if (carouselPositions[group] > maxScroll) {
                 carouselPositions[group] = maxScroll;
             }
-            
+
             container.style.transform = `translateX(-${carouselPositions[group]}px)`;
         }
 
@@ -1393,10 +1393,10 @@
             const modalTitle = document.getElementById('modalTitle');
             const modalDescription = document.getElementById('modalDescription');
             const modalGif = document.getElementById('modalGif');
-            
+
             modalTitle.textContent = name;
             modalDescription.textContent = description;
-            
+
             // Simular GIF - em produção, você usaria o gifUrl real
             modalGif.src = 'data:image/svg+xml,' + encodeURIComponent(`
                 <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
@@ -1409,14 +1409,14 @@
                     </text>
                 </svg>
             `);
-            
+
             // Instruções específicas por exercício
             const instructions = getExerciseInstructions(name);
             const instructionsList = document.getElementById('modalInstructions');
-            instructionsList.innerHTML = instructions.map(instruction => 
+            instructionsList.innerHTML = instructions.map(instruction =>
                 `<li>${instruction}</li>`
             ).join('');
-            
+
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
@@ -1550,7 +1550,7 @@
                     'Suba usando apenas a força da perna de apoio'
                 ]
             };
-            
+
             return instructions[exerciseName] || [
                 'Mantenha a postura correta',
                 'Execute o movimento controlado',
@@ -1599,7 +1599,7 @@
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'scale(1.05)';
             });
-            
+
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1)';
             });
@@ -1609,7 +1609,7 @@
         function updateCarouselResponsive() {
             const isMobile = window.innerWidth <= 768;
             const cardWidth = isMobile ? 235 : 300;
-            
+
             // Atualizar todas as posições do carrossel
             Object.keys(carouselPositions).forEach(group => {
                 const container = document.getElementById(group + '-container');
