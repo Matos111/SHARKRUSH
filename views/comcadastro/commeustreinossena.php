@@ -29,7 +29,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 50%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
             z-index: -1;
@@ -174,7 +174,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            
+
             border-radius: 25px;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -851,7 +851,7 @@
             max-height: 120px;
         }
 
-        
+
         /* ===== NAVBAR CSS INÍCIO ===== */
         .main-menu {
             background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
@@ -1097,13 +1097,13 @@
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php">
+            <a href="/calculadora-imc">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php">
+            <a href="/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
@@ -1118,7 +1118,7 @@
     </nav>
     <!-- ===== NAVBAR HTML FIM ===== -->
     <div class="container">
-       
+
 
         <button class="add-workout-btn" onclick="openAddWorkoutModal()">
             <i class="fas fa-plus"></i>
@@ -1250,13 +1250,13 @@
 
         document.getElementById('workoutForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('workoutName').value;
             const description = document.getElementById('workoutDescription').value;
-            
+
             const exerciseForms = document.querySelectorAll('.exercise-form');
             const exercises = [];
-            
+
             exerciseForms.forEach(form => {
                 const exerciseNameElem = form.querySelector('.exercise-name');
                 const exerciseName = exerciseNameElem.tagName === 'SELECT' ? exerciseNameElem.options[exerciseNameElem.selectedIndex].value : exerciseNameElem.value;
@@ -1301,15 +1301,15 @@
             emptyState.style.display = 'none';
             grid.innerHTML = workouts.map(workout => {
                 const completedExercises = workout.exercises.filter(ex => ex.completed).length;
-                const progress = workout.exercises.length > 0 
+                const progress = workout.exercises.length > 0
                     ? Math.round((completedExercises / workout.exercises.length) * 100)
                     : 0;
-                
+
                 workout.progress = progress;
-                
+
                 let statusClass = 'status-pending';
                 let statusText = 'Pendente';
-                
+
                 if (progress === 100) {
                     statusClass = 'status-completed';
                     statusText = 'Concluído';
@@ -1333,13 +1333,13 @@
                                 <i class="fas fa-play"></i> ${workout.status === 'completed' ? 'Refazer' : 'Iniciar'}
                             </button>
                             <button class="btn btn-view" onclick="resetWorkout(${workout.id})">
-                                <i class="fas fa-undo"></i> 
+                                <i class="fas fa-undo"></i>
                             </button>
                             <button class="btn btn-view" onclick="viewWorkout(${workout.id})">
                                 <i class="fas fa-eye"></i> Ver
                             </button>
-                            
-                
+
+
                             <button class="btn btn-delete" onclick="deleteWorkout(${workout.id})">
                                 <i class="fas fa-trash"></i> Excluir
                             </button>
@@ -1352,8 +1352,8 @@
                                         <div class="exercise-name">${exercise.name}</div>
                                         <div class="exercise-details">${exercise.sets} séries × ${exercise.reps} reps</div>
                                     </div>
-                                    <input type="checkbox" 
-                                           class="exercise-checkbox" 
+                                    <input type="checkbox"
+                                           class="exercise-checkbox"
                                            ${exercise.completed ? 'checked' : ''}
                                            onchange="toggleExercise(${workout.id}, '${exercise.name}')">
                                 </div>
@@ -1382,11 +1382,11 @@
                 if (exercise) {
                     exercise.completed = !exercise.completed;
                     renderWorkouts();
-                    
+
                     if (exercise.completed) {
                         showNotification(`✓ ${exerciseName} concluído!`);
                     }
-                    
+
                     const allCompleted = workout.exercises.every(e => e.completed);
                     if (allCompleted && workout.status !== 'completed') {
                         setTimeout(() => {
@@ -1474,12 +1474,12 @@
                                         <i class="fas fa-dumbbell" style="color: #ff0000;"></i> ${exercise.sets} séries × ${exercise.reps} repetições
                                     </div>
                                 </div>
-                                <input type="checkbox" 
-                                       class="exercise-checkbox" 
+                                <input type="checkbox"
+                                       class="exercise-checkbox"
                                        ${exercise.completed ? 'checked' : ''}
                                        onchange="toggleExercise(${workout.id}, '${exercise.name}'); viewWorkout(${workout.id})">
                             </div>
-                            
+
                             <div class="gif-viewer">
                                 <button class="btn btn-view" style="width: 100%;" onclick="showExerciseGif('${exercise.name}', ${workout.id})">
                                     <i class="fas fa-play-circle"></i> Ver Demonstração
@@ -1525,7 +1525,7 @@
         function showExerciseGif(exerciseName, workoutId) {
             const gifId = 'gif-' + exerciseName.replace(/\s/g, '-');
             const gifContainer = document.getElementById(gifId);
-            
+
             if (gifContainer) {
                 if (gifContainer.style.display === 'none') {
                     gifContainer.style.display = 'block';
@@ -1581,7 +1581,7 @@
             const notification = document.getElementById('notification');
             notification.textContent = message;
             notification.classList.add('show');
-            
+
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
@@ -1642,7 +1642,7 @@
         window.addEventListener('click', (e) => {
             const addModal = document.getElementById('addWorkoutModal');
             const viewModal = document.getElementById('viewWorkoutModal');
-            
+
             if (e.target === addModal) {
                 closeAddWorkoutModal();
             }
@@ -1674,34 +1674,34 @@
                     left: ${x}px;
                     top: ${y}px;
                 `;
-                
+
                 document.body.appendChild(particle);
-                
+
                 const angle = (Math.PI * 2 * i) / 20;
                 const velocity = 2 + Math.random() * 2;
                 const dx = Math.cos(angle) * velocity;
                 const dy = Math.sin(angle) * velocity;
-                
+
                 let posX = x;
                 let posY = y;
                 let opacity = 1;
-                
+
                 const animate = () => {
                     posX += dx;
                     posY += dy;
                     opacity -= 0.02;
-                    
+
                     particle.style.left = posX + 'px';
                     particle.style.top = posY + 'px';
                     particle.style.opacity = opacity;
-                    
+
                     if (opacity > 0) {
                         requestAnimationFrame(animate);
                     } else {
                         particle.remove();
                     }
                 };
-                
+
                 animate();
             }
         }

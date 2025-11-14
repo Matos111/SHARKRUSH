@@ -529,37 +529,37 @@
             .header h1 {
                 font-size: 2.5rem;
             }
-            
+
             .header p {
                 font-size: 1.1rem;
             }
-            
+
             .content-section {
                 padding: 25px;
                 margin-bottom: 30px;
             }
-            
+
             .section-title {
                 font-size: 1.5rem;
             }
-            
+
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .timeline-item {
                 padding-left: 60px;
             }
-            
+
             .timeline::before {
                 left: 20px;
             }
-            
+
             .timeline-marker {
                 left: 10px;
             }
-            
+
             .container {
                 margin-left: 0 !important;
                 padding: 10px;
@@ -621,13 +621,13 @@
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php">
+            <a href="/calculadora-imc">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php">
+            <a href="/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
@@ -657,7 +657,7 @@
             </h2>
             <div class="section-content">
                 <p>Fundada em 2024, nossa equipe nasceu da paixão por tecnologia e da vontade de aprender e criar soluções digitais inovadoras. Iniciamos nossa trajetória no curso de Análise e Desenvolvimento de Sistemas do SESI SENAI Salto, onde demos nossos primeiros passos no desenvolvimento web.</p>
-                
+
                 <p>Durante esse período, nos dedicamos ao aprendizado de HTML, CSS e JavaScript, construindo projetos práticos e colaborativos que fortaleceram nosso conhecimento e trabalho em equipe.</p>
 
                 <div class="timeline">
@@ -669,7 +669,7 @@
                             Ingresso no curso de ADS do SESI SENAI Salto e primeiros contatos com HTML, CSS e JavaScript.
                         </div>
                     </div>
-                    
+
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-year">2025</div>
@@ -690,9 +690,9 @@
             </h2>
             <div class="section-content">
                 <p><strong>Nossa Missão:</strong> Transformar ideias em realidade digital através de soluções inovadoras, acessíveis e de alta qualidade, proporcionando experiências excepcionais para usuários e resultados extraordinários para nossos clientes.</p>
-                
+
                 <p><strong>Nossa Visão:</strong> Ser reconhecida como a empresa líder em desenvolvimento de soluções digitais, estabelecendo novos padrões de excelência em design, funcionalidade e experiência do usuário.</p>
-                
+
                 <p><strong>Nossos Valores:</strong> Inovação constante, qualidade sem compromissos, transparência nos relacionamentos, compromisso com prazos e resultados, e foco absoluto na satisfação do cliente.</p>
             </div>
         </div>
@@ -709,19 +709,19 @@
                     <div class="stat-label">Projetos Entregues</div>
                     <div class="stat-description">Soluções desenvolvidas com excelência e qualidade</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-number">120+</div>
                     <div class="stat-label">Clientes Satisfeitos</div>
                     <div class="stat-description">Empresas que confiam em nosso trabalho</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-number">98%</div>
                     <div class="stat-label">Taxa de Satisfação</div>
                     <div class="stat-description">Aprovação dos clientes em nossos projetos</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-number">2</div>
                     <div class="stat-label">Anos de Experiência</div>
@@ -738,7 +738,7 @@
             </h2>
             <div class="section-content">
                 <p>Nossa força está em nossa equipe talentosa e dedicada. Cada membro contribui com sua expertise única para criar soluções extraordinárias.</p>
-                
+
                 <div class="team-grid">
                     <div class="team-member">
                         <div class="team-avatar">
@@ -748,7 +748,7 @@
                         <div class="team-role">Dev Front End</div>
                         <div class="team-description">Especialista em interfaces modernas, experiência do usuário e desenvolvimento web responsivo.</div>
                     </div>
-                    
+
                     <div class="team-member">
                         <div class="team-avatar">
                             <i class="fas fa-user"></i>
@@ -757,7 +757,7 @@
                         <div class="team-role">Dev Full Stack</div>
                         <div class="team-description">Atua em todas as camadas do desenvolvimento, garantindo qualidade e integração entre front e back end.</div>
                     </div>
-                    
+
                     <div class="team-member">
                         <div class="team-avatar">
                             <i class="fas fa-user"></i>
@@ -766,7 +766,7 @@
                         <div class="team-role">Dev Full Stack</div>
                         <div class="team-description">Responsável por soluções robustas, escaláveis e integração de sistemas.</div>
                     </div>
-                    
+
                     <div class="team-member">
                         <div class="team-avatar">
                             <i class="fas fa-user"></i>
@@ -780,7 +780,7 @@
         </div>
 
         <!-- Call to Action -->
-        
+
     </div>
 
     <script>
@@ -809,14 +809,14 @@
             const start = 0;
             const increment = target / (duration / 16);
             let current = start;
-            
+
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
                     current = target;
                     clearInterval(timer);
                 }
-                
+
                 if (isPlus) {
                     element.textContent = Math.floor(current).toLocaleString() + '+';
                 } else if (isPercent) {
@@ -837,10 +837,10 @@
                     const isPercent = text.trim().endsWith('%');
                     const isPlus = text.trim().endsWith('+');
                     const number = parseInt(text.replace(/\D/g, ''));
-                    
+
                     numberElement.textContent = '0';
                     animateNumber(numberElement, number, 2000, isPercent, isPlus);
-                    
+
                     statsObserver.unobserve(entry.target);
                 }
             });
@@ -855,7 +855,7 @@
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px) scale(1.02)';
             });
-            
+
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
             });
