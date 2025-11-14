@@ -35,12 +35,12 @@ class AuthController
 
     // Validações básicas
     if (!$email) {
-      header("Location: /?error=email_invalido");
+      header("Location: /login?error=email_invalido");
       exit();
     }
 
     if (empty($senha)) {
-      header("Location: /?error=senha_vazia");
+      header("Location: /login?error=senha_vazia");
       exit();
     }
 
@@ -50,13 +50,13 @@ class AuthController
 
     // Verificar se usuário existe
     if (!$usuario) {
-      header("Location: /?error=credenciais_invalidas");
+      header("Location: /login?error=credenciais_invalidas");
       exit();
     }
 
     // Verificar senha
     if (!password_verify($senha, $usuario["senha"])) {
-      header("Location: /?error=credenciais_invalidas");
+      header("Location: /login?error=credenciais_invalidas");
       exit();
     }
 
@@ -102,7 +102,7 @@ class AuthController
   public static function checkAuth()
   {
     if (!isset($_SESSION["user_id"]) || !isset($_SESSION["logged_in"])) {
-      header("Location: /?error=acesso_negado");
+      header("Location: /login?error=acesso_negado");
       exit();
     }
     return true;

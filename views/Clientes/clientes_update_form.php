@@ -121,33 +121,43 @@
 <body>
 
 <h1>Atualizar Cadastro</h1>
-<form action="/sharkrush/update-clientes" method="POST">
+<form action="/update-clientes" method="POST">
 
-    <input type="hidden" name="id" value="<?php echo $clientesInfo['id']; ?>">
-    
+    <input type="hidden" name="id" value="<?php echo $clientesInfo["id"]; ?>">
+
     <label for="nome_completo">Digite o nome completo:</label>
-    <input type="text" id="nome_completo" name="nome_completo" value="<?php echo $clientesInfo['nome_completo']; ?>" required><br><br>
+    <input type="text" id="nome_completo" name="nome_completo" value="<?php echo $clientesInfo[
+      "nome_completo"
+    ]; ?>" required><br><br>
 
     <label for="cpf">CPF:</label>
-    <input type="text" id="cpf" name="cpf" value="<?php echo $clientesInfo['cpf']; ?>" required><br><br>
+    <input type="text" id="cpf" name="cpf" value="<?php echo $clientesInfo[
+      "cpf"
+    ]; ?>" required><br><br>
 
     <label for="endereco">Digite o endereço completo:</label>
-    <input type="text" id="endereco" name="endereco" value="<?php echo $clientesInfo['endereco']; ?>" required><br><br>
+    <input type="text" id="endereco" name="endereco" value="<?php echo $clientesInfo[
+      "endereco"
+    ]; ?>" required><br><br>
 
     <label for="email">Digite o e-mail:</label>
-    <input type="email" id="email" name="email" value="<?php echo $clientesInfo['email']; ?>" required><br><br>
+    <input type="email" id="email" name="email" value="<?php echo $clientesInfo[
+      "email"
+    ]; ?>" required><br><br>
 
     <label for="telefone">Digite o telefone:</label>
-    <input type="text" id="telefone" name="telefone" value="<?php echo $clientesInfo['telefone']; ?>"><br><br>
+    <input type="text" id="telefone" name="telefone" value="<?php echo $clientesInfo[
+      "telefone"
+    ]; ?>"><br><br>
 
-    <label for="senha">Digite a senha:</label>
-    <input type="password" id="senha" name="senha" value="<?php echo $clientesInfo['senha']; ?>"><br><br>
+    <label for="senha">Nova senha (deixe em branco para manter a atual):</label>
+    <input type="password" id="senha" name="senha" placeholder="Digite uma nova senha ou deixe vazio"><br><br>
 
-        
+
     <input type="submit" value="Atualizar cliente">
 
 
-<a href="/sharkrush/list-clientes" class="btn-voltar">Voltar para a lista</a>
+<a href="/list-clientes" class="btn-voltar">Voltar para a lista</a>
 
 </body>
 </html>

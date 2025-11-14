@@ -51,7 +51,12 @@ switch ($request) {
 
   case "/dashboard":
     AuthController::checkAuth();
-    // Reutiliza a view existente comhomesena.php
+    // Verificar se e admin e redirecionar para lista de clientes
+    if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"] == 1) {
+      header("Location: /list-clientes");
+      exit();
+    }
+    // Reutiliza a view existente comhomesena.php para usuarios normais
     include __DIR__ . "/../views/comcadastro/comhomesena.php";
     break;
 
