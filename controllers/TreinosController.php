@@ -1,7 +1,7 @@
 <?php
-require_once '../models/treino.php';
-require_once '../models/exercicio.php';
-require_once '../models/clientes.php';
+require_once __DIR__ . '/../models/treino.php';
+require_once __DIR__ . '/../models/exercicio.php';
+require_once __DIR__ . '/../models/clientes.php';
 
 class TreinosController {
 
@@ -12,7 +12,7 @@ class TreinosController {
         $clientesList = $clientesModel->getAll(); // Corrigido para chamar o método correto
         $exerciciosList = $exerciciosModel->getAll();
 
-        include '../views/Treinos/treino_form.php';
+        include __DIR__ . '/../views/Treinos/treino_form.php';
     }
 
     public function saveTreino() {
@@ -56,8 +56,8 @@ class TreinosController {
         $treino = new Treino();
         // Presumo que getAll() no modelo Treino retorna os dados com nome_cliente e nome_exercicio
         $treinos = $treino->getAll(); // Sua view espera a variável $treinos
-        
-        include '../views/Treinos/treino_list.php';
+
+        include __DIR__ . '/../views/Treinos/treino_list.php';
     }
 
     public function showUpdateForm($id_raw) {
@@ -81,7 +81,7 @@ class TreinosController {
         $clientesList = $clientesModel->getAll(); // Corrigido para chamar o método correto
         $exerciciosList = $exerciciosModel->getAll();
 
-        include '../views/Treinos/treino_update_form.php';
+        include __DIR__ . '/../views/Treinos/treino_update_form.php';
     }
 
     public function updateTreino() {

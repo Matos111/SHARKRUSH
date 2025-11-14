@@ -307,132 +307,6 @@
             text-shadow: 0 0 10px rgba(255, 31, 31, 0.8);
         }
 
-        /* NAVBAR CSS INÍCIO */
-        .main-menu {
-            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            height: 100%;
-            left: 0;
-            width: 70px;
-            overflow: hidden;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
-            z-index: 1002;
-        }
-        .main-menu:hover {
-            width: 280px;
-            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
-        }
-        .main-menu ul {
-            margin: 7px 0;
-            padding: 0;
-            list-style: none;
-        }
-        .main-menu li {
-            position: relative;
-            display: block;
-            width: 250px;
-        }
-        .main-menu li a {
-            position: relative;
-            width: 100%;
-            display: table;
-            color: #c5c5c5;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Strait', sans-serif;
-            border-top: 1px solid rgba(78, 78, 78, 0.2);
-            padding: 10px 0;
-            height: 55px;
-            overflow: hidden;
-        }
-        .main-menu .nav-icon {
-            position: relative;
-            display: table-cell;
-            width: 70px;
-            height: 55px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 26px;
-            padding: 12px 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .main-menu .nav-text {
-            position: relative;
-            display: table-cell;
-            vertical-align: middle;
-            width: 190px;
-            font-family: 'Titillium Web', sans-serif;
-            font-size: 16px;
-            padding-left: 15px;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .main-menu:hover .nav-text {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .main-menu li:hover > a {
-            color: #ffffff;
-            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
-            transform: translateX(8px);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .main-menu li:hover .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
-        }
-        .main-menu li a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0000;
-            transform: scaleY(0);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .main-menu li:hover a::before {
-            transform: scaleY(1);
-        }
-        .logo-container {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-        .logo-container img {
-            max-width: 100%;
-            max-height: 120px;
-        }
-        .main-menu li a.active {
-            background: linear-gradient(45deg, #373737 0%, #292929 100%);
-            color: #ffffff;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .main-menu li a.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0303;
-            transform: scaleY(1);
-        }
-        .main-menu li a.active .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        /* NAVBAR CSS FIM */
-
         /* Responsividade */
         @media (max-width: 768px) {
             .login-container {
@@ -523,64 +397,6 @@
     </style>
 </head>
 <body>
-    <nav class="main-menu">
-        <div class="logo-container">
-            <a href="../semcadastro/Clientes/clientes_form.php" title="Cadastro">
-                <img src="../midia/Logos/logoshark.png"alt="Logo"/>
-            </a>
-        </div>
-        <ul>
-            <li>
-            <a href="../semcadastro/semhomesena.php" >
-                <i class="fa fa-home nav-icon"></i>
-                <span class="nav-text">Home</span>
-            </a>
-            </li>
-            <li>
-            <a href="../semcadastro/semsobresena.php">
-                <i class="fa fa-info-circle nav-icon"></i>
-                <span class="nav-text">Sobre</span>
-            </a>
-            </li>
-            <li>
-            <a href="../semcadastro/semgerador.php">
-                <i class="fa fa-cogs nav-icon"></i>
-                <span class="nav-text">Gerador</span>
-            </a>
-            </li>
-            <li>
-            <a href="../semcadastro/sembibliotecasena.php">
-                <i class="fa fa-book nav-icon"></i>
-                <span class="nav-text">Biblioteca</span>
-            </a>
-            </li>
-            <li>
-            <a href="../semcadastro/semmeustreinossena.php">
-                <i class="fa fa-dumbbell nav-icon"></i>
-                <span class="nav-text">Meus Treinos</span>
-            </a>
-            </li>
-            <li>
-            <a href="../semcadastro/semcalculoimc.php">
-                <i class="fa fa-calculator nav-icon"></i>
-                <span class="nav-text">Calculadora IMC</span>
-            </a>
-            </li>
-            <li>
-            <a href="../semcadastro/semcalculocalorias.php">
-                <i class="fa fa-fire nav-icon"></i>
-                <span class="nav-text">Calculadora Calorias</span>
-            </a>
-            </li>
-            <li>
-            <a href="../semcadastro/login.php" class="active">
-                <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Entrar</span>
-            </a>
-            </li>
-        </ul>
-    </nav>
-    <!-- ===== NAVBAR HTML FIM ===== -->
     <div class="animated-bg">
         <div class="wave"></div>
         <div class="wave"></div>
@@ -594,15 +410,56 @@
             <div class="tagline">Seus treinos te esperam</div>
         </div>
 
-        <form class="login-form" id="loginForm">
+        <?php
+        // Exibir mensagens de erro
+        $erro = "";
+        if (isset($_GET["error"])) {
+          switch ($_GET["error"]) {
+            case "email_invalido":
+              $erro = "Por favor, insira um e-mail válido.";
+              break;
+            case "senha_vazia":
+              $erro = "Por favor, insira sua senha.";
+              break;
+            case "credenciais_invalidas":
+              $erro = "E-mail ou senha incorretos.";
+              break;
+            case "acesso_negado":
+              $erro = "Você precisa fazer login para acessar esta página.";
+              break;
+          }
+        }
+
+        // Exibir mensagem de sucesso
+        $sucesso = "";
+        if (isset($_GET["success"])) {
+          if ($_GET["success"] == "cadastro") {
+            $sucesso = "Cadastro realizado com sucesso! Faça login para continuar.";
+          }
+        }
+        ?>
+
+        <?php if ($erro): ?>
+        <div style="background: rgba(255, 68, 68, 0.2); border: 1px solid rgba(255, 68, 68, 0.5); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; color: #ff4444; text-align: center;">
+            <i class="fas fa-exclamation-circle"></i> <?php echo htmlspecialchars($erro); ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($sucesso): ?>
+        <div style="background: rgba(68, 255, 68, 0.2); border: 1px solid rgba(68, 255, 68, 0.5); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; color: #44ff44; text-align: center;">
+            <i class="fas fa-check-circle"></i> <?php echo htmlspecialchars($sucesso); ?>
+        </div>
+        <?php endif; ?>
+
+        <form class="login-form" id="loginForm" method="POST" action="/authenticate">
             <div class="form-group">
-                <input type="email" class="form-input" id="email" placeholder="Digite seu e-mail" required>
+                <input type="email" class="form-input" id="email" name="email" placeholder="Digite seu e-mail" required>
                 <div class="input-icon">📧</div>
                 <div class="error-message" id="emailError"></div>
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-input" id="password" placeholder="Digite sua senha" required>
+                <input type="password" class="form-input" id="password" name="senha" placeholder="Digite sua senha" required>
                 <div class="input-icon">🔒</div>
                 <div class="error-message" id="passwordError"></div>
             </div>
@@ -625,7 +482,7 @@
         </div>
 
         <div class="register-link">
-            Não tem uma conta? <a href="../semcadastro/semcadastro.php">Cadastre-se aqui</a>
+            Não tem uma conta? <a href="/cadastro">Cadastre-se aqui</a>
         </div>
     </div>
 
@@ -670,7 +527,7 @@
         function showError(inputId, message) {
             const input = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
-            
+
             input.classList.add('error');
             input.classList.remove('success');
             errorElement.textContent = message;
@@ -681,7 +538,7 @@
         function showSuccess(inputId) {
             const input = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
-            
+
             input.classList.add('success');
             input.classList.remove('error');
             errorElement.classList.remove('show');
@@ -691,7 +548,7 @@
         function clearValidation(inputId) {
             const input = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
-            
+
             input.classList.remove('error', 'success');
             errorElement.classList.remove('show');
         }
@@ -699,7 +556,7 @@
         // Event listeners para validação em tempo real
         document.getElementById('email').addEventListener('input', function() {
             const email = this.value.trim();
-            
+
             if (email === '') {
                 clearValidation('email');
             } else if (validateEmail(email)) {
@@ -711,7 +568,7 @@
 
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
-            
+
             if (password === '') {
                 clearValidation('password');
             } else if (validatePassword(password)) {
@@ -734,19 +591,19 @@
 
         // Submissão do formulário
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const loginBtn = document.getElementById('loginBtn');
-            
+
             let isValid = true;
 
             // Validar email
             if (!email) {
+                e.preventDefault();
                 showError('email', 'E-mail é obrigatório');
                 isValid = false;
             } else if (!validateEmail(email)) {
+                e.preventDefault();
                 showError('email', 'Por favor, insira um e-mail válido');
                 isValid = false;
             } else {
@@ -755,27 +612,22 @@
 
             // Validar senha
             if (!password) {
+                e.preventDefault();
                 showError('password', 'Senha é obrigatória');
                 isValid = false;
             } else if (!validatePassword(password)) {
+                e.preventDefault();
                 showError('password', 'A senha deve ter pelo menos 6 caracteres');
                 isValid = false;
             } else {
                 showSuccess('password');
             }
 
+            // Se válido, mostra loading e permite envio do formulário ao backend
             if (isValid) {
-                // Simular loading
                 loginBtn.classList.add('loading');
                 loginBtn.innerHTML = '';
-                
-                setTimeout(() => {
-                    loginBtn.classList.remove('loading');
-                    loginBtn.innerHTML = '<span>ENTRAR</span>';
-                    
-                    // Simular sucesso
-                    alert('Login realizado com sucesso!\n\nE-mail: ' + email + '\nSenha: ' + password);
-                }, 2000);
+                // Formulário será enviado normalmente ao /authenticate
             }
         });
 
@@ -784,13 +636,13 @@
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             const deltaX = (x - centerX) / centerX;
             const deltaY = (y - centerY) / centerY;
-            
+
             this.style.transform = `perspective(1000px) rotateY(${deltaX * 5}deg) rotateX(${-deltaY * 5}deg)`;
         });
 
@@ -804,7 +656,7 @@
             inputs.forEach((input, index) => {
                 const originalPlaceholder = input.placeholder;
                 input.placeholder = '';
-                
+
                 setTimeout(() => {
                     let i = 0;
                     const typeInterval = setInterval(() => {
@@ -834,7 +686,7 @@
                 20%, 40%, 60%, 80% { transform: translateX(5px); }
             }
         `;
-        
+
         const style = document.createElement('style');
         style.textContent = shakeKeyframes;
         document.head.appendChild(style);
@@ -842,7 +694,7 @@
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
-            
+
             // Delay para o efeito de digitação
             setTimeout(typeWriterEffect, 1000);
         });
@@ -851,7 +703,7 @@
         document.addEventListener('click', function(e) {
             const colors = ['#FF1F1F', '#ffffff', '#cccccc'];
             const particleCount = 6;
-            
+
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.style.position = 'fixed';
@@ -863,48 +715,39 @@
                 particle.style.borderRadius = '50%';
                 particle.style.pointerEvents = 'none';
                 particle.style.zIndex = '9999';
-                
+
                 const angle = (Math.PI * 2 * i) / particleCount;
                 const velocity = 100;
                 const vx = Math.cos(angle) * velocity;
                 const vy = Math.sin(angle) * velocity;
-                
+
                 document.body.appendChild(particle);
-                
+
                 let posX = e.clientX;
                 let posY = e.clientY;
                 let opacity = 1;
-                
+
                 const animate = () => {
                     posX += vx * 0.02;
                     posY += vy * 0.02;
                     opacity -= 0.05;
-                    
+
                     particle.style.left = posX + 'px';
                     particle.style.top = posY + 'px';
                     particle.style.opacity = opacity;
-                    
+
                     if (opacity > 0) {
                         requestAnimationFrame(animate);
                     } else {
                         particle.remove();
                     }
                 };
-                
+
                 requestAnimationFrame(animate);
             }
         });
 
-         // ===== NAVBAR JS INÍCIO =====
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.main-menu li a').forEach(link => {
-                link.addEventListener('click', function () {
-                    document.querySelectorAll('.main-menu li a').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-        });
-        // ===== 
+
     </script>
 </body>
 </html>
