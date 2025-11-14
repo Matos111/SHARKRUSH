@@ -632,7 +632,7 @@
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comgerador.php">
+            <a href="/sharkrush/gerador-treino">
                 <i class="fa fa-cogs nav-icon"></i>
                 <span class="nav-text">Gerador</span>
             </a>

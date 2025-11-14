@@ -924,55 +924,55 @@
 
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+            <a href="/sharkrush/dashboard" title="Dashboard">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="../comcadastro/comhomesena.php">
+            <a href="/sharkrush/dashboard">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comsobresena.php">
+            <a href="/sharkrush/sobre">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comgerador.php" class="active">
+            <a href="/sharkrush/gerador-treino" class="active">
                 <i class="fa fa-cogs nav-icon"></i>
                 <span class="nav-text">Gerador</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/combibliotecasena.php">
+            <a href="/sharkrush/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/commeustreinossena.php">
+            <a href="/sharkrush/meus-treinos">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="/calculadora-imc">
+            <a href="/sharkrush/calculadora-imc">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="/calculadora-calorias">
+            <a href="/sharkrush/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="nav-login">
+            <a href="/sharkrush/perfil" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
                 <span class="nav-text">Perfil</span>
             </a>
@@ -1394,75 +1394,74 @@
             if (selectedExercises.length === 0) {
                 saveButton.classList.add('error');
                 setTimeout(() => saveButton.classList.remove('error'), 500);
-                showNotification('Selecione pelo menos um exercício para salvar! ⚠️');
+                showNotification('Selecione pelo menos um exercício para salvar!');
                 return;
             }
 
-            const workoutName = prompt('Digite um nome para o treino:', 'Meu Treino');
-            if (!workoutName) return;
+            const diaSemana = prompt('Digite o dia da semana para o treino (Segunda, Terça, Quarta, Quinta, Sexta, Sábado, Domingo):', 'Segunda');
+            if (!diaSemana) return;
 
-            // Adiciona efeito de loading
+            const diasValidos = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+            if (!diasValidos.includes(diaSemana)) {
+                showNotification('Dia da semana inválido! Use: Segunda, Terça, Quarta, Quinta, Sexta, Sábado ou Domingo');
+                return;
+            }
+
             saveButton.classList.add('saving');
             saveButton.innerHTML = '<i class="fas fa-spinner button-icon"></i><span>Salvando...</span>';
 
             const workoutData = {
-                name: workoutName,
-                date: new Date().toLocaleDateString(),
+                dia_semana: diaSemana,
                 exercises: selectedExercises.map(ex => ({
                     name: ex.name,
                     muscle: ex.muscle,
                     sets: ex.sets,
-                    difficulty: ex.difficulty
+                    difficulty: ex.difficulty,
+                    description: ex.description || ''
                 }))
             };
 
-            // Salva no localStorage
-            let savedWorkouts = JSON.parse(localStorage.getItem('workouts') || '[]');
-            savedWorkouts.push(workoutData);
-            localStorage.setItem('workouts', JSON.stringify(savedWorkouts));
-              // Simula um pequeno delay para mostrar o loading
-            setTimeout(() => {
-                // Remove efeito de loading
+            fetch('/sharkrush/api/save-workout-generator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(workoutData)
+            })
+            .then(response => response.json())
+            .then(data => {
                 saveButton.classList.remove('saving');
-                saveButton.innerHTML = '<i class="fas fa-check button-icon"></i><span>Treino Salvo!</span>';
 
-                showNotification(`Treino "${workoutName}" salvo com sucesso! 🎉`);
+                if (data.success) {
+                    saveButton.innerHTML = '<i class="fas fa-check button-icon"></i><span>Treino Salvo!</span>';
+                    showNotification(data.message);
 
-                // Limpa os exercícios selecionados
-                selectedExercises = [];
-                updateWorkoutCounter();
+                    selectedExercises = [];
+                    updateWorkoutCounter();
 
-                // Atualiza os botões
-                document.querySelectorAll('.add-button').forEach(btn => {
-                    btn.classList.remove('added');
-                    btn.textContent = 'Adicionar ao Treino';
-                });
+                    document.querySelectorAll('.add-button').forEach(btn => {
+                        btn.classList.remove('added');
+                        btn.innerHTML = '<i class="fas fa-plus"></i>';
+                    });
 
-                // Restaura o texto original do botão após 2 segundos
-                setTimeout(() => {
+                    setTimeout(() => {
+                        saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
+                    }, 2000);
+                } else {
+                    saveButton.classList.add('error');
+                    setTimeout(() => saveButton.classList.remove('error'), 500);
+                    showNotification('Erro: ' + data.message);
                     saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
-                }, 2000);
-            }, 1000);
-        }
-
-        // Função para salvar o treino
-        function saveWorkout() {
-            if (selectedExercises.length === 0) {
-                alert('Nenhum exercício selecionado para salvar.');
-                return;
-            }
-
-            const workoutName = prompt('Digite um nome para o treino:', 'Meu Treino');
-            if (!workoutName) return;
-
-            const workoutData = {
-                name: workoutName,
-                exercises: selectedExercises
-            };
-
-            // Aqui você pode implementar o salvamento em servidor ou localStorage
-            console.log('Treino salvo:', workoutData);
-            alert('Treino salvo com sucesso!');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao salvar treino:', error);
+                saveButton.classList.remove('saving');
+                saveButton.classList.add('error');
+                setTimeout(() => saveButton.classList.remove('error'), 500);
+                showNotification('Erro ao salvar treino. Tente novamente.');
+                saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
+            });
         }        // Adiciona eventos aos elementos interativos
         document.addEventListener('DOMContentLoaded', () => {
             // Evento para o botão de salvar

@@ -172,6 +172,31 @@ switch ($request) {
     $controller->updateTreino();
     break;
 
+  case "/api/save-workout-generator":
+    $controller = new TreinosController();
+    $controller->saveWorkoutFromGenerator();
+    break;
+
+  case "/gerador-treino":
+    AuthController::checkAuth();
+    include __DIR__ . "/../views/comcadastro/comgerador.php";
+    break;
+
+  case "/sobre":
+    AuthController::checkAuth();
+    include __DIR__ . "/../views/comcadastro/comsobresena.php";
+    break;
+
+  case "/biblioteca":
+    AuthController::checkAuth();
+    include __DIR__ . "/../views/comcadastro/combibliotecasena.php";
+    break;
+
+  case "/meus-treinos":
+    AuthController::checkAuth();
+    include __DIR__ . "/../views/comcadastro/commeustreinossena.php";
+    break;
+
   default:
     http_response_code(404);
     echo "Página não encontrada.";
