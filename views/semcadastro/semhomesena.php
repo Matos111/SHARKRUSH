@@ -1441,51 +1441,15 @@
         </div>
         <ul>
             <li>
-            <a href="/dashboard" class="active">
+            <a href="/" class="active">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="/sobre">
-                <i class="fa fa-info-circle nav-icon"></i>
-                <span class="nav-text">Sobre</span>
-            </a>
-            </li>
-            <li>
-            <a href="/gerador">
-                <i class="fa fa-cogs nav-icon"></i>
-                <span class="nav-text">Gerador</span>
-            </a>
-            </li>
-            <li>
-            <a href="/biblioteca">
-                <i class="fa fa-book nav-icon"></i>
-                <span class="nav-text">Biblioteca</span>
-            </a>
-            </li>
-            <li>
-            <a href="/meus-treinos">
-                <i class="fa fa-dumbbell nav-icon"></i>
-                <span class="nav-text">Meus Treinos</span>
-            </a>
-            </li>
-            <li>
-            <a href="/calculadora-imc">
-                <i class="fa fa-calculator nav-icon"></i>
-                <span class="nav-text">Calculadora IMC</span>
-            </a>
-            </li>
-            <li>
-            <a href="/calculadora-calorias">
-                <i class="fa fa-fire nav-icon"></i>
-                <span class="nav-text">Calculadora Calorias</span>
-            </a>
-            </li>
-            <li>
-            <a href="/logout" class="nav-login">
-                <i class="fa fa-sign-out-alt nav-icon"></i>
-                <span class="nav-text">Sair</span>
+            <a href="/login" class="nav-login">
+                <i class="fa fa-sign-in-alt nav-icon"></i>
+                <span class="nav-text">Login</span>
             </a>
             </li>
         </ul>
@@ -1917,24 +1881,7 @@
 
             setTimeout(() => {
                 card.style.transform = '';
-
-                switch(page) {
-                    case 'treinos':
-                        console.log('Navegando para página de criação de treinos');
-                        // window.location.href = 'treinos.html';
-                        alert('Redirecionando para Criação de Treinos...');
-                        break;
-                    case 'imc':
-                        console.log('Navegando para calculadora de IMC');
-                        // window.location.href = 'imc.html';
-                        alert('Redirecionando para Calculadora de IMC...');
-                        break;
-                    case 'calorias':
-                        console.log('Navegando para calculadora de calorias');
-                        // window.location.href = 'calorias.html';
-                        alert('Redirecionando para Calculadora de Calorias...');
-                        break;
-                }
+                window.location.href = '/sharkrush/login';
             }, 150);
         }
 
