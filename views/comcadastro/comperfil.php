@@ -611,7 +611,7 @@
 </head>
 <body>
     <!-- NAVBAR -->
-    
+
     <nav class="main-menu">
         <div class="logo-container">
             <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
@@ -620,7 +620,7 @@
         </div>
         <ul>
             <li>
-            <a href="../comcadastro/comhomesena.php" >
+            <a href="/dashboard" >
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
@@ -662,7 +662,7 @@
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="active">
+            <a href="/perfil" class="active">
                 <i class="fa fa-user nav-icon"></i>
                 <span class="nav-text">Perfil</span>
             </a>
@@ -679,10 +679,40 @@
 
     <!-- Container principal -->
     <div class="profile-container">
+        <?php if (isset($_GET["success"])): ?>
+            <div class="success-message show" style="margin-bottom: 2rem;">
+                <i class="fas fa-check-circle"></i>
+                <?php if ($_GET["success"] === "atualizado") {
+                  echo "Perfil atualizado com sucesso!";
+                } elseif ($_GET["success"] === "senha_alterada") {
+                  echo "Senha alterada com sucesso!";
+                } ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET["error"])): ?>
+            <div class="error-message show" style="margin-bottom: 2rem;">
+                <i class="fas fa-exclamation-circle"></i>
+                <?php if ($_GET["error"] === "email_ja_existe") {
+                  echo "Este e-mail já está em uso por outro usuário.";
+                } elseif ($_GET["error"] === "falha_atualizacao") {
+                  echo "Erro ao atualizar perfil. Tente novamente.";
+                } elseif ($_GET["error"] === "senha_incorreta") {
+                  echo "Senha atual incorreta.";
+                } elseif ($_GET["error"] === "senhas_nao_conferem") {
+                  echo "As senhas não conferem.";
+                } elseif ($_GET["error"] === "senha_curta") {
+                  echo "A senha deve ter pelo menos 8 caracteres.";
+                } elseif ($_GET["error"] === "campos_vazios") {
+                  echo "Por favor, preencha todos os campos.";
+                } ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Header do perfil -->
         <div class="profile-header">
             <!-- Botão Sair (Logout) -->
-            <button class="btn btn-secondary" style="position: absolute; top: 2rem; right: 2rem; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 12px;" onclick="window.location.href='../semcadastro/semlogin.php'">
+            <button class="btn btn-secondary" style="position: absolute; top: 2rem; right: 2rem; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 12px;" onclick="window.location.href='/logout'">
                 <i class="fas fa-sign-out-alt" style="margin-right: 0.7rem; font-size: 1.5rem;"></i> Sair
             </button>
 
@@ -697,8 +727,16 @@
                     <input type="file" id="avatarInput" accept="image/*" style="display: none;">
                 </div>
                 <div class="profile-info">
-                    <h1 class="profile-name" id="displayName">João Silva</h1>
-                    <p class="profile-email" id="displayEmail">joao.silva@email.com</p>
+                    <h1 class="profile-name" id="displayName"><?php echo htmlspecialchars(
+                      $userData["nome_completo"],
+                      ENT_QUOTES,
+                      "UTF-8",
+                    ); ?></h1>
+                    <p class="profile-email" id="displayEmail"><?php echo htmlspecialchars(
+                      $userData["email"],
+                      ENT_QUOTES,
+                      "UTF-8",
+                    ); ?></p>
                     <div class="profile-stats">
                         <div class="stat-item">
                             <div class="stat-value">28</div>
@@ -739,25 +777,35 @@
                 <form id="personalForm">
                     <div class="form-group">
                         <label class="form-label">Nome Completo</label>
-                        <input type="text" class="form-input" id="fullName" value="João Silva" disabled>
+                        <input type="text" class="form-input" id="fullName" value="<?php echo htmlspecialchars(
+                          $userData["nome_completo"],
+                          ENT_QUOTES,
+                          "UTF-8",
+                        ); ?>" disabled>
                     </div>
-                    <div class="input-group">
-                        <div class="form-group">
-                            <label class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-input" id="birthDate" value="1995-06-15" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Gênero</label>
-                            <select class="form-input" id="gender" disabled>
-                                <option value="masculino">Masculino</option>
-                                <option value="feminino">Feminino</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">CPF</label>
+                        <input type="text" class="form-input" id="cpf" value="<?php echo htmlspecialchars(
+                          $userData["cpf"],
+                          ENT_QUOTES,
+                          "UTF-8",
+                        ); ?>" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Endereco</label>
+                        <input type="text" class="form-input" id="endereco" value="<?php echo htmlspecialchars(
+                          $userData["endereco"],
+                          ENT_QUOTES,
+                          "UTF-8",
+                        ); ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Telefone</label>
-                        <input type="tel" class="form-input" id="phone" value="(11) 98765-4321" disabled>
+                        <input type="tel" class="form-input" id="phone" value="<?php echo htmlspecialchars(
+                          $userData["telefone"],
+                          ENT_QUOTES,
+                          "UTF-8",
+                        ); ?>" disabled>
                     </div>
                     <div class="action-buttons" id="personalButtons" style="display: none;">
                         <button type="button" class="btn btn-secondary" onclick="cancelEdit('personal')">Cancelar</button>
@@ -786,11 +834,11 @@
                 <form id="accountForm">
                     <div class="form-group">
                         <label class="form-label">E-mail</label>
-                        <input type="email" class="form-input" id="email" value="joao.silva@email.com" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nome de Usuário</label>
-                        <input type="text" class="form-input" id="username" value="@joaosilva" disabled>
+                        <input type="email" class="form-input" id="email" value="<?php echo htmlspecialchars(
+                          $userData["email"],
+                          ENT_QUOTES,
+                          "UTF-8",
+                        ); ?>" disabled>
                     </div>
                     <div class="action-buttons" id="accountButtons" style="display: none;">
                         <button type="button" class="btn btn-secondary" onclick="cancelEdit('account')">Cancelar</button>
@@ -870,7 +918,7 @@
                     <span class="info-value">15/03/2024</span>
                 </div>
                 <!-- Autenticação em Dois Fatores removida conforme solicitado -->
-                
+
                 <div class="action-buttons" style="margin-top: 1.5rem;">
                     <button type="button" class="btn btn-primary" onclick="changePassword()">
                         <i class="fas fa-key"></i> Alterar Senha
@@ -886,7 +934,7 @@
             <button onclick="closePasswordModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #FF1F1F; font-size: 1.5rem; cursor: pointer; transition: all 0.3s ease;">
                 <i class="fas fa-times"></i>
             </button>
-            
+
             <h2 style="color: #fff; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                 <i class="fas fa-key" style="color: #FF1F1F;"></i>
                 Alterar Senha
@@ -996,31 +1044,45 @@
         // Salvar informações pessoais
         function savePersonal() {
             const fullName = document.getElementById('fullName').value;
-            const birthDate = document.getElementById('birthDate').value;
+            const cpf = document.getElementById('cpf').value;
+            const endereco = document.getElementById('endereco').value;
             const phone = document.getElementById('phone').value;
 
-            if (!fullName || !birthDate || !phone) {
-                alert('Por favor, preencha todos os campos.');
+            if (!fullName || !phone) {
+                alert('Por favor, preencha pelo menos o nome e telefone.');
                 return;
             }
 
-            // Aqui você faria a chamada para a API
-            console.log('Salvando informações pessoais:', { fullName, birthDate, phone });
+            // Criar formulário e enviar
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/update-perfil';
 
-            // Atualizar nome exibido
-            document.getElementById('displayName').textContent = fullName;
+            const fields = {
+                'nome_completo': fullName,
+                'cpf': cpf,
+                'endereco': endereco,
+                'telefone': phone
+            };
 
-            cancelEdit('personal');
-            showSuccess('personal');
+            for (const [key, value] of Object.entries(fields)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
         }
 
         // Salvar dados da conta
         function saveAccount() {
             const email = document.getElementById('email').value;
-            const username = document.getElementById('username').value;
 
-            if (!email || !username) {
-                alert('Por favor, preencha todos os campos.');
+            if (!email) {
+                alert('Por favor, preencha o e-mail.');
                 return;
             }
 
@@ -1031,14 +1093,19 @@
                 return;
             }
 
-            // Aqui você faria a chamada para a API
-            console.log('Salvando dados da conta:', { email, username });
+            // Criar formulário e enviar
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/update-perfil';
 
-            // Atualizar email exibido
-            document.getElementById('displayEmail').textContent = email;
+            const emailInput = document.createElement('input');
+            emailInput.type = 'hidden';
+            emailInput.name = 'email';
+            emailInput.value = email;
+            form.appendChild(emailInput);
 
-            cancelEdit('account');
-            showSuccess('account');
+            document.body.appendChild(form);
+            form.submit();
         }
 
         // Salvar dados físicos
@@ -1096,17 +1163,17 @@
             const password = this.value;
             const bar = document.getElementById('strengthBar');
             const text = document.getElementById('strengthText');
-            
+
             let score = 0;
             if (password.length >= 8) score++;
             if (/[A-Z]/.test(password)) score++;
             if (/[a-z]/.test(password)) score++;
             if (/[0-9]/.test(password)) score++;
             if (/[^A-Za-z0-9]/.test(password)) score++;
-            
+
             const percent = (score / 5) * 100;
             bar.style.width = percent + '%';
-            
+
             if (score <= 2) {
                 bar.style.background = '#ff4444';
                 text.style.color = '#ff4444';
@@ -1125,7 +1192,7 @@
         // Submeter alteração de senha
         document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const currentPassword = document.getElementById('currentPassword').value;
             const newPassword = document.getElementById('newPassword').value;
             const confirmNewPassword = document.getElementById('confirmNewPassword').value;
@@ -1156,22 +1223,37 @@
                 return;
             }
 
-            // Aqui você faria a chamada para a API
-            console.log('Alterando senha...');
+            // Criar formulário e enviar
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/update-senha';
 
-            // Simular sucesso
-            setTimeout(() => {
-                successMsg.classList.add('show');
-                setTimeout(() => {
-                    closePasswordModal();
-                }, 2000);
-            }, 500);
+            const currentPassInput = document.createElement('input');
+            currentPassInput.type = 'hidden';
+            currentPassInput.name = 'senha_atual';
+            currentPassInput.value = currentPassword;
+            form.appendChild(currentPassInput);
+
+            const newPassInput = document.createElement('input');
+            newPassInput.type = 'hidden';
+            newPassInput.name = 'nova_senha';
+            newPassInput.value = newPassword;
+            form.appendChild(newPassInput);
+
+            const confirmPassInput = document.createElement('input');
+            confirmPassInput.type = 'hidden';
+            confirmPassInput.name = 'confirma_senha';
+            confirmPassInput.value = confirmNewPassword;
+            form.appendChild(confirmPassInput);
+
+            document.body.appendChild(form);
+            form.submit();
         });
 
         // Navegação ativa
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
-            
+
             document.querySelectorAll('.main-menu li a').forEach(link => {
                 link.addEventListener('click', function() {
                     document.querySelectorAll('.main-menu li a').forEach(l => l.classList.remove('active'));

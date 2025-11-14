@@ -949,7 +949,7 @@
             animation: bounceIn 1s ease;
         }
 
-        
+
 /* SVG positioning */
 .svg-container {
   position: absolute;
@@ -1351,7 +1351,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        
+
         z-index: 20;
     }
 
@@ -1452,7 +1452,7 @@
     </style>
 </head>
 <body>
-    
+
     <nav class="main-menu">
         <div class="logo-container">
             <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
@@ -1503,7 +1503,7 @@
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="nav-login">
+            <a href="/perfil" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
                 <span class="nav-text">Perfil</span>
             </a>
@@ -1521,11 +1521,11 @@
         <i class="fas fa-swimmer fitness-icon"></i>
     </div>
 
-        
+
         </section>
         <section class="hero">
     <div class="hero-content">
-       
+
 
       <h1 class="hero-title">Supere seus limites</h1>
        <div class="loading-text">
@@ -1537,8 +1537,8 @@
         <span class="word">resultados</span>
         <span class="word">força</span>
       </div>
-    
-    
+
+
 
   </section>
 
@@ -1575,9 +1575,9 @@
                 </defs>
             </svg>
 
-   
+
 </main>
-   
+
     <!-- Carrossel de Imagens -->
     <section class="carousel-section scroll-reveal">
         <div class="container">
@@ -1600,11 +1600,11 @@
                         <p>Calcule suas necessidades calóricas diárias e receba recomendações personalizadas para seus objetivos.</p>
                     </div>
                 </div>
-                
+
                 <button class="carousel-nav carousel-prev"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-nav carousel-next"><i class="fas fa-chevron-right"></i></button>
             </div>
-            
+
             <div class="carousel-dots">
                 <span class="dot active" data-slide="0"></span>
                 <span class="dot" data-slide="1"></span>
@@ -1684,7 +1684,7 @@
                                 <h2 >Biblioteca de Exercicios</h2>
                                 <p>Exercicios em destaque da nossa imensa biblioteca de exercicios para você realizar em casa ou na academia!</p>
                         </div>
-        
+
 
         <!-- Exercícios em destaque -->
         <div class="cards-row" style="margin-top: 40px;">
@@ -1772,7 +1772,7 @@
                 <h2>O que Nossos Usuários Dizem</h2>
                 <p>Histórias reais de transformação e sucesso. Veja como o Sharkrush mudou a vida de milhares de pessoas.</p>
             </div>
-            
+
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <i class="fas fa-quote-left testimonial-quote"></i>
@@ -1901,7 +1901,7 @@
         function showSlide(index) {
             slides.forEach(slide => slide.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
-            
+
             slides[index].classList.add('active');
             dots[index].classList.add('active');
         }
@@ -1935,10 +1935,10 @@
         function navigateTo(page) {
             const card = event.target.closest('.service-card');
             card.style.transform = 'scale(0.95)';
-            
+
             setTimeout(() => {
                 card.style.transform = '';
-                
+
                 switch(page) {
                     case 'treinos':
                         console.log('Navegando para página de criação de treinos');
@@ -1962,12 +1962,12 @@
         // Animação de contagem para as estatísticas
         function animateCounters() {
             const counters = document.querySelectorAll('.stat-number');
-            
+
             counters.forEach(counter => {
                 const target = parseInt(counter.getAttribute('data-target'));
                 const increment = target / 200;
                 let current = 0;
-                
+
                 const updateCounter = () => {
                     if (current < target) {
                         current += increment;
@@ -1985,7 +1985,7 @@
                         }
                     }
                 };
-                
+
                 updateCounter();
             });
         }
@@ -2000,7 +2000,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    
+
                     // Animar contadores quando a seção de stats ficar visível
                     if (entry.target.classList.contains('stats-section')) {
                         setTimeout(animateCounters, 500);
@@ -2054,16 +2054,16 @@
             card.addEventListener('mouseenter', function() {
                 this.style.borderColor = '#ff3333';
                 this.style.boxShadow = '0 30px 60px rgba(255, 0, 0, 0.4)';
-                
+
                 const icon = this.querySelector('.service-icon');
                 icon.style.transform = 'scale(1.2) rotate(5deg)';
                 icon.style.textShadow = '0 0 20px rgba(255, 0, 0, 0.6)';
             });
-            
+
             card.addEventListener('mouseleave', function() {
                 this.style.borderColor = '#ff0000';
                 this.style.boxShadow = '0 20px 40px rgba(255, 0, 0, 0.2)';
-                
+
                 const icon = this.querySelector('.service-icon');
                 icon.style.transform = 'scale(1)';
                 icon.style.textShadow = 'none';
@@ -2075,7 +2075,7 @@
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-15px) scale(1.02)';
             });
-            
+
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
             });
@@ -2095,7 +2095,7 @@
         // Inicializar animações
         document.addEventListener('DOMContentLoaded', () => {
             animateBackgroundIcons();
-            
+
             // Adicionar delay às animações de entrada
             const cards = document.querySelectorAll('.service-card');
             cards.forEach((card, index) => {
@@ -2114,7 +2114,7 @@
             if (scrollTimeout) {
                 return;
             }
-            
+
             scrollTimeout = setTimeout(() => {
                 requestParallaxUpdate();
                 scrollTimeout = null;

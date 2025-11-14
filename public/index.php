@@ -11,6 +11,7 @@ require_once "../controllers/AuthController.php";
 require_once "../controllers/ClientesController.php";
 require_once "../controllers/ExerciciosController.php";
 require_once "../controllers/TreinosController.php";
+require_once "../controllers/PerfilController.php";
 
 // Pega a URL atual
 $request = $_SERVER["REQUEST_URI"];
@@ -45,6 +46,24 @@ switch ($request) {
     AuthController::checkAuth();
     // Reutiliza a view existente comhomesena.php
     include __DIR__ . "/../views/comcadastro/comhomesena.php";
+    break;
+
+  case "/perfil":
+    AuthController::checkAuth();
+    $controller = new PerfilController();
+    $controller->showProfile();
+    break;
+
+  case "/update-perfil":
+    AuthController::checkAuth();
+    $controller = new PerfilController();
+    $controller->updateProfile();
+    break;
+
+  case "/update-senha":
+    AuthController::checkAuth();
+    $controller = new PerfilController();
+    $controller->updatePassword();
     break;
 
   // CLIENTES
