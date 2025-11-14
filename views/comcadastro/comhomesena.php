@@ -1461,15 +1461,9 @@
         </div>
         <ul>
             <li>
-            <a href="/sharkrush/dashboard" class="active">
-                <i class="fa fa-home nav-icon"></i>
-                <span class="nav-text">Home</span>
-            </a>
-            </li>
-            <li>
-            <a href="/sharkrush/sobre">
-                <i class="fa fa-info-circle nav-icon"></i>
-                <span class="nav-text">Sobre</span>
+            <a href="/sharkrush/perfil" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Perfil</span>
             </a>
             </li>
             <li>
@@ -1497,9 +1491,9 @@
             </a>
             </li>
             <li>
-            <a href="/sharkrush/perfil" class="nav-login">
-                <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
+            <a href="/sharkrush/sobre">
+                <i class="fa fa-info-circle nav-icon"></i>
+                <span class="nav-text">Sobre</span>
             </a>
             </li>
         </ul>

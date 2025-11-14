@@ -26,9 +26,15 @@ if (strpos($request, "?") !== false) {
 $request = str_replace("/sharkrush", "", $request);
 
 switch ($request) {
-  // AUTENTICAÇÃO
+  // HOME PUBLICA
   case "/":
   case "/public/":
+  case "/home":
+    include __DIR__ . "/../views/semcadastro/semhomesena.php";
+    break;
+
+  // AUTENTICAÇÃO
+  case "/login":
     $controller = new AuthController();
     $controller->showLoginForm();
     break;
