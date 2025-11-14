@@ -202,7 +202,7 @@
         .profile-email {
             color: #ccc;
             font-size: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem; /* Diminuído para ajustar espaço */
         }
 
         .profile-stats {
@@ -829,59 +829,6 @@
                     <div class="action-buttons" id="accountButtons" style="display: none;">
                         <button type="button" class="btn btn-secondary" onclick="cancelEdit('account')">Cancelar</button>
                         <button type="button" class="btn btn-primary" onclick="saveAccount()">Salvar Alterações</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Dados Físicos -->
-            <div class="profile-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-heartbeat"></i>
-                        Dados Físicos
-                    </h2>
-                    <button class="edit-btn" onclick="toggleEdit('physical')">
-                        <i class="fas fa-edit"></i>
-                        <span id="editPhysicalText">Editar</span>
-                    </button>
-                </div>
-
-                <div id="successPhysical" class="success-message">
-                    <i class="fas fa-check-circle"></i> Dados físicos atualizados!
-                </div>
-
-                <form id="physicalForm">
-                    <div class="input-group">
-                        <div class="form-group">
-                            <label class="form-label">Peso (kg)</label>
-                            <input type="number" class="form-input" id="weight" value="75" step="0.1" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Altura (cm)</label>
-                            <input type="number" class="form-input" id="height" value="178" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Objetivo</label>
-                        <select class="form-input" id="goal" disabled>
-                            <option value="perder">Perder Peso</option>
-                            <option value="manter" selected>Manter Peso</option>
-                            <option value="ganhar">Ganhar Massa</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nível de Atividade</label>
-                        <select class="form-input" id="activityLevel" disabled>
-                            <option value="sedentario">Sedentário</option>
-                            <option value="leve">Levemente Ativo</option>
-                            <option value="moderado" selected>Moderadamente Ativo</option>
-                            <option value="intenso">Muito Ativo</option>
-                            <option value="extremo">Extremamente Ativo</option>
-                        </select>
-                    </div>
-                    <div class="action-buttons" id="physicalButtons" style="display: none;">
-                        <button type="button" class="btn btn-secondary" onclick="cancelEdit('physical')">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="savePhysical()">Salvar Alterações</button>
                     </div>
                 </form>
             </div>
