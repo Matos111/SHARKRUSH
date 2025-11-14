@@ -941,12 +941,7 @@
                 <span class="nav-text">Sobre</span>
             </a>
             </li>
-            <li>
-            <a href="/sharkrush/gerador-treino" class="active">
-                <i class="fa fa-cogs nav-icon"></i>
-                <span class="nav-text">Gerador</span>
-            </a>
-            </li>
+
             <li>
             <a href="/sharkrush/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
@@ -1015,21 +1010,13 @@
             <div id="area">
                 Área Selecionada: <span id="data">Nenhuma</span>
             </div>
-        </div>        <div class="workout-actions">            <div class="workout-counter">
-                <i class="fas fa-dumbbell counter-icon"></i>
-                <span>Treino: <span id="workoutCount" class="count-number">0</span> exercícios</span>
-            </div>
-            <button class="save-workout-button" id="saveWorkoutButton" onclick="saveWorkout()">
-                <i class="fas fa-save button-icon"></i>
-                <span>SALVAR TREINO</span>
-            </button>
         </div>
 
         <div class="notification" id="notification"></div><div class="exercise-sidebar" id="exerciseSidebar">
             <span class="close-sidebar" onclick="closeSidebar()">&times;</span>
             <h2 class="muscle-title" id="muscleTitle"></h2>
             <div class="exercise-list" id="exerciseList"></div>
-            <button class="save-workout-button active" id="saveWorkoutButton" onclick="saveWorkout()">SALVAR TREINO</button>
+
         </div>
 
         <div class="popup-overlay" id="popupOverlay"></div>
@@ -1134,37 +1121,7 @@
         // Array para armazenar exercícios selecionados
         let selectedExercises = [];
 
-        // Função para adicionar exercício ao treino
-        function addToWorkout(muscle, exerciseName, button) {
-            const exercise = exerciseData[muscle].find(ex => ex.name === exerciseName);
-            const existingIndex = selectedExercises.findIndex(e => e.name === exerciseName);
 
-            if (existingIndex !== -1) {
-                // Remove o exercício se já estiver selecionado
-                selectedExercises.splice(existingIndex, 1);
-                updateWorkoutCounter();
-                showNotification(`${exerciseName} removido do treino!`);
-                // Atualiza todos os botões com o mesmo exercício
-                document.querySelectorAll('.add-button').forEach(btn => {
-                    if (btn.parentElement.parentElement.querySelector('.exercise-title').textContent === exerciseName) {
-                        btn.classList.remove('added');
-                        btn.textContent = 'Adicionar ao Treino';
-                    }
-                });
-            } else if (exercise) {
-                // Adiciona o exercício se não estiver selecionado
-                selectedExercises.push({...exercise, muscle});
-                updateWorkoutCounter();
-                showNotification(`${exerciseName} adicionado ao treino!`);
-                // Atualiza todos os botões com o mesmo exercício
-                document.querySelectorAll('.add-button').forEach(btn => {
-                    if (btn.parentElement.parentElement.querySelector('.exercise-title').textContent === exerciseName) {
-                        btn.classList.add('added');
-                        btn.textContent = 'Adicionado';
-                    }
-                });
-            }
-        }
 
         // Função para atualizar o contador de exercícios
         function updateWorkoutCounter() {
@@ -1282,10 +1239,6 @@
                         <div class="exercise-buttons">                            <button class="exercise-button watch-button" onclick="window.open('${ex.video}','_blank')">
                                 <i class="fas fa-play-circle"></i>
                                 <span>Ver Vídeo</span>
-                            </button>
-                            <button class="exercise-button add-button ${isSelected ? 'added' : ''}" onclick="addToWorkout('${muscle}', '${ex.name}', this)">
-                                <i class="fas ${isSelected ? 'fa-check-circle' : 'fa-plus-circle'}"></i>
-                                <span>${isSelected ? 'Adicionado' : 'Adicionar ao Treino'}</span>
                             </button>
                         </div>
                     `;

@@ -614,55 +614,49 @@
 
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+            <a href="/sharkrush/dashboard" title="Dashboard">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="/dashboard" >
+            <a href="/sharkrush/dashboard">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comsobresena.php">
+            <a href="/sharkrush/sobre">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
             </li>
             <li>
-            <a href="/sharkrush/gerador-treino">
-                <i class="fa fa-cogs nav-icon"></i>
-                <span class="nav-text">Gerador</span>
-            </a>
-            </li>
-            <li>
-            <a href="../comcadastro/combibliotecasena.php">
+            <a href="/sharkrush/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/commeustreinossena.php">
+            <a href="/sharkrush/meus-treinos">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="/calculadora-imc">
+            <a href="/sharkrush/calculadora-imc">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="/calculadora-calorias">
+            <a href="/sharkrush/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="/perfil" class="active">
+            <a href="/sharkrush/perfil" class="active">
                 <i class="fa fa-user nav-icon"></i>
                 <span class="nav-text">Perfil</span>
             </a>
