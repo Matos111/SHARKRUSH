@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Lateral</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Open Sans", Arial, sans-serif;
+            
+        }
+
+        .main-menu {
+            background: #232323;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 55px;
+            overflow: hidden;
+            transition: width 0.2s linear;
+            box-shadow: 1px 0 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .main-menu:hover {
+            width: 250px;
+        }
+
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.14s linear;
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid #4e4e4e;
+        }
+
+        .main-menu li a:hover {
+            color: #000000;
+            background-color: #ff0000;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 55px;
+            height: 36px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background-color: #ff00009d;
+            transition: all 0.2s linear;
+            transform: translateX(5px);
+        }
+
+        .main-menu li:first-child a {
+            border-top: none;
+        }
+
+        .logo-container {
+            height: 100px; /* Ajuste conforme necessário */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-menu">
+        <div class="logo-container">
+            <img src="../SharkTests/images/logoshark.png" alt="Logo" />
+        </div>
+        <ul>
+            <li>
+                <a href="#home">
+                    <i class="fa fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#sobre">
+                    <i class="fa fa-info-circle nav-icon"></i>
+                    <span class="nav-text">Sobre</span>
+                </a>
+            </li>
+            <li>
+                <a href="#gerador">
+                    <i class="fa fa-cogs nav-icon"></i>
+                    <span class="nav-text">Gerador</span>
+                </a>
+            </li>
+            <li>
+                <a href="#biblioteca">
+                    <i class="fa fa-book nav-icon"></i>
+                    <span class="nav-text">Biblioteca</span>
+                </a>
+            </li>
+            <li>
+                <a href="#meus-treinos">
+                    <i class="fa fa-dumbbell nav-icon"></i>
+                    <span class="nav-text">Meus Treinos</span>
+                </a>
+            </li>
+            <li>
+                <a href="#calculadora-imc">
+                    <i class="fa fa-calculator nav-icon"></i>
+                    <span class="nav-text">Calculadora IMC</span>
+                </a>
+            </li>
+            <li>
+                <a href="#calculadora-kalorias">
+                    <i class="fa fa-fire nav-icon"></i>
+                    <span class="nav-text">Calculadora Kalorias</span>
+                </a>
+            </li>
+            <li>
+                <a href="#academias-proximas">
+                    <i class="fa fa-map-marker-alt nav-icon"></i>
+                    <span class="nav-text">Academias Próximas</span>
+                </a>
+            </li>
+
+            
+        </ul>
+    </nav>
+</body>
+</html>
