@@ -2,20 +2,20 @@
 
 // Iniciar sessão com cookie path correto para XAMPP
 if (session_status() === PHP_SESSION_NONE) {
-    // Definir nome da sessão único para o projeto
-    session_name('SHARKRUSH_SESSION');
+  // Definir nome da sessão único para o projeto
+  session_name("SHARKRUSH_SESSION");
 
-    // Configurar cookie ANTES de iniciar a sessão
-    session_set_cookie_params([
-        'lifetime' => 0,
-        'path' => '/',
-        'domain' => '',
-        'secure' => false,
-        'httponly' => true,
-        'samesite' => 'Lax'
-    ]);
+  // Configurar cookie ANTES de iniciar a sessão
+  session_set_cookie_params([
+    "lifetime" => 0,
+    "path" => "/",
+    "domain" => "",
+    "secure" => false,
+    "httponly" => true,
+    "samesite" => "Lax",
+  ]);
 
-    session_start();
+  session_start();
 }
 
 // Debug - remover depois
@@ -26,7 +26,7 @@ ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
 // Define a base URL para links (ajuste conforme ambiente)
-define('BASE_URL', '/SHARKRUSH');
+define("BASE_URL", "/SHARKRUSH");
 
 require_once "../controllers/AuthController.php";
 require_once "../controllers/ClientesController.php";
@@ -44,8 +44,8 @@ if (strpos($request, "?") !== false) {
 }
 
 // Remove o prefixo /SHARKRUSH/public da URL (para XAMPP)
-$request = preg_replace('#^/SHARKRUSH/public#i', '', $request);
-$request = preg_replace('#^/SHARKRUSH#i', '', $request);
+$request = preg_replace("#^/SHARKRUSH/public#i", "", $request);
+$request = preg_replace("#^/SHARKRUSH#i", "", $request);
 
 switch ($request) {
   // HOME PUBLICA
