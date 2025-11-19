@@ -479,7 +479,7 @@
             width: 100px;
             height: auto;
         }
-        
+
         .form-group label, .input-icon {
             user-select: none;
         }
@@ -489,57 +489,45 @@
     <!-- ===== NAVBAR HTML INÍCIO ===== -->
      <nav class="main-menu">
         <div class="logo-container">
-            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+            <a href="<?= BASE_URL ?>/dashboard" title="Dashboard">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="../comcadastro/comhomesena.php">
-                <i class="fa fa-home nav-icon"></i>
-                <span class="nav-text">Home</span>
+            <a href="<?= BASE_URL ?>/perfil" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Perfil</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comsobresena.php">
-                <i class="fa fa-info-circle nav-icon"></i>
-                <span class="nav-text">Sobre</span>
-            </a>
-            </li>
-            <li>
-            <a href="../comcadastro/comgerador.php">
-                <i class="fa fa-cogs nav-icon"></i>
-                <span class="nav-text">Gerador</span>
-            </a>
-            </li>
-            <li>
-            <a href="../comcadastro/combibliotecasena.php" >
+            <a href="<?= BASE_URL ?>/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/commeustreinossena.php" >
+            <a href="<?= BASE_URL ?>/meus-treinos">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php" class="active">
+            <a href="<?= BASE_URL ?>/calculadora-imc" class="active">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php">
+            <a href="<?= BASE_URL ?>/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="nav-login">
-                <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
+            <a href="<?= BASE_URL ?>/sobre">
+                <i class="fa fa-info-circle nav-icon"></i>
+                <span class="nav-text">Sobre</span>
             </a>
             </li>
         </ul>
@@ -553,10 +541,10 @@
     </div>
 
     <div class="container">
-        
+
 
         <div class="calculator-card">
-            
+
             <form id="imcForm">
                 <div class="form-group">
                     <label for="weight">Peso (kg)</label>
@@ -627,7 +615,7 @@
                 this.imcValue = document.getElementById('imcValue');
                 this.imcCategory = document.getElementById('imcCategory');
                 this.imcDescription = document.getElementById('imcDescription');
-                
+
                 this.init();
             }
 
@@ -635,7 +623,7 @@
                 this.form.addEventListener('submit', (e) => this.handleSubmit(e));
                 this.weightInput.addEventListener('input', () => this.clearError('weight'));
                 this.heightInput.addEventListener('input', () => this.clearError('height'));
-                
+
                 // Adiciona efeitos de hover nos inputs
                 [this.weightInput, this.heightInput].forEach(input => {
                     input.addEventListener('focus', () => this.addInputFocus(input));
@@ -667,7 +655,7 @@
 
             handleSubmit(e) {
                 e.preventDefault();
-                
+
                 const weight = parseFloat(this.weightInput.value);
                 const height = parseFloat(this.heightInput.value);
 
@@ -697,7 +685,7 @@
             showError(field, message) {
                 const errorElement = document.getElementById(`${field}Error`);
                 const inputElement = document.getElementById(field);
-                
+
                 errorElement.textContent = message;
                 errorElement.style.display = 'block';
                 inputElement.style.borderColor = '#ff4444';
@@ -707,7 +695,7 @@
             clearError(field) {
                 const errorElement = document.getElementById(`${field}Error`);
                 const inputElement = document.getElementById(field);
-                
+
                 errorElement.style.display = 'none';
                 inputElement.style.borderColor = 'rgba(255, 0, 0, 0.3)';
                 inputElement.style.boxShadow = 'none';
@@ -760,20 +748,20 @@
 
             displayResult(imc) {
                 const categoryInfo = this.getIMCCategory(imc);
-                
+
                 this.imcValue.textContent = imc.toFixed(1);
                 this.imcValue.style.color = categoryInfo.color;
                 this.imcCategory.textContent = categoryInfo.category;
                 this.imcCategory.style.color = categoryInfo.color;
                 this.imcDescription.textContent = categoryInfo.description;
-                
+
                 this.resultContainer.classList.add('show');
             }
 
             addCalculationAnimation() {
                 const button = document.querySelector('.calculate-btn');
                 button.style.transform = 'scale(0.95)';
-                
+
                 setTimeout(() => {
                     button.style.transform = 'scale(1)';
                 }, 150);
@@ -803,7 +791,7 @@
         // Adiciona partículas flutuantes
         function createFloatingParticles() {
             const particleCount = 15;
-            
+
             for (let i = 0; i < particleCount; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
@@ -817,12 +805,12 @@
                         z-index: -1;
                         opacity: 0.6;
                     `;
-                    
+
                     particle.style.left = Math.random() * window.innerWidth + 'px';
                     particle.style.top = window.innerHeight + 'px';
-                    
+
                     document.body.appendChild(particle);
-                    
+
                     const animation = particle.animate([
                         { transform: 'translateY(0px)', opacity: 0.6 },
                         { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
@@ -830,7 +818,7 @@
                         duration: 8000 + Math.random() * 4000,
                         easing: 'linear'
                     });
-                    
+
                     animation.onfinish = () => particle.remove();
                 }, i * 800);
             }

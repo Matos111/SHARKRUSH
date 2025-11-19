@@ -309,11 +309,11 @@
             .container {
                 padding: 15px;
             }
-            
+
             .calculator-card {
                 padding: 25px;
             }
-            
+
             .logo h1 {
                 font-size: 2.5rem;
             }
@@ -544,57 +544,45 @@
     <!-- Sidebar navigation -->
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+            <a href="<?= BASE_URL ?>/dashboard" title="Dashboard">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="../comcadastro/comhomesena.php">
-                <i class="fa fa-home nav-icon"></i>
-                <span class="nav-text">Home</span>
+            <a href="<?= BASE_URL ?>/perfil" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Perfil</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comsobresena.php">
-                <i class="fa fa-info-circle nav-icon"></i>
-                <span class="nav-text">Sobre</span>
-            </a>
-            </li>
-            <li>
-            <a href="../comcadastro/comgerador.php">
-                <i class="fa fa-cogs nav-icon"></i>
-                <span class="nav-text">Gerador</span>
-            </a>
-            </li>
-            <li>
-            <a href="../comcadastro/combibliotecasena.php" >
+            <a href="<?= BASE_URL ?>/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/commeustreinossena.php" >
+            <a href="<?= BASE_URL ?>/meus-treinos">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php">
+            <a href="<?= BASE_URL ?>/calculadora-imc">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php" class="active">
+            <a href="<?= BASE_URL ?>/calculadora-calorias" class="active">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="nav-login">
-                <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
+            <a href="<?= BASE_URL ?>/sobre">
+                <i class="fa fa-info-circle nav-icon"></i>
+                <span class="nav-text">Sobre</span>
             </a>
             </li>
         </ul>
@@ -607,7 +595,7 @@
     </div>
 
     <div class="container">
-       
+
 
         <div class="calculator-card">
             <form id="calorieForm">
@@ -714,7 +702,7 @@
                 this.weightInput.addEventListener('input', () => this.clearError('weight'));
                 this.heightInput.addEventListener('input', () => this.clearError('height'));
                 this.activityInput.addEventListener('input', () => this.clearError('activity'));
-                
+
                 // Adiciona efeitos de hover nos inputs
                 [this.sexInput, this.ageInput, this.weightInput, this.heightInput, this.activityInput].forEach(input => {
                     input.addEventListener('focus', () => this.addInputFocus(input));
@@ -855,7 +843,7 @@
         // Adiciona partículas flutuantes
         function createFloatingParticles() {
             const particleCount = 15;
-            
+
             for (let i = 0; i < particleCount; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
@@ -869,12 +857,12 @@
                         z-index: -1;
                         opacity: 0.6;
                     `;
-                    
+
                     particle.style.left = Math.random() * window.innerWidth + 'px';
                     particle.style.top = window.innerHeight + 'px';
-                    
+
                     document.body.appendChild(particle);
-                    
+
                     const animation = particle.animate([
                         { transform: 'translateY(0px)', opacity: 0.6 },
                         { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
@@ -882,7 +870,7 @@
                         duration: 8000 + Math.random() * 4000,
                         easing: 'linear'
                     });
-                    
+
                     animation.onfinish = () => particle.remove();
                 }, i * 800);
             }

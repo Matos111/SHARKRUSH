@@ -96,7 +96,7 @@ a.atualizar-btn:hover {
 </head>
 <body>
     <h2>Editar Treino</h2>
-<form action="/sharkrush/update-treino" method="post">
+<form action="<?= BASE_URL ?>/update-treino" method="post">
     <input type="hidden" name="id" value="<?= $treinoInfo['id'] ?>">
 
     <label>Cliente:</label>

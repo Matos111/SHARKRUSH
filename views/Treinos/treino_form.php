@@ -95,7 +95,7 @@ a.ver-clientes-btn:hover {
 </head>
 <body>
     <h2>Atribuir Exercício a Cliente</h2>
-<form action="/sharkrush/save-treino" method="post">
+<form action="<?= BASE_URL ?>/save-treino" method="post">
     <label>Cliente:</label>
     <select name="id_cliente" required>
         <?php foreach ($clientesList as $cliente): ?>
@@ -129,6 +129,6 @@ a.ver-clientes-btn:hover {
 
     <button type="submit">Salvar Treino</button>
 </form>
-<a href="/sharkrush/list-treino" class="ver-treinos-btn">Ver todos os Treinos</a> 
+<a href="<?= BASE_URL ?>/list-treino" class="ver-treinos-btn">Ver todos os Treinos</a> 
 </body>
 </html>
