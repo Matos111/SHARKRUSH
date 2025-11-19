@@ -6,6 +6,42 @@
     <title>Seu Companheiro de Fitness</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* Menu Hamburguer */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 32px;
+            height: 4px;
+            margin: 6px auto;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 900px) {
+            .hamburger {
+                display: block;
+            }
+            .main-menu {
+                transform: translateX(-100vw);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .main-menu.open {
+                transform: translateX(0);
+            }
+        }
         * {
             margin: 0;
             padding: 0;
@@ -737,7 +773,8 @@
             transform: translateX(-10px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .main-menu:hover .nav-text {
+        .main-menu:hover .nav-text,
+        .main-menu.open .nav-text {
             opacity: 1;
             transform: translateX(0);
         }
@@ -2107,6 +2144,23 @@
                 requestParallaxUpdate();
                 scrollTimeout = null;
             }, 10);
+        });
+        // Menu Hamburguer
+        const hamburger = document.getElementById('hamburger-menu');
+        const mainMenu = document.getElementById('main-menu');
+        hamburger.addEventListener('click', function() {
+            const isOpen = mainMenu.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Fechar menu ao clicar fora (mobile)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 900) {
+                if (!mainMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    mainMenu.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', false);
+                }
+            }
         });
     </script>
 </body>
