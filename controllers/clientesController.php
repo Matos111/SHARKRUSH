@@ -25,17 +25,18 @@ class ClientesController
     $clientes->senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
 
     // Validações básicas
+    $baseUrl = defined('BASE_URL') ? BASE_URL : '';
     if (!$clientes->email) {
-      header("Location: /cadastro?error=email_invalido");
+      header("Location: " . $baseUrl . "/cadastro?error=email_invalido");
       exit();
     }
 
     if ($clientes->save()) {
       // Redireciona para login com mensagem de sucesso
-      header("Location: /?success=cadastro");
+      header("Location: " . $baseUrl . "/?success=cadastro");
       exit();
     } else {
-      header("Location: /cadastro?error=erro_cadastro");
+      header("Location: " . $baseUrl . "/cadastro?error=erro_cadastro");
       exit();
     }
   }
@@ -81,7 +82,7 @@ class ClientesController
       }
 
       if ($clientes->update()) {
-        header("Location: /list-clientes");
+        header("Location: " . (defined('BASE_URL') ? BASE_URL : '') . "/list-clientes");
         exit();
       } else {
         echo "Erro ao atualizar o Cliente.";
@@ -96,7 +97,7 @@ class ClientesController
       $clientes->nome_completo = $_POST["nome_completo"];
 
       if ($clientes->deleteByTitle()) {
-        header("Location: /sharkrush/list-clientes");
+        header("Location: " . (defined('BASE_URL') ? BASE_URL : '') . "/list-clientes");
         exit();
       } else {
         echo "Erro ao excluir o Cliente.";

@@ -11,7 +11,7 @@ class AuthController
   {
     // Se já estiver logado, redireciona para o dashboard
     if (isset($_SESSION["user_id"])) {
-      header("Location: /dashboard");
+      header("Location: " . (defined('BASE_URL') ? BASE_URL : '') . "/dashboard");
       exit();
     }
 
@@ -25,7 +25,7 @@ class AuthController
   {
     // Validar se é POST
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-      header("Location: /");
+      header("Location: " . (defined('BASE_URL') ? BASE_URL : '') . "/");
       exit();
     }
 
@@ -34,13 +34,14 @@ class AuthController
     $senha = $_POST["senha"] ?? "";
 
     // Validações básicas
+    $baseUrl = defined('BASE_URL') ? BASE_URL : '';
     if (!$email) {
-      header("Location: /login?error=email_invalido");
+      header("Location: " . $baseUrl . "/login?error=email_invalido");
       exit();
     }
 
     if (empty($senha)) {
-      header("Location: /login?error=senha_vazia");
+      header("Location: " . $baseUrl . "/login?error=senha_vazia");
       exit();
     }
 
@@ -48,20 +49,33 @@ class AuthController
     $clienteModel = new Clientes();
     $usuario = $clienteModel->getByEmail($email);
 
+    // Debug - ver o que retornou
+    error_log("getByEmail retornou: " . print_r($usuario, true));
+
     // Verificar se usuário existe
-    if (!$usuario) {
-      header("Location: /login?error=credenciais_invalidas");
+    if (!$usuario || empty($usuario)) {
+      error_log("Login falhou: usuario nao encontrado - email: " . $email);
+      header("Location: " . $baseUrl . "/login?error=credenciais_invalidas");
+      exit();
+    }
+
+    // Verificar se o campo id existe (suporta tanto 'id' quanto 'id_cliente')
+    $userId = $usuario["id"] ?? $usuario["id_cliente"] ?? null;
+    if (!$userId) {
+      error_log("Login falhou: campo id nao existe no resultado - usuario: " . print_r($usuario, true));
+      header("Location: " . $baseUrl . "/login?error=credenciais_invalidas");
       exit();
     }
 
     // Verificar senha
     if (!password_verify($senha, $usuario["senha"])) {
-      header("Location: /login?error=credenciais_invalidas");
+      error_log("Login falhou: senha incorreta - email: " . $email);
+      header("Location: " . $baseUrl . "/login?error=credenciais_invalidas");
       exit();
     }
 
     // Login bem-sucedido - criar sessão
-    $_SESSION["user_id"] = $usuario["id"];
+    $_SESSION["user_id"] = $userId;
     $_SESSION["user_name"] = $usuario["nome_completo"];
     $_SESSION["user_email"] = $usuario["email"];
     $_SESSION["logged_in"] = true;
@@ -69,8 +83,11 @@ class AuthController
     // Verificar se é admin (campo futuro)
     $_SESSION["is_admin"] = isset($usuario["is_admin"]) ? (bool) $usuario["is_admin"] : false;
 
+    // Debug - remover depois
+    error_log("Login OK - user_id: " . $_SESSION["user_id"] . " - session_id: " . session_id());
+
     // Redirecionar para dashboard
-    header("Location: /dashboard");
+    header("Location: " . $baseUrl . "/dashboard");
     exit();
   }
 
@@ -91,7 +108,7 @@ class AuthController
     session_destroy();
 
     // Redirecionar para login
-    header("Location: /");
+    header("Location: " . (defined('BASE_URL') ? BASE_URL : '') . "/");
     exit();
   }
 
@@ -101,8 +118,14 @@ class AuthController
    */
   public static function checkAuth()
   {
+    // Debug temporário - remover depois
+    error_log("checkAuth - session_id: " . session_id());
+    error_log("checkAuth - user_id: " . ($_SESSION["user_id"] ?? "NAO EXISTE"));
+    error_log("checkAuth - logged_in: " . ($_SESSION["logged_in"] ?? "NAO EXISTE"));
+    error_log("checkAuth - session_status: " . session_status());
+
     if (!isset($_SESSION["user_id"]) || !isset($_SESSION["logged_in"])) {
-      header("Location: /login?error=acesso_negado");
+      header("Location: " . (defined('BASE_URL') ? BASE_URL : '') . "/login?error=acesso_negado");
       exit();
     }
     return true;
@@ -116,7 +139,7 @@ class AuthController
     self::checkAuth();
 
     if (!isset($_SESSION["is_admin"]) || !$_SESSION["is_admin"]) {
-      header("Location: /dashboard?error=acesso_negado");
+      header("Location: " . (defined('BASE_URL') ? BASE_URL : '') . "/dashboard?error=acesso_negado");
       exit();
     }
     return true;

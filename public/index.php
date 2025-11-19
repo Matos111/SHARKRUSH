@@ -1,11 +1,32 @@
 <?php
 
-// Iniciar sessão
-session_start();
+// Iniciar sessão com cookie path correto para XAMPP
+if (session_status() === PHP_SESSION_NONE) {
+    // Definir nome da sessão único para o projeto
+    session_name('SHARKRUSH_SESSION');
+
+    // Configurar cookie ANTES de iniciar a sessão
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'domain' => '',
+        'secure' => false,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+
+    session_start();
+}
+
+// Debug - remover depois
+error_log("Session ID: " . session_id() . " - user_id: " . ($_SESSION["user_id"] ?? "none"));
 
 ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
+
+// Define a base URL para links (ajuste conforme ambiente)
+define('BASE_URL', '/SHARKRUSH');
 
 require_once "../controllers/AuthController.php";
 require_once "../controllers/ClientesController.php";
@@ -22,8 +43,9 @@ if (strpos($request, "?") !== false) {
   $request = strstr($request, "?", true);
 }
 
-// Remove o prefixo /sharkrush da URL
-$request = str_replace("/sharkrush", "", $request);
+// Remove o prefixo /SHARKRUSH/public da URL (para XAMPP)
+$request = preg_replace('#^/SHARKRUSH/public#i', '', $request);
+$request = preg_replace('#^/SHARKRUSH#i', '', $request);
 
 switch ($request) {
   // HOME PUBLICA
@@ -53,7 +75,7 @@ switch ($request) {
     AuthController::checkAuth();
     // Verificar se e admin e redirecionar para lista de clientes
     if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"] == 1) {
-      header("Location: /list-clientes");
+      header("Location: " . BASE_URL . "/list-clientes");
       exit();
     }
     // Reutiliza a view existente comhomesena.php para usuarios normais

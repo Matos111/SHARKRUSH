@@ -83,7 +83,7 @@
     <h1>CADASTRO DO USUÁRIO</h1>
 
     <h2>Preencha os dados abaixo:</h2>
-    <form action="/save-clientes" method="POST">
+    <form action="<?php echo defined('BASE_URL') ? BASE_URL : ''; ?>/save-clientes" method="POST">
 
         <label for="nome_completo">Digite o nome completo:</label>
         <input type="text" id="nome_completo" name="nome_completo" required><br><br>
