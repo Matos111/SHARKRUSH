@@ -595,7 +595,7 @@
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
-           
+
         }
 
         .muscle-chip {
@@ -622,11 +622,11 @@
                 width: 100vw;
                 right: -100vw;
             }
-           
+
             .header h1 {
                 font-size: 2rem;
             }
-           
+
             .main-content {
                 padding: 1rem;
             }
@@ -636,7 +636,7 @@
             max-height: 120px;
             max-width: 100%;
             height: auto;
-           
+
         }        .save-workout-button {
             background: linear-gradient(45deg, #2d2d2d, #2f2f2d);
             color: white;
@@ -917,64 +917,52 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-       
+
     </style>
 </head>
-<body>    
-    
+<body>
+
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="../comcadastro/Clientes/clientes_form.php" title="Cadastro">
+            <a href="/sharkrush/dashboard" title="Dashboard">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="../comcadastro/comhomesena.php">
-                <i class="fa fa-home nav-icon"></i>
-                <span class="nav-text">Home</span>
+            <a href="/sharkrush/perfil" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Perfil</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comsobresena.php">
-                <i class="fa fa-info-circle nav-icon"></i>
-                <span class="nav-text">Sobre</span>
-            </a>
-            </li>
-            <li>
-            <a href="../comcadastro/comgerador.php" class="active">
-                <i class="fa fa-cogs nav-icon"></i>
-                <span class="nav-text">Gerador</span>
-            </a>
-            </li>
-            <li>
-            <a href="../comcadastro/combibliotecasena.php">
+            <a href="/sharkrush/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/commeustreinossena.php">
+            <a href="/sharkrush/meus-treinos">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculoimc.php">
+            <a href="/sharkrush/calculadora-imc">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comcalculocalorias.php">
+            <a href="/sharkrush/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="../comcadastro/comperfil.php" class="nav-login">
-                <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
+            <a href="/sharkrush/sobre">
+                <i class="fa fa-info-circle nav-icon"></i>
+                <span class="nav-text">Sobre</span>
             </a>
             </li>
         </ul>
@@ -1015,21 +1003,13 @@
             <div id="area">
                 Área Selecionada: <span id="data">Nenhuma</span>
             </div>
-        </div>        <div class="workout-actions">            <div class="workout-counter">
-                <i class="fas fa-dumbbell counter-icon"></i>
-                <span>Treino: <span id="workoutCount" class="count-number">0</span> exercícios</span>
-            </div>
-            <button class="save-workout-button" id="saveWorkoutButton" onclick="saveWorkout()">
-                <i class="fas fa-save button-icon"></i>
-                <span>SALVAR TREINO</span>
-            </button>
         </div>
 
         <div class="notification" id="notification"></div><div class="exercise-sidebar" id="exerciseSidebar">
             <span class="close-sidebar" onclick="closeSidebar()">&times;</span>
             <h2 class="muscle-title" id="muscleTitle"></h2>
             <div class="exercise-list" id="exerciseList"></div>
-            <button class="save-workout-button active" id="saveWorkoutButton" onclick="saveWorkout()">SALVAR TREINO</button>
+
         </div>
 
         <div class="popup-overlay" id="popupOverlay"></div>
@@ -1133,38 +1113,8 @@
 
         // Array para armazenar exercícios selecionados
         let selectedExercises = [];
-       
-        // Função para adicionar exercício ao treino
-        function addToWorkout(muscle, exerciseName, button) {
-            const exercise = exerciseData[muscle].find(ex => ex.name === exerciseName);
-            const existingIndex = selectedExercises.findIndex(e => e.name === exerciseName);
-           
-            if (existingIndex !== -1) {
-                // Remove o exercício se já estiver selecionado
-                selectedExercises.splice(existingIndex, 1);
-                updateWorkoutCounter();
-                showNotification(`${exerciseName} removido do treino!`);
-                // Atualiza todos os botões com o mesmo exercício
-                document.querySelectorAll('.add-button').forEach(btn => {
-                    if (btn.parentElement.parentElement.querySelector('.exercise-title').textContent === exerciseName) {
-                        btn.classList.remove('added');
-                        btn.textContent = 'Adicionar ao Treino';
-                    }
-                });
-            } else if (exercise) {
-                // Adiciona o exercício se não estiver selecionado
-                selectedExercises.push({...exercise, muscle});
-                updateWorkoutCounter();
-                showNotification(`${exerciseName} adicionado ao treino!`);
-                // Atualiza todos os botões com o mesmo exercício
-                document.querySelectorAll('.add-button').forEach(btn => {
-                    if (btn.parentElement.parentElement.querySelector('.exercise-title').textContent === exerciseName) {
-                        btn.classList.add('added');
-                        btn.textContent = 'Adicionado';
-                    }
-                });
-            }
-        }
+
+
 
         // Função para atualizar o contador de exercícios
         function updateWorkoutCounter() {
@@ -1186,10 +1136,10 @@
             const popup = document.getElementById('selectedExercisesPopup');
             const overlay = document.getElementById('popupOverlay');
             const list = document.getElementById('selectedExerciseList');
-           
+
             // Limpa a lista atual
             list.innerHTML = '';
-           
+
             if (selectedExercises.length === 0) {
                 list.innerHTML = `
                     <div class="selected-exercise-item" style="justify-content: center; color: #666;">
@@ -1217,20 +1167,20 @@
                     list.appendChild(item);
                 });
             }
-           
+
             popup.classList.add('active');
             overlay.classList.add('active');
         }
-       
+
         // Função para fechar o popup
         function closeExercisePopup() {
             const popup = document.getElementById('selectedExercisesPopup');
             const overlay = document.getElementById('popupOverlay');
-           
+
             popup.classList.remove('active');
             overlay.classList.remove('active');
         }
-       
+
         // Função para remover um exercício da lista (usada no popup)
         function removeExercise(index) {
             const exercise = selectedExercises[index];
@@ -1259,15 +1209,15 @@
             const sidebar = document.getElementById('exerciseSidebar');
             const title = document.getElementById('muscleTitle');
             const list = document.getElementById('exerciseList');
-           
+
             if (!sidebar || !title || !list) {
                 console.error('Elementos da sidebar não encontrados');
                 return;
             }
-           
+
             title.textContent = muscleName(muscle);
             list.innerHTML = '';
-           
+
             if (exerciseData[muscle]) {
                 exerciseData[muscle].forEach(ex => {
                     const item = document.createElement('div');
@@ -1282,10 +1232,6 @@
                         <div class="exercise-buttons">                            <button class="exercise-button watch-button" onclick="window.open('${ex.video}','_blank')">
                                 <i class="fas fa-play-circle"></i>
                                 <span>Ver Vídeo</span>
-                            </button>
-                            <button class="exercise-button add-button ${isSelected ? 'added' : ''}" onclick="addToWorkout('${muscle}', '${ex.name}', this)">
-                                <i class="fas ${isSelected ? 'fa-check-circle' : 'fa-plus-circle'}"></i>
-                                <span>${isSelected ? 'Adicionado' : 'Adicionar ao Treino'}</span>
                             </button>
                         </div>
                     `;
@@ -1339,29 +1285,29 @@
             chip.addEventListener('click', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
-               
+
                 const muscle = this.getAttribute('data-muscle');
                 const sidebar = document.getElementById('exerciseSidebar');
-               
+
                 // If clicking on already selected muscle and sidebar is open, close it
                 if (this.classList.contains('active') && sidebar.classList.contains('active')) {
                     closeSidebar();
                     return;
                 }
-               
+
                 // Remove active class from all chips and SVGs
                 document.querySelectorAll('.muscle-chip').forEach(c => c.classList.remove('active'));
                 document.querySelectorAll('.human-body svg').forEach(s => s.classList.remove('active'));
-               
+
                 // Add active class to clicked chip and corresponding SVG
                 this.classList.add('active');
                 const svg = document.querySelector(`.human-body svg[data-position="${muscle}"]`);
                 if (svg) {
                     svg.classList.add('active');
                 }
-               
+
                 document.getElementById('data').textContent = muscleName(muscle);
-               
+
                 // Close and reopen sidebar to ensure clean state
                 sidebar.classList.remove('active');
                 setTimeout(() => {
@@ -1375,7 +1321,7 @@
             const humanBody = e.target.closest('.human-body');
             const muscleChip = e.target.closest('.muscle-chip');
             const exerciseSidebar = e.target.closest('.exercise-sidebar');
-           
+
             // Só fecha se:
             // 1. A sidebar estiver ativa
             // 2. O clique não foi dentro da sidebar
@@ -1390,87 +1336,86 @@
         });        // Função para salvar o treino
         function saveWorkout() {
             const saveButton = document.getElementById('saveWorkoutButton');
-           
+
             if (selectedExercises.length === 0) {
                 saveButton.classList.add('error');
                 setTimeout(() => saveButton.classList.remove('error'), 500);
-                showNotification('Selecione pelo menos um exercício para salvar! ⚠️');
+                showNotification('Selecione pelo menos um exercício para salvar!');
                 return;
             }
-           
-            const workoutName = prompt('Digite um nome para o treino:', 'Meu Treino');
-            if (!workoutName) return;
-           
-            // Adiciona efeito de loading
+
+            const diaSemana = prompt('Digite o dia da semana para o treino (Segunda, Terça, Quarta, Quinta, Sexta, Sábado, Domingo):', 'Segunda');
+            if (!diaSemana) return;
+
+            const diasValidos = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+            if (!diasValidos.includes(diaSemana)) {
+                showNotification('Dia da semana inválido! Use: Segunda, Terça, Quarta, Quinta, Sexta, Sábado ou Domingo');
+                return;
+            }
+
             saveButton.classList.add('saving');
             saveButton.innerHTML = '<i class="fas fa-spinner button-icon"></i><span>Salvando...</span>';
-           
+
             const workoutData = {
-                name: workoutName,
-                date: new Date().toLocaleDateString(),
+                dia_semana: diaSemana,
                 exercises: selectedExercises.map(ex => ({
                     name: ex.name,
                     muscle: ex.muscle,
                     sets: ex.sets,
-                    difficulty: ex.difficulty
+                    difficulty: ex.difficulty,
+                    description: ex.description || ''
                 }))
             };
-           
-            // Salva no localStorage
-            let savedWorkouts = JSON.parse(localStorage.getItem('workouts') || '[]');
-            savedWorkouts.push(workoutData);
-            localStorage.setItem('workouts', JSON.stringify(savedWorkouts));
-              // Simula um pequeno delay para mostrar o loading
-            setTimeout(() => {
-                // Remove efeito de loading
-                saveButton.classList.remove('saving');
-                saveButton.innerHTML = '<i class="fas fa-check button-icon"></i><span>Treino Salvo!</span>';
-               
-                showNotification(`Treino "${workoutName}" salvo com sucesso! 🎉`);
-               
-                // Limpa os exercícios selecionados
-                selectedExercises = [];
-                updateWorkoutCounter();
-               
-                // Atualiza os botões
-                document.querySelectorAll('.add-button').forEach(btn => {
-                    btn.classList.remove('added');
-                    btn.textContent = 'Adicionar ao Treino';
-                });
-               
-                // Restaura o texto original do botão após 2 segundos
-                setTimeout(() => {
-                    saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
-                }, 2000);
-            }, 1000);
-        }
 
-        // Função para salvar o treino
-        function saveWorkout() {
-            if (selectedExercises.length === 0) {
-                alert('Nenhum exercício selecionado para salvar.');
-                return;
-            }
-           
-            const workoutName = prompt('Digite um nome para o treino:', 'Meu Treino');
-            if (!workoutName) return;
-           
-            const workoutData = {
-                name: workoutName,
-                exercises: selectedExercises
-            };
-           
-            // Aqui você pode implementar o salvamento em servidor ou localStorage
-            console.log('Treino salvo:', workoutData);
-            alert('Treino salvo com sucesso!');
+            fetch('/sharkrush/api/save-workout-generator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(workoutData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                saveButton.classList.remove('saving');
+
+                if (data.success) {
+                    saveButton.innerHTML = '<i class="fas fa-check button-icon"></i><span>Treino Salvo!</span>';
+                    showNotification(data.message);
+
+                    selectedExercises = [];
+                    updateWorkoutCounter();
+
+                    document.querySelectorAll('.add-button').forEach(btn => {
+                        btn.classList.remove('added');
+                        btn.innerHTML = '<i class="fas fa-plus"></i>';
+                    });
+
+                    setTimeout(() => {
+                        saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
+                    }, 2000);
+                } else {
+                    saveButton.classList.add('error');
+                    setTimeout(() => saveButton.classList.remove('error'), 500);
+                    showNotification('Erro: ' + data.message);
+                    saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao salvar treino:', error);
+                saveButton.classList.remove('saving');
+                saveButton.classList.add('error');
+                setTimeout(() => saveButton.classList.remove('error'), 500);
+                showNotification('Erro ao salvar treino. Tente novamente.');
+                saveButton.innerHTML = '<i class="fas fa-save button-icon"></i><span>Salvar Treino</span>';
+            });
         }        // Adiciona eventos aos elementos interativos
         document.addEventListener('DOMContentLoaded', () => {
             // Evento para o botão de salvar
             document.getElementById('saveWorkoutButton').addEventListener('click', saveWorkout);
-           
+
             // Evento para mostrar o popup ao clicar no contador
             document.querySelector('.workout-counter').addEventListener('click', showSelectedExercisesPopup);
-           
+
             // Evento para fechar o popup ao clicar no overlay
             document.getElementById('popupOverlay').addEventListener('click', closeExercisePopup);
         });
@@ -1488,9 +1433,9 @@
             const popup = document.getElementById('selectedExercisesPopup');
             const overlay = document.getElementById('popupOverlay');
             const list = document.getElementById('selectedExerciseList');
-           
+
             list.innerHTML = ''; // Limpa a lista
-           
+
             if (selectedExercises.length === 0) {
                 list.innerHTML = `
                     <div class="selected-exercise-item" style="justify-content: center; color: #666;">
@@ -1517,7 +1462,7 @@
                     list.appendChild(item);
                 });
             }
-           
+
             popup.classList.add('active');
             overlay.classList.add('active');
         }
