@@ -25,7 +25,7 @@
             width: 32px;
             height: 4px;
             margin: 6px auto;
-            background: #ff0000;
+            background: #fff;
             border-radius: 2px;
             transition: all 0.3s;
         }
@@ -773,7 +773,8 @@
             transform: translateX(-10px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .main-menu:hover .nav-text {
+        .main-menu:hover .nav-text,
+        .main-menu.open .nav-text {
             opacity: 1;
             transform: translateX(0);
         }
