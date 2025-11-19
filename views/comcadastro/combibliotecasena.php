@@ -81,7 +81,7 @@
         .header h1 {
             font-size: 3rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ffffff, #e1e1e1, #ffffff);
+            background: #ff0000ff;
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
