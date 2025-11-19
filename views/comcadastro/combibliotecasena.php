@@ -908,7 +908,7 @@
         <!-- Braços -->
         <section class="muscle-group">
             <h2 class="muscle-title">
-                <i class="fas fa-arms"></i>
+                <i class="fas fa-dumbbell"></i>
                 Braços
             </h2>
             <div class="exercises-carousel">
