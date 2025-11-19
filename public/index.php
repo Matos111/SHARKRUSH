@@ -1,14 +1,25 @@
 <?php
 
-// Iniciar sessão
-session_start();
-
 ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
 // Carrega configuracao da aplicacao (BASE_PATH, funcoes helper)
 require_once __DIR__ . "/../config/app.php";
+
+// Configura o cookie da sessao com o path correto
+$cookiePath = BASE_PATH ?: '/';
+if (NEEDS_INDEX_PHP) {
+    $cookiePath = BASE_PATH . '/index.php';
+}
+session_set_cookie_params([
+    'path' => $cookiePath,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
+// Iniciar sessão
+session_start();
 
 require_once __DIR__ . "/../controllers/AuthController.php";
 require_once __DIR__ . "/../controllers/ClientesController.php";
