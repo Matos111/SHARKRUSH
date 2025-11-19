@@ -453,7 +453,7 @@
         </div>
         <?php endif; ?>
 
-        <form class="login-form" id="loginForm" method="POST" action="<?php echo defined('BASE_URL') ? BASE_URL : ''; ?>/authenticate">
+        <form class="login-form" id="loginForm" method="POST" action="/authenticate">
             <div class="form-group">
                 <input type="email" class="form-input" id="email" name="email" placeholder="Digite seu e-mail" required>
                 <div class="input-icon">📧</div>
@@ -484,7 +484,7 @@
         </div>
 
         <div class="register-link">
-            Não tem uma conta? <a href="<?php echo defined('BASE_URL') ? BASE_URL : ''; ?>/cadastro">Cadastre-se aqui</a>
+            Não tem uma conta? <a href="/cadastro">Cadastre-se aqui</a>
         </div>
     </div>
 

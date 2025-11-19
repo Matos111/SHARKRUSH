@@ -1441,13 +1441,13 @@
         </div>
         <ul>
             <li>
-            <a href="<?php echo defined('BASE_URL') ? BASE_URL : ''; ?>/" class="active">
+            <a href="/" class="active">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="<?php echo defined('BASE_URL') ? BASE_URL : ''; ?>/login" class="nav-login">
+            <a href="/login" class="nav-login">
                 <i class="fa fa-sign-in-alt nav-icon"></i>
                 <span class="nav-text">Login</span>
             </a>
