@@ -7,6 +7,9 @@ ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
+// Carrega configuracao da aplicacao (BASE_PATH, funcoes helper)
+require_once "../config/app.php";
+
 require_once "../controllers/AuthController.php";
 require_once "../controllers/ClientesController.php";
 require_once "../controllers/ExerciciosController.php";
@@ -14,16 +17,8 @@ require_once "../controllers/TreinosController.php";
 require_once "../controllers/PerfilController.php";
 require_once "../controllers/MeusTreinosController.php";
 
-// Pega a URL atual
-$request = $_SERVER["REQUEST_URI"];
-
-// Remove query string, se existir
-if (strpos($request, "?") !== false) {
-  $request = strstr($request, "?", true);
-}
-
-// Remove o prefixo /sharkrush da URL
-$request = str_replace("/sharkrush", "", $request);
+// Pega o path da requisicao (com deteccao automatica do base path)
+$request = getRequestPath();
 
 switch ($request) {
   // HOME PUBLICA
@@ -53,8 +48,7 @@ switch ($request) {
     AuthController::checkAuth();
     // Verificar se e admin e redirecionar para lista de clientes
     if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"] == 1) {
-      header("Location: /list-clientes");
-      exit();
+      redirect("/list-clientes");
     }
     // Reutiliza a view existente comhomesena.php para usuarios normais
     include __DIR__ . "/../views/comcadastro/comhomesena.php";

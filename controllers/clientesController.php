@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../models/clientes.php";
+require_once __DIR__ . "/../config/app.php";
 
 class ClientesController
 {
@@ -26,17 +27,14 @@ class ClientesController
 
     // Validações básicas
     if (!$clientes->email) {
-      header("Location: /cadastro?error=email_invalido");
-      exit();
+      redirect("/cadastro", ["error" => "email_invalido"]);
     }
 
     if ($clientes->save()) {
       // Redireciona para login com mensagem de sucesso
-      header("Location: /?success=cadastro");
-      exit();
+      redirect("/", ["success" => "cadastro"]);
     } else {
-      header("Location: /cadastro?error=erro_cadastro");
-      exit();
+      redirect("/cadastro", ["error" => "erro_cadastro"]);
     }
   }
 
@@ -81,8 +79,7 @@ class ClientesController
       }
 
       if ($clientes->update()) {
-        header("Location: /list-clientes");
-        exit();
+        redirect("/list-clientes");
       } else {
         echo "Erro ao atualizar o Cliente.";
       }
@@ -96,8 +93,7 @@ class ClientesController
       $clientes->nome_completo = $_POST["nome_completo"];
 
       if ($clientes->deleteByTitle()) {
-        header("Location: /sharkrush/list-clientes");
-        exit();
+        redirect("/list-clientes");
       } else {
         echo "Erro ao excluir o Cliente.";
       }

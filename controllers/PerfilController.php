@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../models/clientes.php";
+require_once __DIR__ . "/../config/app.php";
 
 class PerfilController
 {
@@ -11,8 +12,7 @@ class PerfilController
   {
     // Verificar se há usuário logado
     if (!isset($_SESSION["user_id"])) {
-      header("Location: /?error=acesso_negado");
-      exit();
+      redirect("/", ["error" => "acesso_negado"]);
     }
 
     // Buscar dados do usuário no banco
@@ -21,8 +21,7 @@ class PerfilController
 
     // Se não encontrar o usuário, desloga
     if (!$usuario) {
-      header("Location: /logout");
-      exit();
+      redirect("/logout");
     }
 
     // Buscar contagem de treinos do usuario
@@ -60,14 +59,12 @@ class PerfilController
   {
     // Verificar se é POST
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-      header("Location: /perfil");
-      exit();
+      redirect("/perfil");
     }
 
     // Verificar se há usuário logado
     if (!isset($_SESSION["user_id"])) {
-      header("Location: /?error=acesso_negado");
-      exit();
+      redirect("/", ["error" => "acesso_negado"]);
     }
 
     // Pegar dados do formulário
@@ -82,16 +79,14 @@ class PerfilController
     $usuario = $clienteModel->getById($_SESSION["user_id"]);
 
     if (!$usuario) {
-      header("Location: /logout");
-      exit();
+      redirect("/logout");
     }
 
     // Se email foi fornecido e é diferente, verificar se já existe
     if ($email && $email !== $usuario["email"]) {
       $emailExistente = $clienteModel->getByEmail($email);
       if ($emailExistente && $emailExistente["id"] != $_SESSION["user_id"]) {
-        header("Location: /perfil?error=email_ja_existe");
-        exit();
+        redirect("/perfil", ["error" => "email_ja_existe"]);
       }
     }
 
@@ -108,11 +103,10 @@ class PerfilController
       // Atualizar sessão
       $_SESSION["user_name"] = $nome_completo ?: $usuario["nome_completo"];
       $_SESSION["user_email"] = $email ?: $usuario["email"];
-      header("Location: /perfil?success=atualizado");
+      redirect("/perfil", ["success" => "atualizado"]);
     } else {
-      header("Location: /perfil?error=falha_atualizacao");
+      redirect("/perfil", ["error" => "falha_atualizacao"]);
     }
-    exit();
   }
 
   /**
@@ -122,14 +116,12 @@ class PerfilController
   {
     // Verificar se é POST
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-      header("Location: /perfil");
-      exit();
+      redirect("/perfil");
     }
 
     // Verificar se há usuário logado
     if (!isset($_SESSION["user_id"])) {
-      header("Location: /?error=acesso_negado");
-      exit();
+      redirect("/", ["error" => "acesso_negado"]);
     }
 
     // Pegar dados do formulário
@@ -139,18 +131,15 @@ class PerfilController
 
     // Validações
     if (empty($senhaAtual) || empty($novaSenha) || empty($confirmaSenha)) {
-      header("Location: /perfil?error=campos_vazios");
-      exit();
+      redirect("/perfil", ["error" => "campos_vazios"]);
     }
 
     if ($novaSenha !== $confirmaSenha) {
-      header("Location: /perfil?error=senhas_nao_conferem");
-      exit();
+      redirect("/perfil", ["error" => "senhas_nao_conferem"]);
     }
 
     if (strlen($novaSenha) < 8) {
-      header("Location: /perfil?error=senha_curta");
-      exit();
+      redirect("/perfil", ["error" => "senha_curta"]);
     }
 
     // Buscar cliente
@@ -158,14 +147,12 @@ class PerfilController
     $usuario = $clienteModel->getById($_SESSION["user_id"]);
 
     if (!$usuario) {
-      header("Location: /logout");
-      exit();
+      redirect("/logout");
     }
 
     // Verificar senha atual
     if (!password_verify($senhaAtual, $usuario["senha"])) {
-      header("Location: /perfil?error=senha_incorreta");
-      exit();
+      redirect("/perfil", ["error" => "senha_incorreta"]);
     }
 
     // Atualizar senha
@@ -180,10 +167,9 @@ class PerfilController
     if ($clienteModel->update()) {
       // Encerrar sessão após troca de senha
       session_destroy();
-      header("Location: /?success=senha_alterada");
+      redirect("/", ["success" => "senha_alterada"]);
     } else {
-      header("Location: /perfil?error=falha_atualizacao");
+      redirect("/perfil", ["error" => "falha_atualizacao"]);
     }
-    exit();
   }
 }

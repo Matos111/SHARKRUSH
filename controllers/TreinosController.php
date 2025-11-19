@@ -2,6 +2,7 @@
 require_once __DIR__ . "/../models/treino.php";
 require_once __DIR__ . "/../models/exercicio.php";
 require_once __DIR__ . "/../models/clientes.php";
+require_once __DIR__ . "/../config/app.php";
 
 class TreinosController
 {
@@ -50,8 +51,7 @@ class TreinosController
 
       if ($treino->create($dados)) {
         // Passando um array
-        header("Location: /sharkrush/list-treino"); // Redireciona para a lista geral de treinos
-        exit();
+        redirect("/list-treino");
       } else {
         echo "Erro ao cadastrar o treino.";
       }
@@ -74,16 +74,14 @@ class TreinosController
   {
     $id = filter_var($id_raw, FILTER_VALIDATE_INT); // Valida o ID da URL
     if ($id === false) {
-      header("Location: /sharkrush/error?msg=ID do treino inválido para edição"); // Assumindo rota de erro
-      exit();
+      redirect("/list-treino", ["error" => "id_invalido"]);
     }
 
     $treino = new Treino();
     $treinoInfo = $treino->getById($id);
 
     if (!$treinoInfo) {
-      header("Location: /sharkrush/error?msg=Treino não encontrado para edição"); // Assumindo rota de erro
-      exit();
+      redirect("/list-treino", ["error" => "treino_nao_encontrado"]);
     }
 
     $clientesModel = new Clientes();
@@ -130,8 +128,7 @@ class TreinosController
       ];
 
       if ($treino->update($dados)) {
-        header("Location: /sharkrush/list-treino");
-        exit();
+        redirect("/list-treino");
       } else {
         echo "Erro ao atualizar o treino.";
       }
@@ -153,8 +150,7 @@ class TreinosController
       }
 
       if ($treino->delete($id_to_delete)) {
-        header("Location: /sharkrush/list-treino");
-        exit();
+        redirect("/list-treino");
       } else {
         echo "Erro ao excluir o treino.";
       }

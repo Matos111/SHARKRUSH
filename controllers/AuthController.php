@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../models/clientes.php";
+require_once __DIR__ . "/../config/app.php";
 
 class AuthController
 {
@@ -11,8 +12,7 @@ class AuthController
   {
     // Se já estiver logado, redireciona para o dashboard
     if (isset($_SESSION["user_id"])) {
-      header("Location: /dashboard");
-      exit();
+      redirect("/dashboard");
     }
 
     include __DIR__ . "/../views/semcadastro/semlogin.php";
@@ -25,8 +25,7 @@ class AuthController
   {
     // Validar se é POST
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-      header("Location: /");
-      exit();
+      redirect("/");
     }
 
     // Pegar dados do formulário
@@ -35,13 +34,11 @@ class AuthController
 
     // Validações básicas
     if (!$email) {
-      header("Location: /login?error=email_invalido");
-      exit();
+      redirect("/login", ["error" => "email_invalido"]);
     }
 
     if (empty($senha)) {
-      header("Location: /login?error=senha_vazia");
-      exit();
+      redirect("/login", ["error" => "senha_vazia"]);
     }
 
     // Buscar usuário no banco
@@ -50,14 +47,12 @@ class AuthController
 
     // Verificar se usuário existe
     if (!$usuario) {
-      header("Location: /login?error=credenciais_invalidas");
-      exit();
+      redirect("/login", ["error" => "credenciais_invalidas"]);
     }
 
     // Verificar senha
     if (!password_verify($senha, $usuario["senha"])) {
-      header("Location: /login?error=credenciais_invalidas");
-      exit();
+      redirect("/login", ["error" => "credenciais_invalidas"]);
     }
 
     // Login bem-sucedido - criar sessão
@@ -70,8 +65,7 @@ class AuthController
     $_SESSION["is_admin"] = isset($usuario["is_admin"]) ? (bool) $usuario["is_admin"] : false;
 
     // Redirecionar para dashboard
-    header("Location: /dashboard");
-    exit();
+    redirect("/dashboard");
   }
 
   /**
@@ -91,8 +85,7 @@ class AuthController
     session_destroy();
 
     // Redirecionar para login
-    header("Location: /");
-    exit();
+    redirect("/");
   }
 
   /**
@@ -102,8 +95,7 @@ class AuthController
   public static function checkAuth()
   {
     if (!isset($_SESSION["user_id"]) || !isset($_SESSION["logged_in"])) {
-      header("Location: /login?error=acesso_negado");
-      exit();
+      redirect("/login", ["error" => "acesso_negado"]);
     }
     return true;
   }
@@ -116,8 +108,7 @@ class AuthController
     self::checkAuth();
 
     if (!isset($_SESSION["is_admin"]) || !$_SESSION["is_admin"]) {
-      header("Location: /dashboard?error=acesso_negado");
-      exit();
+      redirect("/dashboard", ["error" => "acesso_negado"]);
     }
     return true;
   }

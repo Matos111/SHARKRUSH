@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/exercicio.php';
+require_once __DIR__ . '/../config/app.php';
 
 class ExerciciosController {
 
@@ -15,10 +16,9 @@ class ExerciciosController {
             $exercicio->descricao = $_POST['descricao'];
 
             if ($exercicio->save()) {
-                header('Location: /sharkrush/list-exercicio');
-                exit();
+                redirect('/list-exercicio');
             } else {
-                echo "Erro ao cadastrar o Exercício.";
+                echo "Erro ao cadastrar o Exercicio.";
             }
         }
     }
@@ -44,10 +44,9 @@ class ExerciciosController {
             $exercicio->descricao = $_POST['descricao'];
 
             if ($exercicio->update()) {
-                header('Location: /sharkrush/list-exercicio');
-                exit();
+                redirect('/list-exercicio');
             } else {
-                echo "Erro ao atualizar o Exercício.";
+                echo "Erro ao atualizar o Exercicio.";
             }
         }
     }
@@ -57,11 +56,10 @@ class ExerciciosController {
             $exercicio = new Exercicio();
             $exercicio->id = $_POST['id'];
 
-            if ($exercicio->deleteById()) { 
-                header('Location: /sharkrush/list-exercicio'); 
-                exit();
+            if ($exercicio->deleteById()) {
+                redirect('/list-exercicio');
             } else {
-                echo "Erro ao excluir o Exercício.";
+                echo "Erro ao excluir o Exercicio.";
             }
         }
     }
