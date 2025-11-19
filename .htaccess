@@ -1,4 +1,10 @@
 RewriteEngine On
+RewriteBase /SHARKRUSH/
+
+# Redireciona para pasta public
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ public/index.php [L]
+
+# Se acessar raiz, redireciona para public
+RewriteRule ^$ public/index.php [L]
