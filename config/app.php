@@ -36,6 +36,14 @@ if (!defined('BASE_PATH')) {
     define('BASE_PATH', detectBasePath());
 }
 
+// Detecta se precisa incluir index.php nas URLs (sem mod_rewrite)
+if (!defined('NEEDS_INDEX_PHP')) {
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    // Se o script name termina com index.php e não está em /public
+    $needsIndex = (basename($scriptName) === 'index.php' && strpos($scriptName, '/public/') === false);
+    define('NEEDS_INDEX_PHP', $needsIndex);
+}
+
 /**
  * Funcao helper para gerar URLs com o base path correto
  *
@@ -59,7 +67,14 @@ function url($path = '/') {
     }
 
     // Concatena base path com o path
-    $fullPath = BASE_PATH . $path;
+    $fullPath = BASE_PATH;
+
+    // Adiciona /index.php se necessario (sem mod_rewrite)
+    if (NEEDS_INDEX_PHP) {
+        $fullPath .= '/index.php';
+    }
+
+    $fullPath .= $path;
 
     // Evita barra dupla
     $fullPath = str_replace('//', '/', $fullPath);

@@ -454,7 +454,7 @@
         </div>
         <?php endif; ?>
 
-        <form class="login-form" id="loginForm" method="POST" action="/authenticate">
+        <form class="login-form" id="loginForm" method="POST" action="<?php echo url('/authenticate'); ?>">
             <div class="form-group">
                 <input type="email" class="form-input" id="email" name="email" placeholder="Digite seu e-mail" required>
                 <div class="input-icon">📧</div>
