@@ -1435,19 +1435,19 @@
     <!-- Sidebar navigation -->
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="/cadastro" title="Cadastro">
+            <a href="/sharkrush/cadastro" title="Cadastro">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="/" class="active">
+            <a href="/sharkrush/" class="active">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="/login" class="nav-login">
+            <a href="/sharkrush/login" class="nav-login">
                 <i class="fa fa-sign-in-alt nav-icon"></i>
                 <span class="nav-text">Login</span>
             </a>
