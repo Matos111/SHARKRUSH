@@ -1435,19 +1435,19 @@
     <!-- Sidebar navigation -->
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="/sharkrush/cadastro" title="Cadastro">
+            <a href="<?= BASE_URL ?>/cadastro" title="Cadastro">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="/sharkrush/" class="active">
+            <a href="<?= BASE_URL ?>/" class="active">
                 <i class="fa fa-home nav-icon"></i>
                 <span class="nav-text">Home</span>
             </a>
             </li>
             <li>
-            <a href="/sharkrush/login" class="nav-login">
+            <a href="<?= BASE_URL ?>/login" class="nav-login">
                 <i class="fa fa-sign-in-alt nav-icon"></i>
                 <span class="nav-text">Login</span>
             </a>
@@ -1881,7 +1881,7 @@
 
             setTimeout(() => {
                 card.style.transform = '';
-                window.location.href = '/sharkrush/login';
+                window.location.href = '<?= BASE_URL ?>/login';
             }, 150);
         }
 

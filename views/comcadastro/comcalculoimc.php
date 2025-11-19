@@ -489,43 +489,43 @@
     <!-- ===== NAVBAR HTML INÍCIO ===== -->
      <nav class="main-menu">
         <div class="logo-container">
-            <a href="/sharkrush/dashboard" title="Dashboard">
+            <a href="<?= BASE_URL ?>/dashboard" title="Dashboard">
                 <img src="../midia/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="/sharkrush/perfil" class="nav-login">
+            <a href="<?= BASE_URL ?>/perfil" class="nav-login">
                 <i class="fa fa-user nav-icon"></i>
                 <span class="nav-text">Perfil</span>
             </a>
             </li>
             <li>
-            <a href="/sharkrush/biblioteca">
+            <a href="<?= BASE_URL ?>/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
                 <span class="nav-text">Biblioteca</span>
             </a>
             </li>
             <li>
-            <a href="/sharkrush/meus-treinos">
+            <a href="<?= BASE_URL ?>/meus-treinos">
                 <i class="fa fa-dumbbell nav-icon"></i>
                 <span class="nav-text">Meus Treinos</span>
             </a>
             </li>
             <li>
-            <a href="/sharkrush/calculadora-imc" class="active">
+            <a href="<?= BASE_URL ?>/calculadora-imc" class="active">
                 <i class="fa fa-calculator nav-icon"></i>
                 <span class="nav-text">Calculadora IMC</span>
             </a>
             </li>
             <li>
-            <a href="/sharkrush/calculadora-calorias">
+            <a href="<?= BASE_URL ?>/calculadora-calorias">
                 <i class="fa fa-fire nav-icon"></i>
                 <span class="nav-text">Calculadora Calorias</span>
             </a>
             </li>
             <li>
-            <a href="/sharkrush/sobre">
+            <a href="<?= BASE_URL ?>/sobre">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
             </a>
