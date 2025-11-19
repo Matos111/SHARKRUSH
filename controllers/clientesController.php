@@ -18,10 +18,14 @@ class ClientesController
       "nome_completo",
       FILTER_SANITIZE_SPECIAL_CHARS,
     );
-    $clientes->cpf = filter_input(INPUT_POST, "cpf", FILTER_SANITIZE_SPECIAL_CHARS);
+    // Remove formatacao do CPF (pontos, tracos, espacos)
+    $cpf_raw = filter_input(INPUT_POST, "cpf", FILTER_SANITIZE_SPECIAL_CHARS);
+    $clientes->cpf = preg_replace('/[^0-9]/', '', $cpf_raw);
     $clientes->endereco = filter_input(INPUT_POST, "endereco", FILTER_SANITIZE_SPECIAL_CHARS);
     $clientes->email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-    $clientes->telefone = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_SPECIAL_CHARS);
+    // Remove formatacao do telefone
+    $telefone_raw = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_SPECIAL_CHARS);
+    $clientes->telefone = preg_replace('/[^0-9]/', '', $telefone_raw);
     $clientes->senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
 
     // Validações básicas
@@ -67,10 +71,12 @@ class ClientesController
       $clientes = new Clientes();
       $clientes->id = $_POST["id"];
       $clientes->nome_completo = $_POST["nome_completo"];
-      $clientes->cpf = $_POST["cpf"];
+      // Remove formatacao do CPF
+      $clientes->cpf = preg_replace('/[^0-9]/', '', $_POST["cpf"]);
       $clientes->endereco = $_POST["endereco"];
       $clientes->email = $_POST["email"];
-      $clientes->telefone = $_POST["telefone"];
+      // Remove formatacao do telefone
+      $clientes->telefone = preg_replace('/[^0-9]/', '', $_POST["telefone"]);
 
       // So atualizar a senha se uma nova senha foi fornecida
       if (!empty($_POST["senha"])) {
