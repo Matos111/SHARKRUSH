@@ -8,14 +8,14 @@ ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
 // Carrega configuracao da aplicacao (BASE_PATH, funcoes helper)
-require_once "../config/app.php";
+require_once __DIR__ . "/../config/app.php";
 
-require_once "../controllers/AuthController.php";
-require_once "../controllers/ClientesController.php";
-require_once "../controllers/ExerciciosController.php";
-require_once "../controllers/TreinosController.php";
-require_once "../controllers/PerfilController.php";
-require_once "../controllers/MeusTreinosController.php";
+require_once __DIR__ . "/../controllers/AuthController.php";
+require_once __DIR__ . "/../controllers/ClientesController.php";
+require_once __DIR__ . "/../controllers/ExerciciosController.php";
+require_once __DIR__ . "/../controllers/TreinosController.php";
+require_once __DIR__ . "/../controllers/PerfilController.php";
+require_once __DIR__ . "/../controllers/MeusTreinosController.php";
 
 // Pega o path da requisicao (com deteccao automatica do base path)
 $request = getRequestPath();
