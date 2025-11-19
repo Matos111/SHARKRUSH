@@ -7,13 +7,9 @@ error_reporting(E_ALL);
 // Carrega configuracao da aplicacao (BASE_PATH, funcoes helper)
 require_once __DIR__ . "/../config/app.php";
 
-// Configura o cookie da sessao com o path correto
-$cookiePath = BASE_PATH ?: '/';
-if (NEEDS_INDEX_PHP) {
-    $cookiePath = BASE_PATH . '/index.php';
-}
+// Configura o cookie da sessao com path raiz (funciona em qualquer ambiente)
 session_set_cookie_params([
-    'path' => $cookiePath,
+    'path' => '/',
     'httponly' => true,
     'samesite' => 'Lax'
 ]);
