@@ -108,6 +108,11 @@ function getRequestPath() {
         $request = preg_replace($pattern, '', $request);
     }
 
+    // Remove /index.php do inicio (para acesso direto sem mod_rewrite)
+    if (strpos($request, '/index.php') === 0) {
+        $request = substr($request, 10); // Remove '/index.php'
+    }
+
     // Garante que comeca com /
     if (empty($request) || $request[0] !== '/') {
         $request = '/' . $request;
