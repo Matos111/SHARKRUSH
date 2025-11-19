@@ -704,7 +704,7 @@
         <!-- Header do perfil -->
         <div class="profile-header">
             <!-- Botão Sair (Logout) -->
-            <button class="btn btn-secondary" style="position: absolute; top: 2rem; right: 2rem; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 12px;" onclick="window.location.href='/logout'">
+            <button class="btn btn-secondary" style="position: absolute; top: 2rem; right: 2rem; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 12px;" onclick="window.location.href='/SHARKRUSH/logout'">
                 <i class="fas fa-sign-out-alt" style="margin-right: 0.7rem; font-size: 1.5rem;"></i> Sair
             </button>
 

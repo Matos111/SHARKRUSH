@@ -243,19 +243,19 @@ tr:hover {
 <!-- ===== NAVBAR HTML INICIO ===== -->
 <nav class="main-menu">
     <div class="logo-container">
-        <a href="/dashboard" title="Dashboard">
+        <a href="/SHARKRUSH/dashboard" title="Dashboard">
             <img src="../midia/Logos/logoshark.png" alt="Logo"/>
         </a>
     </div>
     <ul>
         <li>
-            <a href="/list-clientes" class="active">
+            <a href="/SHARKRUSH/list-clientes" class="active">
                 <i class="fa fa-users nav-icon"></i>
                 <span class="nav-text">Clientes</span>
             </a>
         </li>
         <li>
-            <a href="/logout" class="nav-logout">
+            <a href="/SHARKRUSH/logout" class="nav-logout">
                 <i class="fa fa-sign-out-alt nav-icon"></i>
                 <span class="nav-text">Sair</span>
             </a>
