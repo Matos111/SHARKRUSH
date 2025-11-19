@@ -512,7 +512,7 @@
 
         <!-- Formulário -->
         <div class="form-card">
-            <form action="/update-clientes" method="POST">
+            <form action="<?= BASE_URL ?>/update-clientes" method="POST">
                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($clientesInfo['id'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
 
                 <!-- Seção: Dados Pessoais -->

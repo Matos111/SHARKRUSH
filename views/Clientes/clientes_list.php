@@ -284,10 +284,10 @@ tr:hover {
             <td><?php echo htmlspecialchars($cliente["email"]); ?></td>
             <td><?php echo htmlspecialchars($cliente["telefone"]); ?></td>
             <td>
-                <a href="/update-clientes/<?php echo $cliente[
+                <a href="<?= BASE_URL ?>/update-clientes/<?php echo $cliente[
                   "id"
                 ]; ?>" class="btn btn-edit">Atualizar</a>
-                <form action="/delete-clientes" method="POST" style="display:inline;">
+                <form action="<?= BASE_URL ?>/delete-clientes" method="POST" style="display:inline;">
                     <input type="hidden" name="nome_completo" value="<?php echo htmlspecialchars(
                       $cliente["nome_completo"],
                     ); ?>">
@@ -303,6 +303,6 @@ tr:hover {
     <?php endif; ?>
 </table>
 
-<a href="/cadastro" class="btn btn-add">Cadastrar novo Cliente</a>
+<a href="<?= BASE_URL ?>/cadastro" class="btn btn-add">Cadastrar novo Cliente</a>
 </body>
 </html>

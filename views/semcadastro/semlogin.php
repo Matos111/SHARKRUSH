@@ -453,7 +453,7 @@
         </div>
         <?php endif; ?>
 
-        <form class="login-form" id="loginForm" method="POST" action="/authenticate">
+        <form class="login-form" id="loginForm" method="POST" action="<?= BASE_URL ?>/authenticate">
             <div class="form-group">
                 <input type="email" class="form-input" id="email" name="email" placeholder="Digite seu e-mail" required>
                 <div class="input-icon">📧</div>
@@ -484,7 +484,7 @@
         </div>
 
         <div class="register-link">
-            Não tem uma conta? <a href="/cadastro">Cadastre-se aqui</a>
+            Não tem uma conta? <a href="<?= BASE_URL ?>/cadastro">Cadastre-se aqui</a>
         </div>
     </div>
 

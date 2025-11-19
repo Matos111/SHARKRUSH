@@ -458,7 +458,7 @@
             <div class="tagline">Comece sua jornada fitness hoje</div>
         </div>
 
-        <form class="register-form" id="registerForm" method="POST" action="/save-clientes">
+        <form class="register-form" id="registerForm" method="POST" action="<?= BASE_URL ?>/save-clientes">
             <div class="form-group full-width">
                 <input type="text" class="form-input" id="nome_completo" name="nome_completo" placeholder="Nome completo" required>
                 <div class="input-icon">👤</div>
