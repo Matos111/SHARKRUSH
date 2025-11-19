@@ -745,6 +745,2510 @@
             background: #444;
             color: #fff;
         }
+
+        /* Novas Estilos para os Exercícios */
+        .exercise-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-image img {
+            transform: scale(1.1);
+        }
+
+        .exercise-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .exercise-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .exercise-details {
+            font-size: 0.9rem;
+            color: #d1d1d1;
+            margin-bottom: 10px;
+        }
+
+        .exercise-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            color: #b1b1b1;
+        }
+
+        .difficulty {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .difficulty.beginner {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+
+        .difficulty.intermediate {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .difficulty.advanced {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+
+        /* Estilos para os GIFs dos Exercícios */
+        .exercise-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-gif {
+            opacity: 1;
+        }
+
+        /* Estilos para o Carrossel de Exercícios */
+        .exercises-carousel {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+
+        .exercises-container {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        /* Modal de Exercício */
+        .exercise-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ff0000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-gif {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-instructions {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .modal-instructions h4 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .modal-instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-instructions li {
+            color: #cccccc;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .modal-instructions li::before {
+            content: '▸';
+            color: #ff0000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .muscle-title {
+                font-size: 1.6rem;
+            }
+
+            .exercise-card {
+                min-width: 250px;
+                height: 350px;
+            }
+
+            .exercises-container {
+                gap: 15px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .exercise-card {
+                min-width: 220px;
+                height: 320px;
+            }
+
+            .exercise-image {
+                height: 160px;
+            }
+
+            .exercise-info {
+                padding: 15px;
+                height: 160px;
+            }
+
+            .exercise-name {
+                font-size: 1.1rem;
+            }
+        }
+
+         .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+
+        .main-menu li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0000;
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu li:hover a::before {
+            transform: scaleY(1);
+        }
+
+        .main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0303;
+            transform: scaleY(1);
+        }
+        .main-menu li a.active .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+
+        .sidebar-workout-actions {
+            margin: 32px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .sidebar-workout-counter {
+            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
+            color: #fff;
+            border-radius: 18px;
+            padding: 18px 32px 18px 28px;
+            font-size: 1.18rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
+            letter-spacing: 0.5px;
+            margin-bottom: 0;
+            border: none;
+            min-width: 230px;
+            justify-content: center;
+        }
+        .sidebar-workout-counter .counter-icon {
+            font-size: 1.6rem;
+            margin-right: 2px;
+        }
+        .sidebar-workout-counter .count-number {
+            background: #e53935;
+            color: #fff;
+            border-radius: 9px;
+            padding: 2px 13px 2px 13px;
+            font-size: 1.08em;
+            font-weight: 700;
+            margin: 0 7px;
+            display: inline-block;
+            min-width: 22px;
+            text-align: center;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .sidebar-save-btn {
+            width: 100%;
+            padding: 17px 0 17px 0;
+            background: #232323;
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px #0004;
+            transition: background 0.18s, color 0.18s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+        .sidebar-save-btn:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        /* Novas Estilos para os Exercícios */
+        .exercise-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-image img {
+            transform: scale(1.1);
+        }
+
+        .exercise-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .exercise-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .exercise-details {
+            font-size: 0.9rem;
+            color: #d1d1d1;
+            margin-bottom: 10px;
+        }
+
+        .exercise-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            color: #b1b1b1;
+        }
+
+        .difficulty {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .difficulty.beginner {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+
+        .difficulty.intermediate {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .difficulty.advanced {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+
+        /* Estilos para os GIFs dos Exercícios */
+        .exercise-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-gif {
+            opacity: 1;
+        }
+
+        /* Estilos para o Carrossel de Exercícios */
+        .exercises-carousel {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+
+        .exercises-container {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        /* Modal de Exercício */
+        .exercise-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ff0000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-gif {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-instructions {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .modal-instructions h4 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .modal-instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-instructions li {
+            color: #cccccc;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .modal-instructions li::before {
+            content: '▸';
+            color: #ff0000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .muscle-title {
+                font-size: 1.6rem;
+            }
+
+            .exercise-card {
+                min-width: 250px;
+                height: 350px;
+            }
+
+            .exercises-container {
+                gap: 15px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .exercise-card {
+                min-width: 220px;
+                height: 320px;
+            }
+
+            .exercise-image {
+                height: 160px;
+            }
+
+            .exercise-info {
+                padding: 15px;
+                height: 160px;
+            }
+
+            .exercise-name {
+                font-size: 1.1rem;
+            }
+        }
+
+         .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+
+        .main-menu li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0000;
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu li:hover a::before {
+            transform: scaleY(1);
+        }
+
+        .main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0303;
+            transform: scaleY(1);
+        }
+        .main-menu li a.active .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+
+        .sidebar-workout-actions {
+            margin: 32px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .sidebar-workout-counter {
+            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
+            color: #fff;
+            border-radius: 18px;
+            padding: 18px 32px 18px 28px;
+            font-size: 1.18rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
+            letter-spacing: 0.5px;
+            margin-bottom: 0;
+            border: none;
+            min-width: 230px;
+            justify-content: center;
+        }
+        .sidebar-workout-counter .counter-icon {
+            font-size: 1.6rem;
+            margin-right: 2px;
+        }
+        .sidebar-workout-counter .count-number {
+            background: #e53935;
+            color: #fff;
+            border-radius: 9px;
+            padding: 2px 13px 2px 13px;
+            font-size: 1.08em;
+            font-weight: 700;
+            margin: 0 7px;
+            display: inline-block;
+            min-width: 22px;
+            text-align: center;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .sidebar-save-btn {
+            width: 100%;
+            padding: 17px 0 17px 0;
+            background: #232323;
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px #0004;
+            transition: background 0.18s, color 0.18s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+        .sidebar-save-btn:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        /* Novas Estilos para os Exercícios */
+        .exercise-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-image img {
+            transform: scale(1.1);
+        }
+
+        .exercise-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .exercise-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .exercise-details {
+            font-size: 0.9rem;
+            color: #d1d1d1;
+            margin-bottom: 10px;
+        }
+
+        .exercise-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            color: #b1b1b1;
+        }
+
+        .difficulty {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .difficulty.beginner {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+
+        .difficulty.intermediate {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .difficulty.advanced {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+
+        /* Estilos para os GIFs dos Exercícios */
+        .exercise-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-gif {
+            opacity: 1;
+        }
+
+        /* Estilos para o Carrossel de Exercícios */
+        .exercises-carousel {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+
+        .exercises-container {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        /* Modal de Exercício */
+        .exercise-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ff0000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-gif {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-instructions {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .modal-instructions h4 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .modal-instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-instructions li {
+            color: #cccccc;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .modal-instructions li::before {
+            content: '▸';
+            color: #ff0000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .muscle-title {
+                font-size: 1.6rem;
+            }
+
+            .exercise-card {
+                min-width: 250px;
+                height: 350px;
+            }
+
+            .exercises-container {
+                gap: 15px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .exercise-card {
+                min-width: 220px;
+                height: 320px;
+            }
+
+            .exercise-image {
+                height: 160px;
+            }
+
+            .exercise-info {
+                padding: 15px;
+                height: 160px;
+            }
+
+            .exercise-name {
+                font-size: 1.1rem;
+            }
+        }
+
+         .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+
+        .main-menu li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0000;
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu li:hover a::before {
+            transform: scaleY(1);
+        }
+
+        .main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0303;
+            transform: scaleY(1);
+        }
+        .main-menu li a.active .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+
+        .sidebar-workout-actions {
+            margin: 32px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .sidebar-workout-counter {
+            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
+            color: #fff;
+            border-radius: 18px;
+            padding: 18px 32px 18px 28px;
+            font-size: 1.18rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
+            letter-spacing: 0.5px;
+            margin-bottom: 0;
+            border: none;
+            min-width: 230px;
+            justify-content: center;
+        }
+        .sidebar-workout-counter .counter-icon {
+            font-size: 1.6rem;
+            margin-right: 2px;
+        }
+        .sidebar-workout-counter .count-number {
+            background: #e53935;
+            color: #fff;
+            border-radius: 9px;
+            padding: 2px 13px 2px 13px;
+            font-size: 1.08em;
+            font-weight: 700;
+            margin: 0 7px;
+            display: inline-block;
+            min-width: 22px;
+            text-align: center;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .sidebar-save-btn {
+            width: 100%;
+            padding: 17px 0 17px 0;
+            background: #232323;
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px #0004;
+            transition: background 0.18s, color 0.18s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+        .sidebar-save-btn:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        /* Novas Estilos para os Exercícios */
+        .exercise-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-image img {
+            transform: scale(1.1);
+        }
+
+        .exercise-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .exercise-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .exercise-details {
+            font-size: 0.9rem;
+            color: #d1d1d1;
+            margin-bottom: 10px;
+        }
+
+        .exercise-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            color: #b1b1b1;
+        }
+
+        .difficulty {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .difficulty.beginner {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+
+        .difficulty.intermediate {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .difficulty.advanced {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+
+        /* Estilos para os GIFs dos Exercícios */
+        .exercise-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-gif {
+            opacity: 1;
+        }
+
+        /* Estilos para o Carrossel de Exercícios */
+        .exercises-carousel {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+
+        .exercises-container {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        /* Modal de Exercício */
+        .exercise-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ff000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-gif {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-instructions {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .modal-instructions h4 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .modal-instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-instructions li {
+            color: #cccccc;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .modal-instructions li::before {
+            content: '▸';
+            color: #ff0000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .muscle-title {
+                font-size: 1.6rem;
+            }
+
+            .exercise-card {
+                min-width: 250px;
+                height: 350px;
+            }
+
+            .exercises-container {
+                gap: 15px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .exercise-card {
+                min-width: 220px;
+                height: 320px;
+            }
+
+            .exercise-image {
+                height: 160px;
+            }
+
+            .exercise-info {
+                padding: 15px;
+                height: 160px;
+            }
+
+            .exercise-name {
+                font-size: 1.1rem;
+            }
+        }
+
+         .main-menu {
+            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 70px;
+            overflow: hidden;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1002;
+        }
+
+        .main-menu:hover {
+            width: 280px;
+            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
+        }
+
+        .main-menu ul {
+            margin: 7px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li a {
+            position: relative;
+            width: 100%;
+            display: table;
+            color: #c5c5c5;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Strait', sans-serif;
+            border-top: 1px solid rgba(78, 78, 78, 0.2);
+            padding: 10px 0;
+            height: 55px;
+            overflow: hidden;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 70px;
+            height: 55px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 26px;
+            padding: 12px 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 16px;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .main-menu li:hover > a {
+            color: #ffffff;
+            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-menu li:hover .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
+        }
+
+        .main-menu li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0000;
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-menu li:hover a::before {
+            transform: scaleY(1);
+        }
+
+        .main-menu li a.active {
+            background: linear-gradient(45deg, #373737 0%, #292929 100%);
+            color: #ffffff;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .main-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #ff0303;
+            transform: scaleY(1);
+        }
+        .main-menu li a.active .nav-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+        }
+
+        .sidebar-workout-actions {
+            margin: 32px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .sidebar-workout-counter {
+            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
+            color: #fff;
+            border-radius: 18px;
+            padding: 18px 32px 18px 28px;
+            font-size: 1.18rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
+            letter-spacing: 0.5px;
+            margin-bottom: 0;
+            border: none;
+            min-width: 230px;
+            justify-content: center;
+        }
+        .sidebar-workout-counter .counter-icon {
+            font-size: 1.6rem;
+            margin-right: 2px;
+        }
+        .sidebar-workout-counter .count-number {
+            background: #e53935;
+            color: #fff;
+            border-radius: 9px;
+            padding: 2px 13px 2px 13px;
+            font-size: 1.08em;
+            font-weight: 700;
+            margin: 0 7px;
+            display: inline-block;
+            min-width: 22px;
+            text-align: center;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .sidebar-save-btn {
+            width: 100%;
+            padding: 17px 0 17px 0;
+            background: #232323;
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px #0004;
+            transition: background 0.18s, color 0.18s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+        .sidebar-save-btn:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        /* Novas Estilos para os Exercícios */
+        .exercise-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-image img {
+            transform: scale(1.1);
+        }
+
+        .exercise-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .exercise-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .exercise-details {
+            font-size: 0.9rem;
+            color: #d1d1d1;
+            margin-bottom: 10px;
+        }
+
+        .exercise-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            color: #b1b1b1;
+        }
+
+        .difficulty {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .difficulty.beginner {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+
+        .difficulty.intermediate {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .difficulty.advanced {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+
+        /* Estilos para os GIFs dos Exercícios */
+        .exercise-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-gif {
+            opacity: 1;
+        }
+
+        /* Estilos para o Carrossel de Exercícios */
+        .exercises-carousel {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+
+        .exercises-container {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        /* Modal de Exercício */
+        .exercise-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ff0000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-gif {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-instructions {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .modal-instructions h4 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .modal-instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-instructions li {
+            color: #cccccc;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .modal-instructions li::before {
+            content: '▸';
+            color: #ff0000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Novas Estilos para os Exercícios - Grupo Peito e Ombros */
+        .exercise-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-image img {
+            transform: scale(1.1);
+        }
+
+        .exercise-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .exercise-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .exercise-details {
+            font-size: 0.9rem;
+            color: #d1d1d1;
+            margin-bottom: 10px;
+        }
+
+        .exercise-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.8rem;
+            color: #b1b1b1;
+        }
+
+        .difficulty {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .difficulty.beginner {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+
+        .difficulty.intermediate {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .difficulty.advanced {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+
+        /* Estilos para os GIFs dos Exercícios */
+        .exercise-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-gif {
+            opacity: 1;
+        }
+
+        /* Peito e Ombros */
+        <section class="muscle-group">
+            <div class="exercise-card">
+                <div class="exercise-image">
+                    <img src="views/midia/img-gif_biblioteca/supino-reto-img.png" alt="Supino Reto">
+                    <div class="exercise-gif">
+                        <img src="views/midia/img-gif_biblioteca/supino-reto-gif.gif" alt="Supino Reto GIF">
+                    </div>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Supino Reto</h3>
+                    <p class="exercise-details">Exercício para peitoral.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="exercise-image">
+                    <img src="views/midia/img-gif_biblioteca/supino-inclinado-img.png" alt="Supino Inclinado">
+                    <div class="exercise-gif">
+                        <img src="views/midia/img-gif_biblioteca/supino-inclinado-gif.gif" alt="Supino Inclinado GIF">
+                    </div>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Supino Inclinado</h3>
+                    <p class="exercise-details">Exercício para peitoral superior.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="exercise-image">
+                    <img src="views/midia/img-gif_biblioteca/crucifixo-img.png" alt="Crucifixo">
+                    <div class="exercise-gif">
+                        <img src="views/midia/img-gif_biblioteca/crucifixo-gif.gif" alt="Crucifixo GIF">
+                    </div>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Crucifixo</h3>
+                    <p class="exercise-details">Exercício para peitoral.</p>
+                </div>
+            </div>
+        </section>
     </style>
 </head>
 <body>
@@ -822,16 +3326,14 @@
                 <div class="exercises-container" id="chest-container">
                     <div class="exercise-card" onclick="openExerciseModal('Supino Reto', 'Exercício fundamental para desenvolvimento do peitoral maior', 'beginner', '3-4 séries', 'https://example.com/supino-reto.gif')">
                         <div class="exercise-image">
-                            <i class="fas fa-hand-fist exercise-placeholder"></i>
-                            <button class="play-button" type="button" onclick="event.stopPropagation(); openExerciseModal('Supino Reto', 'Exercício fundamental para desenvolvimento do peitoral maior', 'beginner', '3-4 séries', 'https://example.com/supino-reto.gif')"><i class="fas fa-play"></i></button>
+                            <img src="views/midia/img-gif_biblioteca/supino-reto-img.png" alt="Supino Reto">
+                            <div class="exercise-gif">
+                                <img src="views/midia/img-gif_biblioteca/supino-reto-gif.gif" alt="Supino Reto GIF">
+                            </div>
                         </div>
                         <div class="exercise-info">
                             <h3 class="exercise-name">Supino Reto</h3>
-                            <p class="exercise-details">Força e volume no peitoral</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">3-4 séries</span>
-                            </div>
+                            <p class="exercise-details">Exercício para peitoral.</p>
                         </div>
                     </div>
 
@@ -1096,24 +3598,23 @@
                 <div class="exercises-container" id="legs-container">
                     <div class="exercise-card" onclick="openExerciseModal('Agachamento', 'Rei dos exercícios para pernas', 'beginner', '3-4 séries',)">
                         <div class="exercise-image">
-                            <i class="fas fa-running exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
+                            <img src="views/midia/img-gif_biblioteca/agachamento-img.png" alt="Agachamento">
+                            <div class="exercise-gif">
+                                <img src="views/midia/img-gif_biblioteca/agachamento-gif.gif" alt="Agachamento GIF">
+                            </div>
                         </div>
                         <div class="exercise-info">
                             <h3 class="exercise-name">Agachamento</h3>
-                            <p class="exercise-details">Pernas e glúteos em foco</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">3-4 séries</span>
-                            </div>
-
+                            <p class="exercise-details">Exercício para quadríceps e glúteos.</p>
                         </div>
                     </div>
 
                     <div class="exercise-card" onclick="openExerciseModal('Levantamento Terra', 'Composto para posterior', 'intermediate', '3 séries', 'https://example.com/levantamento-terra.gif')">
                         <div class="exercise-image">
-                            <i class="fas fa-running exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
+                            <img src="views/midia/img-gif_biblioteca/levantamento-terra-img.png" alt="Levantamento Terra">
+                            <div class="exercise-gif">
+                                <img src="views/midia/img-gif_biblioteca/levantamento-terra-gif.gif" alt="Levantamento Terra GIF">
+                            </div>
                         </div>
                         <div class="exercise-info">
                             <h3 class="exercise-name">Levantamento Terra</h3>
@@ -1128,8 +3629,10 @@
 
                     <div class="exercise-card" onclick="openExerciseModal('Afundo', 'Unilateral para equilíbrio', 'beginner', '3x12 cada', 'https://example.com/afundo.gif')">
                         <div class="exercise-image">
-                            <i class="fas fa-running exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
+                            <img src="views/midia/img-gif_biblioteca/afundo-img.png" alt="Afundo">
+                            <div class="exercise-gif">
+                                <img src="views/midia/img-gif_biblioteca/afundo-gif.gif" alt="Afundo GIF">
+                            </div>
                         </div>
                         <div class="exercise-info">
                             <h3 class="exercise-name">Afundo</h3>
@@ -1144,8 +3647,10 @@
 
                     <div class="exercise-card" onclick="openExerciseModal('Stiff', 'Isolamento posterior', 'intermediate', '3 séries', 'https://example.com/stiff.gif')">
                         <div class="exercise-image">
-                            <i class="fas fa-running exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
+                            <img src="views/midia/img-gif_biblioteca/stiff-img.png" alt="Stiff">
+                            <div class="exercise-gif">
+                                <img src="views/midia/img-gif_biblioteca/stiff-gif.gif" alt="Stiff GIF">
+                            </div>
                         </div>
                         <div class="exercise-info">
                             <h3 class="exercise-name">Stiff</h3>
@@ -1160,31 +3665,17 @@
 
                     <div class="exercise-card" onclick="openExerciseModal('Panturrilha em Pé', 'Isolamento para panturrilhas', 'beginner', '4x15-20', 'https://example.com/panturrilha.gif')">
                         <div class="exercise-image">
-                            <i class="fas fa-running exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
+                            <img src="views/midia/img-gif_biblioteca/panturrilha-img.png" alt="Panturrilha em Pé">
+                            <div class="exercise-gif">
+                                <img src="views/midia/img-gif_biblioteca/panturrilha-gif.gif" alt="Panturrilha em Pé GIF">
+                            </div>
                         </div>
                         <div class="exercise-info">
                             <h3 class="exercise-name">Panturrilha em Pé</h3>
-                            <p class="exercise-details">Panturrilhas definidas e fortes</p>
+                            <p class="exercise-details">Panturrilhas mais fortes</p>
                             <div class="exercise-meta">
                                 <span class="difficulty beginner">Iniciante</span>
                                 <span class="exercise-duration">4x15-20</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Pistol Squat', 'Agachamento unilateral', 'advanced', '3x5 cada', 'https://example.com/pistol-squat.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-running exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Pistol Squat</h3>
-                            <p class="exercise-details">Agachamento unilateral avançado</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty advanced">Avançado</span>
-                                <span class="exercise-duration">3x5 cada</span>
                             </div>
 
                         </div>
@@ -1197,353 +3688,36 @@
         </section>
     </div>
 
-    <!-- Modal de exercício -->
-    <div class="exercise-modal" id="exerciseModal">
+    <!-- Modal de Exercício -->
+    <div class="exercise-modal" id="exercise-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Nome do Exercício</h3>
+                <h2 class="modal-title" id="modal-exercise-name">Nome do Exercício</h2>
                 <button class="close-modal" onclick="closeExerciseModal()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <img class="modal-gif" id="modalGif" src="" alt="Demonstração do exercício">
-                <p class="modal-description" id="modalDescription">Descrição do exercício...</p>
-                <div class="modal-instructions">
-                    <h4><i class="fas fa-list"></i> Como executar:</h4>
-                    <ul id="modalInstructions">
-                        <li>Posicione-se corretamente</li>
-                        <li>Execute o movimento controlado</li>
-                        <li>Respire adequadamente</li>
-                        <li>Mantenha a postura</li>
+                <img src="" alt="GIF do Exercício" class="modal-gif" id="modal-exercise-gif">
+                <p class="modal-description" id="modal-exercise-description"></p>
+                <div class="modal-instructions" id="modal-exercise-instructions">
+                    <h4>Instruções</h4>
+                    <ul>
+                        <li>Instrução 1</li>
+                        <li>Instrução 2</li>
+                        <li>Instrução 3</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Botão para abrir o gerador de treino -->
-    <a href="/sharkrush/gerador-treino" id="open-gerador-btn" style="position:fixed;top:30px;right:30px;z-index:1200;background:#232323;color:#fff;border:none;border-radius:50%;width:54px;height:54px;box-shadow:0 2px 12px #0007;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;transition:background 0.2s; text-decoration: none;">
-        <i class="fas fa-cogs"></i>
-    </a>
-
     <script>
-        // Controle de carrossel
-        const carouselPositions = {
-            chest: 0,
-            arms: 0,
-            abs: 0,
-            legs: 0
-        };
+        // Função para abrir o modal do exercício
+        function openExerciseModal(name, description, level, series, gifUrl) {
+            document.getElementById('modal-exercise-name').innerText = name;
+            document.getElementById('modal-exercise-description').innerText = description;
+            document.getElementById('modal-exercise-gif').src = gifUrl;
 
-        function slideCarousel(group, direction) {
-            const container = document.getElementById(group + '-container');
-            const cardWidth = 300; // largura do card + gap
-            const maxScroll = (container.children.length - 1) * cardWidth;
-
-            carouselPositions[group] += direction * cardWidth;
-
-            // Limites do carrossel
-            if (carouselPositions[group] < 0) {
-                carouselPositions[group] = 0;
-            } else if (carouselPositions[group] > maxScroll) {
-                carouselPositions[group] = maxScroll;
-            }
-
-            container.style.transform = `translateX(-${carouselPositions[group]}px)`;
-        }
-
-        // Modal de exercício
-        function openExerciseModal(name, description, difficulty, duration, gifUrl) {
-            const modal = document.getElementById('exerciseModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            const modalGif = document.getElementById('modalGif');
-
-            modalTitle.textContent = name;
-            modalDescription.textContent = description;
-
-            // Simular GIF - em produção, você usaria o gifUrl real
-            modalGif.src = 'data:image/svg+xml,' + encodeURIComponent(`
-                <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100%" fill="#ff0000"/>
-                    <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="20">
-                        GIF: ${name}
-                    </text>
-                    <text x="50%" y="60%" text-anchor="middle" dy=".3em" fill="white" font-size="14">
-                        ${difficulty.toUpperCase()} - ${duration}
-                    </text>
-                </svg>
-            `);
-
-            // Instruções específicas por exercício
-            const instructions = getExerciseInstructions(name);
-            const instructionsList = document.getElementById('modalInstructions');
-            instructionsList.innerHTML = instructions.map(instruction =>
-                `<li>${instruction}</li>`
-            ).join('');
-
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeExerciseModal() {
-            const modal = document.getElementById('exerciseModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function getExerciseInstructions(exerciseName) {
             const instructions = {
-                'Supino Reto': [
-                    'Deite no banco com os pés apoiados no chão',
-                    'Segure a barra com pegada um pouco mais larga que os ombros',
-                    'Desça a barra controladamente até tocar o peito',
-                    'Empurre a barra para cima mantendo os cotovelos alinhados'
-                ],
-                'Desenvolvimento Ombros': [
-                    'Sente-se com as costas retas e apoiadas',
-                    'Segure os halteres na altura dos ombros',
-                    'Empurre os halteres para cima sem travar os cotovelos',
-                    'Desça controladamente até a posição inicial'
-                ],
-                'Flexão de Braço': [
-                    'Posicione-se em prancha com mãos na largura dos ombros',
-                    'Mantenha o corpo alinhado da cabeça aos pés',
-                    'Desça o peito até quase tocar o chão',
-                    'Empurre para cima mantendo o core ativado'
-                ],
-                'Elevação Lateral': [
-                    'Fique em pé com halteres nas mãos',
-                    'Mantenha os braços levemente flexionados',
-                    'Eleve os halteres lateralmente até a altura dos ombros',
-                    'Desça controladamente resistindo ao peso'
-                ],
-                'Crucifixo Inclinado': [
-                    'Deite no banco inclinado (30-45 graus)',
-                    'Segure os halteres com braços levemente flexionados',
-                    'Abra os braços em arco até sentir alongamento no peito',
-                    'Retorne à posição inicial contraindo o peitoral'
-                ],
-                'Rosca Direta': [
-                    'Fique em pé com a barra na pegada supinada',
-                    'Mantenha os cotovelos fixos ao lado do corpo',
-                    'Flexione os braços levando a barra ao peito',
-                    'Desça controladamente estendendo completamente'
-                ],
-                'Tríceps Testa': [
-                    'Deite no banco segurando a barra ou halteres',
-                    'Estenda os braços perpendiculares ao corpo',
-                    'Flexione apenas os cotovelos descendo o peso em direção à testa',
-                    'Estenda os braços retornando à posição inicial'
-                ],
-                'Rosca Martelo': [
-                    'Segure os halteres com pegada neutra (palmas frente a frente)',
-                    'Mantenha os cotovelos colados ao corpo',
-                    'Flexione um braço de cada vez ou alternado',
-                    'Controle o movimento na descida'
-                ],
-                'Mergulho Paralelas': [
-                    'Apoie-se nas barras paralelas com braços estendidos',
-                    'Incline levemente o tronco para frente',
-                    'Desça flexionando os cotovelos até 90 graus',
-                    'Empurre para cima até a posição inicial'
-                ],
-                'Prancha': [
-                    'Posicione-se em posição de flexão apoiado nos antebraços',
-                    'Mantenha o corpo alinhado da cabeça aos pés',
-                    'Contraia o abdômen e glúteos',
-                    'Respire normalmente mantendo a posição'
-                ],
-                'Abdominal Supra': [
-                    'Deite com joelhos flexionados e pés apoiados',
-                    'Coloque as mãos atrás da cabeça ou cruzadas no peito',
-                    'Contraia o abdômen elevando apenas o tronco',
-                    'Desça controladamente sem relaxar completamente'
-                ],
-                'Elevação de Pernas': [
-                    'Deite com as mãos apoiadas no chão ao lado do corpo',
-                    'Mantenha as pernas estendidas ou levemente flexionadas',
-                    'Eleve as pernas até formar 90 graus com o tronco',
-                    'Desça controladamente sem tocar o chão'
-                ],
-                'Russian Twist': [
-                    'Sente com pernas flexionadas e pés elevados',
-                    'Incline o tronco para trás mantendo as costas retas',
-                    'Gire o tronco de um lado para o outro',
-                    'Mantenha o core contraído durante todo movimento'
-                ],
-                'Mountain Climber': [
-                    'Inicie em posição de prancha',
-                    'Traga um joelho em direção ao peito',
-                    'Alterne rapidamente as pernas como se estivesse correndo',
-                    'Mantenha o core ativado e quadris alinhados'
-                ],
-                'Agachamento': [
-                    'Fique em pé com pés na largura dos ombros',
-                    'Desça flexionando quadris e joelhos simultaneamente',
-                    'Desça até as coxas ficarem paralelas ao chão',
-                    'Suba empurrando pelos calcanhares'
-                ],
-                'Levantamento Terra': [
-                    'Posicione a barra próxima às canelas',
-                    'Agarre a barra com pegada mista ou dupla',
-                    'Levante empurrando o chão com os pés',
-                    'Mantenha as costas retas durante todo movimento'
-                ],
-                'Afundo': [
-                    'Dê um passo largo para frente',
-                    'Desça flexionando ambos os joelhos em 90 graus',
-                    'O joelho da frente deve ficar sobre o tornozelo',
-                    'Retorne à posição inicial empurrando com a perna da frente'
-                ],
-                'Stiff': [
-                    'Segure a barra com pegada pronada',
-                    'Mantenha as pernas levemente flexionadas',
-                    'Desça a barra deslizando pelas pernas',
-                    'Retorne contraindo glúteos e isquiotibiais'
-                ],
-                'Panturrilha em Pé': [
-                    'Posicione a parte anterior dos pés na plataforma',
-                    'Deixe os calcanhares livres para mover',
-                    'Suba na ponta dos pés contraindo as panturrilhas',
-                    'Desça controladamente alongando os músculos'
-                ],
-                'Pistol Squat': [
-                    'Fique em pé numa perna só',
-                    'Estenda a outra perna para frente',
-                    'Desça agachando até o glúteo quase tocar o calcanhar',
-                    'Suba usando apenas a força da perna de apoio'
-                ]
-            };
-
-            return instructions[exerciseName] || [
-                'Mantenha a postura correta',
-                'Execute o movimento controlado',
-                'Respire adequadamente',
-                'Foque na contração muscular'
-            ];
-        }
-
-        // Fechar modal clicando fora
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('exerciseModal');
-            if (event.target === modal) {
-                closeExerciseModal();
-            }
-        });
-
-        // Fechar modal com ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeExerciseModal();
-            }
-        });
-
-        // Animação de entrada
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observar grupos musculares
-        document.querySelectorAll('.muscle-group').forEach(group => {
-            observer.observe(group);
-        });
-
-        // Efeito de hover nos cards
-        document.querySelectorAll('.exercise-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-            });
-        });
-
-        // Controle responsivo do carrossel
-        function updateCarouselResponsive() {
-            const isMobile = window.innerWidth <= 768;
-            const cardWidth = isMobile ? 235 : 300;
-
-            // Atualizar todas as posições do carrossel
-            Object.keys(carouselPositions).forEach(group => {
-                const container = document.getElementById(group + '-container');
-                if (container) {
-                    const maxScroll = Math.max(0, (container.children.length - 1) * cardWidth);
-                    if (carouselPositions[group] > maxScroll) {
-                        carouselPositions[group] = maxScroll;
-                    }
-                    container.style.transform = `translateX(-${carouselPositions[group]}px)`;
-                }
-            });
-        }
-
-        // Aplicar controle responsivo
-        window.addEventListener('resize', updateCarouselResponsive);
-        updateCarouselResponsive();
-
-        // Smooth scroll para background
-        let ticking = false;
-        function updateBackground() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.background-animation');
-            if (parallax) {
-                const speed = scrolled * 0.1;
-                parallax.style.transform = `translateY(${speed}px)`;
-            }
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', function() {
-            if (!ticking) {
-                requestAnimationFrame(updateBackground);
-                ticking = true;
-            }
-        });
-
-        function getExerciseData(card) {
-            const name = card.querySelector('.exercise-name')?.textContent || '';
-            const details = card.querySelector('.exercise-details')?.textContent || '';
-            const meta = card.querySelector('.exercise-meta');
-            const difficulty = meta?.querySelector('.difficulty')?.classList[1] || '';
-            const difficultyText = meta?.querySelector('.difficulty')?.textContent || '';
-            const duration = meta?.querySelector('.exercise-duration')?.textContent || '';
-            const iconClass = card.querySelector('.exercise-placeholder')?.classList[1] || '';
-            let gifUrl = '';
-            let description = '';
-            const onclickAttr = card.getAttribute('onclick');
-            if (onclickAttr) {
-                const match = onclickAttr.match(/['"]([^'"]+)['"],\s*['"]([^'"]+)['"],\s*['"]([^'"]+)['"],\s*['"]([^'"]+)['"],\s*['"]([^'"]+)['"]/);
-                if (match) {
-                    description = match[2];
-                    gifUrl = match[5];
-                }
-            }
-            return { name, details, difficulty, difficultyText, duration, iconClass, gifUrl, description };
-        }
-        // Inicializa a sessão ao carregar
-        document.addEventListener('DOMContentLoaded', function() {
-        });
-
-        // Fecha menu lateral ao clicar fora dele
-        document.addEventListener('mousedown', function(e) {
-            const sidebar = document.getElementById('selected-sidebar');
-            const btn = document.getElementById('open-selected-sidebar-btn');
-            if (!sidebar.contains(e.target) && e.target !== btn) {
-                closeSelectedSidebar();
-            }
-        });
-    </script>
-</body>
-</html>
+                'Supino Reto': ['Deite-se em um banco reto.', 'Segure a barra com as mãos um pouco mais largas que a largura dos ombros.', 'Desça a barra controladamente
