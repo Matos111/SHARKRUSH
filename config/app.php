@@ -9,10 +9,16 @@
 // Detecta automaticamente o base path da aplicacao
 function detectBasePath() {
     $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-    $requestUri = $_SERVER['REQUEST_URI'] ?? '';
 
-    // Remove o arquivo index.php e /public do script name
-    $basePath = dirname(dirname($scriptName));
+    // Remove o nome do arquivo (index.php)
+    $scriptDir = dirname($scriptName);
+
+    // Se termina com /public, remove
+    if (substr($scriptDir, -7) === '/public') {
+        $basePath = substr($scriptDir, 0, -7);
+    } else {
+        $basePath = $scriptDir;
+    }
 
     // Se estiver na raiz, retorna vazio
     if ($basePath === '/' || $basePath === '\\' || $basePath === '.') {
