@@ -120,8 +120,8 @@
         <td><?= htmlspecialchars($treino['repeticoes']) ?></td>
         <td><?= htmlspecialchars($treino['dia_semana']) ?></td>
             <td><?= htmlspecialchars($treino['data_criacao'] ?? 'N/A') ?></td> <td>
-    <a href="/sharkrush/update-treino/<?= htmlspecialchars($treino['id']) ?>" class="btn btn-edit">Atualizar</a> 
-        <form action="/sharkrush/delete-treino" method="post" style="display:inline;">
+    <a href="<?= BASE_URL ?>/update-treino/<?= htmlspecialchars($treino['id']) ?>" class="btn btn-edit">Atualizar</a> 
+        <form action="<?= BASE_URL ?>/delete-treino" method="post" style="display:inline;">
         <input type="hidden" name="id" value="<?= htmlspecialchars($treino['id']) ?>">
         <button type="submit" class="btn btn-delete" onclick="return confirm('Deseja excluir este exercício?');">Excluir</button>
         </form>
@@ -130,6 +130,6 @@
  <?php endforeach; ?>
 </tr>
 </table>
-<a href="/sharkrush/treino-form" class="btn btn-add">Adicionar Treino</a>
+<a href="<?= BASE_URL ?>/treino-form" class="btn btn-add">Adicionar Treino</a>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/sharkrush/views/css/styles.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/views/css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Exercício</title>
 <style>
@@ -98,7 +98,7 @@ a.ver-clientes-btn:hover {
     <h1>CADASTRO DE EXERCÍCIO</h1>
     <h2>Preencha os dados abaixo:</h2>
 
-  <form action="/sharkrush/save-exercicio" method="POST">
+  <form action="<?= BASE_URL ?>/save-exercicio" method="POST">
         <label for="grupo_muscular">Grupo Muscular:</label>
         <select id="grupo_muscular" name="grupo_muscular" required>
             <option value="">Selecione</option>
@@ -121,7 +121,7 @@ a.ver-clientes-btn:hover {
         <input type="submit" value="Cadastrar Exercício">
     </form>
 
-<a href="/sharkrush/list-exercicio" class="ver-clientes-btn">Ver todos os Exercícios</a> 
+<a href="<?= BASE_URL ?>/list-exercicio" class="ver-clientes-btn">Ver todos os Exercícios</a> 
 
 </body>
 </html>

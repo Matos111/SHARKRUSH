@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/sharkrush/views/css/styles.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/views/css/styles.css">
     <title>Atualizar Exercício</title>
     <style>
         * {
@@ -103,7 +103,7 @@
 
 <h1>Atualizar Exercício</h1>
 
-<form action="/sharkrush/update-exercicio" method="POST">
+<form action="<?= BASE_URL ?>/update-exercicio" method="POST">
     <input type="hidden" name="id" value="<?php echo $exercicioInfo['id']; ?>">
 
     <label for="grupo_muscular">Grupo Muscular:</label>
@@ -127,7 +127,7 @@
     <input type="submit" value="Atualizar Exercício">
 </form>
 
-<a href="/sharkrush/list-exercicio" class="btn-voltar">Voltar para a Lista</a>
+<a href="<?= BASE_URL ?>/list-exercicio" class="btn-voltar">Voltar para a Lista</a>
 
 </body>
 </html>
