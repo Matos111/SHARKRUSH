@@ -72,7 +72,6 @@
             }
         }
 
-        /* Header */
         .header {
             text-align: center;
             padding: 40px 20px 20px;
@@ -116,14 +115,12 @@
             }
         }
 
-        /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Seção de grupo muscular */
         .muscle-group {
             margin-bottom: 50px;
             animation: fadeInUp 0.8s ease-out both;
@@ -137,13 +134,13 @@
 
         .muscle-title {
             font-size: 2rem;
-            color: #fff; /* Alterado de #ff0000 para branco */
+            color: #fff;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
             padding-left: 10px;
-            border-left: 4px solid #868686;
+            border-left: 4px solid #ff0000; /* trocado para vermelho */
         }
 
         .muscle-title i {
@@ -151,7 +148,6 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        /* Carrossel de exercícios */
         .exercises-carousel {
             position: relative;
             overflow: visible;
@@ -166,7 +162,6 @@
             padding: 10px 0;
         }
 
-        /* Cards de exercícios */
         .exercise-card {
             min-width: 280px;
             height: 380px;
@@ -197,6 +192,15 @@
             overflow: hidden;
         }
 
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         .exercise-image::before {
             content: '';
             position: absolute;
@@ -210,24 +214,14 @@
                 transparent 10px
             );
             opacity: 0.3;
-        }
-
-        .exercise-gif {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
-
-        .exercise-gif.playing {
-            display: block;
+            z-index: 1;
         }
 
         .exercise-placeholder {
             font-size: 4rem;
             color: white;
             text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            z-index: 2;
             position: relative;
         }
 
@@ -245,7 +239,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 2;
+            z-index: 3;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
@@ -318,7 +312,6 @@
             font-weight: bold;
         }
 
-        /* Botões de navegação do carrossel */
         .carousel-nav {
             position: absolute;
             top: 50%;
@@ -371,7 +364,6 @@
             }
         }
 
-        /* Modal para exercício */
         .exercise-modal {
             display: none;
             position: fixed;
@@ -488,62 +480,7 @@
             left: 0;
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .muscle-title {
-                font-size: 1.6rem;
-            }
-
-            .exercise-card {
-                min-width: 250px;
-                height: 350px;
-            }
-
-            .exercises-container {
-                gap: 15px;
-            }
-
-            .carousel-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .exercise-card {
-                min-width: 220px;
-                height: 320px;
-            }
-
-            .exercise-image {
-                height: 160px;
-            }
-
-            .exercise-info {
-                padding: 15px;
-                height: 160px;
-            }
-
-            .exercise-name {
-                font-size: 1.1rem;
-            }
-        }
-
-         .main-menu {
+        .main-menu {
             background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
             position: fixed;
             top: 0;
@@ -653,6 +590,7 @@
             position: relative;
             box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
         }
+
         .main-menu li a.active::before {
             content: '';
             position: absolute;
@@ -663,6 +601,7 @@
             background: #ff0303;
             transform: scaleY(1);
         }
+
         .main-menu li a.active .nav-icon {
             transform: scale(1.15);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
@@ -681,337 +620,6 @@
             max-height: 120px;
         }
 
-        .sidebar-workout-actions {
-            margin: 32px 0 0 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        .sidebar-workout-counter {
-            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
-            color: #fff;
-            border-radius: 18px;
-            padding: 18px 32px 18px 28px;
-            font-size: 1.18rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
-            letter-spacing: 0.5px;
-            margin-bottom: 0;
-            border: none;
-            min-width: 230px;
-            justify-content: center;
-        }
-        .sidebar-workout-counter .counter-icon {
-            font-size: 1.6rem;
-            margin-right: 2px;
-        }
-        .sidebar-workout-counter .count-number {
-            background: #e53935;
-            color: #fff;
-            border-radius: 9px;
-            padding: 2px 13px 2px 13px;
-            font-size: 1.08em;
-            font-weight: 700;
-            margin: 0 7px;
-            display: inline-block;
-            min-width: 22px;
-            text-align: center;
-            box-shadow: 0 2px 8px #0002;
-        }
-        .sidebar-save-btn {
-            width: 100%;
-            padding: 17px 0 17px 0;
-            background: #232323;
-            color: #fff;
-            font-size: 1.08rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 13px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 12px #0004;
-            transition: background 0.18s, color 0.18s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 0;
-        }
-        .sidebar-save-btn:hover {
-            background: #444;
-            color: #fff;
-        }
-
-        /* Novas Estilos para os Exercícios */
-        .exercise-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .exercise-image {
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .exercise-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-image img {
-            transform: scale(1.1);
-        }
-
-        .exercise-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .exercise-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .exercise-details {
-            font-size: 0.9rem;
-            color: #d1d1d1;
-            margin-bottom: 10px;
-        }
-
-        .exercise-meta {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            color: #b1b1b1;
-        }
-
-        .difficulty {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty.beginner {
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .difficulty.intermediate {
-            background: rgba(255, 165, 0, 0.2);
-            color: #ffa500;
-        }
-
-        .difficulty.advanced {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff0000;
-        }
-
-        /* Estilos para os GIFs dos Exercícios */
-        .exercise-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-gif {
-            opacity: 1;
-        }
-
-        /* Estilos para o Carrossel de Exercícios */
-        .exercises-carousel {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-            padding: 0 15px;
-        }
-
-        .exercises-container {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 10;
-        }
-
-        .carousel-nav:hover {
-            background: rgba(255, 0, 0, 0.8);
-        }
-
-        .carousel-nav.prev {
-            left: 10px;
-        }
-
-        .carousel-nav.next {
-            right: 10px;
-        }
-
-        /* Modal de Exercício */
-        .exercise-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #ff0000;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: #ff0000;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-gif {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .modal-description {
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .modal-instructions {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .modal-instructions h4 {
-            color: #ff0000;
-            margin-bottom: 10px;
-        }
-
-        .modal-instructions ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .modal-instructions li {
-            color: #cccccc;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .modal-instructions li::before {
-            content: '▸';
-            color: #ff0000;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Responsividade */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.2rem;
@@ -1065,2239 +673,55 @@
                 font-size: 1.1rem;
             }
         }
-
-         .main-menu {
-            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            height: 100%;
-            left: 0;
-            width: 70px;
-            overflow: hidden;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
-            z-index: 1002;
-        }
-
-        .main-menu:hover {
-            width: 280px;
-            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
-        }
-
-        .main-menu ul {
-            margin: 7px 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .main-menu li {
-            position: relative;
-            display: block;
-            width: 250px;
-        }
-
-        .main-menu li a {
-            position: relative;
-            width: 100%;
-            display: table;
-            color: #c5c5c5;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Strait', sans-serif;
-            border-top: 1px solid rgba(78, 78, 78, 0.2);
-            padding: 10px 0;
-            height: 55px;
-            overflow: hidden;
-        }
-
-        .main-menu .nav-icon {
-            position: relative;
-            display: table-cell;
-            width: 70px;
-            height: 55px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 26px;
-            padding: 12px 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu .nav-text {
-            position: relative;
-            display: table-cell;
-            vertical-align: middle;
-            width: 190px;
-            font-family: 'Titillium Web', sans-serif;
-            font-size: 16px;
-            padding-left: 15px;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu:hover .nav-text {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .main-menu li:hover > a {
-            color: #ffffff;
-            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
-            transform: translateX(8px);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-menu li:hover .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
-        }
-
-        .main-menu li a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0000;
-            transform: scaleY(0);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu li:hover a::before {
-            transform: scaleY(1);
-        }
-
-        .main-menu li a.active {
-            background: linear-gradient(45deg, #373737 0%, #292929 100%);
-            color: #ffffff;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .main-menu li a.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0303;
-            transform: scaleY(1);
-        }
-        .main-menu li a.active .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .logo-container {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-
-        .logo-container img {
-            max-width: 100%;
-            max-height: 120px;
-        }
-
-        .sidebar-workout-actions {
-            margin: 32px 0 0 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        .sidebar-workout-counter {
-            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
-            color: #fff;
-            border-radius: 18px;
-            padding: 18px 32px 18px 28px;
-            font-size: 1.18rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
-            letter-spacing: 0.5px;
-            margin-bottom: 0;
-            border: none;
-            min-width: 230px;
-            justify-content: center;
-        }
-        .sidebar-workout-counter .counter-icon {
-            font-size: 1.6rem;
-            margin-right: 2px;
-        }
-        .sidebar-workout-counter .count-number {
-            background: #e53935;
-            color: #fff;
-            border-radius: 9px;
-            padding: 2px 13px 2px 13px;
-            font-size: 1.08em;
-            font-weight: 700;
-            margin: 0 7px;
-            display: inline-block;
-            min-width: 22px;
-            text-align: center;
-            box-shadow: 0 2px 8px #0002;
-        }
-        .sidebar-save-btn {
-            width: 100%;
-            padding: 17px 0 17px 0;
-            background: #232323;
-            color: #fff;
-            font-size: 1.08rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 13px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 12px #0004;
-            transition: background 0.18s, color 0.18s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 0;
-        }
-        .sidebar-save-btn:hover {
-            background: #444;
-            color: #fff;
-        }
-
-        /* Novas Estilos para os Exercícios */
-        .exercise-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .exercise-image {
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .exercise-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-image img {
-            transform: scale(1.1);
-        }
-
-        .exercise-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .exercise-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .exercise-details {
-            font-size: 0.9rem;
-            color: #d1d1d1;
-            margin-bottom: 10px;
-        }
-
-        .exercise-meta {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            color: #b1b1b1;
-        }
-
-        .difficulty {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty.beginner {
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .difficulty.intermediate {
-            background: rgba(255, 165, 0, 0.2);
-            color: #ffa500;
-        }
-
-        .difficulty.advanced {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff0000;
-        }
-
-        /* Estilos para os GIFs dos Exercícios */
-        .exercise-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-gif {
-            opacity: 1;
-        }
-
-        /* Estilos para o Carrossel de Exercícios */
-        .exercises-carousel {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-            padding: 0 15px;
-        }
-
-        .exercises-container {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 10;
-        }
-
-        .carousel-nav:hover {
-            background: rgba(255, 0, 0, 0.8);
-        }
-
-        .carousel-nav.prev {
-            left: 10px;
-        }
-
-        .carousel-nav.next {
-            right: 10px;
-        }
-
-        /* Modal de Exercício */
-        .exercise-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #ff0000;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: #ff0000;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-gif {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .modal-description {
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .modal-instructions {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .modal-instructions h4 {
-            color: #ff0000;
-            margin-bottom: 10px;
-        }
-
-        .modal-instructions ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .modal-instructions li {
-            color: #cccccc;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .modal-instructions li::before {
-            content: '▸';
-            color: #ff0000;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .muscle-title {
-                font-size: 1.6rem;
-            }
-
-            .exercise-card {
-                min-width: 250px;
-                height: 350px;
-            }
-
-            .exercises-container {
-                gap: 15px;
-            }
-
-            .carousel-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .exercise-card {
-                min-width: 220px;
-                height: 320px;
-            }
-
-            .exercise-image {
-                height: 160px;
-            }
-
-            .exercise-info {
-                padding: 15px;
-                height: 160px;
-            }
-
-            .exercise-name {
-                font-size: 1.1rem;
-            }
-        }
-
-         .main-menu {
-            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            height: 100%;
-            left: 0;
-            width: 70px;
-            overflow: hidden;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
-            z-index: 1002;
-        }
-
-        .main-menu:hover {
-            width: 280px;
-            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
-        }
-
-        .main-menu ul {
-            margin: 7px 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .main-menu li {
-            position: relative;
-            display: block;
-            width: 250px;
-        }
-
-        .main-menu li a {
-            position: relative;
-            width: 100%;
-            display: table;
-            color: #c5c5c5;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Strait', sans-serif;
-            border-top: 1px solid rgba(78, 78, 78, 0.2);
-            padding: 10px 0;
-            height: 55px;
-            overflow: hidden;
-        }
-
-        .main-menu .nav-icon {
-            position: relative;
-            display: table-cell;
-            width: 70px;
-            height: 55px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 26px;
-            padding: 12px 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu .nav-text {
-            position: relative;
-            display: table-cell;
-            vertical-align: middle;
-            width: 190px;
-            font-family: 'Titillium Web', sans-serif;
-            font-size: 16px;
-            padding-left: 15px;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu:hover .nav-text {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .main-menu li:hover > a {
-            color: #ffffff;
-            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
-            transform: translateX(8px);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-menu li:hover .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
-        }
-
-        .main-menu li a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0000;
-            transform: scaleY(0);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu li:hover a::before {
-            transform: scaleY(1);
-        }
-
-        .main-menu li a.active {
-            background: linear-gradient(45deg, #373737 0%, #292929 100%);
-            color: #ffffff;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .main-menu li a.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0303;
-            transform: scaleY(1);
-        }
-        .main-menu li a.active .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .logo-container {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-
-        .logo-container img {
-            max-width: 100%;
-            max-height: 120px;
-        }
-
-        .sidebar-workout-actions {
-            margin: 32px 0 0 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        .sidebar-workout-counter {
-            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
-            color: #fff;
-            border-radius: 18px;
-            padding: 18px 32px 18px 28px;
-            font-size: 1.18rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
-            letter-spacing: 0.5px;
-            margin-bottom: 0;
-            border: none;
-            min-width: 230px;
-            justify-content: center;
-        }
-        .sidebar-workout-counter .counter-icon {
-            font-size: 1.6rem;
-            margin-right: 2px;
-        }
-        .sidebar-workout-counter .count-number {
-            background: #e53935;
-            color: #fff;
-            border-radius: 9px;
-            padding: 2px 13px 2px 13px;
-            font-size: 1.08em;
-            font-weight: 700;
-            margin: 0 7px;
-            display: inline-block;
-            min-width: 22px;
-            text-align: center;
-            box-shadow: 0 2px 8px #0002;
-        }
-        .sidebar-save-btn {
-            width: 100%;
-            padding: 17px 0 17px 0;
-            background: #232323;
-            color: #fff;
-            font-size: 1.08rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 13px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 12px #0004;
-            transition: background 0.18s, color 0.18s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 0;
-        }
-        .sidebar-save-btn:hover {
-            background: #444;
-            color: #fff;
-        }
-
-        /* Novas Estilos para os Exercícios */
-        .exercise-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .exercise-image {
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .exercise-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-image img {
-            transform: scale(1.1);
-        }
-
-        .exercise-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .exercise-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .exercise-details {
-            font-size: 0.9rem;
-            color: #d1d1d1;
-            margin-bottom: 10px;
-        }
-
-        .exercise-meta {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            color: #b1b1b1;
-        }
-
-        .difficulty {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty.beginner {
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .difficulty.intermediate {
-            background: rgba(255, 165, 0, 0.2);
-            color: #ffa500;
-        }
-
-        .difficulty.advanced {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff0000;
-        }
-
-        /* Estilos para os GIFs dos Exercícios */
-        .exercise-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-gif {
-            opacity: 1;
-        }
-
-        /* Estilos para o Carrossel de Exercícios */
-        .exercises-carousel {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-            padding: 0 15px;
-        }
-
-        .exercises-container {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 10;
-        }
-
-        .carousel-nav:hover {
-            background: rgba(255, 0, 0, 0.8);
-        }
-
-        .carousel-nav.prev {
-            left: 10px;
-        }
-
-        .carousel-nav.next {
-            right: 10px;
-        }
-
-        /* Modal de Exercício */
-        .exercise-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #ff0000;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: #ff0000;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-gif {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .modal-description {
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .modal-instructions {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .modal-instructions h4 {
-            color: #ff0000;
-            margin-bottom: 10px;
-        }
-
-        .modal-instructions ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .modal-instructions li {
-            color: #cccccc;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .modal-instructions li::before {
-            content: '▸';
-            color: #ff0000;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .muscle-title {
-                font-size: 1.6rem;
-            }
-
-            .exercise-card {
-                min-width: 250px;
-                height: 350px;
-            }
-
-            .exercises-container {
-                gap: 15px;
-            }
-
-            .carousel-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .exercise-card {
-                min-width: 220px;
-                height: 320px;
-            }
-
-            .exercise-image {
-                height: 160px;
-            }
-
-            .exercise-info {
-                padding: 15px;
-                height: 160px;
-            }
-
-            .exercise-name {
-                font-size: 1.1rem;
-            }
-        }
-
-         .main-menu {
-            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            height: 100%;
-            left: 0;
-            width: 70px;
-            overflow: hidden;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
-            z-index: 1002;
-        }
-
-        .main-menu:hover {
-            width: 280px;
-            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
-        }
-
-        .main-menu ul {
-            margin: 7px 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .main-menu li {
-            position: relative;
-            display: block;
-            width: 250px;
-        }
-
-        .main-menu li a {
-            position: relative;
-            width: 100%;
-            display: table;
-            color: #c5c5c5;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Strait', sans-serif;
-            border-top: 1px solid rgba(78, 78, 78, 0.2);
-            padding: 10px 0;
-            height: 55px;
-            overflow: hidden;
-        }
-
-        .main-menu .nav-icon {
-            position: relative;
-            display: table-cell;
-            width: 70px;
-            height: 55px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 26px;
-            padding: 12px 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu .nav-text {
-            position: relative;
-            display: table-cell;
-            vertical-align: middle;
-            width: 190px;
-            font-family: 'Titillium Web', sans-serif;
-            font-size: 16px;
-            padding-left: 15px;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu:hover .nav-text {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .main-menu li:hover > a {
-            color: #ffffff;
-            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
-            transform: translateX(8px);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-menu li:hover .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
-        }
-
-        .main-menu li a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0000;
-            transform: scaleY(0);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu li:hover a::before {
-            transform: scaleY(1);
-        }
-
-        .main-menu li a.active {
-            background: linear-gradient(45deg, #373737 0%, #292929 100%);
-            color: #ffffff;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .main-menu li a.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0303;
-            transform: scaleY(1);
-        }
-        .main-menu li a.active .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .logo-container {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-
-        .logo-container img {
-            max-width: 100%;
-            max-height: 120px;
-        }
-
-        .sidebar-workout-actions {
-            margin: 32px 0 0 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        .sidebar-workout-counter {
-            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
-            color: #fff;
-            border-radius: 18px;
-            padding: 18px 32px 18px 28px;
-            font-size: 1.18rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
-            letter-spacing: 0.5px;
-            margin-bottom: 0;
-            border: none;
-            min-width: 230px;
-            justify-content: center;
-        }
-        .sidebar-workout-counter .counter-icon {
-            font-size: 1.6rem;
-            margin-right: 2px;
-        }
-        .sidebar-workout-counter .count-number {
-            background: #e53935;
-            color: #fff;
-            border-radius: 9px;
-            padding: 2px 13px 2px 13px;
-            font-size: 1.08em;
-            font-weight: 700;
-            margin: 0 7px;
-            display: inline-block;
-            min-width: 22px;
-            text-align: center;
-            box-shadow: 0 2px 8px #0002;
-        }
-        .sidebar-save-btn {
-            width: 100%;
-            padding: 17px 0 17px 0;
-            background: #232323;
-            color: #fff;
-            font-size: 1.08rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 13px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 12px #0004;
-            transition: background 0.18s, color 0.18s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 0;
-        }
-        .sidebar-save-btn:hover {
-            background: #444;
-            color: #fff;
-        }
-
-        /* Novas Estilos para os Exercícios */
-        .exercise-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .exercise-image {
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .exercise-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-image img {
-            transform: scale(1.1);
-        }
-
-        .exercise-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .exercise-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .exercise-details {
-            font-size: 0.9rem;
-            color: #d1d1d1;
-            margin-bottom: 10px;
-        }
-
-        .exercise-meta {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            color: #b1b1b1;
-        }
-
-        .difficulty {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty.beginner {
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .difficulty.intermediate {
-            background: rgba(255, 165, 0, 0.2);
-            color: #ffa500;
-        }
-
-        .difficulty.advanced {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff0000;
-        }
-
-        /* Estilos para os GIFs dos Exercícios */
-        .exercise-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-gif {
-            opacity: 1;
-        }
-
-        /* Estilos para o Carrossel de Exercícios */
-        .exercises-carousel {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-            padding: 0 15px;
-        }
-
-        .exercises-container {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 10;
-        }
-
-        .carousel-nav:hover {
-            background: rgba(255, 0, 0, 0.8);
-        }
-
-        .carousel-nav.prev {
-            left: 10px;
-        }
-
-        .carousel-nav.next {
-            right: 10px;
-        }
-
-        /* Modal de Exercício */
-        .exercise-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #ff0000;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: #ff000;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-gif {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .modal-description {
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .modal-instructions {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .modal-instructions h4 {
-            color: #ff0000;
-            margin-bottom: 10px;
-        }
-
-        .modal-instructions ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .modal-instructions li {
-            color: #cccccc;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .modal-instructions li::before {
-            content: '▸';
-            color: #ff0000;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .muscle-title {
-                font-size: 1.6rem;
-            }
-
-            .exercise-card {
-                min-width: 250px;
-                height: 350px;
-            }
-
-            .exercises-container {
-                gap: 15px;
-            }
-
-            .carousel-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .exercise-card {
-                min-width: 220px;
-                height: 320px;
-            }
-
-            .exercise-image {
-                height: 160px;
-            }
-
-            .exercise-info {
-                padding: 15px;
-                height: 160px;
-            }
-
-            .exercise-name {
-                font-size: 1.1rem;
-            }
-        }
-
-         .main-menu {
-            background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            height: 100%;
-            left: 0;
-            width: 70px;
-            overflow: hidden;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
-            z-index: 1002;
-        }
-
-        .main-menu:hover {
-            width: 280px;
-            box-shadow: 2px 0 25px rgba(255, 0, 0, 0.15);
-        }
-
-        .main-menu ul {
-            margin: 7px 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .main-menu li {
-            position: relative;
-            display: block;
-            width: 250px;
-        }
-
-        .main-menu li a {
-            position: relative;
-            width: 100%;
-            display: table;
-            color: #c5c5c5;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Strait', sans-serif;
-            border-top: 1px solid rgba(78, 78, 78, 0.2);
-            padding: 10px 0;
-            height: 55px;
-            overflow: hidden;
-        }
-
-        .main-menu .nav-icon {
-            position: relative;
-            display: table-cell;
-            width: 70px;
-            height: 55px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 26px;
-            padding: 12px 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu .nav-text {
-            position: relative;
-            display: table-cell;
-            vertical-align: middle;
-            width: 190px;
-            font-family: 'Titillium Web', sans-serif;
-            font-size: 16px;
-            padding-left: 15px;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu:hover .nav-text {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .main-menu li:hover > a {
-            color: #ffffff;
-            background: linear-gradient(45deg, #323232 0%, #2b2b2b 100%);
-            transform: translateX(8px);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-menu li:hover .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(175, 175, 175, 0.5);
-        }
-
-        .main-menu li a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0000;
-            transform: scaleY(0);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .main-menu li:hover a::before {
-            transform: scaleY(1);
-        }
-
-        .main-menu li a.active {
-            background: linear-gradient(45deg, #373737 0%, #292929 100%);
-            color: #ffffff;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .main-menu li a.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #ff0303;
-            transform: scaleY(1);
-        }
-        .main-menu li a.active .nav-icon {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .logo-container {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-
-        .logo-container img {
-            max-width: 100%;
-            max-height: 120px;
-        }
-
-        .sidebar-workout-actions {
-            margin: 32px 0 0 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        .sidebar-workout-counter {
-            background: linear-gradient(90deg, #ff0000 80%, #cc0000 100%);
-            color: #fff;
-            border-radius: 18px;
-            padding: 18px 32px 18px 28px;
-            font-size: 1.18rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            box-shadow: 0 6px 24px rgba(255,0,0,0.13);
-            letter-spacing: 0.5px;
-            margin-bottom: 0;
-            border: none;
-            min-width: 230px;
-            justify-content: center;
-        }
-        .sidebar-workout-counter .counter-icon {
-            font-size: 1.6rem;
-            margin-right: 2px;
-        }
-        .sidebar-workout-counter .count-number {
-            background: #e53935;
-            color: #fff;
-            border-radius: 9px;
-            padding: 2px 13px 2px 13px;
-            font-size: 1.08em;
-            font-weight: 700;
-            margin: 0 7px;
-            display: inline-block;
-            min-width: 22px;
-            text-align: center;
-            box-shadow: 0 2px 8px #0002;
-        }
-        .sidebar-save-btn {
-            width: 100%;
-            padding: 17px 0 17px 0;
-            background: #232323;
-            color: #fff;
-            font-size: 1.08rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 13px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 12px #0004;
-            transition: background 0.18s, color 0.18s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 0;
-        }
-        .sidebar-save-btn:hover {
-            background: #444;
-            color: #fff;
-        }
-
-        /* Novas Estilos para os Exercícios */
-        .exercise-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .exercise-image {
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .exercise-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-image img {
-            transform: scale(1.1);
-        }
-
-        .exercise-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .exercise-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .exercise-details {
-            font-size: 0.9rem;
-            color: #d1d1d1;
-            margin-bottom: 10px;
-        }
-
-        .exercise-meta {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            color: #b1b1b1;
-        }
-
-        .difficulty {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty.beginner {
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .difficulty.intermediate {
-            background: rgba(255, 165, 0, 0.2);
-            color: #ffa500;
-        }
-
-        .difficulty.advanced {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff0000;
-        }
-
-        /* Estilos para os GIFs dos Exercícios */
-        .exercise-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-gif {
-            opacity: 1;
-        }
-
-        /* Estilos para o Carrossel de Exercícios */
-        .exercises-carousel {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-            padding: 0 15px;
-        }
-
-        .exercises-container {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 10;
-        }
-
-        .carousel-nav:hover {
-            background: rgba(255, 0, 0, 0.8);
-        }
-
-        .carousel-nav.prev {
-            left: 10px;
-        }
-
-        .carousel-nav.next {
-            right: 10px;
-        }
-
-        /* Modal de Exercício */
-        .exercise-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid #ff0000;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: #ff0000;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-gif {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .modal-description {
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .modal-instructions {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .modal-instructions h4 {
-            color: #ff0000;
-            margin-bottom: 10px;
-        }
-
-        .modal-instructions ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .modal-instructions li {
-            color: #cccccc;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .modal-instructions li::before {
-            content: '▸';
-            color: #ff0000;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Novas Estilos para os Exercícios - Grupo Peito e Ombros */
-        .exercise-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .exercise-image {
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .exercise-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-image img {
-            transform: scale(1.1);
-        }
-
-        .exercise-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .exercise-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .exercise-details {
-            font-size: 0.9rem;
-            color: #d1d1d1;
-            margin-bottom: 10px;
-        }
-
-        .exercise-meta {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            color: #b1b1b1;
-        }
-
-        .difficulty {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty.beginner {
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .difficulty.intermediate {
-            background: rgba(255, 165, 0, 0.2);
-            color: #ffa500;
-        }
-
-        .difficulty.advanced {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff0000;
-        }
-
-        /* Estilos para os GIFs dos Exercícios */
-        .exercise-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .exercise-card:hover .exercise-gif {
-            opacity: 1;
-        }
-
-        /* Peito e Ombros */
-        <section class="muscle-group">
-            <div class="exercise-card">
-                <div class="exercise-image">
-                    <img src="views/midia/img-gif_biblioteca/supino-reto-img.png" alt="Supino Reto">
-                    <div class="exercise-gif">
-                        <img src="views/midia/img-gif_biblioteca/supino-reto-gif.gif" alt="Supino Reto GIF">
-                    </div>
-                </div>
-                <div class="exercise-info">
-                    <h3 class="exercise-name">Supino Reto</h3>
-                    <p class="exercise-details">Exercício para peitoral.</p>
-                </div>
-            </div>
-            <div class="exercise-card">
-                <div class="exercise-image">
-                    <img src="views/midia/img-gif_biblioteca/supino-inclinado-img.png" alt="Supino Inclinado">
-                    <div class="exercise-gif">
-                        <img src="views/midia/img-gif_biblioteca/supino-inclinado-gif.gif" alt="Supino Inclinado GIF">
-                    </div>
-                </div>
-                <div class="exercise-info">
-                    <h3 class="exercise-name">Supino Inclinado</h3>
-                    <p class="exercise-details">Exercício para peitoral superior.</p>
-                </div>
-            </div>
-            <div class="exercise-card">
-                <div class="exercise-image">
-                    <img src="views/midia/img-gif_biblioteca/crucifixo-img.png" alt="Crucifixo">
-                    <div class="exercise-gif">
-                        <img src="views/midia/img-gif_biblioteca/crucifixo-gif.gif" alt="Crucifixo GIF">
-                    </div>
-                </div>
-                <div class="exercise-info">
-                    <h3 class="exercise-name">Crucifixo</h3>
-                    <p class="exercise-details">Exercício para peitoral.</p>
-                </div>
-            </div>
-        </section>
     </style>
 </head>
 <body>
     <nav class="main-menu">
         <div class="logo-container">
             <a href="/sharkrush/dashboard" title="Dashboard">
-                <img src="../midia/Logos/logoshark.png"alt="Logo"/>
+                <img src="../midia/Logos/logoshark.png" alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-            <a href="/sharkrush/perfil" class="nav-login">
-                <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
-            </a>
+                <a href="/sharkrush/perfil" class="nav-login">
+                    <i class="fa fa-user nav-icon"></i>
+                    <span class="nav-text">Perfil</span>
+                </a>
             </li>
             <li>
-            <a href="/sharkrush/biblioteca" class="active">
-                <i class="fa fa-book nav-icon"></i>
-                <span class="nav-text">Biblioteca</span>
-            </a>
+                <a href="/sharkrush/biblioteca" class="active">
+                    <i class="fa fa-book nav-icon"></i>
+                    <span class="nav-text">Biblioteca</span>
+                </a>
             </li>
             <li>
-            <a href="/sharkrush/meus-treinos">
-                <i class="fa fa-dumbbell nav-icon"></i>
-                <span class="nav-text">Meus Treinos</span>
-            </a>
+                <a href="/sharkrush/meus-treinos">
+                    <i class="fa fa-dumbbell nav-icon"></i>
+                    <span class="nav-text">Meus Treinos</span>
+                </a>
             </li>
             <li>
-            <a href="/sharkrush/calculadora-imc">
-                <i class="fa fa-calculator nav-icon"></i>
-                <span class="nav-text">Calculadora IMC</span>
-            </a>
+                <a href="/sharkrush/calculadora-imc">
+                    <i class="fa fa-calculator nav-icon"></i>
+                    <span class="nav-text">Calculadora IMC</span>
+                </a>
             </li>
             <li>
-            <a href="/sharkrush/calculadora-calorias">
-                <i class="fa fa-fire nav-icon"></i>
-                <span class="nav-text">Calculadora Calorias</span>
-            </a>
+                <a href="/sharkrush/calculadora-calorias">
+                    <i class="fa fa-fire nav-icon"></i>
+                    <span class="nav-text">Calculadora Calorias</span>
+                </a>
             </li>
             <li>
-            <a href="/sharkrush/sobre">
-                <i class="fa fa-info-circle nav-icon"></i>
-                <span class="nav-text">Sobre</span>
-            </a>
+                <a href="/sharkrush/sobre">
+                    <i class="fa fa-info-circle nav-icon"></i>
+                    <span class="nav-text">Sobre</span>
+                </a>
             </li>
         </ul>
     </nav>
-    <!-- Animação de fundo -->
+
     <div class="background-animation">
         <i class="fas fa-dumbbell fitness-icon"></i>
         <i class="fas fa-running fitness-icon"></i>
@@ -3305,419 +729,547 @@
         <i class="fas fa-bicycle fitness-icon"></i>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <h1><i class="fas fa-book-open"></i> Biblioteca de Exercícios</h1>
         <p>Descubra centenas de exercícios organizados por grupo muscular com demonstrações em GIF</p>
     </header>
 
-    <!-- Container principal -->
-    <div class="container">
-        <!-- Peito e Ombros -->
-        <section class="muscle-group">
-            <h2 class="muscle-title">
-                <i class="fas fa-dumbbell"></i>
-                Peito e Ombros
-            </h2>
-            <div class="exercises-carousel">
-                <button class="carousel-nav prev" onclick="slideCarousel('chest', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="exercises-container" id="chest-container">
-                    <div class="exercise-card" onclick="openExerciseModal('Supino Reto', 'Exercício fundamental para desenvolvimento do peitoral maior', 'beginner', '3-4 séries', 'https://example.com/supino-reto.gif')">
-                        <div class="exercise-image">
-                            <img src="views/midia/img-gif_biblioteca/supino-reto-img.png" alt="Supino Reto">
-                            <div class="exercise-gif">
-                                <img src="views/midia/img-gif_biblioteca/supino-reto-gif.gif" alt="Supino Reto GIF">
-                            </div>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Supino Reto</h3>
-                            <p class="exercise-details">Exercício para peitoral.</p>
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Desenvolvimento Ombros', 'Exercício completo para deltoides', 'intermediate', '3 séries', 'https://example.com/desenvolvimento-ombros.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-hand-fist exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Desenvolvimento </h3>
-                            <p class="exercise-details">Deltoides fortes e definidos</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty intermediate">Intermediário</span>
-                                <span class="exercise-duration">3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Flexão de Braço', 'Exercício funcional para peito e core', 'beginner', '2-3 séries', 'https://example.com/flexao.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-hand-fist exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Flexão de Braço</h3>
-                            <p class="exercise-details">Peito, tríceps e core</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">2-3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Elevação Lateral', 'Isolamento para deltoides medial', 'intermediate', '3-4 séries', 'https://example.com/elevacao-lateral.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-hand-fist exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Elevação Lateral</h3>
-                            <p class="exercise-details">Ombros mais largos e definidos</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty intermediate">Intermediário</span>
-                                <span class="exercise-duration">3-4 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Crucifixo Inclinado', 'Isolamento para peitoral superior', 'advanced', '3 séries', 'https://example.com/crucifixo.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-hand-fist exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Crucifixo Inclinado</h3>
-                            <p class="exercise-details">Peitoral superior em foco</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty advanced">Avançado</span>
-                                <span class="exercise-duration">3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-nav next" onclick="slideCarousel('chest', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- Braços -->
-        <section class="muscle-group">
-            <h2 class="muscle-title">
-                <i class="fas fa-dumbbell"></i>
-                Braços
-            </h2>
-            <div class="exercises-carousel">
-                <button class="carousel-nav prev" onclick="slideCarousel('arms', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="exercises-container" id="arms-container">
-                    <div class="exercise-card" onclick="openExerciseModal('Rosca Direta', 'Exercício básico para bíceps', 'beginner', '3 séries', 'https://example.com/rosca-direta.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-dumbbell exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Rosca Direta</h3>
-                            <p class="exercise-details">Bíceps mais fortes e definidos</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Tríceps Testa', 'Isolamento para tríceps', 'intermediate', '3-4 séries', 'https://example.com/triceps-testa.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-dumbbell exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Tríceps Testa</h3>
-                            <p class="exercise-details">Tríceps definidos e fortes</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty intermediate">Intermediário</span>
-                                <span class="exercise-duration">3-4 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Rosca Martelo', 'Trabalha bíceps e antebraços', 'beginner', '3 séries', 'https://example.com/rosca-martelo.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-dumbbell exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Rosca Martelo</h3>
-                            <p class="exercise-details">Bíceps e antebraços em foco</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Mergulho Paralelas', 'Composto para tríceps', 'advanced', '3 séries', 'https://example.com/mergulho.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-dumbbell exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Mergulho Paralelas</h3>
-                            <p class="exercise-details">Tríceps, peito e ombros</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty advanced">Avançado</span>
-                                <span class="exercise-duration">3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-nav next" onclick="slideCarousel('arms', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- Abdômen -->
-        <section class="muscle-group">
-            <h2 class="muscle-title">
-                <i class="fas fa-fire"></i>
-                Abdômen
-            </h2>
-            <div class="exercises-carousel">
-                <button class="carousel-nav prev" onclick="slideCarousel('abs', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="exercises-container" id="abs-container">
-                    <div class="exercise-card" onclick="openExerciseModal('Prancha', 'Exercício isométrico para core', 'beginner', '3x30-60s', 'https://example.com/prancha.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-stop exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Prancha</h3>
-                            <p class="exercise-details">Core forte e estável</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">3x30-60s</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Abdominal Supra', 'Clássico para reto abdominal', 'beginner', '3x15-20', 'https://example.com/abdominal.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-stop exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Abdominal Supra</h3>
-                            <p class="exercise-details">Foco no reto abdominal</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">3x15-20</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Elevação de Pernas', 'Trabalha abdômen inferior', 'intermediate', '3x12-15', 'https://example.com/elevacao-pernas.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-stop exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Elevação de Pernas</h3>
-                            <p class="exercise-details">Abdômen inferior em foco</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty intermediate">Intermediário</span>
-                                <span class="exercise-duration">3x12-15</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Russian Twist', 'Rotação para oblíquos', 'intermediate', '3x20', 'https://example.com/russian-twist.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-stop exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Russian Twist</h3>
-                            <p class="exercise-details">Oblíquos e core em ação</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty intermediate">Intermediário</span>
-                                <span class="exercise-duration">3x20</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Mountain Climber', 'Cardio + core', 'advanced', '3x30s', 'https://example.com/mountain-climber.gif')">
-                        <div class="exercise-image">
-                            <i class="fas fa-stop exercise-placeholder"></i>
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Mountain Climber</h3>
-                            <p class="exercise-details">Cardio intenso e core</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty advanced">Avançado</span>
-                                <span class="exercise-duration">3x30s</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-nav next" onclick="slideCarousel('abs', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- Pernas -->
-        <section class="muscle-group">
-            <h2 class="muscle-title">
-                <i class="fas fa-running"></i>
-                Pernas
-            </h2>
-            <div class="exercises-carousel">
-                <button class="carousel-nav prev" onclick="slideCarousel('legs', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="exercises-container" id="legs-container">
-                    <div class="exercise-card" onclick="openExerciseModal('Agachamento', 'Rei dos exercícios para pernas', 'beginner', '3-4 séries',)">
-                        <div class="exercise-image">
-                            <img src="views/midia/img-gif_biblioteca/agachamento-img.png" alt="Agachamento">
-                            <div class="exercise-gif">
-                                <img src="views/midia/img-gif_biblioteca/agachamento-gif.gif" alt="Agachamento GIF">
-                            </div>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Agachamento</h3>
-                            <p class="exercise-details">Exercício para quadríceps e glúteos.</p>
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Levantamento Terra', 'Composto para posterior', 'intermediate', '3 séries', 'https://example.com/levantamento-terra.gif')">
-                        <div class="exercise-image">
-                            <img src="views/midia/img-gif_biblioteca/levantamento-terra-img.png" alt="Levantamento Terra">
-                            <div class="exercise-gif">
-                                <img src="views/midia/img-gif_biblioteca/levantamento-terra-gif.gif" alt="Levantamento Terra GIF">
-                            </div>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Levantamento Terra</h3>
-                            <p class="exercise-details">Posterior de coxa e glúteos</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty intermediate">Intermediário</span>
-                                <span class="exercise-duration">3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Afundo', 'Unilateral para equilíbrio', 'beginner', '3x12 cada', 'https://example.com/afundo.gif')">
-                        <div class="exercise-image">
-                            <img src="views/midia/img-gif_biblioteca/afundo-img.png" alt="Afundo">
-                            <div class="exercise-gif">
-                                <img src="views/midia/img-gif_biblioteca/afundo-gif.gif" alt="Afundo GIF">
-                            </div>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Afundo</h3>
-                            <p class="exercise-details">Equilíbrio e força nas pernas</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">3x12 cada</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Stiff', 'Isolamento posterior', 'intermediate', '3 séries', 'https://example.com/stiff.gif')">
-                        <div class="exercise-image">
-                            <img src="views/midia/img-gif_biblioteca/stiff-img.png" alt="Stiff">
-                            <div class="exercise-gif">
-                                <img src="views/midia/img-gif_biblioteca/stiff-gif.gif" alt="Stiff GIF">
-                            </div>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Stiff</h3>
-                            <p class="exercise-details">Isquiotibiais e glúteos em foco</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty intermediate">Intermediário</span>
-                                <span class="exercise-duration">3 séries</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="exercise-card" onclick="openExerciseModal('Panturrilha em Pé', 'Isolamento para panturrilhas', 'beginner', '4x15-20', 'https://example.com/panturrilha.gif')">
-                        <div class="exercise-image">
-                            <img src="views/midia/img-gif_biblioteca/panturrilha-img.png" alt="Panturrilha em Pé">
-                            <div class="exercise-gif">
-                                <img src="views/midia/img-gif_biblioteca/panturrilha-gif.gif" alt="Panturrilha em Pé GIF">
-                            </div>
-                        </div>
-                        <div class="exercise-info">
-                            <h3 class="exercise-name">Panturrilha em Pé</h3>
-                            <p class="exercise-details">Panturrilhas mais fortes</p>
-                            <div class="exercise-meta">
-                                <span class="difficulty beginner">Iniciante</span>
-                                <span class="exercise-duration">4x15-20</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-nav next" onclick="slideCarousel('legs', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
+    <div class="container" id="exercises-container">
+        <!-- Os exercícios serão inseridos aqui pelo JavaScript -->
     </div>
 
-    <!-- Modal de Exercício -->
-    <div class="exercise-modal" id="exercise-modal">
+    <div class="exercise-modal" id="exerciseModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="modal-exercise-name">Nome do Exercício</h2>
+                <h3 class="modal-title" id="modalTitle">Nome do Exercício</h3>
                 <button class="close-modal" onclick="closeExerciseModal()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <img src="" alt="GIF do Exercício" class="modal-gif" id="modal-exercise-gif">
-                <p class="modal-description" id="modal-exercise-description"></p>
-                <div class="modal-instructions" id="modal-exercise-instructions">
-                    <h4>Instruções</h4>
-                    <ul>
-                        <li>Instrução 1</li>
-                        <li>Instrução 2</li>
-                        <li>Instrução 3</li>
-                    </ul>
+                <img class="modal-gif" id="modalGif" src="" alt="Demonstração do exercício">
+                <p class="modal-description" id="modalDescription">Descrição do exercício...</p>
+                <div class="modal-instructions">
+                    <h4><i class="fas fa-list"></i> Como executar:</h4>
+                    <ul id="modalInstructions"></ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Função para abrir o modal do exercício
-        function openExerciseModal(name, description, level, series, gifUrl) {
-            document.getElementById('modal-exercise-name').innerText = name;
-            document.getElementById('modal-exercise-description').innerText = description;
-            document.getElementById('modal-exercise-gif').src = gifUrl;
+    <a href="/sharkrush/gerador-treino" style="position:fixed;top:30px;right:30px;z-index:1200;background:#232323;color:#fff;border:none;border-radius:50%;width:54px;height:54px;box-shadow:0 2px 12px #0007;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;transition:background 0.2s;text-decoration:none;">
+        <i class="fas fa-cogs"></i>
+    </a>
 
-            const instructions = {
-                'Supino Reto': ['Deite-se em um banco reto.', 'Segure a barra com as mãos um pouco mais largas que a largura dos ombros.', 'Desça a barra controladamente
+    <script>
+        // Base path para as imagens
+        const BASE_IMG_PATH = '../midia/img-gif_biblioteca/';
+
+        // Banco de dados de exercícios COMPLETO
+        const exercisesDatabase = {
+            chest: {
+                title: 'Peito e Ombros',
+                icon: 'fa-dumbbell',
+                exercises: [
+                    {
+                        name: 'Supino Reto',
+                        details: 'Força e volume no peitoral',
+                        description: 'Exercício fundamental para desenvolvimento do peitoral maior',
+                        difficulty: 'beginner',
+                        duration: '3-4 séries',
+                        image: 'supino-reto-img.png',
+                        gif: 'supino-reto-gif.gif',
+                        instructions: [
+                            'Deite no banco com os pés apoiados no chão',
+                            'Segure a barra com pegada um pouco mais larga que os ombros',
+                            'Desça a barra controladamente até tocar o peito',
+                            'Empurre a barra para cima mantendo os cotovelos alinhados'
+                        ]
+                    },
+                    {
+                        name: 'Desenvolvimento Ombros',
+                        details: 'Deltoides fortes e definidos',
+                        description: 'Exercício completo para deltoides',
+                        difficulty: 'intermediate',
+                        duration: '3 séries',
+                        image: 'desenvolvimento-ombros.jpg',
+                        gif: 'desenvolvimento-ombros.gif',
+                        instructions: [
+                            'Sente-se com as costas retas e apoiadas',
+                            'Segure os halteres na altura dos ombros',
+                            'Empurre os halteres para cima sem travar os cotovelos',
+                            'Desça controladamente até a posição inicial'
+                        ]
+                    },
+                    {
+                        name: 'Flexão de Braço',
+                        details: 'Peito, tríceps e core',
+                        description: 'Exercício funcional para peito e core',
+                        difficulty: 'beginner',
+                        duration: '2-3 séries',
+                        image: 'flexão-img.png',
+                        gif: 'flexão-gif.gif',
+                        instructions: [
+                            'Posicione-se em prancha com mãos na largura dos ombros',
+                            'Mantenha o corpo alinhado da cabeça aos pés',
+                            'Desça o peito até quase tocar o chão',
+                            'Empurre para cima mantendo o core ativado'
+                        ]
+                    },
+                    {
+                        name: 'Crucifixo com Halteres',
+                        details: 'Alongamento e definição do peitoral',
+                        description: 'Trabalha a porção medial e externa do peitoral',
+                        difficulty: 'beginner',
+                        duration: '3 séries',
+                        image: 'crucifixo-img.png',
+                        gif: 'crucifixo-gif.gif',
+                        instructions: [
+                            'Deite no banco segurando halteres com braços semi-flexionados',
+                            'Desça os halteres abrindo os braços lateralmente',
+                            'Mantenha leve flexão nos cotovelos',
+                            'Suba trazendo os braços de volta ao centro'
+                        ]
+                    },
+                    {
+                        name: 'Elevação Lateral',
+                        details: 'Foco no deltoide lateral',
+                        description: 'Isolamento dos ombros para largura',
+                        difficulty: 'beginner',
+                        duration: '3x12-15',
+                        image: 'elevacao-lateral.jpg',
+                        gif: 'elevacao-lateral.gif',
+                        instructions: [
+                            'Fique em pé segurando halteres ao lado do corpo',
+                            'Levante os braços até a altura dos ombros',
+                            'Mantenha leve inclinação do tronco',
+                            'Desça controladamente mantendo tensão'
+                        ]
+                    }
+                ]
+            },
+
+            arms: {
+                title: 'Braços',
+                icon: 'fa-dumbbell',
+                exercises: [
+                    {
+                        name: 'Rosca Direta',
+                        details: 'Bíceps mais fortes e definidos',
+                        description: 'Exercício básico para bíceps',
+                        difficulty: 'beginner',
+                        duration: '3 séries',
+                        image: 'rosca-direta.jpg',
+                        gif: 'rosca-direta.gif',
+                        instructions: [
+                            'Fique em pé com a barra na pegada supinada',
+                            'Mantenha os cotovelos fixos ao lado do corpo',
+                            'Flexione os braços levando a barra ao peito',
+                            'Desça controladamente estendendo completamente'
+                        ]
+                    },
+                    {
+                        name: 'Tríceps Testa',
+                        details: 'Tríceps definidos e fortes',
+                        description: 'Isolamento para tríceps',
+                        difficulty: 'intermediate',
+                        duration: '3-4 séries',
+                        image: 'triceps-testa.png',
+                        gif: 'triceps-testa.gif',
+                        instructions: [
+                            'Deite no banco segurando a barra ou halteres',
+                            'Estenda os braços perpendiculares ao corpo',
+                            'Flexione apenas os cotovelos descendo o peso em direção à testa',
+                            'Estenda os braços retornando à posição inicial'
+                        ]
+                    },
+                    {
+                        name: 'Tríceps Corda',
+                        details: 'Isolamento de tríceps',
+                        description: 'Foco na cabeça lateral do tríceps',
+                        difficulty: 'beginner',
+                        duration: '3x12-15',
+                        image: 'triceps-corda.png',
+                        gif: 'triceps-corda.gif',
+                        instructions: [
+                            'Fique em pé no cabo segurando a corda',
+                            'Mantenha os cotovelos próximos ao corpo',
+                            'Empurre a corda para baixo separando as pontas',
+                            'Retorne controlando o movimento'
+                        ]
+                    },
+                    {
+                        name: 'Rosca Martelo',
+                        details: 'Bíceps e antebraços',
+                        description: 'Trabalha braquiorradial e braquial',
+                        difficulty: 'beginner',
+                        duration: '3 séries',
+                        image: 'rosca-martelo.png',
+                        gif: 'rosca-martelo.gif',
+                        instructions: [
+                            'Segure os halteres com pegada neutra',
+                            'Flexione os cotovelos mantendo-os fixos',
+                            'Suba até a contração máxima',
+                            'Desça devagar estendendo completamente'
+                        ]
+                    },
+                    {
+                        name: 'Rosca Scott',
+                        details: 'Isolamento máximo de bíceps',
+                        description: 'Execução guiada com mais estabilidade',
+                        difficulty: 'intermediate',
+                        duration: '3 séries',
+                        image: 'rosca-scott.jpg',
+                        gif: 'rosca-scott.gif',
+                        instructions: [
+                            'Sente-se no banco Scott',
+                            'Apoie os braços totalmente na almofada',
+                            'Flexione os cotovelos levantando a barra',
+                            'Desça controlando toda a amplitude'
+                        ]
+                    }
+                ]
+            },
+
+            abs: {
+                title: 'Abdômen',
+                icon: 'fa-fire',
+                exercises: [
+                    {
+                        name: 'Prancha',
+                        details: 'Core forte e estável',
+                        description: 'Exercício isométrico para core',
+                        difficulty: 'beginner',
+                        duration: '3x30-60s',
+                        image: 'prancha.jpg',
+                        gif: 'prancha.gif',
+                        instructions: [
+                            'Posicione-se em posição de flexão apoiado nos antebraços',
+                            'Mantenha o corpo alinhado da cabeça aos pés',
+                            'Contraia o abdômen e glúteos',
+                            'Respire normalmente mantendo a posição'
+                        ]
+                    },
+                    {
+                        name: 'Abdominal Supra',
+                        details: 'Foco no reto abdominal',
+                        description: 'Clássico para reto abdominal',
+                        difficulty: 'beginner',
+                        duration: '3x15-20',
+                        image: 'abdominal-supra.jpg',
+                        gif: 'abdominal-supra.gif',
+                        instructions: [
+                            'Deite com joelhos flexionados e pés apoiados',
+                            'Coloque as mãos atrás da cabeça ou cruzadas no peito',
+                            'Contraia o abdômen elevando apenas o tronco',
+                            'Desça controladamente sem relaxar completamente'
+                        ]
+                    },
+                    {
+                        name: 'Elevação de Pernas',
+                        details: 'Foco em abdômen inferior',
+                        description: 'Movimento que ativa o reto abdominal inferior',
+                        difficulty: 'intermediate',
+                        duration: '3x12-15',
+                        image: 'elevacao-pernas.jpg',
+                        gif: 'elevacao-pernas.gif',
+                        instructions: [
+                            'Deite-se com as pernas estendidas',
+                            'Eleve as pernas mantendo-as unidas',
+                            'Suba até formar um ângulo de 90 graus',
+                            'Desça devagar sem tocar os pés no chão'
+                        ]
+                    },
+                    {
+                        name: 'Bicicleta Abdominal',
+                        details: 'Oblíquos fortes e definidos',
+                        description: 'Trabalha abdômen completo e rotação do core',
+                        difficulty: 'beginner',
+                        duration: '3x20 alternado',
+                        image: 'bicicleta.jpg',
+                        gif: 'bicicleta.gif',
+                        instructions: [
+                            'Deite-se com os joelhos flexionados',
+                            'Gire o tronco aproximando cotovelo e joelho oposto',
+                            'Alternar os lados continuamente',
+                            'Mantenha o abdômen contraído'
+                        ]
+                    },
+                    {
+                        name: 'Prancha Lateral',
+                        details: 'Foco nos oblíquos',
+                        description: 'Isometria para estabilidade lateral',
+                        difficulty: 'beginner',
+                        duration: '3x20-30s cada lado',
+                        image: 'prancha-lateral.jpg',
+                        gif: 'prancha-lateral.gif',
+                        instructions: [
+                            'Apoie-se em um antebraço lateralmente',
+                            'Eleve o quadril alinhando o corpo',
+                            'Mantenha abdômen contraído',
+                            'Segure a posição respirando normalmente'
+                        ]
+                    }
+                ]
+            },
+
+            legs: {
+                title: 'Pernas',
+                icon: 'fa-running',
+                exercises: [
+                    {
+                        name: 'Agachamento',
+                        details: 'Pernas e glúteos em foco',
+                        description: 'Rei dos exercícios para pernas',
+                        difficulty: 'beginner',
+                        duration: '3-4 séries',
+                        image: 'agachamento.png',
+                        gif: 'agachamento.gif',
+                        instructions: [
+                            'Fique em pé com pés na largura dos ombros',
+                            'Desça flexionando quadris e joelhos simultaneamente',
+                            'Desça até as coxas ficarem paralelas ao chão',
+                            'Suba empurrando pelos calcanhares'
+                        ]
+                    },
+                    {
+                        name: 'Levantamento Terra',
+                        details: 'Posterior de coxa e glúteos',
+                        description: 'Composto para posterior',
+                        difficulty: 'intermediate',
+                        duration: '3 séries',
+                        image: 'levantamento-terra.png',
+                        gif: 'levantamento-terra.gif',
+                        instructions: [
+                            'Posicione a barra próxima às canelas',
+                            'Agarre a barra com pegada mista ou dupla',
+                            'Levante empurrando o chão com os pés',
+                            'Mantenha as costas retas durante todo movimento'
+                        ]
+                    },
+                    {
+                        name: 'Afundo',
+                        details: 'Equilíbrio e força nas pernas',
+                        description: 'Unilateral para equilíbrio',
+                        difficulty: 'beginner',
+                        duration: '3x12 cada',
+                        image: 'afundo.png',
+                        gif: 'afundo.gif',
+                        instructions: [
+                            'Dê um passo largo para frente',
+                            'Desça flexionando ambos os joelhos em 90 graus',
+                            'O joelho da frente deve ficar sobre o tornozelo',
+                            'Retorne à posição inicial empurrando com a perna da frente'
+                        ]
+                    },
+                    {
+                        name: 'Cadeira Extensora',
+                        details: 'Isolamento de quadríceps',
+                        description: 'Trabalha quadríceps com foco em definição',
+                        difficulty: 'beginner',
+                        duration: '3x12-15',
+                        image: 'cadeira-extensora.png',
+                        gif: 'cadeira-extensora.gif',
+                        instructions: [
+                            'Ajuste o banco para apoiar a parte inferior da canela',
+                            'Estenda os joelhos levantando o peso',
+                            'Contraia o quadríceps no topo',
+                            'Desça controladamente'
+                        ]
+                    },
+                    {
+                        name: 'Mesa Flexora',
+                        details: 'Isolamento de posterior de coxa',
+                        description: 'Foco na contração dos posteriores',
+                        difficulty: 'beginner',
+                        duration: '3x12-15',
+                        image: 'mesa-flexora.jpg',
+                        gif: 'mesa-flexora.gif',
+                        instructions: [
+                            'Deite de bruços na máquina',
+                            'Flexione os joelhos puxando o peso',
+                            'Mantenha o quadril apoiado',
+                            'Desça devagar mantendo controle'
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Controle de carrossel
+        const carouselPositions = {};
+
+        // Função para criar card de exercício
+        function createExerciseCard(exercise) {
+            const imagePath = BASE_IMG_PATH + exercise.image;
+            const gifPath = BASE_IMG_PATH + exercise.gif;
+            
+            return `
+                <div class="exercise-card" onclick='openExerciseModal(${JSON.stringify(exercise)})'>
+                    <div class="exercise-image">
+                        <img src="${imagePath}" alt="${exercise.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <i class="fas fa-dumbbell exercise-placeholder" style="display:none;"></i>
+                        <button class="play-button" onclick="event.stopPropagation(); openExerciseModal(${JSON.stringify(exercise).replace(/"/g, '&quot;')})">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                    <div class="exercise-info">
+                        <h3 class="exercise-name">${exercise.name}</h3>
+                        <p class="exercise-details">${exercise.details}</p>
+                        <div class="exercise-meta">
+                            <span class="difficulty ${exercise.difficulty}">
+                                ${exercise.difficulty === 'beginner' ? 'Iniciante' : 
+                                  exercise.difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'}
+                            </span>
+                            <span class="exercise-duration">${exercise.duration}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para criar grupo muscular
+        function createMuscleGroup(groupKey, groupData) {
+            const cardsHTML = groupData.exercises.map(ex => createExerciseCard(ex)).join('');
+            
+            return `
+                <section class="muscle-group">
+                    <h2 class="muscle-title">
+                        <i class="fas ${groupData.icon}"></i>
+                        ${groupData.title}
+                    </h2>
+                    <div class="exercises-carousel">
+                        <button class="carousel-nav prev" onclick="slideCarousel('${groupKey}', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="exercises-container" id="${groupKey}-container">
+                            ${cardsHTML}
+                        </div>
+                        <button class="carousel-nav next" onclick="slideCarousel('${groupKey}', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </section>
+            `;
+        }
+
+        // Renderizar todos os exercícios
+        function renderExercises() {
+            const container = document.getElementById('exercises-container');
+            let html = '';
+            
+            for (const [key, value] of Object.entries(exercisesDatabase)) {
+                html += createMuscleGroup(key, value);
+                carouselPositions[key] = 0;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Controle de carrossel
+        function slideCarousel(group, direction) {
+            const container = document.getElementById(group + '-container');
+            const cardWidth = 300;
+            const maxScroll = Math.max(0, (container.children.length - 1) * cardWidth);
+
+            carouselPositions[group] = carouselPositions[group] || 0;
+            carouselPositions[group] += direction * cardWidth;
+
+            if (carouselPositions[group] < 0) {
+                carouselPositions[group] = 0;
+            } else if (carouselPositions[group] > maxScroll) {
+                carouselPositions[group] = maxScroll;
+            }
+
+            container.style.transform = `translateX(-${carouselPositions[group]}px)`;
+        }
+
+        // Abrir modal de exercício
+        function openExerciseModal(exercise) {
+            const modal = document.getElementById('exerciseModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalGif = document.getElementById('modalGif');
+            const modalInstructions = document.getElementById('modalInstructions');
+
+            modalTitle.textContent = exercise.name;
+            modalDescription.textContent = exercise.description;
+            modalGif.src = BASE_IMG_PATH + exercise.gif;
+            modalGif.alt = exercise.name;
+
+            modalInstructions.innerHTML = exercise.instructions
+                .map(instruction => `<li>${instruction}</li>`)
+                .join('');
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fechar modal
+        function closeExerciseModal() {
+            const modal = document.getElementById('exerciseModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('exerciseModal');
+            if (event.target === modal) {
+                closeExerciseModal();
+            }
+        });
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeExerciseModal();
+            }
+        });
+
+        // Controle responsivo do carrossel
+        function updateCarouselResponsive() {
+            const isMobile = window.innerWidth <= 768;
+            const cardWidth = isMobile ? 235 : 300;
+
+            Object.keys(carouselPositions).forEach(group => {
+                const container = document.getElementById(group + '-container');
+                if (container) {
+                    const maxScroll = Math.max(0, (container.children.length - 1) * cardWidth);
+                    if (carouselPositions[group] > maxScroll) {
+                        carouselPositions[group] = maxScroll;
+                    }
+                    container.style.transform = `translateX(-${carouselPositions[group]}px)`;
+                }
+            });
+        }
+
+        window.addEventListener('resize', updateCarouselResponsive);
+
+        // Animação de background
+        let ticking = false;
+        function updateBackground() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.background-animation');
+            if (parallax) {
+                const speed = scrolled * 0.1;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateBackground);
+                ticking = true;
+            }
+        });
+
+        // Inicializar ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            renderExercises();
+            updateCarouselResponsive();
+        });
+    </script>
+</body>
+</html>
