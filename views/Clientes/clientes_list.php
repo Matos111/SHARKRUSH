@@ -188,7 +188,7 @@
         }
 
         .main-menu li a.nav-logout:hover {
-            background: #8f8f8fff;
+            background: #6c6c6cff;
         }
 
         .logo-container {
