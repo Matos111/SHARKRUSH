@@ -663,7 +663,9 @@
 
         document.getElementById('cpf').addEventListener('input', function(e) {
             this.value = formatCPF(this.value);
-            
+            clearValidation('cpf');
+        });
+        document.getElementById('cpf').addEventListener('blur', function(e) {
             const cpf = this.value.replace(/\D/g, '');
             if (cpf === '') {
                 clearValidation('cpf');
@@ -674,26 +676,30 @@
                     showError('cpf', 'CPF inválido');
                 }
             } else {
-                clearValidation('cpf');
+                showError('cpf', 'CPF incompleto');
             }
         });
 
         document.getElementById('telefone').addEventListener('input', function(e) {
             this.value = formatPhone(this.value);
-            
+            clearValidation('telefone');
+        });
+        document.getElementById('telefone').addEventListener('blur', function(e) {
             const phone = this.value.replace(/\D/g, '');
             if (phone === '') {
                 clearValidation('telefone');
             } else if (phone.length >= 10) {
                 showSuccess('telefone');
             } else {
-                clearValidation('telefone');
+                showError('telefone', 'Telefone incompleto');
             }
         });
 
         document.getElementById('email').addEventListener('input', function() {
+            clearValidation('email');
+        });
+        document.getElementById('email').addEventListener('blur', function() {
             const email = this.value.trim();
-            
             if (email === '') {
                 clearValidation('email');
             } else if (validateEmail(email)) {
@@ -704,8 +710,10 @@
         });
 
         document.getElementById('nome_completo').addEventListener('input', function() {
+            clearValidation('nome_completo');
+        });
+        document.getElementById('nome_completo').addEventListener('blur', function() {
             const nome = this.value.trim();
-            
             if (nome === '') {
                 clearValidation('nome_completo');
             } else if (nome.split(' ').length >= 2 && nome.length >= 5) {
@@ -716,47 +724,52 @@
         });
 
         document.getElementById('endereco').addEventListener('input', function() {
+            clearValidation('endereco');
+        });
+        document.getElementById('endereco').addEventListener('blur', function() {
             const endereco = this.value.trim();
-            
             if (endereco === '') {
                 clearValidation('endereco');
             } else if (endereco.length >= 10) {
                 showSuccess('endereco');
             } else {
-                clearValidation('endereco');
+                showError('endereco', 'Digite o endereço completo');
             }
         });
 
         document.getElementById('senha').addEventListener('input', function() {
             const senha = this.value;
-            
             if (senha === '') {
                 clearValidation('senha');
                 document.getElementById('passwordStrength').classList.remove('show');
             } else {
                 updatePasswordStrength(senha);
-                
-                if (senha.length >= 6) {
-                    showSuccess('senha');
-                } else {
-                    showError('senha', 'Mínimo de 6 caracteres');
-                }
+                clearValidation('senha');
             }
-            
+            // Não mostrar erro de confirmação enquanto digita
+            // Apenas limpar o erro se estiver digitando
             const confirmarSenha = document.getElementById('confirmar_senha').value;
             if (confirmarSenha) {
-                if (senha === confirmarSenha) {
-                    showSuccess('confirmar_senha');
-                } else {
-                    showError('confirmar_senha', 'As senhas não coincidem');
-                }
+                clearValidation('confirmar_senha');
+            }
+        });
+        document.getElementById('senha').addEventListener('blur', function() {
+            const senha = this.value;
+            if (senha === '') {
+                clearValidation('senha');
+            } else if (senha.length >= 6) {
+                showSuccess('senha');
+            } else {
+                showError('senha', 'Mínimo de 6 caracteres');
             }
         });
 
         document.getElementById('confirmar_senha').addEventListener('input', function() {
+            clearValidation('confirmar_senha');
+        });
+        document.getElementById('confirmar_senha').addEventListener('blur', function() {
             const senha = document.getElementById('senha').value;
             const confirmarSenha = this.value;
-            
             if (confirmarSenha === '') {
                 clearValidation('confirmar_senha');
             } else if (senha === confirmarSenha) {
