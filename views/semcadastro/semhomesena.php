@@ -1436,7 +1436,7 @@
     <nav class="main-menu">
         <div class="logo-container">
             <a href="<?= BASE_URL ?>/cadastro" title="Cadastro">
-                <img src="../midia/Logos/logoshark.png"alt="Logo"/>
+                <img src="/SHARKRUSH/VIEWS/MIDIA/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
@@ -1636,7 +1636,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../midia/images/supinoinclinado.png" alt="Supino Inclinado">
+                            <img class="card-bg-image" src="/SHARKRUSH/VIEWS/MIDIA/images/supinoinclinado.png" alt="Supino Inclinado">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PEITO</div>
@@ -1661,7 +1661,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../midia/images/agachamentolivre.png" alt="Agachamento Livre">
+                            <img class="card-bg-image" src="/SHARKRUSH/VIEWS/MIDIA/images/agachamentolivre.png" alt="Agachamento Livre">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PERNA</div>
@@ -1686,7 +1686,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../midia/images/puxadafrontal.png" alt="Puxada Frontal">
+                            <img class="card-bg-image" src="/SHARKRUSH/VIEWS/MIDIA/images/puxadafrontal.png" alt="Puxada Frontal">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">COSTAS</div>

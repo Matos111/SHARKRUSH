@@ -1069,7 +1069,7 @@
     <nav class="main-menu">
         <div class="logo-container">
             <a href="<?= BASE_URL ?>/dashboard" title="Dashboard">
-                <img src="../midia/Logos/logoshark.png"alt="Logo"/>
+                <img src="/SHARKRUSH/VIEWS/MIDIA/Logos/logoshark.png"alt="Logo"/>
             </a>
         </div>
         <ul>
