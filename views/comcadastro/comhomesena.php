@@ -1654,25 +1654,25 @@
                         </div>
         <!-- Grid de serviços -->
         <section id="services" class="services-grid scroll-reveal">
-            <div class="service-card" onclick="navigateTo('treinos')">
-                <i class="fas fa-dumbbell service-icon"></i>
-                <h3>Criação de Treinos</h3>
-                <p>Monte treinos personalizados com exercícios específicos para seus objetivos. Organize por grupos musculares, defina séries, repetições e descanso.</p>
-                <button class="service-btn">Criar Treino</button>
+            <div class="service-card" onclick="window.location.href='<?= BASE_URL ?>/meus-treinos'">
+            <i class="fas fa-dumbbell service-icon"></i>
+            <h3>Criação de Treinos</h3>
+            <p>Monte treinos personalizados com exercícios específicos para seus objetivos. Organize por grupos musculares, defina séries, repetições e descanso.</p>
+            <button class="service-btn">Criar Treino</button>
             </div>
 
-            <div class="service-card" onclick="navigateTo('imc')">
-                <i class="fas fa-weight service-icon"></i>
-                <h3>Calculadora de IMC</h3>
-                <p>Calcule seu Índice de Massa Corporal e descubra sua classificação. Monitore seu peso ideal e acompanhe seu progresso de forma inteligente.</p>
-                <button class="service-btn">Calcular IMC</button>
+            <div class="service-card" onclick="window.location.href='<?= BASE_URL ?>/calculadora-imc'">
+            <i class="fas fa-weight service-icon"></i>
+            <h3>Calculadora de IMC</h3>
+            <p>Calcule seu Índice de Massa Corporal e descubra sua classificação. Monitore seu peso ideal e acompanhe seu progresso de forma inteligente.</p>
+            <button class="service-btn">Calcular IMC</button>
             </div>
 
-            <div class="service-card" onclick="navigateTo('calorias')">
-                <i class="fas fa-fire-alt service-icon"></i>
-                <h3>Calorias Diárias</h3>
-                <p>Descubra quantas calorias você precisa consumir por dia baseado no seu perfil, metabolismo e objetivos de ganho ou perda de peso.</p>
-                <button class="service-btn">Calcular Calorias</button>
+            <div class="service-card" onclick="window.location.href='<?= BASE_URL ?>/calculadora-calorias'">
+            <i class="fas fa-fire-alt service-icon"></i>
+            <h3>Calorias Diárias</h3>
+            <p>Descubra quantas calorias você precisa consumir por dia baseado no seu perfil, metabolismo e objetivos de ganho ou perda de peso.</p>
+            <button class="service-btn">Calcular Calorias</button>
             </div>
         </section>
     </div>
