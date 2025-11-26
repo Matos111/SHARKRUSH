@@ -763,7 +763,7 @@
 
     <script>
         // Base path para as imagens
-        const BASE_IMG_PATH = '../midia/img-gif_biblioteca/';
+        const BASE_IMG_PATH = '/SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/';
 
         // Banco de dados de exercícios COMPLETO
         const exercisesDatabase = {

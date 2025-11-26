@@ -471,7 +471,7 @@
                     <input type="checkbox" id="rememberMe">
                     Lembrar de mim
                 </label>
-                <a href="../semcadastro/semrecuperarsenha.php" class="forgot-password">Esqueceu a senha?</a>
+                
             </div>
 
             <button type="submit" class="login-btn" id="loginBtn">

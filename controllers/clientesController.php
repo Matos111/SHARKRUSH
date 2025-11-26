@@ -37,7 +37,7 @@ class ClientesController
 
     if ($clientes->save()) {
       // Redireciona para login com mensagem de sucesso
-      header("Location: " . $baseUrl . "/?success=cadastro");
+      header("Location: " . $baseUrl . "/login?success=cadastro");
       exit();
     } else {
       header("Location: " . $baseUrl . "/cadastro?error=erro_cadastro");

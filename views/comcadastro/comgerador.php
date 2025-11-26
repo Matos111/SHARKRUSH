@@ -971,7 +971,7 @@
     <div class="container">
         <div class="main-content">
             <div class="header">
-                <h1>Gerador de Treinos</h1>
+                <h1>Como fortalecer cada músculo?</h1>
                 <p>Selecione os músculos e veja os exercícios recomendados.</p>
             </div>
 

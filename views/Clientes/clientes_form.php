@@ -524,7 +524,7 @@
         </div>
 
         <div class="login-link">
-            Já tem uma conta? <a href="../semcadastro/semlogin.php">Faça login</a>
+            Já tem uma conta? <a href="<?= BASE_URL ?>/login">Faça login</a>
         </div>
     </div>
 
@@ -778,60 +778,65 @@
 
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             let isValid = true;
-            
+
             const nome = document.getElementById('nome_completo').value.trim();
             if (!nome || nome.split(' ').length < 2 || nome.length < 5) {
                 e.preventDefault();
                 showError('nome_completo', 'Digite o nome completo');
                 isValid = false;
             }
-            
+
             const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
             if (!cpf || !validateCPF(cpf)) {
                 e.preventDefault();
                 showError('cpf', 'CPF inválido');
                 isValid = false;
             }
-            
+
             const endereco = document.getElementById('endereco').value.trim();
             if (!endereco || endereco.length < 10) {
                 e.preventDefault();
                 showError('endereco', 'Digite o endereço completo');
                 isValid = false;
             }
-            
+
             const email = document.getElementById('email').value.trim();
             if (!email || !validateEmail(email)) {
                 e.preventDefault();
                 showError('email', 'E-mail inválido');
                 isValid = false;
             }
-            
+
             const senha = document.getElementById('senha').value;
             if (!senha || senha.length < 6) {
                 e.preventDefault();
                 showError('senha', 'Senha deve ter no mínimo 6 caracteres');
                 isValid = false;
             }
-            
+
             const confirmarSenha = document.getElementById('confirmar_senha').value;
             if (senha !== confirmarSenha) {
                 e.preventDefault();
                 showError('confirmar_senha', 'As senhas não coincidem');
                 isValid = false;
             }
-            
+
             const terms = document.getElementById('terms').checked;
             if (!terms) {
                 e.preventDefault();
                 alert('Você precisa concordar com os Termos de Uso');
                 isValid = false;
             }
-            
+
             if (isValid) {
                 const registerBtn = document.getElementById('registerBtn');
                 registerBtn.classList.add('loading');
                 registerBtn.innerHTML = '';
+
+                // Redireciona para a página de login após 1 segundo
+                setTimeout(function() {
+                    window.location.href = "<?= BASE_URL ?>/login";
+                }, 1000);
             }
         });
 

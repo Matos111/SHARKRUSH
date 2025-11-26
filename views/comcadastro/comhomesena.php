@@ -1718,7 +1718,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../midia/images/supinoinclinado.png" alt="Supino Inclinado">
+                            <img class="card-bg-image" src="/SHARKRUSH/VIEWS/MIDIA/images/supinoinclinado.png" alt="Supino Inclinado">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PEITO</div>
@@ -1743,7 +1743,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../midia/images/agachamentolivre.png" alt="Agachamento Livre">
+                            <img class="card-bg-image" src="/SHARKRUSH/VIEWS/MIDIA/agachamentolivre.png" alt="Agachamento Livre">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">PERNA</div>
@@ -1768,7 +1768,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../sharkrush/views/midia/images/puxadafrontal.png" alt="Puxada Frontal">
+                            <img class="card-bg-image" src="/SHARKRUSH/VIEWS/MIDIA/IMAGES/puxadafrontal.png" alt="Puxada Frontal">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">COSTAS</div>
