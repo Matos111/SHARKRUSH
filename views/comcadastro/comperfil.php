@@ -987,28 +987,20 @@
                 return;
             }
 
-            // Criar formulário e enviar
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/update-perfil';
-
-            const fields = {
-                'nome_completo': fullName,
-                'cpf': cpf,
-                'endereco': endereco,
-                'telefone': phone
-            };
-
-            for (const [key, value] of Object.entries(fields)) {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = value;
-                form.appendChild(input);
+            // Atualiza o topo do perfil (nome e email)
+            document.getElementById('displayName').textContent = fullName;
+            // Atualiza o email se o campo de email existir no formulário de informações pessoais
+            var emailField = document.getElementById('email');
+            if (emailField) {
+                document.getElementById('displayEmail').textContent = emailField.value;
             }
 
-            document.body.appendChild(form);
-            form.submit();
+            // Simulação frontend: desabilita campos e mostra mensagem de sucesso
+            const inputs = document.querySelectorAll('#personalForm input');
+            inputs.forEach(input => input.disabled = true);
+            document.getElementById('personalButtons').style.display = 'none';
+            document.getElementById('editPersonalText').textContent = 'Editar';
+            showSuccess('personal');
         }
 
         // Salvar dados da conta
@@ -1027,38 +1019,31 @@
                 return;
             }
 
-            // Criar formulário e enviar
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/update-perfil';
-
-            const emailInput = document.createElement('input');
-            emailInput.type = 'hidden';
-            emailInput.name = 'email';
-            emailInput.value = email;
-            form.appendChild(emailInput);
-
-            document.body.appendChild(form);
-            form.submit();
+            // Simulação frontend: desabilita campos e mostra mensagem de sucesso
+            const inputs = document.querySelectorAll('#accountForm input');
+            inputs.forEach(input => input.disabled = true);
+            document.getElementById('accountButtons').style.display = 'none';
+            document.getElementById('editAccountText').textContent = 'Editar';
+            showSuccess('account');
         }
 
         // Salvar dados físicos
         function savePhysical() {
-            const weight = document.getElementById('weight').value;
-            const height = document.getElementById('height').value;
-            const goal = document.getElementById('goal').value;
-            const activityLevel = document.getElementById('activityLevel').value;
-
-            if (!weight || !height) {
-                alert('Por favor, preencha todos os campos.');
-                return;
-            }
-
-            // Aqui você faria a chamada para a API
-            console.log('Salvando dados físicos:', { weight, height, goal, activityLevel });
-
-            cancelEdit('physical');
+            // Simulação frontend para dados físicos (se houver)
+            const inputs = document.querySelectorAll('#physicalForm input');
+            inputs.forEach(input => input.disabled = true);
+            document.getElementById('physicalButtons').style.display = 'none';
+            document.getElementById('editPhysicalText').textContent = 'Editar';
             showSuccess('physical');
+        }
+        // Simular edição de segurança (senha)
+        function saveSecurity() {
+            // Apenas simula a alteração de senha
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('successPassword').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('successPassword').classList.remove('show');
+            }, 2000);
         }
 
         // Alterar avatar
@@ -1126,62 +1111,8 @@
         // Submeter alteração de senha
         document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
-            const errorMsg = document.getElementById('errorPassword');
-            const errorText = document.getElementById('errorPasswordText');
-            const successMsg = document.getElementById('successPassword');
-
-            // Limpar mensagens
-            errorMsg.classList.remove('show');
-            successMsg.classList.remove('show');
-
-            // Validações
-            if (!currentPassword || !newPassword || !confirmNewPassword) {
-                errorText.textContent = 'Por favor, preencha todos os campos.';
-                errorMsg.classList.add('show');
-                return;
-            }
-
-            if (newPassword.length < 8) {
-                errorText.textContent = 'A nova senha deve ter pelo menos 8 caracteres.';
-                errorMsg.classList.add('show');
-                return;
-            }
-
-            if (newPassword !== confirmNewPassword) {
-                errorText.textContent = 'As senhas não coincidem.';
-                errorMsg.classList.add('show');
-                return;
-            }
-
-            // Criar formulário e enviar
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/update-senha';
-
-            const currentPassInput = document.createElement('input');
-            currentPassInput.type = 'hidden';
-            currentPassInput.name = 'senha_atual';
-            currentPassInput.value = currentPassword;
-            form.appendChild(currentPassInput);
-
-            const newPassInput = document.createElement('input');
-            newPassInput.type = 'hidden';
-            newPassInput.name = 'nova_senha';
-            newPassInput.value = newPassword;
-            form.appendChild(newPassInput);
-
-            const confirmPassInput = document.createElement('input');
-            confirmPassInput.type = 'hidden';
-            confirmPassInput.name = 'confirma_senha';
-            confirmPassInput.value = confirmNewPassword;
-            form.appendChild(confirmPassInput);
-
-            document.body.appendChild(form);
-            form.submit();
+            // Simulação frontend: apenas mostra mensagem de sucesso
+            saveSecurity();
         });
 
         // Navegação ativa
