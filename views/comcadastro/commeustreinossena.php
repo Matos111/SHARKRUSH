@@ -7,6 +7,39 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+    .confetti {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 99999;
+    }
+    .confetti-piece {
+        position: absolute;
+        width: 12px;
+        height: 24px;
+        border-radius: 4px;
+        opacity: 0.85;
+        will-change: transform, opacity;
+        animation: confetti-fall 2.5s linear forwards;
+    }
+    @keyframes confetti-fall {
+        0% {
+            transform: translateY(-100px) rotateZ(0deg);
+            opacity: 1;
+        }
+        80% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotateZ(360deg);
+            opacity: 0;
+        }
+    }
+    </style>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -1261,16 +1294,32 @@
         }
 
         const exerciseGifs = {
-            'supino': 'https://i.pinimg.com/originals/16/70/c8/1670c89b555af7d1e75161a19bb622c1.gif',
-            'flexao': 'https://i.pinimg.com/originals/49/7d/f9/497df922c8f51417c0e00f2a1b29ab5b.gif',
-            'agachamento': 'https://thumbs.gfycat.com/BlondPleasingChameleon-size_restricted.gif',
-            'rosca': 'https://thumbs.gfycat.com/AltruisticImpressiveElephantbeetle-max-1mb.gif',
-            'puxada': 'https://thumbs.gfycat.com/WeightyPointedBluetonguelizard-size_restricted.gif',
-            'default': 'https://i.pinimg.com/originals/82/3c/66/823c664ee7195f5e0efbe8ca90e2b2e0.gif'
+            'supino reto': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/supino_reto.gif',
+            'supino inclinado': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/supino_inclinado.gif',
+            'crucifixo': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/crucifixo.gif',
+            'tríceps testa': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/triceps_testa.gif',
+            'tríceps corda': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/triceps_corda.gif',
+            'puxada frontal': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/puxada_frontal.gif',
+            'remada curvada': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/remada_curvada.gif',
+            'remada unilateral': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/remada_unilateral.gif',
+            'rosca direta': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/rosca_direta.gif',
+            'agachamento livre': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/agachamento_livre.gif',
+            'leg press': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/leg_press.gif',
+            'cadeira extensora': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/cadeira_extensora.gif',
+            'cadeira flexora': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/cadeira_flexora.gif',
+            'panturrilha': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/panturrilha.gif',
+            'flexão': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/flexao.gif',
+            'outro': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/outro.gif',
+            'default': '..SHARKRUSH/VIEWS/MIDIA/img-gif_biblioteca/outro.gif'
         };
 
         function getExerciseGif(exerciseName) {
             const name = exerciseName.toLowerCase();
+            // Try exact match first
+            if (exerciseGifs[name]) {
+                return exerciseGifs[name];
+            }
+            // Try partial match
             for (let key in exerciseGifs) {
                 if (name.includes(key)) {
                     return exerciseGifs[key];
@@ -1756,6 +1805,10 @@
 
                 document.getElementById('viewWorkoutModal').classList.add('active');
                 atualizarCronometroModal();
+                // Launch confetti if workout is completed
+                if (workout.status === 'completed' || workout.progress === 100) {
+                    setTimeout(launchConfetti, 400); // slight delay for effect
+                }
             } catch (error) {
                 console.error('Erro:', error);
                 showNotification('Erro ao carregar detalhes do treino');
@@ -1949,6 +2002,37 @@
 
                 animate();
             }
+        }
+
+        // Confetti effect for workout completion
+        function launchConfetti() {
+            const confettiColors = [
+                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff',
+                '#ff8800', '#ff0088', '#88ff00', '#0088ff', '#00ff88', '#8800ff'
+            ];
+            let confettiContainer = document.querySelector('.confetti');
+            if (!confettiContainer) {
+                confettiContainer = document.createElement('div');
+                confettiContainer.className = 'confetti';
+                document.body.appendChild(confettiContainer);
+            }
+            // Remove old confetti
+            confettiContainer.innerHTML = '';
+            const pieces = 80;
+            for (let i = 0; i < pieces; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-40px';
+                confetti.style.transform = `rotateZ(${Math.random() * 360}deg)`;
+                confetti.style.animationDelay = (Math.random() * 0.7) + 's';
+                confettiContainer.appendChild(confetti);
+            }
+            // Remove confetti after animation
+            setTimeout(() => {
+                if (confettiContainer) confettiContainer.innerHTML = '';
+            }, 3000);
         }
 
         // Adicionar efeito de partículas ao marcar exercício
