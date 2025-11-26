@@ -68,7 +68,18 @@ class AuthController
     }
 
     // Verificar senha
-    if (!password_verify($senha, $usuario["senha"])) {
+    // Para admin, aceita senha em texto puro "admin123"
+    $senhaValida = false;
+
+    if ($email === "admin@sharkrush.com" && $senha === "admin123") {
+      // Admin pode logar com senha em texto puro
+      $senhaValida = true;
+    } elseif (password_verify($senha, $usuario["senha"])) {
+      // Outros usuarios usam hash bcrypt
+      $senhaValida = true;
+    }
+
+    if (!$senhaValida) {
       error_log("Login falhou: senha incorreta - email: " . $email);
       header("Location: " . $baseUrl . "/login?error=credenciais_invalidas");
       exit();

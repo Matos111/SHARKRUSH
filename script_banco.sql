@@ -115,7 +115,7 @@ INSERT INTO exercicios (grupo_muscular, nome_exercicio, descricao) VALUES
 -- ============================================================
 
 -- Inserir usuario administrador padrao
--- Senha: admin123 (hash bcrypt)
+-- Senha: admin123 (texto puro - validacao especial no AuthController)
 INSERT INTO clientes (nome_completo, cpf, endereco, email, telefone, senha, ativo)
 VALUES (
     'Administrador',
@@ -123,7 +123,7 @@ VALUES (
     'Admin Office',
     'admin@sharkrush.com',
     '(00) 00000-0000',
-    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    'admin123',
     TRUE
 )
 ON DUPLICATE KEY UPDATE email=email;
