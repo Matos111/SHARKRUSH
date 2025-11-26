@@ -118,8 +118,32 @@
         .profile-top {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 2rem;
             margin-bottom: 2rem;
+        }
+
+        .profile-header-treinos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+            padding: 0 1.5rem;
+        }
+        .profile-header-treinos .stat-value {
+            font-size: 2.7rem;
+            font-weight: bold;
+            color: #FF1F1F;
+            line-height: 1.1;
+            text-align: center;
+        }
+        .profile-header-treinos .stat-label {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
         .profile-avatar {
@@ -230,10 +254,13 @@
         }
 
         /* Seções do perfil */
-        .profile-sections {
+        .profile-sections-columns {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
+        }
+        .profile-section-group > .profile-section + .profile-section {
+            margin-top: 2rem;
         }
 
         .profile-section {
@@ -346,7 +373,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #FF1F1F, #cc0000);
+            background: linear-gradient(135deg, #1f1f1fff, #1c1c1cff);
             color: white;
         }
 
@@ -367,7 +394,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 31, 31, 0.4);
+            box-shadow: 0 10px 25px rgba(63, 63, 63, 0.95);
         }
 
         .btn-secondary {
@@ -580,8 +607,11 @@
 
         /* Responsividade */
         @media (max-width: 1024px) {
-            .profile-sections {
+            .profile-sections-columns {
                 grid-template-columns: 1fr;
+            }
+            .profile-section-group > .profile-section + .profile-section {
+                margin-top: 2rem;
             }
         }
 
@@ -703,12 +733,7 @@
 
         <!-- Header do perfil -->
         <div class="profile-header">
-            <!-- Botão Sair (Logout) -->
-            <button class="btn btn-secondary" style="position: absolute; top: 2rem; right: 2rem; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 12px;" onclick="window.location.href='/SHARKRUSH/logout'">
-                <i class="fas fa-sign-out-alt" style="margin-right: 0.7rem; font-size: 1.5rem;"></i> Sair
-            </button>
-
-            <div class="profile-top">
+            <div class="profile-top" style="display: flex; align-items: center; justify-content: flex-start; gap: 2rem; margin-bottom: 2rem; position: relative;">
                 <div class="profile-avatar">
                     <div class="avatar-container" id="avatarContainer">
                         <i class="fas fa-user"></i>
@@ -719,31 +744,21 @@
                     <input type="file" id="avatarInput" accept="image/*" style="display: none;">
                 </div>
                 <div class="profile-info">
-                    <h1 class="profile-name" id="displayName"><?php echo htmlspecialchars(
-                      $userData["nome_completo"] ?? "",
-                      ENT_QUOTES,
-                      "UTF-8",
-                    ); ?></h1>
-                    <p class="profile-email" id="displayEmail"><?php echo htmlspecialchars(
-                      $userData["email"] ?? "",
-                      ENT_QUOTES,
-                      "UTF-8",
-                    ); ?></p>
-                    <div class="profile-stats">
-                        <div class="stat-item">
-                            <div class="stat-value"><?php echo htmlspecialchars(
-                              $userData["total_treinos"] ?? 0,
-                            ); ?></div>
-                            <div class="stat-label">Treinos</div>
-                        </div>
-                    </div>
+                    <h1 class="profile-name" id="displayName"><?php echo htmlspecialchars($userData["nome_completo"] ?? "", ENT_QUOTES, "UTF-8"); ?></h1>
+                    <p class="profile-email" id="displayEmail"><?php echo htmlspecialchars($userData["email"] ?? "", ENT_QUOTES, "UTF-8"); ?></p>
                 </div>
+                <div class="profile-header-treinos" style="margin-left: auto; margin-right: 1.5rem;">
+                    <div class="stat-value"><?php echo htmlspecialchars($userData["total_treinos"] ?? 0); ?></div>
+                    <div class="stat-label">Treinos Realizados</div>
+                </div>
+                <button class="btn btn-secondary" style="padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 12px;" onclick="window.location.href='/SHARKRUSH/logout'">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 0.7rem; font-size: 1.5rem;"></i> Sair
+                </button>
             </div>
         </div>
 
         <!-- Seções do perfil -->
-        <div class="profile-sections">
-            <!-- Informações Pessoais -->
+        <div class="profile-sections-columns">
             <div class="profile-section">
                 <div class="section-header">
                     <h2 class="section-title">
@@ -755,43 +770,25 @@
                         <span id="editPersonalText">Editar</span>
                     </button>
                 </div>
-
                 <div id="successPersonal" class="success-message">
                     <i class="fas fa-check-circle"></i> Informações atualizadas com sucesso!
                 </div>
-
                 <form id="personalForm">
                     <div class="form-group">
                         <label class="form-label">Nome Completo</label>
-                        <input type="text" class="form-input" id="fullName" value="<?php echo htmlspecialchars(
-                          $userData["nome_completo"] ?? "",
-                          ENT_QUOTES,
-                          "UTF-8",
-                        ); ?>" disabled>
+                        <input type="text" class="form-input" id="fullName" value="<?php echo htmlspecialchars($userData["nome_completo"] ?? "", ENT_QUOTES, "UTF-8"); ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label class="form-label">CPF</label>
-                        <input type="text" class="form-input" id="cpf" value="<?php echo htmlspecialchars(
-                          $userData["cpf"] ?? "",
-                          ENT_QUOTES,
-                          "UTF-8",
-                        ); ?>" disabled>
+                        <input type="text" class="form-input" id="cpf" value="<?php echo htmlspecialchars($userData["cpf"] ?? "", ENT_QUOTES, "UTF-8"); ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Endereco</label>
-                        <input type="text" class="form-input" id="endereco" value="<?php echo htmlspecialchars(
-                          $userData["endereco"] ?? "",
-                          ENT_QUOTES,
-                          "UTF-8",
-                        ); ?>" disabled>
+                        <input type="text" class="form-input" id="endereco" value="<?php echo htmlspecialchars($userData["endereco"] ?? "", ENT_QUOTES, "UTF-8"); ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Telefone</label>
-                        <input type="tel" class="form-input" id="phone" value="<?php echo htmlspecialchars(
-                          $userData["telefone"] ?? "",
-                          ENT_QUOTES,
-                          "UTF-8",
-                        ); ?>" disabled>
+                        <input type="tel" class="form-input" id="phone" value="<?php echo htmlspecialchars($userData["telefone"] ?? "", ENT_QUOTES, "UTF-8"); ?>" disabled>
                     </div>
                     <div class="action-buttons" id="personalButtons" style="display: none;">
                         <button type="button" class="btn btn-secondary" onclick="cancelEdit('personal')">Cancelar</button>
@@ -799,116 +796,52 @@
                     </div>
                 </form>
             </div>
-
-            <!-- Dados da Conta -->
-            <div class="profile-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-envelope"></i>
-                        Dados da Conta
-                    </h2>
-                    <button class="edit-btn" onclick="toggleEdit('account')">
-                        <i class="fas fa-edit"></i>
-                        <span id="editAccountText">Editar</span>
-                    </button>
-                </div>
-
-                <div id="successAccount" class="success-message">
-                    <i class="fas fa-check-circle"></i> Dados da conta atualizados!
-                </div>
-
-                <form id="accountForm">
-                    <div class="form-group">
-                        <label class="form-label">E-mail</label>
-                        <input type="email" class="form-input" id="email" value="<?php echo htmlspecialchars(
-                          $userData["email"] ?? "",
-                          ENT_QUOTES,
-                          "UTF-8",
-                        ); ?>" disabled>
+            <div class="profile-section-group">
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-envelope"></i>
+                            Dados da Conta
+                        </h2>
+                        <button class="edit-btn" onclick="toggleEdit('account')">
+                            <i class="fas fa-edit"></i>
+                            <span id="editAccountText">Editar</span>
+                        </button>
                     </div>
-                    <div class="action-buttons" id="accountButtons" style="display: none;">
-                        <button type="button" class="btn btn-secondary" onclick="cancelEdit('account')">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="saveAccount()">Salvar Alterações</button>
+                    <div id="successAccount" class="success-message">
+                        <i class="fas fa-check-circle"></i> Dados da conta atualizados!
                     </div>
-                </form>
-            </div>
-
-            <!-- Dados Físicos -->
-            <div class="profile-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-heartbeat"></i>
-                        Dados Físicos
-                    </h2>
-                    <button class="edit-btn" onclick="toggleEdit('physical')">
-                        <i class="fas fa-edit"></i>
-                        <span id="editPhysicalText">Editar</span>
-                    </button>
-                </div>
-
-                <div id="successPhysical" class="success-message">
-                    <i class="fas fa-check-circle"></i> Dados físicos atualizados!
-                </div>
-
-                <form id="physicalForm">
-                    <div class="input-group">
+                    <form id="accountForm">
                         <div class="form-group">
-                            <label class="form-label">Peso (kg)</label>
-                            <input type="number" class="form-input" id="weight" value="75" step="0.1" disabled>
+                            <label class="form-label">E-mail</label>
+                            <input type="email" class="form-input" id="email" value="<?php echo htmlspecialchars($userData["email"] ?? "", ENT_QUOTES, "UTF-8"); ?>" disabled>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Altura (cm)</label>
-                            <input type="number" class="form-input" id="height" value="178" disabled>
+                        <div class="action-buttons" id="accountButtons" style="display: none;">
+                            <button type="button" class="btn btn-secondary" onclick="cancelEdit('account')">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="saveAccount()">Salvar Alterações</button>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Objetivo</label>
-                        <select class="form-input" id="goal" disabled>
-                            <option value="perder">Perder Peso</option>
-                            <option value="manter" selected>Manter Peso</option>
-                            <option value="ganhar">Ganhar Massa</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nível de Atividade</label>
-                        <select class="form-input" id="activityLevel" disabled>
-                            <option value="sedentario">Sedentário</option>
-                            <option value="leve">Levemente Ativo</option>
-                            <option value="moderado" selected>Moderadamente Ativo</option>
-                            <option value="intenso">Muito Ativo</option>
-                            <option value="extremo">Extremamente Ativo</option>
-                        </select>
-                    </div>
-                    <div class="action-buttons" id="physicalButtons" style="display: none;">
-                        <button type="button" class="btn btn-secondary" onclick="cancelEdit('physical')">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="savePhysical()">Salvar Alterações</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Segurança -->
-            <div class="profile-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-shield-alt"></i>
-                        Segurança
-                    </h2>
+                    </form>
                 </div>
-
-                <div class="info-item">
-                    <span class="info-label">Senha</span>
-                    <span class="info-value">••••••••</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Última Alteração</span>
-                    <span class="info-value">15/03/2024</span>
-                </div>
-                <!-- Autenticação em Dois Fatores removida conforme solicitado -->
-
-                <div class="action-buttons" style="margin-top: 1.5rem;">
-                    <button type="button" class="btn btn-primary" onclick="changePassword()">
-                        <i class="fas fa-key"></i> Alterar Senha
-                    </button>
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Segurança
+                        </h2>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Senha</span>
+                        <span class="info-value">••••••••</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Última Alteração</span>
+                        <span class="info-value">15/03/2024</span>
+                    </div>
+                    <div class="action-buttons" style="margin-top: 1.5rem;">
+                        <button type="button" class="btn btn-primary" onclick="changePassword()">
+                            <i class="fas fa-key"></i> Alterar Senha
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -983,7 +916,15 @@
         function toggleEdit(section) {
             const inputs = document.querySelectorAll(`#${section}Form input, #${section}Form select`);
             const buttons = document.getElementById(`${section}Buttons`);
-            const editText = document.getElementById(`edit${section.charAt(0).toUpperCase() + section.slice(1)}Text`);
+            // Corrigir para pegar o id correto, que está em PascalCase no HTML
+            let editText = null;
+            if(section === 'personal') {
+                editText = document.getElementById('editPersonalText');
+            } else if(section === 'account') {
+                editText = document.getElementById('editAccountText');
+            } else {
+                editText = document.getElementById(`edit${section.charAt(0).toUpperCase() + section.slice(1)}Text`);
+            }
             const isEditing = !inputs[0].disabled;
 
             if (isEditing) {
@@ -1004,7 +945,14 @@
         function cancelEdit(section) {
             const inputs = document.querySelectorAll(`#${section}Form input, #${section}Form select`);
             const buttons = document.getElementById(`${section}Buttons`);
-            const editText = document.getElementById(`edit${section.charAt(0).toUpperCase() + section.slice(1)}Text`);
+            let editText = null;
+            if(section === 'personal') {
+                editText = document.getElementById('editPersonalText');
+            } else if(section === 'account') {
+                editText = document.getElementById('editAccountText');
+            } else {
+                editText = document.getElementById(`edit${section.charAt(0).toUpperCase() + section.slice(1)}Text`);
+            }
 
             // Restaurar valores originais
             inputs.forEach(input => {
