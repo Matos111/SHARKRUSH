@@ -183,12 +183,12 @@
         }
 
         .main-menu li a.nav-logout {
-            background: #8B0000;
+            background: #202020ff;
             color: #fff;
         }
 
         .main-menu li a.nav-logout:hover {
-            background: #A00000;
+            background: #a0000062;
         }
 
         .logo-container {
@@ -493,19 +493,19 @@
     <!-- NAVBAR -->
     <nav class="main-menu">
         <div class="logo-container">
-            <a href="/dashboard" title="Dashboard">
-                <img src="../midia/Logos/logoshark.png" alt="Logo"/>
+            <a href="<?= BASE_URL ?>/dashboard" title="Dashboard">
+                <img src="<?= BASE_URL ?>/VIEWS/MIDIA/Logos/logoshark.png" alt="Logo"/>
             </a>
         </div>
         <ul>
             <li>
-                <a href="/list-clientes" class="active">
+                <a href="<?= BASE_URL ?>/list-clientes" class="active">
                     <i class="fa fa-users nav-icon"></i>
                     <span class="nav-text">Clientes</span>
                 </a>
             </li>
             <li>
-                <a href="/logout" class="nav-logout">
+                <a href="<?= BASE_URL ?>/logout" class="nav-logout">
                     <i class="fa fa-sign-out-alt nav-icon"></i>
                     <span class="nav-text">Sair</span>
                 </a>
@@ -538,7 +538,7 @@
                         placeholder="Buscar cliente..."
                     >
                 </div>
-                <a href="/cadastro" class="btn btn-add">
+                <a href="<?= BASE_URL ?>/cadastro" class="btn btn-add">
                     <i class="fas fa-user-plus"></i>
                     Novo Cliente
                 </a>
@@ -569,10 +569,10 @@
                             <td><?php echo htmlspecialchars($cliente["telefone"]); ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="/update-clientes/<?php echo $cliente["id"]; ?>" class="btn btn-edit">
+                                    <a href="<?= BASE_URL ?>/update-clientes/<?php echo $cliente["id"]; ?>" class="btn btn-edit">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
-                                    <form action="/delete-clientes" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
+                                    <form action="<?= BASE_URL ?>/delete-clientes" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
                                         <input type="hidden" name="nome_completo" value="<?php echo htmlspecialchars($cliente["nome_completo"]); ?>">
                                         <button type="submit" class="btn btn-delete">
                                             <i class="fas fa-trash-alt"></i> Excluir
