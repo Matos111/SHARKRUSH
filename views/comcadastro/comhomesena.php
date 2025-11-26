@@ -1768,7 +1768,7 @@
                 <div class="inner-container">
                     <div class="border-outer">
                         <div class="main-card">
-                            <img class="card-bg-image" src="../midia/images/puxadafrontal.png" alt="Puxada Frontal">
+                            <img class="card-bg-image" src="../sharkrush/views/midia/images/puxadafrontal.png" alt="Puxada Frontal">
                             <div class="content-container">
                                 <div class="content-top">
                                     <div class="scrollbar-glass">COSTAS</div>
