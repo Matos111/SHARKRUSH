@@ -526,6 +526,18 @@
             overflow: hidden;
         }
 
+        .main-menu li a.nav-login {
+            background: #2f2f2f;
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login .nav-icon {
+            color: #d6d6d6;
+        }
+        .main-menu li a.nav-login:hover {
+            background: #3b3b3b;
+            color: #ffffff;
+        }
+
         .main-menu .nav-icon {
             position: relative;
             display: table-cell;
@@ -684,40 +696,48 @@
         </div>
         <ul>
             <li>
-                <a href="<?= BASE_URL ?>/perfil" class="nav-login">
-                    <i class="fa fa-user nav-icon"></i>
-                    <span class="nav-text">Perfil</span>
-                </a>
+            <a href="<?= BASE_URL ?>/homepage" >
+                <i class="fa fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
+            </a>
+            </li>
+        
+            <li>
+            <a href="<?= BASE_URL ?>/biblioteca" class="active">
+                <i class="fa fa-book nav-icon"></i>
+                <span class="nav-text">Biblioteca</span>
+            </a>
             </li>
             <li>
-                <a href="<?= BASE_URL ?>/biblioteca" class="active">
-                    <i class="fa fa-book nav-icon"></i>
-                    <span class="nav-text">Biblioteca</span>
-                </a>
+            <a href="<?= BASE_URL ?>/meus-treinos">
+                <i class="fa fa-dumbbell nav-icon"></i>
+                <span class="nav-text">Meus Treinos</span>
+            </a>
             </li>
             <li>
-                <a href="<?= BASE_URL ?>/meus-treinos">
-                    <i class="fa fa-dumbbell nav-icon"></i>
-                    <span class="nav-text">Meus Treinos</span>
-                </a>
+            <a href="<?= BASE_URL ?>/calculadora-imc">
+                <i class="fa fa-calculator nav-icon"></i>
+                <span class="nav-text">Calculadora IMC</span>
+            </a>
             </li>
             <li>
-                <a href="<?= BASE_URL ?>/calculadora-imc">
-                    <i class="fa fa-calculator nav-icon"></i>
-                    <span class="nav-text">Calculadora IMC</span>
-                </a>
+            <a href="<?= BASE_URL ?>/calculadora-calorias">
+                <i class="fa fa-fire nav-icon"></i>
+                <span class="nav-text">Calculadora Calorias</span>
+            </a>
             </li>
             <li>
-                <a href="<?= BASE_URL ?>/calculadora-calorias">
-                    <i class="fa fa-fire nav-icon"></i>
-                    <span class="nav-text">Calculadora Calorias</span>
-                </a>
+            <a href="<?= BASE_URL ?>/sobre">
+                <i class="fa fa-info-circle nav-icon"></i>
+                <span class="nav-text">Sobre</span>
+            </a>
             </li>
+
             <li>
-                <a href="<?= BASE_URL ?>/sobre">
-                    <i class="fa fa-info-circle nav-icon"></i>
-                    <span class="nav-text">Sobre</span>
-                </a>
+            <a href="<?= BASE_URL ?>/perfil" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Perfil</span>
+            </a>
             </li>
         </ul>
     </nav>

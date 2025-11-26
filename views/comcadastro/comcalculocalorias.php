@@ -550,11 +550,12 @@
         </div>
         <ul>
             <li>
-            <a href="<?= BASE_URL ?>/perfil" class="nav-login">
-                <i class="fa fa-user nav-icon"></i>
-                <span class="nav-text">Perfil</span>
+            <a href="<?= BASE_URL ?>/homepage" >
+                <i class="fa fa-home nav-icon"></i>
+                <span class="nav-text">Home</span>
             </a>
             </li>
+        
             <li>
             <a href="<?= BASE_URL ?>/biblioteca">
                 <i class="fa fa-book nav-icon"></i>
@@ -583,6 +584,13 @@
             <a href="<?= BASE_URL ?>/sobre">
                 <i class="fa fa-info-circle nav-icon"></i>
                 <span class="nav-text">Sobre</span>
+            </a>
+            </li>
+
+            <li>
+            <a href="<?= BASE_URL ?>/perfil" class="nav-login">
+                <i class="fa fa-user nav-icon"></i>
+                <span class="nav-text">Perfil</span>
             </a>
             </li>
         </ul>

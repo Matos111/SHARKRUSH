@@ -1,3 +1,4 @@
+
 <?php
 
 // Iniciar sessão com cookie path correto para XAMPP
@@ -71,6 +72,11 @@ switch ($request) {
     $controller->logout();
     break;
 
+  case "/homepage":
+  AuthController::checkAuth();
+  include __DIR__ . "/../views/comcadastro/comhomesena.php";
+  break;
+
   case "/dashboard":
     AuthController::checkAuth();
     // Verificar se e admin e redirecionar para lista de clientes
@@ -120,6 +126,8 @@ switch ($request) {
     $controller = new ClientesController();
     $controller->saveClientes();
     break;
+
+    
 
   case "/list-clientes":
     $controller = new ClientesController();
